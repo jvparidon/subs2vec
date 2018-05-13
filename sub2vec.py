@@ -8,6 +8,7 @@ import strip_subs
 import join_subs
 import deduplicate
 from utensilities import timer
+from multiprocessing import cpu_count
 
 
 @timer
