@@ -49,7 +49,6 @@ def generate(lang, working_dir, subs_dir, subs_prep, dedup, phrase_pass, cores):
 
     # prep subs
     if subs_prep:
-
         training_data = os.path.join('../OpenSubtitles2018/raw')
         # strip subs
         print('stripping xml from subs in language {}'.format(lang))

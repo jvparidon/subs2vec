@@ -11,8 +11,11 @@ from utensilities import timer
 
 punctuation = string.punctuation.replace('_', '')
 punctuation_table = str.maketrans(punctuation, ' ' * len(punctuation))
-def strip_punctuation(text):
-    lines = [' '.join([word for word in line.split(' ') if word != '']) for line in text.lower().translate(punctuation_table).replace('_punct', '').split('\n')]
+def strip_punctuation(text, lower=False):
+    if lower:
+        lines = [' '.join([word for word in line.split(' ') if word != '']) for line in text.lower().translate(punctuation_table).replace('_punct', '').split('\n')]
+    else:
+        lines = [' '.join([word for word in line.split(' ') if word != '']) for line in text.translate(punctuation_table).replace('_punct', '').split('\n')]
     return '\n'.join([line for line in lines if line != ''])
 
 
@@ -32,7 +35,7 @@ def join_dir(in_dir, out_dir, lang, verbose=False, ioformat='txt'):
                 outfile.write(strip_punctuation(infile.read()))
                 if verbose:
                     i += 1
-                    print('writing xml-stripped text files to single training file: {: >3}%'.format(int((float(i) / total) * 100)), end='\r')
+                    print('writing xml-stripped text files to single training file: {:5.2f}%'.format((float(i) / total) * 100, end='\r')
     if verbose:
         print('')
     return total

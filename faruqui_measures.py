@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 # jvparidon@gmail.com
 import numpy as np
-import pandas
 import argparse
 import os
 import scipy.spatial.distance
 import scipy.stats
-from vecs import load_vecs, sub2vec_dissim
+import vecs
+from utensilities import timer
 
 
+@timer
 def compare_dissimilarities(fname, vecs_dict):
     with open(fname, 'r') as simfile:
         lines = simfile.read()
@@ -18,38 +19,31 @@ def compare_dissimilarities(fname, vecs_dict):
     sub2vec_dsm = []
     wordsim_dsm = []
     for i in range(len(word_pairs)):
-        try:
-            sub2vec_dsm.append(sub2vec_dissim(word_pairs[i], vecs_dict))
+        if all(word in vecs_dict.keys() for word in word_pairs[i]):
+            sub2vec_dsm.append(scipy.spatial.distance.cosine(vecs_dict[word_pairs[i][0]],
+                                                             vecs_dict[word_pairs[i][1]]))
             wordsim_dsm.append(wordsim[i])
-            #print('{} {} {}'.format(word_pairs[i][0], word_pairs[i][1], wordsim[i]))
-        except KeyError:
-            pass
-    return fname, np.around(scipy.stats.spearmanr(wordsim_dsm, sub2vec_dsm)[0], 3), len(wordsim_dsm), len(word_pairs)
+    return scipy.stats.spearmanr(wordsim_dsm, sub2vec_dsm)[0], len(wordsim_dsm), len(word_pairs)
 
 
 def evaluate_vecs(vecs_dict, verbose=True):
     folder = '../faruqui_dissimilarities'
     results = []
-    for filename in sorted(os.listdir(folder)):
-        results.append(compare_dissimilarities(os.path.join(folder, filename), vecs_dict))
-    if verbose=True:
-        [print('{: <45} {: >6} ({}/{})'.format(*entry)) for entry in results]
+    for fname in sorted(os.listdir(folder)):
+        result, t = compare_dissimilarities(os.path.join(folder, fname), vecs_dict)
+        results.append((fname, result, t['duration']))
+        if verbose:
+            vecs.print_result(fname, result, t['duration'])
     return results
 
 
 if __name__ == '__main__':
-    #vecs_file = '../results/en/sub.en.vec'
-    #vecs_file = '../results/en/sub.lemma.en.vec'
-    #vecs_file = '../pretrained_reference/fasttext/wiki.en.vec'
-    #vecs_file = '../cbow_models/sub.en.defaults.vec'
-    #vecs_file = '../pretrained_reference/fasttext/wiki-news-300d-1M-subword.vec'
-    #vecs_file = '../pretrained_reference/fasttext/crawl-300d-2M.vec'
-    #vecs_file = '../pretrained_reference/glove.840B.300d.txt'
-    vecs_file = '../pretrained_reference/mkb2017.vec'
+    #vecs_fname = '../word2phrase/dedup.en.5pass.d5.t100.neg10.epoch10.vec'
+    vecs_fname = '../pretrained_reference/fasttext/wiki-news-300d-1M-subword.vec'
 
-    argparser = argparse.ArgumentParser(description='Run evaluation metrics from wordvectors.org')
-    argparser.add_argument('--filename', default=vecs_file, help='word vectors to evaluate')
+    argparser = argparse.ArgumentParser(description='compute semantic dissimilarity correlations from wordvectors.org')
+    argparser.add_argument('--filename', default=vecs_fname, help='word vectors to evaluate')
     args = argparser.parse_args()
 
-    vecs_dict = load_vecs(args.filename)
+    vecs_dict = vecs.load_vecs(args.filename, normalize=False)
     results = evaluate_vecs(vecs_dict)
