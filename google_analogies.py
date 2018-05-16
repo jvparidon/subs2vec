@@ -90,8 +90,8 @@ def solve_analogies(analogies, vecs_dict, method='additive', whole_matrix=False)
                 b2_predictions[:, i] = cos(vecs, (b1[i] - a1[i] + a2[i]).reshape(1, -1)).squeeze()
 
     # zero out b1s (yes, this feels like cheating)
-    b1_idx = np.in1d(words, b1_words)
-    b2_predictions[b1_idx] = -1.0
+    for i in range(len(b1_words)):
+        b2_predictions[np.where(words == b1_words[i]), i] = -1.0
 
     b2_maxidx = np.argmax(b2_predictions, axis=0)
     b2_predicted_words = words[b2_maxidx]
@@ -125,12 +125,14 @@ def evaluate_vecs(vecs_dict,
 
 
 if __name__ == '__main__':
-    #vecs_fname = '../word2phrase/dedup.en.5pass.d5.t100.neg10.epoch10.vec'
-    vecs_fname = '../pretrained_reference/fasttext/wiki-news-300d-1M-subword.vec'
+    #vecs_fname = '../tmp-jeroen/en.dedup.5pass.d5.t100.vec'
+    vecs_fname = '../pretrained_reference/mkb2017.vec'
+    #vecs_fname = '../pretrained_reference/fasttext/crawl-300d-2M.vec'
+    #vecs_fname = '../pretrained_reference/fasttext/wiki-news-300d-1M-subword.vec'
 
     argparser = argparse.ArgumentParser(description='solve syntactic and semantic analogies from Mikolov et al. (2013)')
     argparser.add_argument('--filename', default=vecs_fname, help='word vectors to evaluate')
     args = argparser.parse_args()
 
     vecs_dict = vecs.load_vecs(args.filename, normalize=True)
-    results = evaluate_vecs(vecs_dict, subsets=True)
+    results = evaluate_vecs(vecs_dict, subsets=False)

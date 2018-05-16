@@ -35,7 +35,7 @@ def join_dir(in_dir, out_dir, lang, verbose=False, ioformat='txt'):
                 outfile.write(strip_punctuation(infile.read()))
                 if verbose:
                     i += 1
-                    print('writing xml-stripped text files to single training file: {:5.2f}%'.format((float(i) / total) * 100, end='\r')
+                    print('writing xml-stripped text files to single training file: {:5.2f}%'.format((float(i) / total) * 100), end='\r')
     if verbose:
         print('')
     return total

@@ -21,8 +21,9 @@ def train_fasttext(training_data, working_dir, cores):
     neg = ['-neg', str(5)]
     epoch = ['-epoch', str(5)]
     t = ['-t', str(.0001)]
+    dim = ['-dim', str(300)]
     thread = ['-thread', str(cores)]
-    sp.run(binary + method + train + output + neg + epoch + t + thread)
+    sp.run(binary + method + train + output + neg + epoch + t + dim + thread)
     model = '{}.bin'.format(base_fname)
     vecs = '{}.vec'.format(base_fname)
     return model, vecs
