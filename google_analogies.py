@@ -72,30 +72,36 @@ def solve_analogies(analogies, vecs_dict, method='additive', whole_matrix=False)
         eps = np.finfo(np.float64).eps
         if whole_matrix:
             b2_predictions = (cos_pos(vecs, b1) * cos_pos(vecs, a2)) / (cos_pos(vecs, a1) + eps)
+            # zero out b1s (yes, this feels like cheating)
+            for i in range(len(b1_words)):
+                b2_predictions[np.where(words == b1_words[i])[0], i] = -1.0
+            b2_predicted_idx = np.argmax(b2_predictions, axis=0)
         else:
-            b2_predictions = np.zeros((vecs.shape[0], b1.shape[0]))
+            b2_predicted_idx = np.zeros(b1.shape[0], dtype=np.int32)
             for i in range(b1.shape[0]):
-                cos_a1 = (1.0 + cos(vecs, a1[i].reshape(1, -1))) / 2.0
-                cos_a2 = (1.0 + cos(vecs, a2[i].reshape(1, -1))) / 2.0
-                cos_b1 = (1.0 + cos(vecs, b1[i].reshape(1, -1))) / 2.0
-                b2_predictions[:, i] = ((cos_b1 * cos_a2) / (cos_a1 + eps)).squeeze()
-                b2_predictions = ((cos_pos(vecs, b1[i].reshape(1, -1)) * cos_pos(vecs, a2[i].reshape(1, -1)))
-                                  / (cos_pos(vecs, a1[i].reshape(1, -1)) + eps)).squeeze()
+                b2_prediction = ((cos_pos(vecs, b1[i].reshape(1, -1)) * cos_pos(vecs, a2[i].reshape(1, -1)))
+                                 / (cos_pos(vecs, a1[i].reshape(1, -1)) + eps)).squeeze()
+                # zero out b1s (yes, this feels like cheating)
+                b2_prediction[np.where(words == b1_words[i])[0]] = -1.0
+                b2_predicted_idx[i] = np.argmax(b2_prediction)
 
     elif method == 'additive':
         # additive method from Mikolov et al. (2013)
         if whole_matrix:
             b2_predictions = cos(vecs, b1 - a1 + a2)
+            # zero out b1s (yes, this feels like cheating)
+            for i in range(len(b1_words)):
+                b2_predictions[np.where(words == b1_words[i])[0], i] = -1.0
+            b2_predicted_idx = np.argmax(b2_predictions, axis=0)
         else:
-            b2_predictions = np.zeros((vecs.shape[0], b1.shape[0]))
+            b2_predicted_idx = np.zeros(b1.shape[0], dtype=np.int32)
             for i in range(b1.shape[0]):
-                b2_predictions[:, i] = cos(vecs, (b1[i] - a1[i] + a2[i]).reshape(1, -1)).squeeze()
+                b2_prediction = cos(vecs, (b1[i] - a1[i] + a2[i]).reshape(1, -1)).squeeze()
+                # zero out b1s (yes, this feels like cheating)
+                b2_prediction[np.where(words == b1_words[i])[0]] = -1.0
+                b2_predicted_idx[i] = np.argmax(b2_prediction)
 
-    # zero out b1s (yes, this feels like cheating)
-    for i in range(len(b1_words)):
-        b2_predictions[np.where(words == b1_words[i]), i] = -1.0
-
-    b2_predicted_words = words[np.argmax(b2_predictions, axis=0)]
+    b2_predicted_words = words[b2_predicted_idx]
     return np.mean(b2_predicted_words == b2_targets), total - missing, total
 
 
@@ -103,20 +109,21 @@ def evaluate_vecs(vecs_dict,
                   verbose=True,
                   analogies_types=['syntactic', 'semantic'],
                   methods=['additive', 'multiplicative'],
-                  subsets=False):
+                  subsets=False,
+                  whole_matrix=False):
     results = []
     for analogies_type in analogies_types:
         analogies = get_analogies(analogies_type, subsets)
         for method in methods:
             if subsets:
                 for subset in sorted(analogies.keys()):
-                    result, t = solve_analogies(analogies[subset], vecs_dict, method=method)
+                    result, t = solve_analogies(analogies[subset], vecs_dict, method=method, whole_matrix=whole_matrix)
                     label = '{} ({})'.format(subset[2:], method)
                     results.append((label, result, t['duration']))
                     if verbose:
                         vecs.print_result(label, result, t['duration'])
             else:
-                result, t = solve_analogies(analogies, vecs_dict, method=method)
+                result, t = solve_analogies(analogies, vecs_dict, method=method, whole_matrix=whole_matrix)
                 label = '{} ({})'.format(analogies_type, method)
                 results.append((label, result, t['duration']))
                 if verbose:
@@ -132,7 +139,12 @@ if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser(description='solve syntactic and semantic analogies from Mikolov et al. (2013)')
     argparser.add_argument('--filename', default=vecs_fname, help='word vectors to evaluate')
+    argparser.add_argument('--subsets', default=False, help='break syntactic/semantic analogy performance down by subset')
+    argparser.add_argument('--whole_matrix', default=False, help='perform computations using whole matrices instead of column-wise (potentially results in massive memory use)')
     args = argparser.parse_args()
 
     vecs_dict = vecs.load_vecs(args.filename, normalize=True)
-    results = evaluate_vecs(vecs_dict, subsets=False)
+    print('column-wise:')
+    results = evaluate_vecs(vecs_dict, subsets=False, whole_matrix=False)
+    print('whole matrix:')
+    results = evaluate_vecs(vecs_dict, subsets=False, whole_matrix=True)
