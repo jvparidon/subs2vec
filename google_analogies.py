@@ -62,16 +62,16 @@ def solve_analogies(analogies, vecs_dict, method='additive', whole_matrix=False)
     def cos(a, b):
         return np.matmul(a, b.T)
 
+    def cos_pos(a, b):
+        return (1.0 + np.matmul(a, b.T)) / 2.0
+
     # compute cosine distance between all word vecs and
     # the vecs predicted from the word word analogy arrays
     if method == 'multiplicative':
         # multiplicative method from Levy & Goldberg (2014)
         eps = np.finfo(np.float64).eps
         if whole_matrix:
-            cos_a1 = (1.0 + cos(vecs, a1)) / 2.0
-            cos_a2 = (1.0 + cos(vecs, a2)) / 2.0
-            cos_b1 = (1.0 + cos(vecs, b1)) / 2.0
-            b2_predictions = (cos_b1 * cos_a2) / (cos_a1 + eps)
+            b2_predictions = (cos_pos(vecs, b1) * cos_pos(vecs, a2)) / (cos_pos(vecs, a1) + eps)
         else:
             b2_predictions = np.zeros((vecs.shape[0], b1.shape[0]))
             for i in range(b1.shape[0]):
@@ -79,6 +79,8 @@ def solve_analogies(analogies, vecs_dict, method='additive', whole_matrix=False)
                 cos_a2 = (1.0 + cos(vecs, a2[i].reshape(1, -1))) / 2.0
                 cos_b1 = (1.0 + cos(vecs, b1[i].reshape(1, -1))) / 2.0
                 b2_predictions[:, i] = ((cos_b1 * cos_a2) / (cos_a1 + eps)).squeeze()
+                b2_predictions = ((cos_pos(vecs, b1[i].reshape(1, -1)) * cos_pos(vecs, a2[i].reshape(1, -1)))
+                                  / (cos_pos(vecs, a1[i].reshape(1, -1)) + eps)).squeeze()
 
     elif method == 'additive':
         # additive method from Mikolov et al. (2013)
@@ -93,9 +95,7 @@ def solve_analogies(analogies, vecs_dict, method='additive', whole_matrix=False)
     for i in range(len(b1_words)):
         b2_predictions[np.where(words == b1_words[i]), i] = -1.0
 
-    b2_maxidx = np.argmax(b2_predictions, axis=0)
-    b2_predicted_words = words[b2_maxidx]
-
+    b2_predicted_words = words[np.argmax(b2_predictions, axis=0)]
     return np.mean(b2_predicted_words == b2_targets), total - missing, total
 
 
@@ -126,8 +126,8 @@ def evaluate_vecs(vecs_dict,
 
 if __name__ == '__main__':
     #vecs_fname = '../tmp-jeroen/en.dedup.5pass.d5.t100.vec'
-    vecs_fname = '../pretrained_reference/mkb2017.vec'
-    #vecs_fname = '../pretrained_reference/fasttext/crawl-300d-2M.vec'
+    #vecs_fname = '../pretrained_reference/mkb2017.vec'
+    vecs_fname = '../pretrained_reference/fasttext/crawl-300d-2M.vec'
     #vecs_fname = '../pretrained_reference/fasttext/wiki-news-300d-1M-subword.vec'
 
     argparser = argparse.ArgumentParser(description='solve syntactic and semantic analogies from Mikolov et al. (2013)')
