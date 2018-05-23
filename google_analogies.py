@@ -74,7 +74,7 @@ def solve_analogies(analogies, vecs_dict, method='additive', whole_matrix=False)
             b2_predictions = (cos_pos(vecs, b1) * cos_pos(vecs, a2)) / (cos_pos(vecs, a1) + eps)
             # zero out b1s (yes, this feels like cheating)
             for i in range(len(b1_words)):
-                b2_predictions[np.where(words == b1_words[i])[0], i] = -1.0
+                b2_prediction[np.isin(words.squeeze(), analogies[i][0:3])] = -1.0
             b2_predicted_idx = np.argmax(b2_predictions, axis=0)
         else:
             b2_predicted_idx = np.zeros(b1.shape[0], dtype=np.int32)
@@ -82,7 +82,6 @@ def solve_analogies(analogies, vecs_dict, method='additive', whole_matrix=False)
                 b2_prediction = ((cos_pos(vecs, b1[i].reshape(1, -1)) * cos_pos(vecs, a2[i].reshape(1, -1)))
                                  / (cos_pos(vecs, a1[i].reshape(1, -1)) + eps)).squeeze()
                 # zero out b1s (yes, this feels like cheating)
-                #b2_prediction[np.where(words == b1_words[i])[0]] = -1.0
                 b2_prediction[np.isin(words, analogies[i][0:3]).squeeze()] = -1.0
                 b2_predicted_idx[i] = np.argmax(b2_prediction)
 
@@ -92,14 +91,13 @@ def solve_analogies(analogies, vecs_dict, method='additive', whole_matrix=False)
             b2_predictions = cos(vecs, b1 - a1 + a2)
             # zero out b1s (yes, this feels like cheating)
             for i in range(len(b1_words)):
-                b2_predictions[np.where(words == b1_words[i])[0], i] = -1.0
+                b2_prediction[np.isin(words.squeeze(), analogies[i][0:3])] = -1.0
             b2_predicted_idx = np.argmax(b2_predictions, axis=0)
         else:
             b2_predicted_idx = np.zeros(b1.shape[0], dtype=np.int32)
             for i in range(b1.shape[0]):
                 b2_prediction = cos(vecs, (b1[i] - a1[i] + a2[i]).reshape(1, -1)).squeeze()
                 # zero out b1s (yes, this feels like cheating)
-                #b2_prediction[np.where(words == b1_words[i])[0]] = -1.0
                 b2_prediction[np.isin(words.squeeze(), analogies[i][0:3])] = -1.0
                 b2_predicted_idx[i] = np.argmax(b2_prediction)
 
