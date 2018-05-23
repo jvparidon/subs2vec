@@ -91,7 +91,7 @@ if __name__ == '__main__':
     argparser.add_argument('--working_dir', default='../tmp-jeroen', type=str,
                            help='working directory, write permission required')
     argparser.add_argument('--lang', default='en', type=str,
-                           help='source language (use ISO 3166-1 alpha-2 country codes to select OpenSubtitles data)')
+                           help='source language (uses ISO 3166-1 codes to select OpenSubtitles data)')
     argparser.add_argument('--subs_dir', default='../OpenSubtitles2018', type=str,
                            help='location of OpenSubtitles data')
     argparser.add_argument('--subs_prep', default=False, type=bool,

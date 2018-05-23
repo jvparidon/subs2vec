@@ -22,9 +22,9 @@ def dedup_file(in_fname, out_fname):
 
 
 def dedup_reddit(folder, verbose=False):
-    fnames = [os.path.join(folder, fname) for fname in sorted(list(os.listdir(folder))) if fname.endswith('_stripped.xz')]
+    fnames = [os.path.join(folder, fname) for fname in sorted(list(os.listdir(folder))) if fname.endswith('_stripped.txt')]
     for fname in fnames:
-        with lzma.open(fname, 'rt') as in_file, open('{}.dedup.txt'.format(fname[:-3]), 'w') as out_file:
+        with open(fname, 'rt') as in_file, open('{}.dedup.txt'.format(fname[:-4]), 'w') as out_file:
             lines, n_lines, n_duplicates = get_lines(in_file)
             out_file.write('\n'.join(lines))
         if verbose:
@@ -33,6 +33,6 @@ def dedup_reddit(folder, verbose=False):
 
 if __name__ == '__main__':
     # for deduplicating reddit corpus without memory overruns, deduplicate by month first, then by year, then overall?
-    #n_lines, n_duplicates, t = dedup_file('../training_data/opensubtitles/raw/en.txt', '../dedup.en.txt')
+    #n_lines, n_duplicates, t = dedup_file('../reddit/reddit_comments.txt', '../reddit/reddit_comments.dedup.txt')
     #print('read {} lines and removed {} duplicates in {} seconds'.format(n_lines, n_duplicates, int(t['duration'])))
-    dedup_reddit('../reddit', verbose=True)
+    dedup_reddit('../reddit/stripped', verbose=True)

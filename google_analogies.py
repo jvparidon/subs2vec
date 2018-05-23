@@ -6,16 +6,16 @@ from utensilities import timer
 import vecs
 
 
-def get_analogies(analogies_set, subsets=False):
+def get_analogies(analogies_set, lang='en', subsets=False):
     if analogies_set == 'syntactic':
-        fname = '../google_analogies/syntactic.txt'
+        fname = '../google_analogies/{}-syntactic.txt'.format(lang)
     elif analogies_set == 'semantic':
-        fname = '../google_analogies/semantic.txt'
+        fname = '../google_analogies/{}-semantic.txt'.format(lang)
     with open(fname, 'r') as analogies_file:
         if subsets:
             analogies = {}
             for line in analogies_file:
-                if line[0] == ':':
+                if ':' in line:
                     subset = line.strip('\n')
                     analogies[subset] = []
                 else:
@@ -82,7 +82,8 @@ def solve_analogies(analogies, vecs_dict, method='additive', whole_matrix=False)
                 b2_prediction = ((cos_pos(vecs, b1[i].reshape(1, -1)) * cos_pos(vecs, a2[i].reshape(1, -1)))
                                  / (cos_pos(vecs, a1[i].reshape(1, -1)) + eps)).squeeze()
                 # zero out b1s (yes, this feels like cheating)
-                b2_prediction[np.where(words == b1_words[i])[0]] = -1.0
+                #b2_prediction[np.where(words == b1_words[i])[0]] = -1.0
+                b2_prediction[np.isin(words, analogies[i][0:3]).squeeze()] = -1.0
                 b2_predicted_idx[i] = np.argmax(b2_prediction)
 
     elif method == 'additive':
@@ -98,7 +99,8 @@ def solve_analogies(analogies, vecs_dict, method='additive', whole_matrix=False)
             for i in range(b1.shape[0]):
                 b2_prediction = cos(vecs, (b1[i] - a1[i] + a2[i]).reshape(1, -1)).squeeze()
                 # zero out b1s (yes, this feels like cheating)
-                b2_prediction[np.where(words == b1_words[i])[0]] = -1.0
+                #b2_prediction[np.where(words == b1_words[i])[0]] = -1.0
+                b2_prediction[np.isin(words.squeeze(), analogies[i][0:3])] = -1.0
                 b2_predicted_idx[i] = np.argmax(b2_prediction)
 
     b2_predicted_words = words[b2_predicted_idx]
@@ -109,11 +111,12 @@ def evaluate_vecs(vecs_dict,
                   verbose=True,
                   analogies_types=['syntactic', 'semantic'],
                   methods=['additive', 'multiplicative'],
+                  lang='en',
                   subsets=False,
                   whole_matrix=False):
     results = []
     for analogies_type in analogies_types:
-        analogies = get_analogies(analogies_type, subsets)
+        analogies = get_analogies(analogies_type, lang, subsets)
         for method in methods:
             if subsets:
                 for subset in sorted(analogies.keys()):
@@ -138,13 +141,15 @@ if __name__ == '__main__':
     #vecs_fname = '../pretrained_reference/fasttext/wiki-news-300d-1M-subword.vec'
 
     argparser = argparse.ArgumentParser(description='solve syntactic and semantic analogies from Mikolov et al. (2013)')
-    argparser.add_argument('--filename', default=vecs_fname, help='word vectors to evaluate')
-    argparser.add_argument('--subsets', default=False, help='break syntactic/semantic analogy performance down by subset')
-    argparser.add_argument('--whole_matrix', default=False, help='perform computations using whole matrices instead of column-wise (potentially results in massive memory use)')
+    argparser.add_argument('--filename', default=vecs_fname,
+                           help='word vectors to evaluate')
+    argparser.add_argument('--lang', default='en', choices=['en', 'fr', 'hi', 'pl'],
+                           help='language to solve analogies in (uses ISO 3166-1 codes)')
+    argparser.add_argument('--subsets', default=False, type=bool,
+                           help='break syntactic/semantic analogy performance down by subset')
+    argparser.add_argument('--whole_matrix', default=False, type=bool,
+                           help='perform computations using whole matrices instead of column-wise (potentially results in massive memory use)')
     args = argparser.parse_args()
 
     vecs_dict = vecs.load_vecs(args.filename, normalize=True)
-    print('column-wise:')
-    results = evaluate_vecs(vecs_dict, subsets=False, whole_matrix=False)
-    print('whole matrix:')
-    results = evaluate_vecs(vecs_dict, subsets=False, whole_matrix=True)
+    results = evaluate_vecs(vecs_dict, lang=args.lang, subsets=args.subsets, whole_matrix=args.whole_matrix)
