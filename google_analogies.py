@@ -21,12 +21,14 @@ def get_analogies(analogies_set, lang='en', subsets=False):
                 else:
                     analogies[subset].append(line.strip('\n').split(' '))
         else:
-            analogies = [line.strip('\n').split(' ') for line in analogies_file if line[0] != ':']
+            analogies = [line.strip('\n').split(' ') for line in analogies_file
+                         if line[0] != ':']
     return analogies
 
 
 @timer
-def solve_analogies(analogies, vecs_dict, method='additive', whole_matrix=False):
+def solve_analogies(analogies, vecs_dict, method='additive',
+                    whole_matrix=False):
     missing = 0
     total = len(analogies)
     # make numpy arrays of vecs for given words in analogies
@@ -71,60 +73,67 @@ def solve_analogies(analogies, vecs_dict, method='additive', whole_matrix=False)
         # multiplicative method from Levy & Goldberg (2014)
         eps = np.finfo(np.float64).eps
         if whole_matrix:
-            b2_predictions = (cos_pos(vecs, b1) * cos_pos(vecs, a2)) / (cos_pos(vecs, a1) + eps)
+            b2_pred = ((cos_pos(vecs, b1) * cos_pos(vecs, a2))
+                       / (cos_pos(vecs, a1) + eps))
             # zero out b1s (yes, this feels like cheating)
             for i in range(len(b1_words)):
-                b2_prediction[np.isin(words.squeeze(), analogies[i][0:3])] = -1.0
-            b2_predicted_idx = np.argmax(b2_predictions, axis=0)
+                b2_pred[np.isin(words.squeeze(), analogies[i][0:3])] = -1.0
+            b2_pred_idx = np.argmax(b2_pred, axis=0)
         else:
-            b2_predicted_idx = np.zeros(b1.shape[0], dtype=np.int32)
+            b2_pred_idx = np.zeros(b1.shape[0], dtype=np.int32)
             for i in range(b1.shape[0]):
-                b2_prediction = ((cos_pos(vecs, b1[i].reshape(1, -1)) * cos_pos(vecs, a2[i].reshape(1, -1)))
-                                 / (cos_pos(vecs, a1[i].reshape(1, -1)) + eps)).squeeze()
+                b2_pred = ((cos_pos(vecs, b1[i].reshape(1, -1))
+                            * cos_pos(vecs, a2[i].reshape(1, -1)))
+                           / (cos_pos(vecs, a1[i].reshape(1, -1)) + eps))
+                          .squeeze()
                 # zero out b1s (yes, this feels like cheating)
-                b2_prediction[np.isin(words, analogies[i][0:3]).squeeze()] = -1.0
-                b2_predicted_idx[i] = np.argmax(b2_prediction)
+                b2_pred[np.isin(words, analogies[i][0:3]).squeeze()] = -1.0
+                b2_pred_idx[i] = np.argmax(b2_pred)
 
     elif method == 'additive':
         # additive method from Mikolov et al. (2013)
         if whole_matrix:
-            b2_predictions = cos(vecs, b1 - a1 + a2)
+            b2_pred = cos(vecs, b1 - a1 + a2)
             # zero out b1s (yes, this feels like cheating)
             for i in range(len(b1_words)):
-                b2_prediction[np.isin(words.squeeze(), analogies[i][0:3])] = -1.0
-            b2_predicted_idx = np.argmax(b2_predictions, axis=0)
+                b2_pred[np.isin(words.squeeze(), analogies[i][0:3])] = -1.0
+            b2_pred_idx = np.argmax(b2_pred, axis=0)
         else:
-            b2_predicted_idx = np.zeros(b1.shape[0], dtype=np.int32)
+            b2_pred_idx = np.zeros(b1.shape[0], dtype=np.int32)
             for i in range(b1.shape[0]):
-                b2_prediction = cos(vecs, (b1[i] - a1[i] + a2[i]).reshape(1, -1)).squeeze()
+                b2_pred = cos(vecs, (b1[i] - a1[i] + a2[i]).reshape(1, -1))
+                          .squeeze()
                 # zero out b1s (yes, this feels like cheating)
-                b2_prediction[np.isin(words.squeeze(), analogies[i][0:3])] = -1.0
-                b2_predicted_idx[i] = np.argmax(b2_prediction)
+                b2_pred[np.isin(words.squeeze(), analogies[i][0:3])] = -1.0
+                b2_pred_idx[i] = np.argmax(b2_pred)
 
-    b2_predicted_words = words[b2_predicted_idx]
-    return np.mean(b2_predicted_words == b2_targets), total - missing, total
+    b2_pred_words = words[b2_pred_idx]
+    return np.mean(b2_pred_words == b2_targets), total - missing, total
 
 
 def evaluate_vecs(vecs_dict,
-                  verbose=True,
+                  lang='en',
                   analogies_types=['syntactic', 'semantic'],
                   methods=['additive', 'multiplicative'],
-                  lang='en',
                   subsets=False,
-                  whole_matrix=False):
+                  whole_matrix=False,
+                  verbose=True):
     results = []
     for analogies_type in analogies_types:
         analogies = get_analogies(analogies_type, lang, subsets)
         for method in methods:
             if subsets:
                 for subset in sorted(analogies.keys()):
-                    result, t = solve_analogies(analogies[subset], vecs_dict, method=method, whole_matrix=whole_matrix)
+                    result, t = solve_analogies(analogies[subset], vecs_dict,
+                                                method=method,
+                                                whole_matrix=whole_matrix)
                     label = '{} ({})'.format(subset[2:], method)
                     results.append((label, result, t['duration']))
                     if verbose:
                         vecs.print_result(label, result, t['duration'])
             else:
-                result, t = solve_analogies(analogies, vecs_dict, method=method, whole_matrix=whole_matrix)
+                result, t = solve_analogies(analogies, vecs_dict, method=method,
+                                            whole_matrix=whole_matrix)
                 label = '{} ({})'.format(analogies_type, method)
                 results.append((label, result, t['duration']))
                 if verbose:
@@ -134,20 +143,27 @@ def evaluate_vecs(vecs_dict,
 
 if __name__ == '__main__':
     #vecs_fname = '../tmp-jeroen/en.dedup.5pass.d5.t100.vec'
-    #vecs_fname = '../pretrained_reference/mkb2017.vec'
-    vecs_fname = '../pretrained_reference/fasttext/crawl-300d-2M.vec'
-    #vecs_fname = '../pretrained_reference/fasttext/wiki-news-300d-1M-subword.vec'
+    #vecs_fname = '../pretrained/mkb2017.vec'
+    #vecs_fname = '../pretrained/fasttext/crawl-300d-2M.vec'
+    #vecs_fname = '../pretrained/fasttext/wiki-news-300d-1M-subword.vec'
+    vecs_fname = '../tmp-jeroen/fr.dedup.5pass.d5.t100.vec'
+    #vecs_fname = '../reddit/reddit.dedup.sg.lr01.vec'
 
-    argparser = argparse.ArgumentParser(description='solve syntactic and semantic analogies from Mikolov et al. (2013)')
+    argparser = argparse.ArgumentParser(
+        description='solve syntactic and semantic analogies from Mikolov et al.'
+                    + ' (2013)')
     argparser.add_argument('--filename', default=vecs_fname,
-                           help='word vectors to evaluate')
-    argparser.add_argument('--lang', default='en', choices=['en', 'fr', 'hi', 'pl'],
-                           help='language to solve analogies in (uses ISO 3166-1 codes)')
+        help='word vectors to evaluate')
+    argparser.add_argument('--lang', default='en',
+                           choices=['en', 'fr', 'hi', 'pl'],
+        help='language to solve analogies in (uses ISO 3166-1 codes)')
     argparser.add_argument('--subsets', default=False, type=bool,
-                           help='break syntactic/semantic analogy performance down by subset')
+        help='break syntactic/semantic analogy performance down by subset')
     argparser.add_argument('--whole_matrix', default=False, type=bool,
-                           help='perform computations using whole matrices instead of column-wise (potentially results in massive memory use)')
+        help='perform computations using whole matrices instead of column-wise'
+             + ' (potentially results in massive memory use)')
     args = argparser.parse_args()
 
-    vecs_dict = vecs.load_vecs(args.filename, normalize=True)
-    results = evaluate_vecs(vecs_dict, lang=args.lang, subsets=args.subsets, whole_matrix=args.whole_matrix)
+    vecs_dict = vecs.load_vecs(args.filename, normalize=True, n=1e6)
+    results = evaluate_vecs(vecs_dict, lang=args.lang, subsets=args.subsets,
+                            whole_matrix=args.whole_matrix)
