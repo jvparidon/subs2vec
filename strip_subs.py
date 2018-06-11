@@ -52,9 +52,8 @@ def strip_viz(tree):
             if len(children) > 0:
                 if children[0].tag == 'time':
                     timestamp = children[0].get('value').replace(':', '').replace(',', '.')
-                    stripped.append('{} {}'.format(timestamp,
-                        etree.tostring(node, encoding=str, method='text')
-                        .replace('\n', '')))
+                    stripped.append(
+                        '{} {}'.format(timestamp, etree.tostring(node, encoding=str, method='text').replace('\n', '')))
     return u'\n'.join(stripped)
 
 
@@ -79,38 +78,32 @@ def strip_folder(folder, ioformat='txt'):
             if filename.endswith('.xml.gz'):
                 filepaths.append(os.path.join(root, filename))
     for filepath in sorted(filepaths):
-        with gzip.open(filepath, 'rb') as infile, open(filepath
-            .replace('.xml.gz', '.{}'.format(ioformat)), 'w') as outfile:
+        with gzip.open(filepath, 'rb') as infile, open(filepath.replace('.xml.gz', '.{}'.format(ioformat)),
+                                                       'w') as outfile:
             outfile.write(strip_xml(infile.read(), ioformat))
     return len(filepaths)
 
 
 @timer
 def strip_parallelized(folder, lang, ioformat='txt', cores=1):
-    return Parallel(n_jobs=cores)(delayed(strip_folder)(
-        os.path.join(folder, lang, year), ioformat) for year in sorted(
-            os.listdir(os.path.join(folder, lang))))
+    return Parallel(n_jobs=cores)(delayed(strip_folder)(os.path.join(folder, lang, year), ioformat) for year in
+                                  sorted(os.listdir(os.path.join(folder, lang))))
 
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(
-        description='join xml-stripped subs into a single training file for'
-                    + ' word2vec-style models')
+        description='join xml-stripped subs into a single training file for word2vec-style models')
     argparser.add_argument('--directory', default=None,
-        help='folder where the files are located')
-    argparser.add_argument('--ioformat', default='txt',
-                           choices=['txt', 'lemma', 'upos', 'viz'],
-        help='input/output format')
+                           help='folder where the files are located')
+    argparser.add_argument('--ioformat', default='txt', choices=['txt', 'lemma', 'upos', 'viz'],
+                           help='input/output format')
     args = argparser.parse_args()
 
     ioformat = args.ioformat
     folder = args.directory
     if folder is None:
-        folder = '../OpenSubtitles2018/parsed' if (ioformat
-            in ['upos', 'lemma']) else '../OpenSubtitles2018/raw'
+        folder = '../OpenSubtitles2018/parsed' if (ioformat in ['upos', 'lemma']) else '../OpenSubtitles2018/raw'
     for lang in sorted(os.listdir(folder)):
         if '.' not in lang:
-            results, t = strip_parallelized(folder, lang, ioformat=ioformat,
-                                            cores=cores)
-            print('stripped xml from {} {} files in {} seconds'
-                  .format(np.sum(results), lang, int(t['duration'])))
+            results, t = strip_parallelized(folder, lang, ioformat=ioformat, cores=cores)
+            print('stripped xml from {} {} files in {} seconds'.format(np.sum(results), lang, int(t['duration'])))

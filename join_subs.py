@@ -9,27 +9,12 @@ import numpy as np
 from utensilities import timer
 
 
-punctuation = string.punctuation.replace('_', '')
-punctuation_table = str.maketrans(punctuation, ' ' * len(punctuation))
-def strip_punctuation_old(text, lower=False):
-    if lower:
-        lines = [' '.join([word for word in line.split(' ') if word != ''])
-                 for line in text.lower().translate(punctuation_table)
-                             .replace('_punct', '').split('\n')]
-    else:
-        lines = [' '.join([word for word in line.split(' ') if word != ''])
-                 for line in text.translate(punctuation_table)
-                             .replace('_punct', '').split('\n')]
-    return '\n'.join([line for line in lines if line != ''])
-
-
 def strip_special(txt):
     return ''.join([char if char.isalnum() else ' ' for char in txt])
 
 
 def strip_punctuation(txt):
-    lines = [' '.join([word for word in strip_special(line).split(' ')
-                       if word != '']) for line in txt.split('\n')]
+    lines = [' '.join([word for word in strip_special(line).split(' ') if word != '']) for line in txt.split('\n')]
     return '{}\n'.format('\n'.join([line for line in lines if line != '']))
 
 
@@ -49,9 +34,8 @@ def join_dir(in_dir, out_dir, lang, verbose=False, ioformat='txt'):
                 outfile.write(strip_punctuation(infile.read()))
                 if verbose:
                     i += 1
-                    print('writing xml-stripped text files to single training'
-                          + ' file: {:5.2f}%'.format((float(i) / total) * 100),
-                                                     end='\r')
+                    print('writing xml-stripped text files to single training file: {:5.2f}%'.format(
+                        (float(i) / total) * 100), end='\r')
     if verbose:
         print('')
     return total
@@ -59,16 +43,13 @@ def join_dir(in_dir, out_dir, lang, verbose=False, ioformat='txt'):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        description='join xml-stripped text files into a single training file'
-                    + ' for word2vec-style models')
+        description='join xml-stripped text files into a single training file for word2vec-style models')
     parser.add_argument('--in_dir', default='../OpenSubtitles2018/raw',
-        help='directory the files are located in')
-    parser.add_argument('--out_dir',
-                        default='../training_data/opensubtitles/raw',
-        help='directory the output will be written to')
-    parser.add_argument('--ioformat', default='txt',
-                        choices=['txt', 'lemma', 'upos', 'viz'],
-        help='input/output format')
+                        help='directory the files are located in')
+    parser.add_argument('--out_dir', default='../training_data/opensubtitles/raw',
+                        help='directory the output will be written to')
+    parser.add_argument('--ioformat', default='txt', choices=['txt', 'lemma', 'upos', 'viz'],
+                        help='input/output format')
     parser.add_argument('--verbose', default='True')
     args = parser.parse_args()
 
@@ -78,7 +59,5 @@ if __name__ == '__main__':
     verbose = args.verbose
     for lang in sorted(os.listdir(in_dir)):
         if '.' not in lang:
-            results, t = join_dir(in_dir, out_dir, lang, verbose=verbose,
-            ioformat=ioformat)
-            print('joined {} files for language {} in {} seconds'
-                  .format(results, lang, int(t['duration'])))
+            results, t = join_dir(in_dir, out_dir, lang, verbose=verbose, ioformat=ioformat)
+            print('joined {} files for language {} in {} seconds'.format(results, lang, int(t['duration'])))

@@ -20,8 +20,7 @@ def compare_dissimilarities(fname, vecs_dict):
     wordsim_dsm = []
     for i in range(len(word_pairs)):
         if all(word in vecs_dict.keys() for word in word_pairs[i]):
-            sub2vec_dsm.append(scipy.spatial.distance.cosine(vecs_dict[word_pairs[i][0]],
-                                                             vecs_dict[word_pairs[i][1]]))
+            sub2vec_dsm.append(scipy.spatial.distance.cosine(vecs_dict[word_pairs[i][0]], vecs_dict[word_pairs[i][1]]))
             wordsim_dsm.append(wordsim[i])
     return scipy.stats.spearmanr(wordsim_dsm, sub2vec_dsm)[0], len(wordsim_dsm), len(word_pairs)
 

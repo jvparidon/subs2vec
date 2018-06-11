@@ -22,7 +22,8 @@ def dedup_file(in_fname, out_fname):
 
 
 def dedup_reddit(folder, verbose=False):
-    fnames = [os.path.join(folder, fname) for fname in sorted(list(os.listdir(folder))) if fname.endswith('_stripped.txt')]
+    fnames = [os.path.join(folder, fname) for fname in sorted(list(os.listdir(folder))) if
+              fname.endswith('_stripped.txt')]
     for fname in fnames:
         with open(fname, 'rt') as in_file, open('{}.dedup.txt'.format(fname[:-4]), 'w') as out_file:
             lines, n_lines, n_duplicates = get_lines(in_file)

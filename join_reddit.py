@@ -7,7 +7,8 @@ from utensilities import timer
 
 @timer
 def join_files(folder):
-    fnames = [os.path.join(folder, fname) for fname in sorted(list(os.listdir(folder))) if fname.endswith('_stripped..dedup.txt')]
+    fnames = [os.path.join(folder, fname) for fname in sorted(list(os.listdir(folder))) if
+              fname.endswith('_stripped..dedup.txt')]
     with open(os.path.join(folder, 'reddit_comments.txt'), 'w') as training_file:
         for fname in fnames:
             print('writing file {} to reddit training file'.format(fname))

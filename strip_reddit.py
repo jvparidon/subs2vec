@@ -18,15 +18,9 @@ def strip_special(txt):
     return ''.join([char if char.isalnum() else ' ' for char in txt])
 
 
-def strip_line_new(line):
-    lines = [' '.join([word for word in strip_special(line).split(' ') if word != '']) for line in re.sub(r'http\S+', '', html.unescape(json.loads(line)['body'])).split('\n')]
-    return '{}\n'.format('\n'.join([line for line in lines if line != '']))
-
-
-punctuation = string.punctuation.replace('_', '')
-punctuation_table = str.maketrans(punctuation, ' ' * len(punctuation))
-def strip_line_old(line):
-    lines = [' '.join([word for word in line.split(' ') if word != '']) for line in re.sub(r'http\S+', '', html.unescape(json.loads(line)['body']).lower()).translate(punctuation_table).split('\n')]
+def strip_line(line):
+    lines = [' '.join([word for word in strip_special(line).split(' ') if word != '']) for line in
+             re.sub(r'http\S+', '', html.unescape(json.loads(line)['body'])).split('\n')]
     return '{}\n'.format('\n'.join([line for line in lines if line != '']))
 
 
@@ -48,7 +42,7 @@ def strip_file(fname, compress=True):
         i = 0
         for line in json_file:
             try:
-                stripped_file.write(strip_line_new(line))
+                stripped_file.write(strip_line(line))
             except json.JSONDecodeError:
                 print('encountered invalid JSON in file {} on line {}'.format(fname, i))
             i += 1
@@ -57,7 +51,8 @@ def strip_file(fname, compress=True):
 
 
 def strip_folder_parallel(folder, compress=True, cores=1):
-    fnames = [os.path.join(folder, fname) for fname in sorted(list(os.listdir(folder))) if (fname.endswith('.bz2') or fname.endswith('.xz'))]
+    fnames = [os.path.join(folder, fname) for fname in sorted(list(os.listdir(folder))) if
+              (fname.endswith('.bz2') or fname.endswith('.xz'))]
     return strip_parallelized(fnames, compress, cores)
 
 

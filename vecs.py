@@ -18,11 +18,9 @@ def load_vecs(filename, normalize=False, n=False, d=300):
             line = line.split(' ')
             if len(line) > d:
                 if normalize:
-                    vecs_dict[line[0]] = normalize_vec(
-                        np.array([float(num) for num in line[1:d + 1]]))
+                    vecs_dict[line[0]] = normalize_vec(np.array([float(num) for num in line[1:d + 1]]))
                 else:
-                    vecs_dict[line[0]] = np.array(
-                        [float(num) for num in line[1:d + 1]])
+                    vecs_dict[line[0]] = np.array([float(num) for num in line[1:d + 1]])
             i += 1
             if n and (i > n):
                 return vecs_dict
@@ -31,14 +29,12 @@ def load_vecs(filename, normalize=False, n=False, d=300):
 
 def print_result(label, result, t=0):
     if t > 0:
-        print('{: <50}{: 5.2f} ({: >5}/{: >5}) in {}s'
-              .format(label, *result, int(t)))
+        print('{: <50}{: 5.2f} ({: >5}/{: >5}) in {}s'.format(label, *result, int(t)))
     else:
         print('{: <50}{: 5.2f} ({: >5}/{: >5})'.format(label, *result))
 
 
-def evaluate_vecs(vecs_dict, lang='en', dissimilarities=True, rts=True,
-                  analogies=True):
+def evaluate_vecs(vecs_dict, lang='en', dissimilarities=True, rts=True, analogies=True):
     if lang == 'en':
         if dissimilarities:
             faruqui_measures.evaluate_vecs(vecs_dict, verbose=True)
@@ -51,19 +47,17 @@ def evaluate_vecs(vecs_dict, lang='en', dissimilarities=True, rts=True,
 if __name__ == '__main__':
     default_fname = '../pretrained/fasttext/wiki-news-300d-1M-subword.vec'
 
-    argparser = argparse.ArgumentParser(
-        description='evaluate a set of word embeddings')
+    argparser = argparse.ArgumentParser(description='evaluate a set of word embeddings')
     argparser.add_argument('--filename', default=default_fname,
-        help='word vectors to evaluate')
-    argparser.add_argument('--lang', default='en',
-                           choices=['en', 'fr', 'hi', 'pl'],
-        help='language to solve analogies in (uses ISO 3166-1 codes)')
+                           help='word vectors to evaluate')
+    argparser.add_argument('--lang', default='en', choices=['en', 'fr', 'hi', 'pl'],
+                           help='language to solve analogies in (uses ISO 3166-1 codes)')
     argparser.add_argument('--dissimilarities', default=True, type=bool,
-        help='Faruqui semantic dissimilarity correlations')
+                           help='Faruqui semantic dissimilarity correlations')
     argparser.add_argument('--rts', default=True, type=bool,
-        help='Semantic Priming Project response time predictions')
+                           help='Semantic Priming Project response time predictions')
     argparser.add_argument('--analogies', default=True, type=bool,
-        help='Google (Mikolov) analogy problems')
+                           help='Google (Mikolov) analogy problems')
     args = argparser.parse_args()
 
     # bypass filename from argparse for convenient testing of multiple files

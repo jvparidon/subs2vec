@@ -14,7 +14,8 @@ from utensilities import timer
 def predict_ldt(vecs_dict):
     fname = '../MKB2017/SemPriming/clean_ldt_data.txt'
     df = pd.read_csv(fname, sep='\t')
-    df['cosine'] = df.apply(lambda row: cosine(vecs_dict[row['target'].lower()], vecs_dict[row['prime'].lower()]), axis=1)
+    df['cosine'] = df.apply(lambda row: cosine(vecs_dict[row['target'].lower()], vecs_dict[row['prime'].lower()]),
+                            axis=1)
     df = df.replace('#NULL!', np.nan).dropna()
     df['wordpair'] = df.apply(lambda row: '{}{}'.format(row['target'].lower(), row['prime'].lower()), axis=1)
     df['sub_sess'] = df.apply(lambda row: '{}_{}'.format(row['Subject'], row['Session']), axis=1)
@@ -62,7 +63,8 @@ def predict_ldt(vecs_dict):
 def predict_naming(vecs_dict):
     fname = '../MKB2017/SemPriming/clean_naming_data.txt'
     df = pd.read_csv(fname, sep='\t')
-    df['cosine'] = df.apply(lambda row: cosine(vecs_dict[row['target'].lower()], vecs_dict[row['prime'].lower()]), axis=1)
+    df['cosine'] = df.apply(lambda row: cosine(vecs_dict[row['target'].lower()], vecs_dict[row['prime'].lower()]),
+                            axis=1)
     df = df.replace('#NULL!', np.nan).dropna()
     df['wordpair'] = df.apply(lambda row: '{}{}'.format(row['target'].lower(), row['prime'].lower()), axis=1)
     df['sub_sess'] = df.apply(lambda row: '{}_{}'.format(row['Subject'], row['Session']), axis=1)
@@ -126,7 +128,8 @@ if __name__ == '__main__':
     #vecs_fname = '../pretrained_reference/fasttext/crawl-300d-2M.vec'
     vecs_fname = '../pretrained_reference/fasttext/wiki-news-300d-1M-subword.vec'
 
-    argparser = argparse.ArgumentParser(description='predict primed lexical decision and naming response times in Semantic Priming Project data')
+    argparser = argparse.ArgumentParser(
+        description='predict primed lexical decision and naming response times in Semantic Priming Project data')
     argparser.add_argument('--filename', default=vecs_fname, help='word vectors to evaluate')
     args = argparser.parse_args()
 
