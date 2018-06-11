@@ -12,7 +12,7 @@ from multiprocessing import cpu_count
 
 
 @timer
-def train_fasttext(training_data, working_dir, cores):
+def train_fasttext(training_data, working_dir, cores, dim=300):
     base_fname = training_data.strip('.txt')
     binary = ['../local-bin/fasttext']
     method = ['skipgram']
@@ -23,7 +23,7 @@ def train_fasttext(training_data, working_dir, cores):
     neg = ['-neg', str(5)]
     epoch = ['-epoch', str(5)]
     t = ['-t', str(.0001)]
-    dim = ['-dim', str(300)]
+    dim = ['-dim', str(dim)]
     thread = ['-thread', str(cores)]
     sp.run(binary + method + train + output + neg + epoch + t + dim + thread)
     model = '{}.bin'.format(base_fname)

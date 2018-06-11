@@ -84,8 +84,7 @@ def solve_analogies(analogies, vecs_dict, method='additive',
             for i in range(b1.shape[0]):
                 b2_pred = ((cos_pos(vecs, b1[i].reshape(1, -1))
                             * cos_pos(vecs, a2[i].reshape(1, -1)))
-                           / (cos_pos(vecs, a1[i].reshape(1, -1)) + eps))
-                          .squeeze()
+                           / (cos_pos(vecs, a1[i].reshape(1, -1)) + eps)).squeeze()
                 # zero out b1s (yes, this feels like cheating)
                 b2_pred[np.isin(words, analogies[i][0:3]).squeeze()] = -1.0
                 b2_pred_idx[i] = np.argmax(b2_pred)
@@ -101,8 +100,7 @@ def solve_analogies(analogies, vecs_dict, method='additive',
         else:
             b2_pred_idx = np.zeros(b1.shape[0], dtype=np.int32)
             for i in range(b1.shape[0]):
-                b2_pred = cos(vecs, (b1[i] - a1[i] + a2[i]).reshape(1, -1))
-                          .squeeze()
+                b2_pred = cos(vecs, (b1[i] - a1[i] + a2[i]).reshape(1, -1)).squeeze()
                 # zero out b1s (yes, this feels like cheating)
                 b2_pred[np.isin(words.squeeze(), analogies[i][0:3])] = -1.0
                 b2_pred_idx[i] = np.argmax(b2_pred)
@@ -146,7 +144,9 @@ if __name__ == '__main__':
     #vecs_fname = '../pretrained/mkb2017.vec'
     #vecs_fname = '../pretrained/fasttext/crawl-300d-2M.vec'
     #vecs_fname = '../pretrained/fasttext/wiki-news-300d-1M-subword.vec'
-    vecs_fname = '../tmp-jeroen/fr.dedup.5pass.d5.t100.vec'
+    #vecs_fname = '../tmp-jeroen/fr.dedup.5pass.d5.t100.vec'
+    vecs_fname = '../tmp-jeroen/pl.dedup.5pass.d5.t100.vec'
+    #vecs_fname = '../pretrained/fasttext/cc.fr.300.vec'
     #vecs_fname = '../reddit/reddit.dedup.sg.lr01.vec'
 
     argparser = argparse.ArgumentParser(

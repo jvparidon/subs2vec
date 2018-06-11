@@ -7,7 +7,7 @@ import google_analogies
 import response_times
 
 
-def load_vecs(filename, normalize=False, n=False, dims=300):
+def load_vecs(filename, normalize=False, n=False, d=300):
     def normalize_vec(x):
         return x / np.linalg.norm(x)
     print('loading vecs: {}'.format(filename))
@@ -16,13 +16,13 @@ def load_vecs(filename, normalize=False, n=False, dims=300):
         i = 0
         for line in vecfile:
             line = line.split(' ')
-            if len(line) > dims:
+            if len(line) > d:
                 if normalize:
                     vecs_dict[line[0]] = normalize_vec(
-                        np.array([float(num) for num in line[1:dims + 1]]))
+                        np.array([float(num) for num in line[1:d + 1]]))
                 else:
                     vecs_dict[line[0]] = np.array(
-                        [float(num) for num in line[1:dims + 1]])
+                        [float(num) for num in line[1:d + 1]])
             i += 1
             if n and (i > n):
                 return vecs_dict
@@ -72,8 +72,9 @@ if __name__ == '__main__':
               '../pretrained/mkb2017.vec',
               '../pretrained/fasttext/crawl-300d-2M.vec',
               '../reddit/reddit.dedup.sg.lr01.vec']
+    fnames = ['../tmp-jeroen/en.dedup.5pass.d5.t100.3000d.vec']
     for fname in fnames:
-        vecs_dict = load_vecs(fname, n=2e6, normalize=True)
+        vecs_dict = load_vecs(fname, n=1e6, normalize=True, d=3000)
         evaluate_vecs(vecs_dict,
                       lang=args.lang,
                       dissimilarities=args.dissimilarities,
