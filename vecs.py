@@ -12,7 +12,7 @@ def load_vecs(filename, normalize=False, n=False, d=300):
         return x / np.linalg.norm(x)
     print('loading vecs: {}'.format(filename))
     vecs_dict = {}
-    with open(filename, 'r', encoding='utf-8', errors='replace') as vecfile:
+    with open(filename, 'r', encoding='utf-8') as vecfile:
         i = 0
         for line in vecfile:
             line = line.split(' ')
@@ -67,8 +67,9 @@ if __name__ == '__main__':
               '../pretrained/fasttext/crawl-300d-2M.vec',
               '../reddit/reddit.dedup.sg.lr01.vec']
     fnames = ['../tmp-jeroen/en.dedup.5pass.d5.t100.3000d.vec']
+    fnames = ['../tmp-jeroen/bn.dedup.utf-8.5pass.d5.t100.neg5.epoch5.t0.0001.300d.vec']
     for fname in fnames:
-        vecs_dict = load_vecs(fname, n=1e6, normalize=True, d=3000)
+        vecs_dict = load_vecs(fname, n=1e6, normalize=True, d=300)
         evaluate_vecs(vecs_dict,
                       lang=args.lang,
                       dissimilarities=args.dissimilarities,
