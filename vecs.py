@@ -2,9 +2,8 @@
 # jvparidon@gmail.com
 import numpy as np
 import argparse
-import faruqui_measures
+import faruqui_dissimilarities
 import google_analogies
-import response_times
 
 
 def load_vecs(filename, normalize=False, n=False, d=300):
@@ -34,12 +33,10 @@ def print_result(label, result, t=0):
         print('{: <50}{: 5.2f} ({: >5}/{: >5})'.format(label, *result))
 
 
-def evaluate_vecs(vecs_dict, lang='en', dissimilarities=True, rts=True, analogies=True):
+def evaluate_vecs(vecs_dict, lang='en', dissimilarities=True, analogies=True):
     if lang == 'en':
         if dissimilarities:
-            faruqui_measures.evaluate_vecs(vecs_dict, verbose=True)
-        if rts:
-            response_times.evaluate_vecs(vecs_dict, verbose=True)
+            faruqui_dissimilarities.evaluate_vecs(vecs_dict, verbose=True)
     if analogies:
         google_analogies.evaluate_vecs(vecs_dict, lang, verbose=True)
 
@@ -54,24 +51,18 @@ if __name__ == '__main__':
                            help='language to solve analogies in (uses ISO 3166-1 codes)')
     argparser.add_argument('--dissimilarities', default=True, type=bool,
                            help='Faruqui semantic dissimilarity correlations')
-    argparser.add_argument('--rts', default=True, type=bool,
-                           help='Semantic Priming Project response time predictions')
     argparser.add_argument('--analogies', default=True, type=bool,
                            help='Google (Mikolov) analogy problems')
     args = argparser.parse_args()
 
     # bypass filename from argparse for convenient testing of multiple files
-    fnames = ['../tmp-jeroen/en.dedup.5pass.d5.t100.vec',
-              '../pretrained/fasttext/wiki-news-300d-1M-subword.vec',
+    fnames = ['../pretrained/fasttext/wiki-news-300d-1M-subword.vec',
               '../pretrained/mkb2017.vec',
               '../pretrained/fasttext/crawl-300d-2M.vec',
               '../reddit/reddit.dedup.sg.lr01.vec']
-    fnames = ['../tmp-jeroen/en.dedup.5pass.d5.t100.3000d.vec']
-    fnames = ['../tmp-jeroen/bn.dedup.utf-8.5pass.d5.t100.neg5.epoch5.t0.0001.300d.vec']
     for fname in fnames:
         vecs_dict = load_vecs(fname, n=1e6, normalize=True, d=300)
         evaluate_vecs(vecs_dict,
                       lang=args.lang,
                       dissimilarities=args.dissimilarities,
-                      rts=args.rts,
                       analogies=args.analogies)

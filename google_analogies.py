@@ -8,9 +8,9 @@ import vecs
 
 def get_analogies(analogies_set, lang='en', subsets=False):
     if analogies_set == 'syntactic':
-        fname = '../google_analogies/{}-syntactic.txt'.format(lang)
+        fname = 'google_analogies/{}-syntactic.txt'.format(lang)
     elif analogies_set == 'semantic':
-        fname = '../google_analogies/{}-semantic.txt'.format(lang)
+        fname = 'google_analogies/{}-semantic.txt'.format(lang)
     with open(fname, 'r') as analogies_file:
         if subsets:
             analogies = {}

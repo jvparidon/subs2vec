@@ -20,7 +20,8 @@ def train_fasttext(training_data, cores, d=300, neg=10, epoch=10, t=.0001):
     binary = ['../local-bin/fasttext']
     method = ['skipgram']
     train = ['-input', training_data]
-    model_name = training_data.replace('.txt', '.neg{}.epoch{}.t{}.{}d'.format(neg, epoch, t, d))
+    #model_name = training_data.replace('.txt', '.neg{}.epoch{}.t{}.{}d'.format(neg, epoch, t, d))
+    model_name = 'sub.{}'.format(training_data.split('.')[0])
     output = ['-output', model_name]
     neg = ['-neg', str(neg)]
     epoch = ['-epoch', str(epoch)]
@@ -60,7 +61,7 @@ def fix_encoding(training_data):
 @timer
 def generate(lang, subs_dir, subs_prep, dedup, phrase_pass, cores):
     if lang == 'all':
-        langs = sorted(os.listdir(os.path.join(subs_dir, 'raw')))
+        langs = reversed(sorted(os.listdir(os.path.join(subs_dir, 'raw'))))
     else:
         langs = [lang]
     for lang in langs:

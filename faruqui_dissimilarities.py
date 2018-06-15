@@ -26,7 +26,7 @@ def compare_dissimilarities(fname, vecs_dict):
 
 
 def evaluate_vecs(vecs_dict, verbose=True):
-    folder = '../faruqui_dissimilarities'
+    folder = 'faruqui_dissimilarities'
     results = []
     for fname in sorted(os.listdir(folder)):
         result, t = compare_dissimilarities(os.path.join(folder, fname), vecs_dict)
