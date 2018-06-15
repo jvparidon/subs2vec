@@ -134,18 +134,9 @@ def evaluate_vecs(vecs_dict,
 
 
 if __name__ == '__main__':
-    #vecs_fname = '../tmp-jeroen/en.dedup.5pass.d5.t100.vec'
-    #vecs_fname = '../pretrained/mkb2017.vec'
-    #vecs_fname = '../pretrained/fasttext/crawl-300d-2M.vec'
-    #vecs_fname = '../pretrained/fasttext/wiki-news-300d-1M-subword.vec'
-    #vecs_fname = '../tmp-jeroen/fr.dedup.5pass.d5.t100.vec'
-    vecs_fname = '../tmp-jeroen/pl.dedup.5pass.d5.t100.vec'
-    #vecs_fname = '../pretrained/fasttext/cc.fr.300.vec'
-    #vecs_fname = '../reddit/reddit.dedup.sg.lr01.vec'
-
     argparser = argparse.ArgumentParser(
         description='solve syntactic and semantic analogies from Mikolov et al. (2013)')
-    argparser.add_argument('--filename', default=vecs_fname,
+    argparser.add_argument('--filename',
                            help='word vectors to evaluate')
     argparser.add_argument('--lang', default='en', choices=['en', 'fr', 'hi', 'pl'],
                            help='language to solve analogies in (uses ISO 3166-1 codes)')

@@ -37,12 +37,9 @@ def evaluate_vecs(vecs_dict, verbose=True):
 
 
 if __name__ == '__main__':
-    #vecs_fname = '../word2phrase/dedup.en.5pass.d5.t100.neg10.epoch10.vec'
-    vecs_fname = '../pretrained_reference/fasttext/wiki-news-300d-1M-subword.vec'
-
     argparser = argparse.ArgumentParser(description='compute semantic dissimilarity correlations from wordvectors.org')
-    argparser.add_argument('--filename', default=vecs_fname, help='word vectors to evaluate')
+    argparser.add_argument('--filename', help='word vectors to evaluate')
     args = argparser.parse_args()
 
-    vecs_dict = vecs.load_vecs(args.filename, normalize=False)
+    vecs_dict = vecs.load_vecs(args.filename)
     results = evaluate_vecs(vecs_dict)

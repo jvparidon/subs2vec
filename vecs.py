@@ -42,10 +42,8 @@ def evaluate_vecs(vecs_dict, lang='en', dissimilarities=True, analogies=True):
 
 
 if __name__ == '__main__':
-    default_fname = '../pretrained/fasttext/wiki-news-300d-1M-subword.vec'
-
     argparser = argparse.ArgumentParser(description='evaluate a set of word embeddings')
-    argparser.add_argument('--filename', default=default_fname,
+    argparser.add_argument('--filename',
                            help='word vectors to evaluate')
     argparser.add_argument('--lang', default='en', choices=['en', 'fr', 'hi', 'pl'],
                            help='language to solve analogies in (uses ISO 3166-1 codes)')
@@ -55,14 +53,8 @@ if __name__ == '__main__':
                            help='Google (Mikolov) analogy problems')
     args = argparser.parse_args()
 
-    # bypass filename from argparse for convenient testing of multiple files
-    fnames = ['../pretrained/fasttext/wiki-news-300d-1M-subword.vec',
-              '../pretrained/mkb2017.vec',
-              '../pretrained/fasttext/crawl-300d-2M.vec',
-              '../reddit/reddit.dedup.sg.lr01.vec']
-    for fname in fnames:
-        vecs_dict = load_vecs(fname, n=1e6, normalize=True, d=300)
-        evaluate_vecs(vecs_dict,
-                      lang=args.lang,
-                      dissimilarities=args.dissimilarities,
-                      analogies=args.analogies)
+    vecs_dict = load_vecs(args.filename, n=1e6, normalize=True, d=300)
+    evaluate_vecs(vecs_dict,
+                  lang=args.lang,
+                  dissimilarities=args.dissimilarities,
+                  analogies=args.analogies)
