@@ -9,10 +9,8 @@ import join_subs
 import deduplicate
 from utensilities import timer
 from multiprocessing import cpu_count
-
-
-def print_s2v(txt):
-    print('[sub2vec] {}'.format(txt))
+import logging
+logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 
 
 @timer
@@ -28,7 +26,10 @@ def train_fasttext(training_data, cores, d=300, neg=10, epoch=10, t=.0001):
     t = ['-t', str(t)]
     dim = ['-dim', str(d)]
     thread = ['-thread', str(cores)]
-    sp.run(binary + method + train + output + neg + epoch + t + dim + thread)
+    if logging.getLogger().isEnabledFor(logging.INFO):
+        sp.run(binary + method + train + output + neg + epoch + t + dim + thread)
+    else:
+        sp.run(binary + method + train + output + neg + epoch + t + dim + thread, stdout=sp.DEVNULL)
     model = '{}.bin'.format(model_name)
     vecs = '{}.vec'.format(model_name)
     return model, vecs
@@ -45,7 +46,10 @@ def build_phrases(training_data, phrase_pass):
         output = ['-output', out_fname]
         d = ['-min-count', str(5)]
         t = ['-threshold', str(t)]
-        sp.run(binary + train + output + d + t)
+        if logging.getLogger().isEnabledFor(logging.INFO):
+            sp.run(binary + train + output + d + t)
+        else:
+            sp.run(binary + train + output + d + t, stdout=sp.DEVNULL)
         training_data = out_fname
     return out_fname
 
@@ -69,41 +73,42 @@ def generate(lang, subs_dir, subs_prep, dedup, phrase_pass, cores):
         if subs_prep:
             training_data = os.path.join(subs_dir, 'raw')
             # strip subs
-            print_s2v('stripping xml from subs in language {}'.format(lang))
+            logging.info('stripping xml from subs in language {}'.format(lang))
             results, t = strip_subs.strip_parallelized(training_data, lang, ioformat='txt', cores=cores)
-            print_s2v('stripped xml from {} files in {} seconds'.format(np.sum(results), int(t['duration'])))
+            logging.info('stripped xml from {} files in {} seconds'.format(np.sum(results), int(t['duration'])))
             # join subs
-            print_s2v('concatenating training data for language {}'.format(lang))
+            logging.info('concatenating training data for language {}'.format(lang))
             results, t = join_subs.join_dir(training_data, './', lang, verbose=True, ioformat='txt')
-            print_s2v('concatenated {} files in {} seconds'.format(results, int(t['duration'])))
+            logging.info('concatenated {} files in {} seconds'.format(results, int(t['duration'])))
 
         training_data = '{}.txt'.format(lang)
 
         # deduplicate
         if dedup:
-            print_s2v('deduplicating {}'.format(training_data))
+            logging.info('deduplicating {}'.format(training_data))
             out_fname = training_data.replace('.txt', '.dedup.txt')
             results, t = deduplicate.dedup_file(training_data, out_fname)
             n_lines, n_duplicates = results
             training_data = out_fname
-            print_s2v('read {} lines and removed {} duplicates in {} seconds'.format(n_lines, n_duplicates,
+            logging.info('read {} lines and removed {} duplicates in {} seconds'.format(n_lines, n_duplicates,
                                                                                  int(t['duration'])))
 
         # build phrases
-        print_s2v('building phrases for {}'.format(training_data))
+        logging.info('building phrases for {}'.format(training_data))
         training_data, t = build_phrases(training_data, phrase_pass)
-        print_s2v('built phrases in {} passes in {} seconds'.format(phrase_pass, int(t['duration'])))
+        logging.info('built phrases in {} passes in {} seconds'.format(phrase_pass, int(t['duration'])))
 
         # fix potential broken utf-8 encoding
-        print_s2v('checking (and fixing) utf-8 encoding for {}'.format(training_data))
+        logging.info('checking (and fixing) utf-8 encoding for {}'.format(training_data))
         training_data = fix_encoding(training_data)
 
         # train fastText model
+        logging.info('training fastText model on {}'.format(training_data))
         results, t = train_fasttext(training_data, cores)
         model, vecs = results
-        print_s2v('trained fastText model in {} seconds'.format(int(t['duration'])))
-        print_s2v('model binary at {}'.format(model))
-        print_s2v('word vectors at {}'.format(vecs))
+        logging.info('trained fastText model in {} seconds'.format(int(t['duration'])))
+        logging.info('model binary at {}'.format(model))
+        logging.info('word vectors at {}'.format(vecs))
 
     return langs
 
@@ -126,4 +131,4 @@ if __name__ == '__main__':
 
     langs, t = generate(**vars(args))
     for lang in langs:
-        print_s2v('generated sub2vec model for language {} in {} seconds'.format(lang, int(t['duration'])))
+        logging.info('generated sub2vec model for language {} in {} seconds'.format(lang, int(t['duration'])))
