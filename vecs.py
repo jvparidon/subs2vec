@@ -2,8 +2,8 @@
 # jvparidon@gmail.com
 import numpy as np
 import argparse
-import faruqui_dissimilarities
-import google_analogies
+import similarities
+import analogies
 
 
 def load_vecs(filename, normalize=False, n=False, d=300):
@@ -33,28 +33,28 @@ def print_result(label, result, t=0):
         print('{: <50}{: 5.2f} ({: >5}/{: >5})'.format(label, *result))
 
 
-def evaluate_vecs(vecs_dict, lang='en', dissimilarities=True, analogies=True):
+def evaluate_vecs(vecs_dict, lang='en', similarities=True, analogies=True):
     if lang == 'en':
         if dissimilarities:
-            faruqui_dissimilarities.evaluate_vecs(vecs_dict, verbose=True)
+            similarities.evaluate_vecs(vecs_dict, verbose=True)
     if analogies:
-        google_analogies.evaluate_vecs(vecs_dict, lang, verbose=True)
+        analogies.evaluate_vecs(vecs_dict, lang, verbose=True)
 
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='evaluate a set of word embeddings')
     argparser.add_argument('--filename',
                            help='word vectors to evaluate')
-    argparser.add_argument('--lang', default='en', choices=['en', 'fr', 'hi', 'pl'],
-                           help='language to solve analogies in (uses ISO 3166-1 codes)')
-    argparser.add_argument('--dissimilarities', default=True, type=bool,
-                           help='Faruqui semantic dissimilarity correlations')
+    argparser.add_argument('--lang', default='en',
+                           help='language to evaluate vector in (use ISO 3166-1 codes)')
+    argparser.add_argument('--similarities', default=True, type=bool,
+                           help='semantic similarity correlations')
     argparser.add_argument('--analogies', default=True, type=bool,
-                           help='Google (Mikolov) analogy problems')
+                           help='analogy problems')
     args = argparser.parse_args()
 
-    vecs_dict = load_vecs(args.filename, n=1e6, normalize=True, d=300)
+    vecs_dict = load_vecs(args.filename, n=1e6, normalize=True)
     evaluate_vecs(vecs_dict,
                   lang=args.lang,
-                  dissimilarities=args.dissimilarities,
+                  similarities=args.similarities,
                   analogies=args.analogies)

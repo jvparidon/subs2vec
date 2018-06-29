@@ -9,6 +9,7 @@ def deduplicate_words(analogies_fname):
     words = set()
     with open(analogies_fname, 'r', encoding='utf-8') as analogies_file:
         [words.update(line[1].replace('\n', '').split(' ')) for line in enumerate(analogies_file) if ':' not in line[1]]
+    words = sorted(list(words))
     words_fname = analogies_fname.replace('.txt', '.unique_words.txt')
     with open(words_fname, 'w', encoding='utf-8') as words_file:
         words_file.write('\n'.join(words))

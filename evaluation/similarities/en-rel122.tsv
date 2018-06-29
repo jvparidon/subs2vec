@@ -1,0 +1,124 @@
+# Szumlanski, Gomez, Sims (2013)
+word1	word2	similarity
+underwear	lingerie	3.94118
+digital camera	photographer	3.85294
+tuition	fee	3.84706
+leaves	rake	3.81781
+symptom	fever	3.79412
+fertility	ovary	3.78235
+beef	slaughterhouse	3.77727
+broadcast	commentator	3.75455
+apparel	jewellery	3.715
+arrest	detention	3.69
+hardware	pc	3.60714
+street	neighborhood	3.6
+pixel	digital camera	3.57143
+vehicle	trailer	3.53571
+mathematics	method	3.47
+draft	manuscript	3.46471
+flavor	pepper	3.45
+defense	soldier	3.39091
+seller	profit	3.38636
+lion	cage	3.35548
+treasure	hunter	3.345
+translation	meaning	3.33182
+bread	egg	3.235
+garage	opener	3.20714
+prohibition	rum	3.17143
+fax	e-mail	3.17143
+captive	custody	3.14545
+solar system	sphere	3.13
+vegetation	pastureland	3.12727
+leather	pouch	3.12143
+terrace	pavilion	3.1
+recycling	landfill	3.085
+garden	art	3.065
+recording studio	loudspeaker	3.00714
+strike	enemy	2.99773
+ethanol	benzene	2.995
+pepper	corn	2.99
+murder	gang	2.92727
+multiple	coefficient	2.91765
+infantry	reconnaissance	2.9
+density	electron	2.9
+representation	gender	2.85882
+palm	anatomy	2.78571
+poem	singer	2.78182
+maintenance	aviation	2.74
+mushroom	herb	2.72941
+yeast	lager	2.71429
+headache	caffeine	2.71176
+truss	cantilever bridge	2.709
+workplace	discrimination	2.67
+hunter	squirrel	2.66429
+disorder	abuse	2.65682
+contract	legislation	2.65
+motivation	morality	2.51765
+sewer	overflow	2.5125
+blindness	placebo	2.48
+agility	fox hunting	2.46364
+proportion	stability	2.394
+drug	public school	2.33571
+resentment	instigator	2.27857
+pow	combatant	2.25714
+banana	salad	2.25294
+emphasis	newspaper	2.24
+forestry	urban area	2.225
+hypocrisy	condemnation	2.22353
+facility	activity	2.04545
+rendezvous	convoy	2.04286
+propagation	radio wave	2.01176
+puppetry	slapstick	2
+public domain	brand	1.99412
+cartridge	lid	1.97143
+enclosure	mental health	1.91765
+credit	foundation	1.91176
+guardian	livestock	1.90909
+coronation	majority rule	1.885
+enzyme	depression	1.87727
+precursor	prevention	1.85909
+arbitration	committee	1.83529
+lemon	coriander	1.75455
+stock	bull	1.6585
+vicar	archdiocese	1.65714
+scrap	chemical element	1.57
+paranoia	newsroom	1.48235
+phase	consistency	1.47353
+hope	psychology	1.44286
+juvenile	rope	1.39286
+half-hour	weeknight	1.37059
+evolution	publicity	1.35909
+contestant	donor	1.30588
+sheet	window	1.21364
+robbery	mobile phone	1.21364
+metre	semifinal	1.2
+relief	total	1.18182
+public service	array	1.1775
+fresco	modern times	1.10588
+summit	canal	1.09091
+outlet	silk	1.085
+greed	vest	1.075
+eyeball	flatworm	1.045
+spreadsheet	silk	0.98636
+distinction	sword	0.93636
+inclusion	career	0.82727
+feud	programmer	0.805
+switch	glass	0.79286
+penalty	programming	0.77857
+duty	verb	0.77143
+catering	loan	0.76765
+musical group	confession	0.755
+complication	harp	0.74286
+female	insect	0.73636
+seminar	fern	0.71429
+home run	surfer	0.70588
+mishap	cube root	0.7
+thriller	sunlight	0.61429
+crusade	catwalk	0.58636
+jumper	furnishing	0.58571
+eclipse	cord	0.57
+fork	combination	0.54545
+madness	nest	0.45909
+gas	algebra	0.41176
+hotel	bibliography	0.36529
+gladiator	plastic bag	0.12941

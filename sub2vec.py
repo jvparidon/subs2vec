@@ -63,7 +63,7 @@ def fix_encoding(training_data):
 
 
 @timer
-def generate(lang, subs_dir, subs_prep, dedup, phrase_pass, cores):
+def generate(lang, subs_dir, subs_prep, dedup, phrase_pass, cores, subset_years=(0, 2020)):
     if lang == 'all':
         langs = reversed(sorted(os.listdir(os.path.join(subs_dir, 'raw'))))
     else:
@@ -78,10 +78,10 @@ def generate(lang, subs_dir, subs_prep, dedup, phrase_pass, cores):
             logging.info('stripped xml from {} files in {} seconds'.format(np.sum(results), int(t['duration'])))
             # join subs
             logging.info('concatenating training data for language {}'.format(lang))
-            results, t = join_subs.join_dir(training_data, './', lang, verbose=True, ioformat='txt')
+            results, t = join_subs.join_dir(training_data, './', lang, verbose=True, ioformat='txt', subset_years=subset_years)
             logging.info('concatenated {} files in {} seconds'.format(results, int(t['duration'])))
 
-        training_data = '{}.txt'.format(lang)
+        training_data = '{}.{}-{}.txt'.format(lang, *subset_years)
 
         # deduplicate
         if dedup:

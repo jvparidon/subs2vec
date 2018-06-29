@@ -2,20 +2,17 @@
 # jvparidon@gmail.com
 import numpy as np
 import argparse
+import os
 from utensilities import timer
 import vecs
 
 
-def get_analogies(analogies_set, lang='en', subsets=False):
-    if analogies_set == 'syntactic':
-        fname = 'google_analogies/{}-syntactic.txt'.format(lang)
-    elif analogies_set == 'semantic':
-        fname = 'google_analogies/{}-semantic.txt'.format(lang)
+def get_analogies(fname, subsets=False):
     with open(fname, 'r') as analogies_file:
         if subsets:
             analogies = {}
             for line in analogies_file:
-                if ':' in line:
+                if line.startswith(':'):
                     subset = line.strip('\n')
                     analogies[subset] = []
                 else:
@@ -107,29 +104,31 @@ def solve_analogies(analogies, vecs_dict, method='additive', whole_matrix=False)
 
 
 def evaluate_vecs(vecs_dict,
+                  analogies_type='',
                   lang='en',
-                  analogies_types=('syntactic', 'semantic'),
-                  methods=('additive', 'multiplicative'),
+                  methods=['multiplicative'],
                   subsets=False,
                   whole_matrix=False,
                   verbose=True):
     results = []
-    for analogies_type in analogies_types:
-        analogies = get_analogies(analogies_type, lang, subsets)
-        for method in methods:
-            if subsets:
-                for subset in sorted(analogies.keys()):
-                    result, t = solve_analogies(analogies[subset], vecs_dict, method=method, whole_matrix=whole_matrix)
-                    label = '{} ({})'.format(subset[2:], method)
+    folder = 'evaluation/analogies'
+    for fname in sorted(os.listdir(folder)):
+        if fname.startswith(lang) and (analogies_type in fname):
+            analogies = get_analogies(os.path.join(folder, fname), subsets)
+            for method in methods:
+                if subsets:
+                    for subset in sorted(analogies.keys()):
+                        result, t = solve_analogies(analogies[subset], vecs_dict, method=method, whole_matrix=whole_matrix)
+                        label = '{} ({})'.format(subset[2:], method)
+                        results.append((label, result, t['duration']))
+                        if verbose:
+                            vecs.print_result(label, result, t['duration'])
+                else:
+                    result, t = solve_analogies(analogies, vecs_dict, method=method, whole_matrix=whole_matrix)
+                    label = '{} ({})'.format(fname, method)
                     results.append((label, result, t['duration']))
                     if verbose:
                         vecs.print_result(label, result, t['duration'])
-            else:
-                result, t = solve_analogies(analogies, vecs_dict, method=method, whole_matrix=whole_matrix)
-                label = '{} ({})'.format(analogies_type, method)
-                results.append((label, result, t['duration']))
-                if verbose:
-                    vecs.print_result(label, result, t['duration'])
     return results
 
 
@@ -138,8 +137,8 @@ if __name__ == '__main__':
         description='solve syntactic and semantic analogies from Mikolov et al. (2013)')
     argparser.add_argument('--filename',
                            help='word vectors to evaluate')
-    argparser.add_argument('--lang', default='en', choices=['en', 'fr', 'hi', 'pl'],
-                           help='language to solve analogies in (uses ISO 3166-1 codes)')
+    argparser.add_argument('--lang', default='en',
+                           help='language to solve analogies in (use ISO 3166-1 codes)')
     argparser.add_argument('--subsets', default=False, type=bool,
                            help='break syntactic/semantic analogy performance down by subset')
     argparser.add_argument('--whole_matrix', default=False, type=bool,
