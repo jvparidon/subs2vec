@@ -116,11 +116,11 @@ def generate(lang, subs_dir, subs_prep, dedup, phrase_pass, cores, subset_years=
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='generate a fastText model from OpenSubtitles data')
     argparser.add_argument('--lang', default='en',
-                           help='source language (OpenSubtitles data uses ISO 3166-1 codes, use "all" for all languages)')
+                           help='source language (OpenSubtitles data uses ISO 639-1 codes, use "all" for all languages)')
     argparser.add_argument('--subs_dir', default='../OpenSubtitles2018',
                            help='location of OpenSubtitles data')
-    argparser.add_argument('--subs_prep', default=False, type=bool,
-                           help='xml-strip and concatenate subs (default False)')
+    argparser.add_argument('--subs_prep', default=True, type=bool,
+                           help='xml-strip and concatenate subs (default True)')
     argparser.add_argument('--dedup', default=True, type=bool,
                            help='deduplicate training data line-wise (default True)')
     argparser.add_argument('--phrase_pass', default='5', type=int,

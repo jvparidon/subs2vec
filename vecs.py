@@ -46,7 +46,7 @@ if __name__ == '__main__':
     argparser.add_argument('--filename',
                            help='word vectors to evaluate')
     argparser.add_argument('--lang', default='en',
-                           help='language to evaluate vector in (use ISO 3166-1 codes)')
+                           help='language to evaluate vector in (use ISO 639-1 codes)')
     argparser.add_argument('--similarities', default=True, type=bool,
                            help='semantic similarity correlations')
     argparser.add_argument('--analogies', default=True, type=bool,

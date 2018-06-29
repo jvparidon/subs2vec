@@ -138,7 +138,7 @@ if __name__ == '__main__':
     argparser.add_argument('--filename',
                            help='word vectors to evaluate')
     argparser.add_argument('--lang', default='en',
-                           help='language to solve analogies in (use ISO 3166-1 codes)')
+                           help='language to solve analogies in (use ISO 639-1 codes)')
     argparser.add_argument('--subsets', default=False, type=bool,
                            help='break syntactic/semantic analogy performance down by subset')
     argparser.add_argument('--whole_matrix', default=False, type=bool,
