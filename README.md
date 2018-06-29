@@ -10,12 +10,11 @@ If you use sub2vec and/or pretrained models, please cite the arXiv paper (also f
 
 ## Usage examples
 To evaluate word vectors on a set of language-specific benchmarks:  
-`python3 vecs.py --filename=my_spanish_vectors.vec --lang=es`
-sub2vec uses the ISO 639-1 language codes.
-For more detailed evaluation options:
+`python3 vecs.py --filename=my_spanish_vectors.vec --lang=es` (sub2vec uses the ISO 639-1 language codes)  
+For more detailed evaluation options:  
 `python3 vecs.py --help`
 
-To train a sub2vec model:
-`python3 sub2vec.py --subs_dir=../OpenSubtitles2018 --lang=es`
-For more detailed training options:
+To train a sub2vec model:  
+`python3 sub2vec.py --subs_dir=../OpenSubtitles2018 --lang=es`  
+For more detailed training options:  
 `python3 sub2vec.py --help`
