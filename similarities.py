@@ -37,7 +37,7 @@ def evaluate_vecs(vecs_dict, lang, verbose=True):
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='compute semantic similarity correlations')
     argparser.add_argument('--filename', help='word vectors to evaluate')
-    argparser.add_argument('--lang', help='language to compare simarities in (use ISO 639-1 codes)'')
+    argparser.add_argument('--lang', help='language to compare simarities in (use ISO 639-1 codes)')
     args = argparser.parse_args()
 
     vecs_dict = vecs.load_vecs(args.filename, n=1e6)

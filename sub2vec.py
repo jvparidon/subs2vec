@@ -15,7 +15,7 @@ logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.I
 
 @timer
 def train_fasttext(training_data, cores, d=300, neg=10, epoch=10, t=.0001):
-    binary = ['../local-bin/fasttext']
+    binary = ['fasttext']
     method = ['skipgram']
     train = ['-input', training_data]
     #model_name = training_data.replace('.txt', '.neg{}.epoch{}.t{}.{}d'.format(neg, epoch, t, d))
@@ -40,7 +40,7 @@ def build_phrases(training_data, phrase_pass):
     base_fname = training_data.replace('.txt', '')
     for i in range(phrase_pass):
         t = (2 ** (phrase_pass - i - 1)) * 100
-        binary = ['../local-bin/word2phrase']
+        binary = ['word2phrase']
         train = ['-train', training_data]
         out_fname = '{}.{}pass.d5.t{}.txt'.format(base_fname, i + 1, t)
         output = ['-output', out_fname]
@@ -63,14 +63,16 @@ def fix_encoding(training_data):
 
 
 @timer
-def generate(lang, subs_dir, subs_prep, dedup, phrase_pass, cores, subset_years=(0, 2020)):
+def generate(lang, subs_dir, no_subs_prep, no_dedup, phrase_pass, cores, subset_years=(0, 2020)):
     if lang == 'all':
         langs = reversed(sorted(os.listdir(os.path.join(subs_dir, 'raw'))))
     else:
         langs = [lang]
     for lang in langs:
         # prep subs
-        if subs_prep:
+        if no_subs_prep:
+            logging.info('skipping subtitle xml-stripping and file concatenation')
+        else:
             training_data = os.path.join(subs_dir, 'raw')
             # strip subs
             logging.info('stripping xml from subs in language {}'.format(lang))
@@ -84,7 +86,9 @@ def generate(lang, subs_dir, subs_prep, dedup, phrase_pass, cores, subset_years=
         training_data = '{}.{}-{}.txt'.format(lang, *subset_years)
 
         # deduplicate
-        if dedup:
+        if no_dedup:
+            logging.info('skipping subtitle xml-stripping and file concatenation')
+        else:
             logging.info('deduplicating {}'.format(training_data))
             out_fname = training_data.replace('.txt', '.dedup.txt')
             results, t = deduplicate.dedup_file(training_data, out_fname)
@@ -119,10 +123,10 @@ if __name__ == '__main__':
                            help='source language (OpenSubtitles data uses ISO 639-1 codes, use "all" for all languages)')
     argparser.add_argument('--subs_dir', default='../OpenSubtitles2018',
                            help='location of OpenSubtitles data')
-    argparser.add_argument('--subs_prep', default=True, type=bool,
-                           help='xml-strip and concatenate subs (default True)')
-    argparser.add_argument('--dedup', default=True, type=bool,
-                           help='deduplicate training data line-wise (default True)')
+    argparser.add_argument('--no_subs_prep', action='store_true',
+                           help='do not xml-strip and concatenate subs')
+    argparser.add_argument('--no_dedup', action='store_true',
+                           help='do not deduplicate training data line-wise')
     argparser.add_argument('--phrase_pass', default='5', type=int,
                            help='number of phrase-building passes, 0 equals no phrase-building (default 5)')
     argparser.add_argument('--cores', default=int(cpu_count() / 2), type=int,

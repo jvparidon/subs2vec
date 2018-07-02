@@ -104,8 +104,8 @@ def solve_analogies(analogies, vecs_dict, method='additive', whole_matrix=False)
 
 
 def evaluate_vecs(vecs_dict,
+                  lang,
                   analogies_type='',
-                  lang='en',
                   methods=['multiplicative'],
                   subsets=False,
                   whole_matrix=False,

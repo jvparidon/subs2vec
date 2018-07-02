@@ -33,11 +33,14 @@ def print_result(label, result, t=0):
         print('{: <50}{: 5.2f} ({: >5}/{: >5})'.format(label, *result))
 
 
-def evaluate_vecs(vecs_dict, lang='en', similarities=True, analogies=True):
-    if lang == 'en':
-        if dissimilarities:
-            similarities.evaluate_vecs(vecs_dict, verbose=True)
-    if analogies:
+def evaluate_vecs(vecs_dict, lang, no_similarities=False, no_analogies=False):
+    if no_similarities:
+        logging.info('skipping similarities')
+    else:
+        similarities.evaluate_vecs(vecs_dict, lang, verbose=True)
+    if no_analogies:
+        logging.info('skipping analogies')
+    else:
         analogies.evaluate_vecs(vecs_dict, lang, verbose=True)
 
 
@@ -45,16 +48,16 @@ if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='evaluate a set of word embeddings')
     argparser.add_argument('--filename',
                            help='word vectors to evaluate')
-    argparser.add_argument('--lang', default='en',
+    argparser.add_argument('--lang',
                            help='language to evaluate vector in (use ISO 639-1 codes)')
-    argparser.add_argument('--similarities', default=True, type=bool,
-                           help='semantic similarity correlations')
-    argparser.add_argument('--analogies', default=True, type=bool,
-                           help='analogy problems')
+    argparser.add_argument('--no_similarities', action='store_true',
+                           help='do not include semantic similarity correlations')
+    argparser.add_argument('--no_analogies', action='store_true',
+                           help='do not include analogy problems')
     args = argparser.parse_args()
 
     vecs_dict = load_vecs(args.filename, n=1e6, normalize=True)
     evaluate_vecs(vecs_dict,
                   lang=args.lang,
-                  similarities=args.similarities,
-                  analogies=args.analogies)
+                  no_similarities=args.no_similarities,
+                  no_analogies=args.no_analogies)
