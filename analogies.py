@@ -5,6 +5,8 @@ import argparse
 import os
 from utensilities import timer
 import vecs
+import logging
+logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 
 
 def get_analogies(fname, subsets=False):
@@ -108,8 +110,7 @@ def evaluate_vecs(vecs_dict,
                   analogies_type='',
                   methods=['multiplicative'],
                   subsets=False,
-                  whole_matrix=False,
-                  verbose=True):
+                  whole_matrix=False):
     results = []
     folder = 'evaluation/analogies'
     for fname in sorted(os.listdir(folder)):
@@ -119,16 +120,14 @@ def evaluate_vecs(vecs_dict,
                 if subsets:
                     for subset in sorted(analogies.keys()):
                         result, t = solve_analogies(analogies[subset], vecs_dict, method=method, whole_matrix=whole_matrix)
-                        label = '{} ({})'.format(subset[2:], method)
-                        results.append((label, result, t['duration']))
-                        if verbose:
-                            vecs.print_result(label, result, t['duration'])
+                        result = (subset[2:], *result, t['duration'], method)
+                        vecs.print_result(result)
+                        results.append(result)
                 else:
                     result, t = solve_analogies(analogies, vecs_dict, method=method, whole_matrix=whole_matrix)
-                    label = '{} ({})'.format(fname, method)
-                    results.append((label, result, t['duration']))
-                    if verbose:
-                        vecs.print_result(label, result, t['duration'])
+                    result = (fname, *result, t['duration'], method)
+                    vecs.print_result(result)
+                    results.append(result)
     return results
 
 

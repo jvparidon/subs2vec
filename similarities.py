@@ -8,6 +8,8 @@ import scipy.spatial.distance
 import scipy.stats
 import vecs
 from utensilities import timer
+import logging
+logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 
 
 @timer
@@ -22,15 +24,15 @@ def compare_similarities(fname, vecs_dict):
     return scipy.stats.spearmanr(wordsim_dsm, sub2vec_dsm)[0], len(wordsim_dsm), len(wordsim)
 
 
-def evaluate_vecs(vecs_dict, lang, verbose=True):
+def evaluate_vecs(vecs_dict, lang):
     folder = 'evaluation/similarities'
     results = []
     for fname in sorted(os.listdir(folder)):
         if fname.lower().startswith(lang):
             result, t = compare_similarities(os.path.join(folder, fname), vecs_dict)
-            results.append((fname, result, t['duration']))
-            if verbose:
-                vecs.print_result(fname, result, t['duration'])
+            result = (fname, *result, t['duration'])
+            vecs.print_result(result)
+            results.append(result)
     return results
 
 

@@ -4,6 +4,8 @@ import numpy as np
 import argparse
 import similarities
 import analogies
+import logging
+logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 
 
 def load_vecs(filename, normalize=False, n=False, d=300):
@@ -26,7 +28,12 @@ def load_vecs(filename, normalize=False, n=False, d=300):
     return vecs_dict
 
 
-def print_result(label, result, t=0):
+def print_result(results):
+    results = [str(result) for result in results]
+    print('\t'.join(results))
+
+
+def print_result_pretty(label, result, t=0):
     if t > 0:
         print('{: <50}{: 5.2f} ({: >5}/{: >5}) in {}s'.format(label, *result, int(t)))
     else:
@@ -37,11 +44,11 @@ def evaluate_vecs(vecs_dict, lang, no_similarities=False, no_analogies=False):
     if no_similarities:
         logging.info('skipping similarities')
     else:
-        similarities.evaluate_vecs(vecs_dict, lang, verbose=True)
+        similarities.evaluate_vecs(vecs_dict, lang)
     if no_analogies:
         logging.info('skipping analogies')
     else:
-        analogies.evaluate_vecs(vecs_dict, lang, verbose=True)
+        analogies.evaluate_vecs(vecs_dict, lang)
 
 
 if __name__ == '__main__':
