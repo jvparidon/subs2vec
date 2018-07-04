@@ -12,7 +12,7 @@ def strip_wiki_xml(txt):
     # pattern = re.compile('<div.*?>.*?</div>', re.DOTALL)
     # txt = pattern.sub('', txt)
     pattern = re.compile('<text.*?>(.*?)</text>', re.DOTALL)
-    txts = pattern.findall(html.unescape(txt).lower())
+    txts = pattern.findall(html.unescape(txt))
 
     regeces = [
         ('<.*?>', ''),
@@ -37,10 +37,10 @@ def strip_wiki_xml(txt):
         ('\.', '\n'),
         ('\n\n*', '\n')
     ]
-    txts = [txt if (('#redirect' not in txt)
+    txts = [txt if (('#redirect' not in txt.lower())
                     and ('<noinclude>' not in txt)
-                    and ('__noindex__' not in txt)
-                    #and ('{{cite' not in txt)
+                    and ('__noindex__' not in txt.lower())
+                    # and ('{{cite' not in txt)
                     and ('{{user' not in txt)
                     ) else '' for txt in txts]
     for regec in regeces:
