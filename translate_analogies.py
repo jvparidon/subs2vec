@@ -24,7 +24,7 @@ def rebuild_analogies(analogies_fname, translations_fname, lang):
     new_fname = '/'.join(new_fname)
     with open(analogies_fname, 'r', encoding='utf-8') as analogies_file, open(new_fname, 'w', encoding='utf-8') as new_file:
         for line in analogies_file:
-            if ':' in line:
+            if (':' in line) or ('#' in line):
                 new_file.write(line)
             else:
                 line = line.replace('\n', '').split(' ')

@@ -8,12 +8,12 @@ import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 
 
-def load_vecs(filename, normalize=False, n=False, d=300):
+def load_vecs(fname, normalize=False, n=False, d=300):
     def normalize_vec(x):
         return x / np.linalg.norm(x)
-    print('loading vecs: {}'.format(filename))
+    logging.info(f'loading vecs {fname}')
     vecs_dict = {}
-    with open(filename, 'r', encoding='utf-8') as vecfile:
+    with open(fname, 'r', encoding='utf-8') as vecfile:
         i = 0
         for line in vecfile:
             line = line.split(' ')
@@ -55,7 +55,7 @@ if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='evaluate a set of word embeddings')
     argparser.add_argument('--filename',
                            help='word vectors to evaluate')
-    argparser.add_argument('--lang',
+    argparser.add_argument('--lang', default='en',
                            help='language to evaluate vector in (use ISO 639-1 codes)')
     argparser.add_argument('--no_similarities', action='store_true',
                            help='do not include semantic similarity correlations')

@@ -1,0 +1,105 @@
+
+af
+loading vecs: ../for_publication/af/sub.af.vec
+
+ar
+loading vecs: ../for_publication/ar/sub.ar.vec
+ar-mc30.tsv	-0.5797908000270573	29	30	0.44344162940979004
+ar-wordsim353-all.tsv	-0.5388561715575498	327	352	0.1685023307800293
+
+bg
+loading vecs: ../for_publication/bg/sub.bg.vec
+
+bn
+loading vecs: ../for_publication/bn/sub.bn.vec
+
+br
+loading vecs: ../for_publication/br/sub.br.vec
+
+bs
+loading vecs: ../for_publication/bs/sub.bs.vec
+
+ca
+loading vecs: ../for_publication/ca/sub.ca.vec
+
+cs
+loading vecs: ../for_publication/cs/sub.cs.vec
+cs-analogies-svoboda.txt	0.4240962383976551	16376	20839	573.5562570095062	multiplicative
+
+da
+loading vecs: ../for_publication/da/sub.da.vec
+
+de
+loading vecs: ../for_publication/de/sub.de.vec
+de-gur350.tsv	-0.40363083970302743	252	350	0.06663322448730469
+de-gur65.tsv	-0.7861071849785042	64	65	0.07193613052368164
+de-rg65.tsv	-0.05027440544047831	6	66	0.07052755355834961
+de-schm280.tsv	0.009515616068161053	57	280	0.0996699333190918
+de-yp130.tsv	-0.4647301708868421	126	130	0.06461477279663086
+de-zg222.tsv	-0.018809034051720058	126	222	0.11638832092285156
+de-analogies-semrel.txt	0.002793296089385475	1790	2463	83.98855972290039	multiplicative
+de-semantic-google.txt	0.023366261398176293	5264	8870	271.07085609436035	multiplicative
+de-syntactic-google.txt	0.3098079161816065	6872	9684	277.403222322464	multiplicative
+
+el
+loading vecs: ../for_publication/el/sub.el.vec
+el-semantic_nocountries-google.txt	0.32517482517482516	572	626	33.25411581993103	multiplicative
+el-syntactic-google.txt	0.3462094608551952	4841	9435	200.50502967834473	multiplicative
+
+en
+loading vecs: ../for_publication/en/sub.en.vec
+en-mc30.tsv	-0.8712585330209672	30	30	0.04814624786376953
+en-men3000.tsv	-0.8043641185362355	2999	3000	0.48563480377197266
+en-mturk287.tsv	-0.6948457489662602	276	287	0.055814504623413086
+en-mturk771.tsv	-0.7360653966311528	771	771	0.13364577293395996
+en-rarewords2034.tsv	-0.13975547034911345	1008	2034	0.31093740463256836
+en-rel122.tsv	-0.31880741865061035	97	122	0.062066078186035156
+en-rg65.tsv	-0.8709391915965826	65	65	0.015960216522216797
+en-simlex999.tsv	-0.47967089578765437	998	999	0.19787383079528809
+en-simverb3500.tsv	-0.40525778440424215	3498	3500	0.5943996906280518
+en-verb143.tsv	-0.4328814789107868	144	144	0.05175328254699707
+en-wordsim353-all.tsv	-0.7313755409925761	352	353	0.057352304458618164
+en-wordsim353-rel.tsv	-0.646539313999768	252	252	0.04088544845581055
+en-wordsim353-sim.tsv	-0.8223362784102578	202	203	0.03404593467712402
+en-yp130.tsv	-0.6638188801762103	129	130	0.03817319869995117
+en-analogies-bless.txt	0.015348609372448701	18373	20001	591.8449325561523	multiplicative
+en-analogies-semrel.txt	0.003427859146151449	6418	7517	221.94500303268433	multiplicative
+en-semantic-google.txt	0.07862903225806452	5952	8989	205.4401524066925	multiplicative
+en-semantic_no_countries-google.txt	0.4343598055105348	617	626	23.410897493362427	multiplicative
+en-syntactic-google.txt	0.5033941039565555	10312	10557	320.27416157722473	multiplicative
+
+eo
+loading vecs: ../for_publication/eo/sub.eo.vec
+
+es
+loading vecs: ../for_publication/es/sub.es.vec
+es-mc30.tsv	-0.7876697279446279	29	30	0.031149625778198242
+es-wordsim353-all.tsv	-0.5934981592311649	334	352	0.20805978775024414
+
+et
+loading vecs: ../for_publication/et/sub.et.vec
+
+eu
+loading vecs: ../for_publication/eu/sub.eu.vec
+
+fa
+loading vecs: ../for_publication/fa/sub.fa.vec
+
+fi
+loading vecs: ../for_publication/fi/sub.fi.vec
+fi-finnsim300.tsv	-0.3151372102354538	294	300	0.1990053653717041
+fi-analogies-venekoski.txt	0.0591016548463357	423	1038	18.146023511886597	multiplicative
+
+fr
+loading vecs: ../for_publication/fr/sub.fr.vec
+fr-rg65.tsv	-0.7991731847208552	62	65	0.07298135757446289
+fr-semantic-google.txt	0.02212111703796674	6374	22225	200.53213047981262	multiplicative
+fr-syntactic-google.txt	0.32933269323091696	8332	9465	257.65356063842773	multiplicative
+
+gl
+loading vecs: ../for_publication/gl/sub.gl.vec
+
+he
+loading vecs: ../for_publication/he/sub.he.vec
+he-semantic_no_countries-google.txt	0.14163090128755365	466	626	23.04088258743286	multiplicative
+he-syntactic-google.txt	0.1325505947783099	6473	10557	250.2369384765625	multiplicative

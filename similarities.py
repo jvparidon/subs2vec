@@ -13,15 +13,23 @@ logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.I
 
 
 @timer
-def compare_similarities(fname, vecs_dict):
+def compare_similarities(fname, vecs_dict, replace_missing=True):
     wordsim = pd.read_csv(fname, delimiter='\t', comment='#')
     sub2vec_dsm = []
     wordsim_dsm = []
+    missing = 0
+
     for index, pair in wordsim.iterrows():
         if all(word in vecs_dict.keys() for word in (pair['word1'], pair['word2'])):
             sub2vec_dsm.append(scipy.spatial.distance.cosine(vecs_dict[pair['word1']], vecs_dict[pair['word2']]))
             wordsim_dsm.append(pair['similarity'])
-    return scipy.stats.spearmanr(wordsim_dsm, sub2vec_dsm)[0], len(wordsim_dsm), len(wordsim)
+        else:
+            missing += 1
+            if replace_missing:
+                sub2vec_dsm.append(0)
+                wordsim_dsm.append(pair['similarity'])
+            
+    return scipy.stats.spearmanr(wordsim_dsm, sub2vec_dsm)[0], len(wordsim) - missing, len(wordsim)
 
 
 def evaluate_vecs(vecs_dict, lang):

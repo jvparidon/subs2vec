@@ -14,12 +14,12 @@ logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.I
 
 
 @timer
-def train_fasttext(training_data, cores, d=300, neg=10, epoch=10, t=.0001):
+def train_fasttext(training_data, cores, d=300, neg=10, epoch=10, t=.0001, prefix='sub'):
     binary = ['fasttext']
     method = ['skipgram']
     train = ['-input', training_data]
     #model_name = training_data.replace('.txt', '.neg{}.epoch{}.t{}.{}d'.format(neg, epoch, t, d))
-    model_name = 'sub.{}'.format(training_data.split('.')[0])
+    model_name = '{}.{}'.format(prefix, training_data.split('.')[0])
     output = ['-output', model_name]
     neg = ['-neg', str(neg)]
     epoch = ['-epoch', str(epoch)]
@@ -63,27 +63,35 @@ def fix_encoding(training_data):
 
 
 @timer
-def generate(lang, subs_dir, no_subs_prep, no_dedup, phrase_pass, cores, subset_years=(0, 2020)):
+def generate(lang, subs_dir, no_strip, no_join, no_dedup, phrase_pass, cores, filename='', subset_years=(0, 2020)):
     if lang == 'all':
         langs = reversed(sorted(os.listdir(os.path.join(subs_dir, 'raw'))))
     else:
         langs = [lang]
     for lang in langs:
         # prep subs
-        if no_subs_prep:
-            logging.info('skipping subtitle xml-stripping and file concatenation')
-        else:
-            training_data = os.path.join(subs_dir, 'raw')
-            # strip subs
-            logging.info('stripping xml from subs in language {}'.format(lang))
-            results, t = strip_subs.strip_parallelized(training_data, lang, ioformat='txt', cores=cores)
-            logging.info('stripped xml from {} files in {} seconds'.format(np.sum(results), int(t['duration'])))
-            # join subs
-            logging.info('concatenating training data for language {}'.format(lang))
-            results, t = join_subs.join_dir(training_data, './', lang, verbose=True, ioformat='txt', subset_years=subset_years)
-            logging.info('concatenated {} files in {} seconds'.format(results, int(t['duration'])))
+        if filename == '':
+            if no_strip:
+                logging.info('skipping subtitle xml-stripping')
+            else:
+                training_data = os.path.join(subs_dir, 'raw')
+                # strip subs
+                logging.info('stripping xml from subs in language {}'.format(lang))
+                results, t = strip_subs.strip_parallelized(training_data, lang, ioformat='txt', cores=cores)
+                logging.info('stripped xml from {} files in {} seconds'.format(np.sum(results), int(t['duration'])))
+            if no_join:
+                logging.info('skipping subtitle file concatenation')
+            else:
+                training_data = os.path.join(subs_dir, 'raw')
+                # join subs
+                logging.info('concatenating training data for language {}'.format(lang))
+                results, t = join_subs.join_dir(training_data, './', lang, verbose=True, ioformat='txt', subset_years=subset_years)
+                logging.info('concatenated {} files in {} seconds'.format(results, int(t['duration'])))
 
-        training_data = '{}.{}-{}.txt'.format(lang, *subset_years)
+            training_data = '{}.{}-{}.txt'.format(lang, *subset_years)
+        else:
+            training_data = filename
+
 
         # deduplicate
         if no_dedup:
@@ -108,7 +116,7 @@ def generate(lang, subs_dir, no_subs_prep, no_dedup, phrase_pass, cores, subset_
 
         # train fastText model
         logging.info('training fastText model on {}'.format(training_data))
-        results, t = train_fasttext(training_data, cores)
+        results, t = train_fasttext(training_data, cores, prefix=f'sub.{subset_years[0]}-{subset_years[1]}')
         model, vecs = results
         logging.info('trained fastText model in {} seconds'.format(int(t['duration'])))
         logging.info('model binary at {}'.format(model))
@@ -121,10 +129,14 @@ if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='generate a fastText model from OpenSubtitles data')
     argparser.add_argument('--lang', default='en',
                            help='source language (OpenSubtitles data uses ISO 639-1 codes, use "all" for all languages)')
+    argparser.add_argument('--filename', default='',
+                           help='filename if skipping subs preparation')
     argparser.add_argument('--subs_dir', default='../OpenSubtitles2018',
                            help='location of OpenSubtitles data')
-    argparser.add_argument('--no_subs_prep', action='store_true',
-                           help='do not xml-strip and concatenate subs')
+    argparser.add_argument('--no_strip', action='store_true',
+                           help='do not xml-strip subtitle files')
+    argparser.add_argument('--no_join', action='store_true',
+                           help='do not concatenate subtitle files')
     argparser.add_argument('--no_dedup', action='store_true',
                            help='do not deduplicate training data line-wise')
     argparser.add_argument('--phrase_pass', default='5', type=int,

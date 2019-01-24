@@ -34,6 +34,6 @@ if __name__ == '__main__':
     else:
         folder = args.directory
         for filename in sorted(os.listdir(folder)):
-            if '.' in filename:
+            if filename.endswith('.txt'):
                 wordcount = count_words(os.path.join(folder, filename))
                 print_count(wordcount, filename)

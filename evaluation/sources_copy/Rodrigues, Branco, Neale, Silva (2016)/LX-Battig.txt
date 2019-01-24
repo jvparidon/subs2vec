@@ -1,0 +1,10 @@
+mamíferos: cão, elefante, gato, vaca, leão, porco, cavalo, urso, tigre, veado 
+aves: pisco, pardal, pombo, galinha, águia, pato, coruja, pinguim, falcão, corvo
+peixe: bacalhau, pimpão, vairão, salmão, truta, atum
+vegetais: brócolo, espinafre, alface, batata, cebola, cenoura, pepino, ervilhas, aipo, feijões
+fruta: maçã, laranja, uva, pêssego, morango, ameixa, toranja
+árvores: carvalho, pinheiro, vidoeiro, cedro
+veículos: barco, carro, navio, camião, mota, helicóptero, autocarro, avião, comboio, bicicleta
+roupas: camisa, calças, meias, blusão, camisola, sutiã, saia, casaco, vestido, blusa
+ferramentas: chave de fendas, martelo, cinzel, chave inglesa, lixa, alicate
+utensílios de cozinha: chávena, taça, colher, tacho, panela, liquidificador, concha, coador, passador

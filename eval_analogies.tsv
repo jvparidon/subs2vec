@@ -1,0 +1,26 @@
+cs-analogies-svoboda.txt	0.424096238	16376	20839	6.705.489.265.918.730	multiplicative
+de-analogies-semrel.txt	0.002793296	1790	2463	8.156.713.366.508.480	multiplicative
+de-semantic-google.txt	0.023366261	5264	8870	23.225.627.732.276.900	multiplicative
+de-syntactic-google.txt	0.309807916	6872	9684	29.623.682.594.299.300	multiplicative
+el-semantic_nocountries-google.txt	0.325174825	572	626	283.218.777.179.718	multiplicative
+el-syntactic-google.txt	0.346209461	4841	9435	19.405.178.880.691.500	multiplicative
+en-analogies-bless.txt	0.015348609	18373	20001	6.902.401.559.352.870	multiplicative
+en-analogies-semrel.txt	0.003427859	6418	7517	269.326.030.254.364	multiplicative
+en-semantic-google.txt	0.078629032	5952	8989	25.303.370.785.713.100	multiplicative
+en-semantic_no_countries-google.txt	0.434359806	617	626	2.694.074.296.951.290	multiplicative
+en-syntactic-google.txt	0.503394104	10312	10557	4.009.024.667.739.860	multiplicative
+fi-analogies-venekoski.txt	0.059101655	423	1038	18.385.008.096.694.900	multiplicative
+fr-semantic-google.txt	0.022121117	6374	22225	2.589.822.402.000.420	multiplicative
+fr-syntactic-google.txt	0.329332693	8332	9465	34.736.268.639.564.500	multiplicative
+he-semantic_no_countries-google.txt	0.141630901	466	626	22.761.226.415.634.100	multiplicative
+he-syntactic-google.txt	0.132550595	6473	10557	28.047.742.223.739.600	multiplicative
+pt-semantic-google.txt	0.040911997	4693	8826	20.000.264.954.566.900	multiplicative
+pt-syntactic-google.txt	0.361070488	6838	8663	2.880.006.422.996.520	multiplicative
+pl-semantic-google.txt	0.086354962	2096	15347	9.034.344.148.635.860	multiplicative
+pl-syntactic-google.txt	0.368048859	6222	9225	2.595.139.591.693.870	multiplicative
+nl-semantic_nocountries-google.txt	0.216748768	609	626	27.128.782.749.176.000	multiplicative
+nl-syntactic-google.txt	0.407684223	8563	10557	3.685.255.432.128.900	multiplicative
+it-semantic-google.txt	0.030455868	5155	8916	22.039.979.934.692.300	multiplicative
+it-syntactic-google.txt	0.376681614	8028	10877	34.342.635.440.826.400	multiplicative
+					
+					

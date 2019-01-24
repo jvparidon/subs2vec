@@ -1,0 +1,252 @@
+# ARABIC
+
+xWS353
+xMC30
+Samer Hassan and Rada Mihalcea.
+2009
+Cross-lingual semantic  relatedness  using  encyclopedic  knowledge.
+In Proc. EMNLP
+
+
+
+# CHINESE
+
+xANALOGIES
+Chen, X., Xu, L., Liu, Z., Sun, M., and Luan, H.
+2015
+Joint learning of character and word embeddings.
+In Proc. IJCAI.
+
+WS353?
+Jin, P., Wu, Y.: Semeval-2012 task 4: Evaluating chinese word similarity. In: Proceedings
+of the First Joint Conference on Lexical and Computational Semantics
+- Volume 1: Proceedings of the Main Conference and the Shared Task, and Volume
+2: Proceedings of the Sixth International Workshop on Semantic Evaluation.
+SemEval ’12, Association for Computational Linguistics (2012) 374–377
+
+
+
+# CZECH
+
+xANALOGIES
+Lukáš Svoboda and Tomáš Brychcin.
+2016
+New word analogy  corpus  for  exploring  embeddings  of  Czech words.
+In Proc. CICLING.
+
+
+
+# DUTCH
+
+xRG65
+xMC30
+Postma, M., Vossen, P.: What implementation and translation teach us: the case
+of semantic similarity measures in wordnets. In: Proceedings of the Seventh Global
+Wordnet Conference. (2014) 133–141
+
+
+# ENGLISH
+
+xMC30 (subset of RG65)
+Miller, G. A., & Charles, W. G.
+1991
+Contextual Correlates of Semantic Similarity.
+Language and Cognitive Processes, 6(1), 1-28.
+
+xRG65 (IRR .85)
+Rubenstein, H., & Goodenough, J. B.
+1965
+Contextual Correlates of Synonymy.
+Communications of the ACM, 8(10), 627-633.
+
+xSemRel ANALOGIES
+xBLESS ANALOGIES
+Maximilian Köper, Christian Scheible, and Sabine  Schulte  im  Walde.
+2015
+Multilingual reliability   and   “semantic”   structure   of   continuous word spaces.
+Proc. IWCS 2015.
+
+xWS353 (IRR .72)
+Finkelstein, L., Gabrilovich, E., Matias, Y., Rivlin, E., Solan, Z., & Wolfman, G.
+2002
+Placing Search in Context: The Concept Revisited.
+ACM Transactions on Information Systems, 20(1), 116-131.
+
+xSimLex-999
+Felix Hill, Roi Reichart and Anna Korhonen.
+2015
+SimLex-999: Evaluating Semantic Models with (Genuine) Similarity Estimation.
+Preprint pubslished on arXiv. arXiv:1408.3456
+
+xSimVerb-3500
+Daniela Gerz, Ivan Vulić, Felix Hill, Roi Reichart and Anna Korhonen.
+2016
+A Large-Scale Evaluation Set of Verb Similarity.
+EMNLP 2016.
+
+xMEN-TR-3k
+Elia Bruni, Gemma Boleda, Marco Baroni, and
+Nam Khanh Tran. 2012. Distributional semantics
+in technicolor. In Proceedings of the 50th Annual
+Meeting of the Association for Computational Linguistics
+(Volume 1: Long Papers), pages 136–145,
+Jeju Island, Korea, July. Association for Computational
+Linguistics.
+
+xMTurk-287
+Kira Radinsky, Eugene Agichtein, Evgeniy
+Gabrilovich, and Shaul Markovitch. 2011. A
+word at a time: computing word relatedness using
+temporal semantic analysis. In Proceedings of the
+20th international conference on World wide web,
+WWW ’11, pages 337–346, New York, NY, USA.
+ACM
+
+xMTurk-771
+Guy Halawi, Gideon Dror, Evgeniy Gabrilovich, and
+Yehuda Koren. 2012. Large-scale learning of word
+relatedness with constraints. In KDD, pages 1406–
+1414.
+
+xRW-STANFORD
+Thang Luong, Richard Socher, and Christopher D. Manning.
+2013
+Better word representations with recursive neural networks for morphology.
+In Proc. CoNLL.
+
+xYP-130
+Yang, D., & Powers, D. M. W.
+2006
+Verb Similarity on the Taxonomy of WordNet.
+Proceedings of the Third International WordNet Conference (GWC-06) (pp. 121-128). Jeju Island, Korea.
+
+xREL-122
+Szumlanski, S., Gomez, F. & Sims, V. K.
+2013
+A New Set of Norms for Semantic Relatedness Measures.
+Proceedings of the 51st Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers) (pp. 890-895). Sofia, Bulgaria.
+
+Faruqui, M., Dyer, C.: Community Evaluation and Exchange of Word Vectors at
+wordvectors.org. In: Proceedings of the 52nd Annual Meeting of the Association
+for Computational Linguistics: System Demonstrations, Association for Computational
+Linguistics (2014) 19–24
+
+
+
+# FINNISH
+
+xANALOGIES
+xFS300
+xWord Intrusion?
+Venekoski, V. and Vankka, J.
+2017
+Finnish resources for evaluating language model semantics.
+In Proc. NoDaLiDa.
+
+
+
+# FRENCH
+
+xRG65
+Colette Joubarne and Diana Inkpen.
+2011
+Comparison of semantic similarity for different languages using the google n-gram corpus and second-order co-occurrence measures.
+In Proc. Canadian Conference on Artificial Intelligence.
+
+
+
+# GERMAN
+
+xANALOGIES
+xWS280
+xSemRel ANALOGIES
+xBLESS ANALOGIES
+Maximilian Köper, Christian Scheible, and Sabine  Schulte  im  Walde.
+2015
+Multilingual reliability   and   “semantic”   structure   of   continuous word spaces.
+Proc. IWCS 2015.
+
+xGUR65 (IRR .81)
+xGUR350 (IRR .69)
+Iryna Gurevych.
+2005
+Using the structure of a conceptual  network  in  computing  semantic  relatedness.
+In Proc. IJCNLP.
+
+xZG222 (IRR .49)
+Torsten Zesch and Iryna Gurevych.
+2006
+Automatically creating datasets for measures of semantic relatedness.
+In Proc. Workshop on Linguistic Distances.
+
+xYP130
+Meyer, C.M., Gurevych, I.: To Exhibit is not to Loiter: A Multilingual, SenseDisambiguated
+Wiktionary for Measuring Verb Similarity. In: Proceedings of COLING
+2012: Technical Papers, The COLING 2012 Organizing Committee (2012)
+1763–1780
+
+
+
+# ITALIAN
+
+xANALOGIES
+Giacomo  Berardi,  Andrea  Esuli,  and  Diego  Marcheggiani.
+2015
+Word embeddings go to Italy:  a comparison of models and training datasets.
+Italian Information Retrieval Workshop.
+
+
+
+# PORTUGUESE
+
+ANALOGIES
+João Rodrigues, António Branco, Steven Neale and João Silva.
+2016
+LX-DSemVectors: Distributional Semantics Models for the Portuguese Language.
+Lecture Notes in Artificial Intelligence, 9727, Berlin, Springer, pp.259-270.
+
+Andreia Querido and Rita Carvalho and João Rodrigues and Marcos Garcia and João Silva and Catarina Correia and Nuno Rendeiro and Rita Pereira and Marisa Campos and António Branco.
+2017
+LX-LR4DistSemEval: a collection of language resources for the evaluation of distributional semantic models of Portuguese.
+Revista da Associação Portuguesa de Linguística, 3.
+
+
+
+# SPANISH
+
+xWS353
+xMC30
+Samer Hassan and Rada Mihalcea.
+2009
+Cross-lingual semantic  relatedness  using  encyclopedic  knowledge.
+In Proc. EMNLP
+
+
+
+# ROMANIAN
+
+xWS353
+xMC30
+Samer Hassan and Rada Mihalcea.
+2009
+Cross-lingual semantic  relatedness  using  encyclopedic  knowledge.
+In Proc. EMNLP
+
+
+
+# RUSSIAN
+
+xHJ398 (IRR .49)
+@inbook{Panchenko:17:aist,
+  author    = {Panchenko, Alexander and Ustalov, Dmitry and Arefyev, Nikolay and Paperno, Denis and Konstantinova, Natalia and Loukachevitch, Natalia and Biemann, Chris},
+  title     = {{Human and Machine Judgements for Russian Semantic Relatedness}},
+  booktitle = {Analysis of Images, Social Networks and Texts: 5th International Conference, AIST 2016, Yekaterinburg, Russia, April 7-9, 2016, Revised Selected Papers},
+  editor    = {Ignatov, Dmitry I. and others},
+  year      = {2017},
+  publisher = {Springer International Publishing},
+  address   = {Cham},
+  pages     = {221--235},
+  isbn      = {978-3-319-52920-2},
+  doi       = {10.1007/978-3-319-52920-2_21},
+  language  = {english},
+}
