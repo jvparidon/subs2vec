@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # jvparidon@gmail.com
 from time import time, localtime, strftime
-
+import logging
+logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 
 def timer(func):
     """Decorator to add timing wrapper to other functions.
@@ -22,4 +23,21 @@ def timer(func):
         t['finish'] = strftime('%Y/%m/%d %H:%M:%S', localtime())
         t['duration'] = t1 - t0
         return res, t
+    return timed_func
+
+def log_timer(func):
+    """Decorator to add logging timer to other functions.
+
+    Use by prepending @log_timer to the target function definition.
+    Logs function name and duration in seconds to level INFO.
+
+    :param func: any function
+    :return: func with logging timer
+    """
+    def timed_func(*args, **kwargs):
+        t0 = time()
+        res = func(*args, **kwargs)
+        t1 = time()
+        t = t1 - t0
+        logging.info(f'{func} ran in {t:.3f} seconds')
     return timed_func

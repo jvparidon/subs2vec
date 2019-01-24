@@ -1,7 +1,7 @@
 import random
 
 def shuffle_text(fname):
-    with open(fname, 'r', encoding='utf-8', errors='replace') as infile, open(fname.replace('.txt', '.shuffled.txt'), 'w', encoding='utf-8') as outfile:
+    with open(fname, 'r', encoding='utf-8', errors='replace') as infile, open(fname + '.shuffled', 'w', encoding='utf-8') as outfile:
         print('reading text from {}'.format(fname))
         text = infile.read()
         print('finished reading text, starting split')

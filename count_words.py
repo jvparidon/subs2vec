@@ -3,7 +3,6 @@
 import os
 import argparse
 
-
 def count_words(filename):
     with open(filename, 'r') as infile:
         wordcount = 0
