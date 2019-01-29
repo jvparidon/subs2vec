@@ -7,12 +7,14 @@ from utensilities import log_timer
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 
+
 def get_lines(fhandle):
     lines = fhandle.read().split('\n')
     n_lines = len(lines)
     lines = set(lines)
     n_duplicates = n_lines - len(lines)
     return lines, n_lines, n_duplicates
+
 
 @log_timer
 def dedup_file(in_fname, out_fname):
@@ -22,6 +24,7 @@ def dedup_file(in_fname, out_fname):
     logging.info(f'deduplicated {in_fname}, removed {n_duplicates} duplicates out of {n_lines} lines')
     return n_lines, n_duplicates
 
+
 def dedup_reddit(folder):
     fnames = [os.path.join(folder, fname) for fname in sorted(list(os.listdir(folder))) if
               fname.endswith('_stripped.txt')]
@@ -30,6 +33,7 @@ def dedup_reddit(folder):
             lines, n_lines, n_duplicates = get_lines(in_file)
             out_file.write('\n'.join(lines))
             logging.info(f'deduplicated {fname}, removed {n_duplicates} duplicates out of {n_lines} lines')
+
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='deduplicate lines in a file')

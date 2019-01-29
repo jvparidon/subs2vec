@@ -4,6 +4,7 @@ from time import time, localtime, strftime
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 
+
 def timer(func):
     """Decorator to add timing wrapper to other functions.
 
@@ -25,6 +26,7 @@ def timer(func):
         return res, t
     return timed_func
 
+
 def log_timer(func):
     """Decorator to add logging timer to other functions.
 
@@ -40,4 +42,5 @@ def log_timer(func):
         t1 = time()
         t = t1 - t0
         logging.info(f'{func} ran in {t:.3f} seconds')
+        return res
     return timed_func

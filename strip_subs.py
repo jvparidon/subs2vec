@@ -4,7 +4,6 @@
 import os
 import argparse
 import gzip
-import codecs
 import numpy as np
 from lxml import etree
 from joblib import Parallel, delayed

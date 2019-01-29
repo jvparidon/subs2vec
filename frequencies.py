@@ -4,6 +4,7 @@ from utensilities import log_timer
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 
+
 @log_timer
 def count_freqs(filename):
     n_words = 0
@@ -17,6 +18,7 @@ def count_freqs(filename):
             freq_counter.update(line)
     logging.info(f'counted {n_words} words over {n_lines} lines')
     return freq_counter, n_words, n_lines
+
 
 def write_freqs(filename, freq_counter, n_words):
     with open(filename, 'w') as out_file:
