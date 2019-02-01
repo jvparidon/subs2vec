@@ -35,7 +35,7 @@ def strip_wiki_xml(txt):
     # pattern = re.compile('<div.*?>.*?</div>', re.DOTALL)
     # txt = pattern.sub('', txt)
     pattern = re.compile('<text.*?>(.*?)</text>', re.DOTALL)
-    txts = pattern.findall(html.unescape(txt))
+    txts = pattern.findall(html.unescape(html.unescape(txt)))
 
     regeces = [
         ('<ref.*?</ref>', ''),
