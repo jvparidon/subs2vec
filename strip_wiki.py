@@ -1,11 +1,16 @@
 import re
 import argparse
 import html
+import bz2
 
 
 def strip_wiki_file(fname):
-    with open(fname, 'r', encoding='utf-8') as in_file, open(fname.replace('.xml', '.linebreaks.txt'), 'w', encoding='utf-8') as out_file:
-        out_file.write(strip_wiki_xml(in_file.read()))
+    if fname.endswith('.bz2'):
+        with bz2.open(fname, 'r', encoding='utf-8') as in_file, open(fname.replace('.xml.bz2', '.txt'), 'w', encoding='utf-8') as out_file:
+            out_file.write(strip_wiki_xml(in_file.read()))
+    if fname.endswith('.xml'):
+        with open(fname, 'r', encoding='utf-8') as in_file, open(fname.replace('.xml', '.txt'), 'w', encoding='utf-8') as out_file:
+            out_file.write(strip_wiki_xml(in_file.read()))
 
 
 def strip_curly(txt):
