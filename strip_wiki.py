@@ -6,7 +6,7 @@ import bz2
 
 def strip_wiki_file(fname):
     if fname.endswith('.bz2'):
-        with bz2.open(fname, 'r', encoding='utf-8') as in_file, open(fname.replace('.xml.bz2', '.txt'), 'w', encoding='utf-8') as out_file:
+        with bz2.open(fname, 'rt', encoding='utf-8') as in_file, open(fname.replace('.xml.bz2', '.txt'), 'w', encoding='utf-8') as out_file:
             out_file.write(strip_wiki_xml(in_file.read()))
     if fname.endswith('.xml'):
         with open(fname, 'r', encoding='utf-8') as in_file, open(fname.replace('.xml', '.txt'), 'w', encoding='utf-8') as out_file:
