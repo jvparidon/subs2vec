@@ -36,7 +36,7 @@ def strip_wiki_xml(txt):
         ('<ref.*?</ref>', ''),
         ('<.*?>', ''),
         ('<[^>]*?>', ''),
-        # ('http.*?[\s|\]]', ''),
+        ('http.*?[\s|\]]', ''),
         # ('\|thumb', ''),
         # ('\|left', ''),
         # ('\|right', ''),
@@ -56,8 +56,10 @@ def strip_wiki_xml(txt):
         # ('\n\s*:.*', ''),
         ('\n\s*file:.*', ''),
         ('\n\s*\*.*', ''),
-        ('\s*==.*?\n', ''),
-        ('\.', '\n'),
+        ('\s*==.*?\n', '\n'),
+        ('\s*--.*?\n', '\n'),
+        ('([a - z]{2})\.', '\\1'),  # line breaks at sentence ends
+        ('\.', ''),
         ('\n\n*', '\n')
     ]
     txts = [strip_curly(txt) if (('#redirect' not in txt.lower())
