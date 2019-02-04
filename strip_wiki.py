@@ -2,15 +2,23 @@ import re
 import argparse
 import html
 import bz2
+import os
+import logging
+from joblib import Parallel, delayed
+from multiprocessing import cpu_count
+logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
+cores = int(cpu_count() / 2)
 
 
 def strip_wiki_file(fname):
+    logging.info(f'stripping {fname}')
     if fname.endswith('.bz2'):
         with bz2.open(fname, 'rt', encoding='utf-8') as in_file, open(fname.replace('.xml.bz2', '.txt'), 'w', encoding='utf-8') as out_file:
             out_file.write(strip_wiki_xml(in_file.read()))
     if fname.endswith('.xml'):
         with open(fname, 'r', encoding='utf-8') as in_file, open(fname.replace('.xml', '.txt'), 'w', encoding='utf-8') as out_file:
             out_file.write(strip_wiki_xml(in_file.read()))
+    logging.info(f'completed stripping {fname}')
 
 
 def strip_curly(txt):
@@ -45,11 +53,11 @@ def strip_wiki_xml(txt):
         ('http.*?(?:[\s\n\]]|$)', ''),  # strip links
         ('(?s)\[{2}[^\]]*?:.*?\]{2}', ''),  # strip all special links (categories, files, etc.)
         ('\[\[.*?\|(.*?)\]\]', '\\1'),  # convert labeled links to just labels
-        ('(?m)^[^a-z\[].*?$', ''),  # strip lines that do not start with a-z or [
-        ('([a-z]{2})[\.\?\!]', '\\1\n'),  # line breaks at sentence ends
+        ('(?m)^[*=+\-].*?$', ''),  # strip lines that do not start with a-z or [
+        ('([^\s]{2})[\.\?\!]', '\\1\n'),  # line breaks at sentence ends, but not single initials
         ('\n+', '\n'),  # strip excessive line endings
         ('(?:^\n|\n$)', ''),  # strip line endings at either end of strings
-        ('[-–—\/]', ' '),  # replace dashes and slashes with spaces
+        ('[-–—/]', ' '),  # replace dashes and slashes with spaces
     ]
     txts = [strip_curly(txt) if (('#redirect' not in txt.lower())
                                  and ('<noinclude>' not in txt)
@@ -63,9 +71,17 @@ def strip_wiki_xml(txt):
     return '\n'.join(txts)
 
 
+def strip_parallelized(folder, cores=2):
+    return Parallel(n_jobs=cores)(delayed(strip_wiki_file)(os.path.join(folder, fname)) for fname in sorted(os.listdir(folder)))
+
+
 if __name__ == '__main__':
-    argparser = argparse.ArgumentParser()
+    argparser = argparse.ArgumentParser(description='strip wikipedia dumps of xml and other tags')
     argparser.add_argument('--filename', help='')
+    argparser.add_argument('--directory', help='overrides filename')
     args = argparser.parse_args()
 
-    strip_wiki_file(args.filename)
+    if args.directory:
+        strip_parallelized(args.directory)
+    elif args.filename:
+        strip_wiki_file(args.filename)
