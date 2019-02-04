@@ -32,87 +32,34 @@ def strip_curly(txt):
 
 
 def strip_wiki_xml(txt):
-    # pattern = re.compile('<div.*?>.*?</div>', re.DOTALL)
-    # txt = pattern.sub('', txt)
     pattern = re.compile('<text.*?>(.*?)</text>', re.DOTALL)
     txts = pattern.findall(html.unescape(html.unescape(txt)))
 
     regeces = [
-        ('<ref.*?</ref>', ''),
-        ('<.*?>', ''),
-        ('<[^>]*?>', ''),
-        ('http.*?[\s|\]]', ''),
-        # ('\|thumb', ''),
-        # ('\|left', ''),
-        # ('\|right', ''),
-        # ('\|\d+px', ''),
-        ('\[\[.*?:[^\[\]]*\|.*', ''),
-        #('\[\[image:[^\[\]]*\|.*', ''),
-        #('\[\[file:[^\[\]]*\|.*', ''),
-        #('\[\[category:([^|\]]*)[^]]*\]\]', '[[\\1]]'),
-        ('\n(\[\[.*?\]\]\n)+', '\n'),
-        ('\[\[.*?\|(.*?)\]\]', '\\1'),
-        ('\[\[(.*?)\]\]', '\\1'),
-        # ('\[\[[a-z\-]*:[^\]]*\]\]', ''),
-        # ('\[\[[^\|\]]*\|', '[['),
-        # ('\{\{[^\}]*\}\}', ''),
-        # ('\{[^\}]*\}', ''),
-        # ('\n\s*\|.*', ''),
-        # ('\n\s*\!.*', ''),
-        # ('\n\s*:.*', ''),
-        ('\n\s*file:.*', ''),
-        ('\n\s*\*.*', ''),
-        ('\s*==.*?\n', '\n'),
-        ('\s*--.*?\n', '\n'),
-        ('([a - z]{2})\.', '\\1'),  # line breaks at sentence ends
-        ('\.', ''),
-        ('\n\n*', '\n')
+        ('(?s)<ref.*?</ref>', ''),  # strip reference links
+        ('(?s)<references.*?</references>', ''),  # strip references
+        ('(?s)<table.*?</table>', ''),  # strip tables
+        ('(?s)<gallery.*?</gallery>', ''),  # strip galleries
+        ('(?s)<kml.*?</kml>', ''),  # strip KML tags
+        ('<.*?>', ''),  # strip other xml tags
+        ('http.*?(?:[\s\n\]]|$)', ''),  # strip links
+        ('(?s)\[{2}[^\]]*?:.*?\]{2}', ''),  # strip all special links (categories, files, etc.)
+        ('\[\[.*?\|(.*?)\]\]', '\\1'),  # convert labeled links to just labels
+        ('(?m)^[^a-z\[].*?$', ''),  # strip lines that do not start with a-z or [
+        ('([a-z]{2})[\.\?\!]', '\\1\n'),  # line breaks at sentence ends
+        ('\n+', '\n'),  # strip excessive line endings
+        ('(?:^\n|\n$)', ''),  # strip line endings at either end of strings
+        ('[-–—\/]', ' '),  # replace dashes and slashes with spaces
     ]
     txts = [strip_curly(txt) if (('#redirect' not in txt.lower())
                                  and ('<noinclude>' not in txt)
                                  and ('__noindex__' not in txt.lower())
-                                 # and ('{{cite' not in txt)
-                                 # and ('{{user' not in txt)
                                  ) else '' for txt in txts]
     for regec in regeces:
         for i in range(len(txts)):
             pattern = re.compile(regec[0], re.IGNORECASE)
             txts[i] = pattern.sub(regec[1], txts[i])
-    txts = [''.join([letter for letter in txt if (letter.isalnum() or letter.isspace() or (letter == '-'))]) for txt in txts]
-    return '\n'.join(txts)
-
-
-def strip_wiki_xml(txt):
-    pattern = re.compile('<text.*?>(.*?)</text>', re.DOTALL)
-    txts = pattern.findall(html.unescape(html.unescape(txt)))
-
-    regeces = [
-        ('<ref.*?</ref>', ''),  # strip reference links
-        ('<references.*?</references>', ''),  # strip references
-        ('<gallery.*?</gallery>', ''),  # strip galleries
-        ('<table.*?</table>', ''),  # strip tables
-        ('<gallery.*?</gallery>', ''),  # strip galleries
-        ('<kml.*?</kml>', ''),  # strip KML tags
-        ('<.*?>', ''),  # strip other xml tags
-        ('^[^a-z\[].*?$', ''),  # strip lines that do not start with a-z or [
-        ('http.*?(?:[\s\n\]]|$)', ''),  # strip links
-        ('\[{2}.*?:.*?\]{2}', ''),  # strip all special links (categories, files, etc.)
-        ('\[\[.*?\|(.*?)\]\]', '\\1'),  # convert labeled links to just labels
-        ('([a-z0-9]{2})\.', '\\1\n'),  # line breaks at sentence ends
-        ('\n+', '\n'),  # strip excessive line endings
-        ('(?:^\n|\n$)', ''),  # strip line endings at either end of strings
-    ]
-    txts = [strip_curly(txt) if (('#redirect' not in txt.lower())
-                                 and ('<noinclude>' not in txt)
-                                 and ('__noindex__' not in txt.lower())
-                                 # and ('{{cite' not in txt)
-                                 # and ('{{user' not in txt)
-                                 ) else '' for txt in txts]
-    for regec in regeces:
-        for i in range(len(txts)):
-            pattern = re.compile(regec[0], re.IGNORECASE | re.MULTILINE)
-            txts[i] = pattern.sub(regec[1], txts[i])
-    txts = [''.join([letter for letter in txt if (letter.isalnum() or letter.isspace() or (letter == '-'))]) for txt in txts if txt != '']
+    txts = [''.join([letter for letter in txt if (letter.isalnum() or letter.isspace())]) for txt in txts if txt != '']
     return '\n'.join(txts)
 
 
