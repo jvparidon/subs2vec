@@ -39,9 +39,12 @@ def strip_curly(txt):
     return ''.join(txt)
 
 
-def strip_wiki_xml(txt):
+def strip_wiki_xml(txts):
     pattern = re.compile('<text.*?>(.*?)</text>', re.DOTALL)
-    txts = pattern.findall(html.unescape(html.unescape(txt)))
+    #txts = html.unescape(txts)
+    #txts = html.unescape(txts)
+    #txts = pattern.findall(txts)
+    txts = pattern.findall(html.unescape(html.unescape(txts)))
 
     regeces = [
         ('(?s)<ref.*?</ref>', ''),  # strip reference links
@@ -57,21 +60,22 @@ def strip_wiki_xml(txt):
         ('([^\s]{2})[\.\?\!]', '\\1\n'),  # line breaks at sentence ends, but not single initials
         ('\n+', '\n'),  # strip excessive line endings
         ('(?:^\n|\n$)', ''),  # strip line endings at either end of strings
-        ('[-–—/]', ' '),  # replace dashes and slashes with spaces
+        ('[-–]', '-'),  # replace different types of dash with hyphen
+        ('[—/]', ' '),  # replace ellipses and slashes with spaces
     ]
     txts = [strip_curly(txt) if (('#redirect' not in txt.lower())
                                  and ('<noinclude>' not in txt)
                                  and ('__noindex__' not in txt.lower())
                                  ) else '' for txt in txts]
     for regec in regeces:
+        pattern = re.compile(regec[0], re.IGNORECASE)
         for i in range(len(txts)):
-            pattern = re.compile(regec[0], re.IGNORECASE)
             txts[i] = pattern.sub(regec[1], txts[i])
-    txts = [''.join([letter for letter in txt if (letter.isalnum() or letter.isspace())]) for txt in txts if txt != '']
+    txts = [''.join([letter for letter in txt if (letter.isalnum() or letter.isspace() or (letter == '-'))]) for txt in txts if txt != '']
     return '\n'.join(txts)
 
 
-def strip_parallelized(folder, cores=2):
+def strip_parallelized(folder, cores=1):
     return Parallel(n_jobs=cores)(delayed(strip_wiki_file)(os.path.join(folder, fname)) for fname in sorted(os.listdir(folder)))
 
 

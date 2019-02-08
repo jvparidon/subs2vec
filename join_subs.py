@@ -19,8 +19,12 @@ def strip_punctuation(txt):
 
 
 @timer
-def join_dir(in_dir, out_dir, lang, verbose=False, ioformat='txt', subset_years=(0, 2020)):
-    out_fname = os.path.join(out_dir, '{}.{}-{}.{}'.format(lang, *subset_years, ioformat))
+def join_dir(in_dir, out_dir, lang, verbose=False, ioformat='txt', subset_years=False):
+    if subset_years:
+        out_fname = os.path.join(out_dir, '{}.{}-{}.{}'.format(lang, *subset_years, ioformat))
+    else:
+        out_fname = os.path.join(out_dir, '{}.{}'.format(lang, ioformat))
+        subset_years = (0, 3000)
     filepaths = []
     for year in sorted(os.listdir(os.path.join(in_dir, lang))):
         if int(year) in range(*subset_years):
