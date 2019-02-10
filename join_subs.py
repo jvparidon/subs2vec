@@ -45,14 +45,11 @@ def join_dir(tar_filename, out_dir, lang, verbose=False, ioformat='txt', subset_
         subset_years = (0, 3000)
     tar_object = tarfile.TarFile(tar_filename)
     filepaths = []
-    temp = sorted(tar_object.getnames())
-    print('got temp')
-    for filepath in temp:
+    for filepath in sorted(tar_object.getnames()):
         if filepath.endswith('.{}'.format(ioformat)):
             if filepath.startswith('OpenSubtitles2018/raw/' + lang):
                 if int(filepath.split('/')[3]) in range(*subset_years):
                     filepaths += [filepath]
-    print(filepaths[0:10])
     '''
     filepaths = []
     for year in sorted(os.listdir(os.path.join(in_dir, lang))):
@@ -66,12 +63,11 @@ def join_dir(tar_filename, out_dir, lang, verbose=False, ioformat='txt', subset_
     i = 0
     with open(out_fname, 'w') as outfile:
         for filepath in filepaths:
-            with open(filepath, 'r') as infile:
-                outfile.write(strip_punctuation(infile.read()))
-                if verbose:
-                    i += 1
-                    print('writing xml-stripped text files to single training file: {:5.2f}%'
-                          .format((float(i) / total) * 100), end='\r')
+            outfile.write(strip_punctuation(tar_object.extractfile(filepath).read().decode('utf-8')))
+            if verbose:
+                i += 1
+                print('writing xml-stripped text files to single training file: {:5.2f}%'
+                      .format((float(i) / total) * 100), end='\r')
     if verbose:
         print('')
     return total
