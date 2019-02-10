@@ -41,9 +41,6 @@ def strip_curly(txt):
 
 def strip_wiki_xml(txts):
     pattern = re.compile('<text.*?>(.*?)</text>', re.DOTALL)
-    #txts = html.unescape(txts)
-    #txts = html.unescape(txts)
-    #txts = pattern.findall(txts)
     txts = pattern.findall(html.unescape(html.unescape(txts)))
 
     regeces = [

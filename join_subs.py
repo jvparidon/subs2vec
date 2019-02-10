@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # jvparidon@gmail.com
 import os
+import tarfile
 import argparse
 import unicodedata
 import string
@@ -13,18 +14,46 @@ def strip_special(txt):
     return ''.join([char if char.isalnum() else ' ' for char in txt])
 
 
-def strip_punctuation(txt):
+def strip_punctuation_old(txt):
     lines = [' '.join([word for word in strip_special(line).split(' ') if word != '']) for line in txt.split('\n')]
     return '{}\n'.format('\n'.join([line for line in lines if line != '']))
 
 
+def strip_punctuation(txt):
+    regeces = [
+        ('<.*?>', ''),  # strip other xml tags
+        ('http.*?(?:[\s\n\]]|$)', ''),  # strip links
+        ('([^\s]{2})[\.\?\!]', '\\1\n'),  # line breaks at sentence ends, but not single initials
+        ('\n+', '\n'),  # strip excessive line endings
+        ('(?:^\n|\n$)', ''),  # strip line endings at either end of strings
+        ('[-–]', '-'),  # replace different types of dash with hyphen
+        ('[—/]', ' '),  # replace ellipses and slashes with spaces
+    ]
+    for regec in regeces:
+        pattern = re.compile(regec[0], re.IGNORECASE)
+        txt = pattern.sub(regec[1], txt)
+    txt = ''.join([letter for letter in txt if (letter.isalnum() or letter.isspace() or (letter == '-'))])
+    return txt
+
+
 @timer
-def join_dir(in_dir, out_dir, lang, verbose=False, ioformat='txt', subset_years=False):
+def join_dir(tar_filename, out_dir, lang, verbose=False, ioformat='txt', subset_years=False):
     if subset_years:
         out_fname = os.path.join(out_dir, '{}.{}-{}.{}'.format(lang, *subset_years, ioformat))
     else:
         out_fname = os.path.join(out_dir, '{}.{}'.format(lang, ioformat))
         subset_years = (0, 3000)
+    tar_object = tarfile.TarFile(tar_filename)
+    filepaths = []
+    temp = sorted(tar_object.getnames())
+    print('got temp')
+    for filepath in temp:
+        if filepath.endswith('.{}'.format(ioformat)):
+            if filepath.startswith('OpenSubtitles2018/raw/' + lang):
+                if int(filepath.split('/')[3]) in range(*subset_years):
+                    filepaths += [filepath]
+    print(filepaths[0:10])
+    '''
     filepaths = []
     for year in sorted(os.listdir(os.path.join(in_dir, lang))):
         if int(year) in range(*subset_years):
@@ -32,6 +61,7 @@ def join_dir(in_dir, out_dir, lang, verbose=False, ioformat='txt', subset_years=
                 for filename in filenames:
                     if filename.endswith('.{}'.format(ioformat)):
                         filepaths.append(os.path.join(root, filename))
+    '''
     total = len(filepaths)
     i = 0
     with open(out_fname, 'w') as outfile:
@@ -52,7 +82,7 @@ if __name__ == '__main__':
         description='join xml-stripped text files into a single training file for word2vec-style models')
     argparser.add_argument('--lang', default='en',
                            help='source language (OpenSubtitles data uses ISO 3166-1)')
-    argparser.add_argument('--in_dir', default='../OpenSubtitles2018/raw',
+    argparser.add_argument('--tar_filename', default='../OpenSubtitles2018.tar',
                            help='directory the files are located in')
     argparser.add_argument('--out_dir', default='../training_data/opensubtitles/raw',
                            help='directory the output will be written to')
