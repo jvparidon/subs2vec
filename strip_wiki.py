@@ -55,10 +55,12 @@ def strip_wiki_xml(txts):
         ('\[\[.*?\|(.*?)\]\]', '\\1'),  # convert labeled links to just labels
         ('(?m)^[*=+\-].*?$', ''),  # strip lines that do not start with a-z or [
         ('([^\s]{2})[\.\?\!]', '\\1\n'),  # line breaks at sentence ends, but not single initials
-        ('\n+', '\n'),  # strip excessive line endings
+        ('\n{2,}', '\n'),  # strip excessive line endings
         ('(?:^\n|\n$)', ''),  # strip line endings at either end of strings
         ('[-–]', '-'),  # replace different types of dash with hyphen
         ('[—/]', ' '),  # replace ellipses and slashes with spaces
+        ('[-\s]', ''),  # strip hyphens outside of compounds
+        (' {2,}', ' '),  # strip excessive spaces
     ]
     txts = [strip_curly(txt) if (('#redirect' not in txt.lower())
                                  and ('<noinclude>' not in txt)

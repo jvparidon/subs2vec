@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # jvparidon@gmail.com
 import os
-import tarfile
 import argparse
 import unicodedata
 import string
@@ -24,10 +23,12 @@ def strip_punctuation(txt):
         ('<.*?>', ''),  # strip other xml tags
         ('http.*?(?:[\s\n\]]|$)', ''),  # strip links
         ('([^\s]{2})[\.\?\!]', '\\1\n'),  # line breaks at sentence ends, but not single initials
-        ('\n+', '\n'),  # strip excessive line endings
+        ('\n{2,}', '\n'),  # strip excessive line endings
         ('(?:^\n|\n$)', ''),  # strip line endings at either end of strings
         ('[-–]', '-'),  # replace different types of dash with hyphen
         ('[—/]', ' '),  # replace ellipses and slashes with spaces
+        ('[-\s]', ''),  # strip hyphens outside of compounds
+        (' {2,}', ' '),  # strip excessive spaces
     ]
     for regec in regeces:
         pattern = re.compile(regec[0], re.IGNORECASE)
@@ -37,20 +38,12 @@ def strip_punctuation(txt):
 
 
 @timer
-def join_dir(tar_filename, out_dir, lang, verbose=False, ioformat='txt', subset_years=False):
+def join_dir(in_dir, out_dir, lang, verbose=False, ioformat='txt', subset_years=False):
     if subset_years:
         out_fname = os.path.join(out_dir, '{}.{}-{}.{}'.format(lang, *subset_years, ioformat))
     else:
         out_fname = os.path.join(out_dir, '{}.{}'.format(lang, ioformat))
         subset_years = (0, 3000)
-    tar_object = tarfile.TarFile(tar_filename)
-    filepaths = []
-    for filepath in sorted(tar_object.getnames()):
-        if filepath.endswith('.{}'.format(ioformat)):
-            if filepath.startswith('OpenSubtitles2018/raw/' + lang):
-                if int(filepath.split('/')[3]) in range(*subset_years):
-                    filepaths += [filepath]
-    '''
     filepaths = []
     for year in sorted(os.listdir(os.path.join(in_dir, lang))):
         if int(year) in range(*subset_years):
@@ -58,16 +51,16 @@ def join_dir(tar_filename, out_dir, lang, verbose=False, ioformat='txt', subset_
                 for filename in filenames:
                     if filename.endswith('.{}'.format(ioformat)):
                         filepaths.append(os.path.join(root, filename))
-    '''
     total = len(filepaths)
     i = 0
     with open(out_fname, 'w') as outfile:
         for filepath in filepaths:
-            outfile.write(strip_punctuation(tar_object.extractfile(filepath).read().decode('utf-8')))
-            if verbose:
-                i += 1
-                print('writing xml-stripped text files to single training file: {:5.2f}%'
-                      .format((float(i) / total) * 100), end='\r')
+            with open(filepath, 'r') as infile:
+                outfile.write(strip_punctuation(infile.read()))
+                if verbose:
+                    i += 1
+                    print('writing xml-stripped text files to single training file: {:5.2f}%'
+                          .format((float(i) / total) * 100), end='\r')
     if verbose:
         print('')
     return total
@@ -78,7 +71,7 @@ if __name__ == '__main__':
         description='join xml-stripped text files into a single training file for word2vec-style models')
     argparser.add_argument('--lang', default='en',
                            help='source language (OpenSubtitles data uses ISO 3166-1)')
-    argparser.add_argument('--tar_filename', default='../OpenSubtitles2018.tar',
+    argparser.add_argument('--in_dir', default='../OpenSubtitles2018/raw',
                            help='directory the files are located in')
     argparser.add_argument('--out_dir', default='../training_data/opensubtitles/raw',
                            help='directory the output will be written to')
