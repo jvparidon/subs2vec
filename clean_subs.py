@@ -1,6 +1,7 @@
 import os
 import zipfile
 import argparse
+import re
 from utensilities import log_timer
 from lxml import etree
 import logging
@@ -77,17 +78,65 @@ def strip_archive(lang, ioformat='txt', years=(1900, 2050)):
     logging.info(f'stripping xml from {len(filepaths)} subtitles in {lang}')
     # XML parser recover option is needed to deal with malformed XML in subs
     xmlparser = etree.XMLParser(recover=True, encoding='utf-8')
-    for filename in filepaths:
-        write_zip.writestr(filename.replace('xml', ioformat),
-                           strip_xml(read_zip.open(filename).read(), xmlparser, ioformat))
+    for filepath in filepaths:
+        write_zip.writestr(filepath.replace('xml', ioformat),
+                           strip_xml(read_zip.open(filepath).read(), xmlparser, ioformat))
+
+
+def strip_punctuation(txt):
+    regeces = [
+        (r'<.*?>', ''),  # strip other xml tags
+        (r'http.*?(?:[\s\n\]]|$)', ''),  # strip links
+        (r'([^\s]{2})[\.\?\!]+', '\\1\n'),  # line breaks at sentence ends, but not single initials
+        (r'[-–]', '-'),  # replace different types of dash with hyphen
+        (r'[—/]', ' '),  # replace ellipses and slashes with spaces
+        (r'-\s', ' '),  # strip hyphens outside of compounds
+        (r' {2,}', ' '),  # strip excessive spaces
+        (r'\s*\n\s*', '\n'),  # strip empty lines
+    ]
+    for regec in regeces:
+        pattern = re.compile(regec[0], re.IGNORECASE)
+        txt = pattern.sub(regec[1], txt)
+    txt = ''.join([letter for letter in txt if (letter.isalnum() or letter.isspace() or (letter == '-'))])
+    return txt
+
+
+@log_timer
+def join_archive(lang, ioformat='txt', years=(1900, 2050), verbose=False):
+    read_zip = zipfile.ZipFile(f'{lang}_stripped.zip', 'r')
+    out_fname = f'{lang}.{ioformat}'
+    dirpath = 'OpenSubtitles/raw'
+    filepaths = []
+    for filepath in read_zip.namelist():
+        if filepath.endswith(ioformat):
+            if filepath.startswith(os.path.join(dirpath, lang)):
+                if int(filepath.split('/')[3]) in range(*years):
+                    filepaths.append(filepath)
+    total = len(filepaths)
+    logging.info(f'joining {len(filepaths)} subtitles in {lang} into a single file')
+    i = 0
+    with open(out_fname, 'w') as outfile:
+        for filepath in filepaths:
+                outfile.write(strip_punctuation(read_zip.open(filepath).read().decode('utf-8')))
+                if verbose:
+                    i += 1
+                    print(f'\tprogress: {(float(i) / total) * 100:5.2f}%', end='\r')
+        if verbose:
+            print('')
+    return total
 
 
 if __name__ == '__main__':
-    argparser = argparse.ArgumentParser(
-        description='clean subtitles for training distributional semantics models')
+    argparser = argparse.ArgumentParser(description='clean subtitles for training distributional semantics models')
     argparser.add_argument('lang', help='language to clean')
+    argparser.add_argument('--stripxml', action='store_true')
+    argparser.add_argument('--years', default=(1900, 2050), nargs=2, type=int)
+    argparser.add_argument('--join', action='store_true')
     argparser.add_argument('--ioformat', default='txt', choices=['txt', 'lemma', 'upos', 'viz'],
                            help='input/output format')
     args = argparser.parse_args()
 
-    strip_archive(args.lang, args.ioformat)
+    if args.stripxml:
+        strip_archive(args.lang, args.ioformat, args.years)
+    if args.join:
+        join_archive(args.lang, args.ioformat, args.years)
