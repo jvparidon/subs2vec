@@ -3,6 +3,7 @@
 import os
 import lzma
 import argparse
+import random
 from utensilities import log_timer
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
@@ -20,6 +21,8 @@ def get_lines(fhandle):
 def dedup_file(in_fname, out_fname):
     with open(in_fname, 'r') as in_file, open(out_fname, 'w') as out_file:
         lines, n_lines, n_duplicates = get_lines(in_file)
+        lines = list(lines)
+        random.shuffle(lines)
         out_file.write('\n'.join(lines))
     logging.info(f'deduplicated {in_fname}, removed {n_duplicates} duplicates out of {n_lines} lines')
     return n_lines, n_duplicates
@@ -37,7 +40,7 @@ def dedup_reddit(folder):
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='deduplicate lines in a file')
-    argparser.add_argument('--filename', help='filename')
+    argparser.add_argument('filename', help='file to deduplicate')
     args = argparser.parse_args()
 
-    dedup_file(args.filename, args.filename + '.dedup')
+    dedup_file(args.filename, 'dedup.' + args.filename)
