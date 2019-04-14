@@ -28,6 +28,12 @@ def load_vecs(fname, normalize=False, n=False, d=300):
     return vecs_dict
 
 
+def write_vecs(vecs, fname):
+    with open(fname, 'w') as vecfile:
+        for key, value in vecs.items():
+            vecfile.write(f'{key} {" ".join([str(num) for num in value])}\n')
+
+
 def print_result(results):
     results = [str(result) for result in results]
     print('\t'.join(results))
