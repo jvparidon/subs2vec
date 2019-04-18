@@ -39,8 +39,8 @@ def train_fasttext(training_data, prefix, lang, d=300, neg=10, epoch=10, t=.0001
 def build_phrases(training_data, phrase_pass):
     base_fname = training_data.strip('.txt')
     for i in range(phrase_pass):
-        out_fname = f'{base_fname}.{i + 1}pass.d5.t{t}.txt'
         t = (2 ** (phrase_pass - i - 1)) * 100
+        out_fname = f'{base_fname}.{i + 1}pass.d5.t{t}.txt'
         binary = ['word2phrase']
         train = ['-train', training_data]
         output = ['-output', out_fname]
@@ -102,7 +102,7 @@ def generate(lang, filename, source, prep_data, dedup_data, phrase_pass, years=(
 
     # train fastText model
     logging.info('training fastText model on {}'.format(training_data))
-    results = train_fasttext(training_data=training_data, lang=lang, prefix=f'{source}.')
+    results = train_fasttext(training_data=training_data, lang=lang, prefix=source)
     model, vecs = results
     logging.info('model binary at {}'.format(model))
     logging.info('word vectors at {}'.format(vecs))
@@ -112,10 +112,10 @@ if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='generate a fastText model from OpenSubtitles and Wikipedia data')
     argparser.add_argument('lang',
                            help='source language (OpenSubtitles and Wikipedia data uses ISO 639-1 codes)')
+    argparser.add_argument('source',
+                           help='source data, use one of {wiki, sub, wiki-sub} if using automatic data preparation')
     argparser.add_argument('filename',
                            help='filename if skipping data preparation')
-    argparser.add_argument('--source',
-                           help='source data, use one of {wiki, sub, wiki-sub} if using automatic data preparation')
     argparser.add_argument('--prep_data', action='store_true')
     argparser.add_argument('--dedup_data', action='store_true',
                            help='deduplicate training data line-wise')

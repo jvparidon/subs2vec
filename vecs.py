@@ -1,11 +1,48 @@
 # -*- coding: utf-8 -*-
 # jvparidon@gmail.com
 import numpy as np
+import pandas as pd
 import argparse
 import similarities
 import analogies
+from utensilities import log_timer
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
+
+
+class Vectors:
+    @log_timer
+    def __init__(self, fname, normalize=False, n=1e6, d=300):
+        n = int(n)
+        logging.info(f'loading vectors {fname}')
+
+        with open(fname, 'r', encoding='utf-8') as vecfile:
+            # skip header
+            next(vecfile)
+
+            # initialize arrays
+            self.vectors = np.zeros((n, d))
+            self.words = np.empty(n, dtype=object)
+
+            # fill arrays
+            for i, line in enumerate(vecfile):
+                if i >= n:
+                    break
+                rowentries = line.rstrip('\n').split(' ')
+                self.words[i] = rowentries[0]
+                self.vectors[i] = rowentries[1:d + 1]
+
+            # truncate empty part of arrays, if necessary
+            self.vectors = self.vectors[:i]
+            self.words = self.words[:i]
+
+            # normalize by L1 norm
+            if normalize:
+                self.vectors = self.vectors / np.linalg.norm(self.vectors, axis=1).reshape(-1, 1)
+
+    @log_timer
+    def as_df(self):
+        return pd.DataFrame(self.vectors).set_index(self.words)
 
 
 def load_vecs(fname, normalize=False, n=False, d=300):
@@ -16,7 +53,7 @@ def load_vecs(fname, normalize=False, n=False, d=300):
     with open(fname, 'r', encoding='utf-8') as vecfile:
         i = 0
         for line in vecfile:
-            line = line.split(' ')
+            line = line.rstrip('\n').split(' ')
             if len(line) > d:
                 if normalize:
                     vecs_dict[line[0]] = normalize_vec(np.array([float(num) for num in line[1:d + 1]]))
