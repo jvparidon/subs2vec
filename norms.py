@@ -1,5 +1,5 @@
 # coding: utf-8
-# Copyright (c) 2018 - Present Bill Thompson (biltho@mpi.nl)
+# Copyright (c) 2018 - Present Bill Thompson (biltho@mpi.nl) & Jeroen van Paridon (jerpar@mpi.nl)
 import numpy as np
 import pandas as pd
 import sklearn.linear_model
