@@ -4,17 +4,49 @@ import html
 import bz2
 import os
 import logging
+from utensilities import log_timer
 from joblib import Parallel, delayed
 from multiprocessing import cpu_count
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 cores = int(cpu_count() / 2)
 
 
+@log_timer
 def strip_wiki_file(fname):
     logging.info(f'stripping {fname}')
     if fname.endswith('.bz2'):
         with bz2.open(fname, 'rt', encoding='utf-8') as in_file, open(fname.replace('.xml.bz2', '.txt'), 'w', encoding='utf-8') as out_file:
             out_file.write(strip_wiki_xml(in_file.read()))
+    if fname.endswith('.xml'):
+        with open(fname, 'r', encoding='utf-8') as in_file, open(fname.replace('.xml', '.txt'), 'w', encoding='utf-8') as out_file:
+            out_file.write(strip_wiki_xml(in_file.read()))
+    logging.info(f'completed stripping {fname}')
+
+
+# TODO: figure out if 1e7 is a sensible number of lines for this (equates to approx. 500MB temp files)
+@log_timer
+def big_strip_wiki_file(fname, lines_per_chunk=1e7):
+    logging.info(f'stripping {fname}')
+    if fname.endswith('.bz2'):
+        with bz2.open(fname, 'rt', encoding='utf-8') as in_file, open(fname.replace('.xml.bz2', '.txt'), 'w', encoding='utf-8') as out_file:
+
+            i = 0
+            j = 0
+            temp_file = open(f'temp{j}.txt', 'w')
+            for line in in_file:
+                if i > ((j + 1) * int(lines_per_chunk)):
+                    if '<text' in line:
+                        temp_file.close()
+                        j += 1
+                        temp_file = open(f'temp{j}.txt', 'w')
+                temp_file.write(line)
+                i += 1
+            temp_file.close()
+
+            for k in range(j + 1):
+                with open(f'temp{k}.txt', 'r') as temp_file:
+                    out_file.write(strip_wiki_xml(temp_file.read()))
+
     if fname.endswith('.xml'):
         with open(fname, 'r', encoding='utf-8') as in_file, open(fname.replace('.xml', '.txt'), 'w', encoding='utf-8') as out_file:
             out_file.write(strip_wiki_xml(in_file.read()))
@@ -79,11 +111,15 @@ def strip_parallelized(folder, cores=1):
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='strip wikipedia dumps of xml and other tags')
-    argparser.add_argument('--filename', help='')
+    argparser.add_argument('--filename')
     argparser.add_argument('--directory', help='overrides filename')
+    argparser.add_argument('--big', action='store_true', help='for files that do not fit in memory')
     args = argparser.parse_args()
 
     if args.directory:
         strip_parallelized(args.directory)
     elif args.filename:
-        strip_wiki_file(args.filename)
+        if args.big:
+            big_strip_wiki_file(args.filename)
+        else:
+            strip_wiki_file(args.filename)
