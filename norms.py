@@ -11,21 +11,25 @@ import vecs
 from utensilities import log_timer
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
+path = os.path.dirname(__file__)
 
 
 @log_timer
 def evaluate_vecs(lang, vecs_fname):
+    norms_path = os.path.join(path, 'evaluation', 'norms')
+    logging.info(f'evaluating lexical norm prediction with {vecs_fname}')
     vectors = vecs.Vectors(vecs_fname, normalize=True, n=1e6).as_df()
     results = []
-    for norms_fname in os.listdir('evaluation/norms'):
+    for norms_fname in os.listdir(norms_path):
         if norms_fname.startswith(lang):
-            results.append(predict_norms(vectors, norms_fname))
+            results.append(predict_norms(vectors, os.path.join(norms_path, norms_fname)))
     results_fname = os.path.split(vecs_fname)[1].replace('.vec', '.tsv')
-    pd.concat(results).to_csv(os.path.join('results/norms', results_fname), sep='\t')
+    pd.concat(results).to_csv(os.path.join(path, 'results', 'norms', results_fname), sep='\t')
 
 
 @log_timer
 def predict_norms(vectors, norms_fname):
+    logging.info(f'predicting norms from {norms_fname}')
     norms = pd.read_csv(norms_fname, sep='\t')
     norms = norms.set_index('word')
     df = norms.join(vectors, how='left').dropna()
@@ -37,7 +41,7 @@ def predict_norms(vectors, norms_fname):
     results = []
     for col in norms.columns.values:
         # set dependent variable and calculate 10-fold mean fit/predict scores
-        y = df['ratings']
+        y = df[col]
         score = np.mean(sklearn.model_selection.cross_val_score(model, X, y, cv=10))
         results.append({
             'source': norms_fname.rstrip('.tsv'),
@@ -47,7 +51,6 @@ def predict_norms(vectors, norms_fname):
         })
 
     return pd.DataFrame(results)
-
 
 
 @log_timer
