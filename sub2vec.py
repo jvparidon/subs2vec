@@ -7,19 +7,18 @@ import subprocess as sp
 import strip_subs
 import join_subs
 import deduplicate
-from utensilities import timer
+from utensilities import log_timer
 from multiprocessing import cpu_count
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 
 
-@timer
-def train_fasttext(training_data, cores, d=300, neg=10, epoch=10, t=.0001, prefix='sub'):
+@log_timer
+def train_fasttext(training_data, cores, d=300, neg=10, epoch=10, t=.0001):
+    model_name = training_data.strip('.txt')
     binary = ['fasttext']
     method = ['skipgram']
     train = ['-input', training_data]
-    #model_name = training_data.replace('.txt', '.neg{}.epoch{}.t{}.{}d'.format(neg, epoch, t, d))
-    model_name = '{}.{}'.format(prefix, training_data.split('.')[0])
     output = ['-output', model_name]
     neg = ['-neg', str(neg)]
     epoch = ['-epoch', str(epoch)]
@@ -30,19 +29,19 @@ def train_fasttext(training_data, cores, d=300, neg=10, epoch=10, t=.0001, prefi
         sp.run(binary + method + train + output + neg + epoch + t + dim + thread)
     else:
         sp.run(binary + method + train + output + neg + epoch + t + dim + thread, stdout=sp.DEVNULL)
-    model = '{}.bin'.format(model_name)
-    vecs = '{}.vec'.format(model_name)
+    model = f'{model_name}.bin'
+    vecs = f'{model_name}.vec'
     return model, vecs
 
 
-@timer
+@log_timer
 def build_phrases(training_data, phrase_pass):
-    base_fname = training_data.replace('.txt', '')
+    base_fname = training_data.strip('.txt')
     for i in range(phrase_pass):
+        out_fname = f'{base_fname}.{i + 1}pass.d5.t{t}.txt'
         t = (2 ** (phrase_pass - i - 1)) * 100
         binary = ['word2phrase']
         train = ['-train', training_data]
-        out_fname = '{}.{}pass.d5.t{}.txt'.format(base_fname, i + 1, t)
         output = ['-output', out_fname]
         d = ['-min-count', str(5)]
         t = ['-threshold', str(t)]
@@ -62,7 +61,7 @@ def fix_encoding(training_data):
     return out_fname
 
 
-@timer
+@log_timer
 def generate(lang, subs_dir, no_strip, no_join, no_dedup, phrase_pass, cores, filename='', subset_years=(0, 2020)):
     if lang == 'all':
         langs = reversed(sorted(os.listdir(os.path.join(subs_dir, 'raw'))))
@@ -127,7 +126,7 @@ def generate(lang, subs_dir, no_strip, no_join, no_dedup, phrase_pass, cores, fi
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='generate a fastText model from OpenSubtitles data')
-    argparser.add_argument('--lang', default='en',
+    argparser.add_argument('lang',
                            help='source language (OpenSubtitles data uses ISO 639-1 codes, use "all" for all languages)')
     argparser.add_argument('--filename', default='',
                            help='filename if skipping subs preparation')
