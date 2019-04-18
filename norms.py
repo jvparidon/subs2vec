@@ -27,7 +27,7 @@ def evaluate_vecs(lang, vecs_fname):
 @log_timer
 def predict_norms(vectors, norms_fname):
     norms = pd.read_csv(norms_fname, sep='\t')
-    norms = norms.set_index('words')
+    norms = norms.set_index('word')
     df = norms.join(vectors, how='left').dropna()
 
     scaler = sklearn.preprocessing.StandardScaler()  # standardize predictors
