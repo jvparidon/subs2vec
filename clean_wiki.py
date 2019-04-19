@@ -76,20 +76,21 @@ def strip_wiki_xml(txts):
     txts = pattern.findall(html.unescape(html.unescape(txts)))
 
     regeces = [
-        ('(?s)<ref.*?</ref>', ''),  # strip reference links
-        ('(?s)<references.*?</references>', ''),  # strip references
-        ('(?s)<table.*?</table>', ''),  # strip tables
-        ('(?s)<gallery.*?</gallery>', ''),  # strip galleries
-        ('(?s)<kml.*?</kml>', ''),  # strip KML tags
-        ('<.*?>', ''),  # strip other xml tags
-        ('http.*?(?:[\s\n\]]|$)', ''),  # strip links
-        ('(?s)\[{2}[^\]]*?:.*?\]{2}', ''),  # strip all special links (categories, files, etc.)
-        ('\[\[.*?\|(.*?)\]\]', '\\1'),  # convert labeled links to just labels
-        ('(?m)^[*=+\-].*?$', ''),  # strip lines that do not start with a-z or [
+        (r'(?s)<ref.*?</ref>', ''),  # strip reference links
+        (r'(?s)<references.*?</references>', ''),  # strip references
+        (r'(?s)<table.*?</table>', ''),  # strip tables
+        (r'(?s)<gallery.*?</gallery>', ''),  # strip galleries
+        (r'(?s)<kml.*?</kml>', ''),  # strip KML tags
+        (r'<.*?>', ''),  # strip other xml tags
+        (r'http.*?(?:[\s\n\]]|$)', ''),  # strip links
+        (r'(?s)\[{2}[^\]]*?:.*?\]{2}', ''),  # strip all special links (categories, files, etc.)
+        (r'\[\[.*?\|(.*?)\]\]', '\\1'),  # convert labeled links to just labels
+        (r'(?m)^[*=+\-].*?$', ''),  # strip lines that do not start with a-z or [
         (r'([^\s]{2})[\.\?\!]+', '\\1\n'),  # line breaks at sentence ends, but not single initials
         (r'[-–]', '-'),  # replace different types of dash with hyphen
         (r'[—/]', ' '),  # replace ellipses and slashes with spaces
         (r'-\s', ' '),  # strip hyphens outside of compounds
+        (r'\n-', '\n'),  # strip hyphens at sentence starts
         (r' {2,}', ' '),  # strip excessive spaces
         (r'\s*\n\s*', '\n'),  # strip empty lines
     ]
