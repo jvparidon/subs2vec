@@ -97,8 +97,8 @@ def generate(lang, filename, source, prep_data, dedup_data, phrase_pass, years=(
     training_data = build_phrases(training_data, phrase_pass)
 
     # fix potential broken utf-8 encoding
-    # logging.info('checking (and fixing) utf-8 encoding for {}'.format(training_data))
-    # training_data = fix_encoding(training_data)
+    logging.info('checking (and fixing) utf-8 encoding for {}'.format(training_data))
+    training_data = fix_encoding(training_data)
 
     # train fastText model
     logging.info('training fastText model on {}'.format(training_data))

@@ -91,6 +91,7 @@ def strip_punctuation(txt):
         (r'[-–]', '-'),  # replace different types of dash with hyphen
         (r'[—/]', ' '),  # replace ellipses and slashes with spaces
         (r'-\s', ' '),  # strip hyphens outside of compounds
+        (r'\n-', '\n'),  # strip hyphens at sentence starts
         (r' {2,}', ' '),  # strip excessive spaces
         (r'\s*\n\s*', '\n'),  # strip empty lines
     ]
