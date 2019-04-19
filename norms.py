@@ -31,18 +31,20 @@ def evaluate_vecs(lang, vecs_fname):
 def predict_norms(vectors, norms_fname):
     logging.info(f'predicting norms from {norms_fname}')
     norms = pd.read_csv(norms_fname, sep='\t')
+    norms['word'] = norms['word'].str.lower()
     norms = norms.set_index('word')
     df = norms.join(vectors, how='left').dropna()
 
     scaler = sklearn.preprocessing.StandardScaler()  # standardize predictors
     model = sklearn.linear_model.Ridge()  # use ridge regression models
     X = scaler.fit_transform(df[vectors.columns.values])  # word vectors are the predictors
+    cv = sklearn.model_selection.KFold(10, shuffle=True)
 
     results = []
     for col in norms.columns.values:
         # set dependent variable and calculate 10-fold mean fit/predict scores
         y = df[col]
-        score = np.mean(sklearn.model_selection.cross_val_score(model, X, y, cv=10))
+        score = np.mean(sklearn.model_selection.cross_val_score(model, X, y, cv=cv))
         results.append({
             'source': norms_fname.rstrip('.tsv'),
             'norm': col,
