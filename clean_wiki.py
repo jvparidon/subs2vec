@@ -32,19 +32,19 @@ def big_strip_wiki_file(fname, lines_per_chunk=1e7):
 
             i = 0
             j = 0
-            temp_file = open(f'temp{j}.txt', 'w')
+            temp_file = open(f'{fname}_temp_{j}.txt', 'w')
             for line in in_file:
                 if i > ((j + 1) * int(lines_per_chunk)):
                     if '<text' in line:
                         temp_file.close()
                         j += 1
-                        temp_file = open(f'temp{j}.txt', 'w')
+                        temp_file = open(f'{fname}_temp_{j}.txt', 'w')
                 temp_file.write(line)
                 i += 1
             temp_file.close()
 
             for k in range(j + 1):
-                with open(f'temp{k}.txt', 'r') as temp_file:
+                with open(f'{fname}_temp_{k}.txt', 'r') as temp_file:
                     out_file.write(strip_wiki_xml(temp_file.read()))
 
     if fname.endswith('.xml'):

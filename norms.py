@@ -18,7 +18,7 @@ path = os.path.dirname(__file__)
 def evaluate_vecs(lang, vecs_fname):
     norms_path = os.path.join(path, 'evaluation', 'norms')
     logging.info(f'evaluating lexical norm prediction with {vecs_fname}')
-    vectors = vecs.Vectors(vecs_fname, normalize=True, n=1e6).as_df()
+    vectors = vecs.Vectors(vecs_fname, normalize=True, n=1e6, d=300).as_df()
     results = []
     for norms_fname in os.listdir(norms_path):
         if norms_fname.startswith(lang):
@@ -37,13 +37,15 @@ def predict_norms(vectors, norms_fname):
 
     scaler = sklearn.preprocessing.StandardScaler()  # standardize predictors
     model = sklearn.linear_model.Ridge()  # use ridge regression models
-    X = scaler.fit_transform(df[vectors.columns.values])  # word vectors are the predictors
-    cv = sklearn.model_selection.KFold(10, shuffle=True)
+    X = df[vectors.columns.values]
+    #X = scaler.fit_transform(df[vectors.columns.values])  # word vectors are the predictors
+    cv = sklearn.model_selection.KFold(10, shuffle=True)  # shuffle is important for ordered datasets, because even ridge regression will overfit otherwise
 
     results = []
     for col in norms.columns.values:
         # set dependent variable and calculate 10-fold mean fit/predict scores
         y = df[col]
+        #y = df[col] - np.mean(df[col])
         score = np.mean(sklearn.model_selection.cross_val_score(model, X, y, cv=cv))
         results.append({
             'source': norms_fname.rstrip('.tsv'),

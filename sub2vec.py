@@ -57,8 +57,14 @@ def build_phrases(training_data, phrase_pass):
 def fix_encoding(training_data):
     out_fname = training_data.replace('.txt', '.utf-8.txt')
     with open(training_data, 'r', encoding='utf-8', errors='ignore') as in_file, open(out_fname, 'w', encoding='utf-8') as out_file:
-        for line in in_file:
-            out_file.write(line)
+        outfile.write(infile.read())
+    return out_fname
+
+
+def lowercase(training_data):
+    out_fname = training_data.replace('.txt', '.lower.txt')
+    with open(training_data, 'r', encoding='utf-8') as in_file, open(out_fname, 'w', encoding='utf-8') as out_file:
+        outfile.write(infile.read().lower())
     return out_fname
 
 
@@ -91,6 +97,10 @@ def generate(lang, filename, source, prep_data, dedup_data, phrase_pass, years=(
         out_fname = training_data.replace('.txt', '.dedup.txt')
         n_lines, n_duplicates = deduplicate.dedup_file(training_data, out_fname)
         training_data = out_fname
+
+    # lowercase
+    logging.info(f'lowercasing {training_data}')
+    training_data = lowercase(training_data)
 
     # build phrases
     logging.info('building phrases for {}'.format(training_data))
