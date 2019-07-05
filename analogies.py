@@ -14,13 +14,14 @@ def get_analogies(fname, subsets=False):
         if subsets:
             analogies = {}
             for line in analogies_file:
+                line = line.lower()  # important if the word vectors are lowercased
                 if line.startswith(':'):
                     subset = line.strip('\n')
                     analogies[subset] = []
                 else:
                     analogies[subset].append(line.strip('\n').split(' '))
         else:
-            analogies = [line.strip('\n').split(' ') for line in analogies_file
+            analogies = [line.lower().strip('\n').split(' ') for line in analogies_file
                          if line[0] != ':']
     return analogies
 

@@ -1,0 +1,9 @@
+	norm	r	r-squared	source
+0	valence	0.8368773170124723	0.700363643729994	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/de-kanske-2010
+1	arousal	0.8342745872237831	0.6960140868874136	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/de-kanske-2010
+2	concreteness	0.901901065965847	0.813425532790331	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/de-kanske-2010
+0	potency	0.6764404444628239	0.4575716749050628	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/de-schauenburg-2016
+1	authority	0.7380194247788564	0.544672671350914	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/de-schauenburg-2016
+2	community	0.7295469083934253	0.5322386915464048	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/de-schauenburg-2016
+3	arousal	0.7978389371698944	0.6365469696643867	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/de-schauenburg-2016
+4	valence	0.8400694953794374	0.7057167570670626	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/de-schauenburg-2016

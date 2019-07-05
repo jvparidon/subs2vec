@@ -1,0 +1,269 @@
+	Unnamed: 0	lang	norm	r	r-squared	source	task	corrected score	label	col
+0	0	de	valence	0.738206657	0.544949069	cc	kanske (2010)	0.544949069	de kanske (2010) valence	0
+1	1	de	arousal	0.818963432	0.670701103	cc	kanske (2010)	0.670701103	de kanske (2010) arousal	0
+2	2	de	concreteness	0.83132175	0.691095852	cc	kanske (2010)	0.691095852	de kanske (2010) concreteness	0
+3	0	de	potency	0.642041824	0.412217703	cc	schauenburg (2016)	0.412217703	de schauenburg (2016) potency	0
+4	1	de	authority	0.703517068	0.494936265	cc	schauenburg (2016)	0.494936265	de schauenburg (2016) authority	0
+5	2	de	community	0.708748236	0.502324062	cc	schauenburg (2016)	0.502324062	de schauenburg (2016) community	0
+6	3	de	arousal	0.756031473	0.571583588	cc	schauenburg (2016)	0.571583588	de schauenburg (2016) arousal	0
+7	4	de	valence	0.826659803	0.68336643	cc	schauenburg (2016)	0.68336643	de schauenburg (2016) valence	0
+67	0	de	valence	0.807601754	0.652220592	sub	kanske (2010)	0.652220592	de kanske (2010) valence	0
+68	1	de	arousal	0.801222449	0.641957413	sub	kanske (2010)	0.641957413	de kanske (2010) arousal	0
+69	2	de	concreteness	0.892063116	0.795776604	sub	kanske (2010)	0.795776604	de kanske (2010) concreteness	0
+70	0	de	potency	0.641780811	0.411882609	sub	schauenburg (2016)	0.411882609	de schauenburg (2016) potency	0
+71	1	de	authority	0.682625201	0.465977164	sub	schauenburg (2016)	0.465977164	de schauenburg (2016) authority	0
+72	2	de	community	0.706000417	0.498436589	sub	schauenburg (2016)	0.498436589	de schauenburg (2016) community	0
+73	3	de	arousal	0.768559791	0.590684152	sub	schauenburg (2016)	0.590684152	de schauenburg (2016) arousal	0
+74	4	de	valence	0.800692589	0.641108621	sub	schauenburg (2016)	0.641108621	de schauenburg (2016) valence	0
+134	0	de	valence	0.836877317	0.700363644	wiki-sub	kanske (2010)	0.700363644	de kanske (2010) valence	0
+135	1	de	arousal	0.834274587	0.696014087	wiki-sub	kanske (2010)	0.696014087	de kanske (2010) arousal	0
+136	2	de	concreteness	0.901901066	0.813425533	wiki-sub	kanske (2010)	0.813425533	de kanske (2010) concreteness	0
+137	0	de	potency	0.676440444	0.457571675	wiki-sub	schauenburg (2016)	0.457571675	de schauenburg (2016) potency	0
+138	1	de	authority	0.738019425	0.544672671	wiki-sub	schauenburg (2016)	0.544672671	de schauenburg (2016) authority	0
+139	2	de	community	0.729546908	0.532238692	wiki-sub	schauenburg (2016)	0.532238692	de schauenburg (2016) community	0
+140	3	de	arousal	0.797838937	0.63654697	wiki-sub	schauenburg (2016)	0.63654697	de schauenburg (2016) arousal	0
+141	4	de	valence	0.840069495	0.705716757	wiki-sub	schauenburg (2016)	0.705716757	de schauenburg (2016) valence	0
+201	0	de	valence	0.811681903	0.658827512	wiki	kanske (2010)	0.658827512	de kanske (2010) valence	0
+202	1	de	arousal	0.815521407	0.665075165	wiki	kanske (2010)	0.665075165	de kanske (2010) arousal	0
+203	2	de	concreteness	0.894471836	0.800079865	wiki	kanske (2010)	0.800079865	de kanske (2010) concreteness	0
+204	0	de	potency	0.669303735	0.44796749	wiki	schauenburg (2016)	0.44796749	de schauenburg (2016) potency	0
+205	1	de	authority	0.719650412	0.517896716	wiki	schauenburg (2016)	0.517896716	de schauenburg (2016) authority	0
+206	2	de	community	0.698203941	0.487488743	wiki	schauenburg (2016)	0.487488743	de schauenburg (2016) community	0
+207	3	de	arousal	0.780917153	0.6098316	wiki	schauenburg (2016)	0.6098316	de schauenburg (2016) arousal	0
+208	4	de	valence	0.830224724	0.689273093	wiki	schauenburg (2016)	0.689273093	de schauenburg (2016) valence	0
+8	0	en	valence	0.817406964	0.668154145	cc	warriner (2013)	0.668154145	en warriner (2013) valence	0
+9	1	en	arousal	0.637513366	0.406423291	cc	warriner (2013)	0.406423291	en warriner (2013) arousal	0
+10	2	en	dominance	0.712498071	0.507653501	cc	warriner (2013)	0.507653501	en warriner (2013) dominance	0
+11	0	en	concreteness	0.885662933	0.784398831	cc	brysbaert (2014)	0.784398831	en brysbaert (2014) concreteness	0
+12	0	en	imageability	0.438418045	0.192210382	cc	thibodeau (2016)	0.192210382	en thibodeau (2016) imageability	0
+13	1	en	arousal	0.606456117	0.367789022	cc	thibodeau (2016)	0.367789022	en thibodeau (2016) arousal	0
+14	2	en	familiarity	0.389354186	0.151596682	cc	thibodeau (2016)	0.151596682	en thibodeau (2016) familiarity	0
+15	3	en	use	0.436370033	0.190418806	cc	thibodeau (2016)	0.190418806	en thibodeau (2016) use	0
+16	4	en	aversion	0.646560266	0.418040178	cc	thibodeau (2016)	0.418040178	en thibodeau (2016) aversion	0
+17	5	en	valence	0.713121089	0.508541687	cc	thibodeau (2016)	0.508541687	en thibodeau (2016) valence	0
+18	0	en	age of acquisition	0.821225264	0.674410934	cc	kuperman (2012)	0.674410934	en kuperman (2012) age of acquisition	0
+19	0	en	arousal	0.69708049	0.485921209	cc	janschewitz (2008)	0.485921209	en janschewitz (2008) arousal	0
+20	1	en	familiarity	0.715615535	0.512105594	cc	janschewitz (2008)	0.512105594	en janschewitz (2008) familiarity	0
+21	2	en	tabooness	0.783388519	0.613697572	cc	janschewitz (2008)	0.613697572	en janschewitz (2008) tabooness	0
+22	3	en	personal use	0.708303912	0.501694432	cc	janschewitz (2008)	0.501694432	en janschewitz (2008) personal use	0
+23	4	en	offensiveness	0.719879864	0.518227018	cc	janschewitz (2008)	0.518227018	en janschewitz (2008) offensiveness	0
+24	5	en	valence	0.824118827	0.679171841	cc	janschewitz (2008)	0.679171841	en janschewitz (2008) valence	0
+75	0	en	valence	0.786590691	0.618724915	sub	warriner (2013)	0.618724915	en warriner (2013) valence	0
+76	1	en	arousal	0.611775221	0.374268921	sub	warriner (2013)	0.374268921	en warriner (2013) arousal	0
+77	2	en	dominance	0.69384215	0.48141693	sub	warriner (2013)	0.48141693	en warriner (2013) dominance	0
+78	0	en	concreteness	0.874090536	0.764034265	sub	brysbaert (2014)	0.764034265	en brysbaert (2014) concreteness	0
+79	0	en	imageability	0.380620094	0.144871656	sub	thibodeau (2016)	0.144871656	en thibodeau (2016) imageability	0
+80	1	en	arousal	0.42368404	0.179508165	sub	thibodeau (2016)	0.179508165	en thibodeau (2016) arousal	0
+81	2	en	familiarity	0.263388177	0.069373332	sub	thibodeau (2016)	0.069373332	en thibodeau (2016) familiarity	0
+82	3	en	use	0.449526747	0.202074297	sub	thibodeau (2016)	0.202074297	en thibodeau (2016) use	0
+83	4	en	aversion	0.649348386	0.421653327	sub	thibodeau (2016)	0.421653327	en thibodeau (2016) aversion	0
+84	5	en	valence	0.648513439	0.420569681	sub	thibodeau (2016)	0.420569681	en thibodeau (2016) valence	0
+85	0	en	age of acquisition	0.73183485	0.535582247	sub	kuperman (2012)	0.535582247	en kuperman (2012) age of acquisition	0
+86	0	en	arousal	0.670860124	0.450053307	sub	janschewitz (2008)	0.450053307	en janschewitz (2008) arousal	0
+87	1	en	familiarity	0.625577865	0.391347665	sub	janschewitz (2008)	0.391347665	en janschewitz (2008) familiarity	0
+88	2	en	tabooness	0.744912103	0.554894041	sub	janschewitz (2008)	0.554894041	en janschewitz (2008) tabooness	0
+89	3	en	personal use	0.613622913	0.376533079	sub	janschewitz (2008)	0.376533079	en janschewitz (2008) personal use	0
+90	4	en	offensiveness	0.745064272	0.55512077	sub	janschewitz (2008)	0.55512077	en janschewitz (2008) offensiveness	0
+91	5	en	valence	0.786176299	0.618073172	sub	janschewitz (2008)	0.618073172	en janschewitz (2008) valence	0
+142	0	en	valence	0.802577381	0.644130452	wiki-sub	warriner (2013)	0.644130452	en warriner (2013) valence	0
+143	1	en	arousal	0.613905267	0.376879676	wiki-sub	warriner (2013)	0.376879676	en warriner (2013) arousal	0
+144	2	en	dominance	0.705306065	0.497456646	wiki-sub	warriner (2013)	0.497456646	en warriner (2013) dominance	0
+145	0	en	concreteness	0.882015249	0.777950899	wiki-sub	brysbaert (2014)	0.777950899	en brysbaert (2014) concreteness	0
+146	0	en	imageability	0.131258261	0.017228731	wiki-sub	thibodeau (2016)	0.017228731	en thibodeau (2016) imageability	0
+147	1	en	arousal	0.584339933	0.341453157	wiki-sub	thibodeau (2016)	0.341453157	en thibodeau (2016) arousal	0
+148	2	en	familiarity	0.34172153	0.116773604	wiki-sub	thibodeau (2016)	0.116773604	en thibodeau (2016) familiarity	0
+149	3	en	use	0.448431527	0.201090834	wiki-sub	thibodeau (2016)	0.201090834	en thibodeau (2016) use	0
+150	4	en	aversion	0.638267915	0.407385932	wiki-sub	thibodeau (2016)	0.407385932	en thibodeau (2016) aversion	0
+151	5	en	valence	0.689835039	0.475872382	wiki-sub	thibodeau (2016)	0.475872382	en thibodeau (2016) valence	0
+152	0	en	age of acquisition	0.771358278	0.594993592	wiki-sub	kuperman (2012)	0.594993592	en kuperman (2012) age of acquisition	0
+153	0	en	arousal	0.704450693	0.496250779	wiki-sub	janschewitz (2008)	0.496250779	en janschewitz (2008) arousal	0
+154	1	en	familiarity	0.588487566	0.346317615	wiki-sub	janschewitz (2008)	0.346317615	en janschewitz (2008) familiarity	0
+155	2	en	tabooness	0.745219962	0.555352791	wiki-sub	janschewitz (2008)	0.555352791	en janschewitz (2008) tabooness	0
+156	3	en	personal use	0.57181248	0.326969512	wiki-sub	janschewitz (2008)	0.326969512	en janschewitz (2008) personal use	0
+157	4	en	offensiveness	0.711991504	0.506931901	wiki-sub	janschewitz (2008)	0.506931901	en janschewitz (2008) offensiveness	0
+158	5	en	valence	0.773106997	0.597694429	wiki-sub	janschewitz (2008)	0.597694429	en janschewitz (2008) valence	0
+209	0	en	valence	0.787285983	0.61981922	wiki	warriner (2013)	0.61981922	en warriner (2013) valence	0
+210	1	en	arousal	0.605173467	0.366234925	wiki	warriner (2013)	0.366234925	en warriner (2013) arousal	0
+211	2	en	dominance	0.693522866	0.480973965	wiki	warriner (2013)	0.480973965	en warriner (2013) dominance	0
+212	0	en	concreteness	0.873778579	0.763489005	wiki	brysbaert (2014)	0.763489005	en brysbaert (2014) concreteness	0
+213	0	en	imageability	0.111979779	0.012539471	wiki	thibodeau (2016)	0.012539471	en thibodeau (2016) imageability	0
+214	1	en	arousal	0.426768334	0.182131211	wiki	thibodeau (2016)	0.182131211	en thibodeau (2016) arousal	0
+215	2	en	familiarity	0.311806944	0.09722357	wiki	thibodeau (2016)	0.09722357	en thibodeau (2016) familiarity	0
+216	3	en	use	0.321106745	0.103109542	wiki	thibodeau (2016)	0.103109542	en thibodeau (2016) use	0
+217	4	en	aversion	0.608803612	0.370641838	wiki	thibodeau (2016)	0.370641838	en thibodeau (2016) aversion	0
+218	5	en	valence	0.668692938	0.447150246	wiki	thibodeau (2016)	0.447150246	en thibodeau (2016) valence	0
+219	0	en	age of acquisition	0.759275578	0.576499404	wiki	kuperman (2012)	0.576499404	en kuperman (2012) age of acquisition	0
+220	0	en	arousal	0.684935426	0.469136538	wiki	janschewitz (2008)	0.469136538	en janschewitz (2008) arousal	0
+221	1	en	familiarity	0.610118424	0.372244491	wiki	janschewitz (2008)	0.372244491	en janschewitz (2008) familiarity	0
+222	2	en	tabooness	0.728612635	0.530876372	wiki	janschewitz (2008)	0.530876372	en janschewitz (2008) tabooness	0
+223	3	en	personal use	0.590736034	0.348969062	wiki	janschewitz (2008)	0.348969062	en janschewitz (2008) personal use	0
+224	4	en	offensiveness	0.664482436	0.441536907	wiki	janschewitz (2008)	0.441536907	en janschewitz (2008) offensiveness	0
+225	5	en	valence	0.779598545	0.607773892	wiki	janschewitz (2008)	0.607773892	en janschewitz (2008) valence	0
+25	0	es	valence	0.786504832	0.61858985	cc	stadthagen-gonzalez (2017)	0.61858985	es stadthagen-gonzalez (2017) valence	0
+26	1	es	arousal	0.729207026	0.531742887	cc	stadthagen-gonzalez (2017)	0.531742887	es stadthagen-gonzalez (2017) arousal	0
+27	0	es	valence	0.82995707	0.688828738	cc	gausch (2015)	0.688828738	es gausch (2015) valence	0
+28	1	es	arousal	0.762746639	0.581782435	cc	gausch (2015)	0.581782435	es gausch (2015) arousal	0
+29	2	es	concreteness	0.844316081	0.712869645	cc	gausch (2015)	0.712869645	es gausch (2015) concreteness	0
+30	3	es	imageability	0.834262725	0.695994295	cc	gausch (2015)	0.695994295	es gausch (2015) imageability	0
+31	4	es	context availability	0.670166993	0.449123798	cc	gausch (2015)	0.449123798	es gausch (2015) context availability	0
+32	5	es	familiarity	0.691759553	0.478531279	cc	gausch (2015)	0.478531279	es gausch (2015) familiarity	0
+92	0	es	valence	0.749705947	0.562059007	sub	stadthagen-gonzalez (2017)	0.562059007	es stadthagen-gonzalez (2017) valence	0
+93	1	es	arousal	0.699092076	0.48872973	sub	stadthagen-gonzalez (2017)	0.48872973	es stadthagen-gonzalez (2017) arousal	0
+94	0	es	valence	0.790013491	0.624121316	sub	gausch (2015)	0.624121316	es gausch (2015) valence	0
+95	1	es	arousal	0.738391131	0.545221462	sub	gausch (2015)	0.545221462	es gausch (2015) arousal	0
+96	2	es	concreteness	0.822285602	0.676153611	sub	gausch (2015)	0.676153611	es gausch (2015) concreteness	0
+97	3	es	imageability	0.823246667	0.677735075	sub	gausch (2015)	0.677735075	es gausch (2015) imageability	0
+98	4	es	context availability	0.580846776	0.337382977	sub	gausch (2015)	0.337382977	es gausch (2015) context availability	0
+99	5	es	familiarity	0.549255673	0.301681794	sub	gausch (2015)	0.301681794	es gausch (2015) familiarity	0
+159	0	es	valence	0.77544695	0.601317972	wiki-sub	stadthagen-gonzalez (2017)	0.601317972	es stadthagen-gonzalez (2017) valence	0
+160	1	es	arousal	0.711253524	0.505881575	wiki-sub	stadthagen-gonzalez (2017)	0.505881575	es stadthagen-gonzalez (2017) arousal	0
+161	0	es	valence	0.810604537	0.657079716	wiki-sub	gausch (2015)	0.657079716	es gausch (2015) valence	0
+162	1	es	arousal	0.743618391	0.552968312	wiki-sub	gausch (2015)	0.552968312	es gausch (2015) arousal	0
+163	2	es	concreteness	0.818892862	0.67058552	wiki-sub	gausch (2015)	0.67058552	es gausch (2015) concreteness	0
+164	3	es	imageability	0.826309569	0.682787504	wiki-sub	gausch (2015)	0.682787504	es gausch (2015) imageability	0
+165	4	es	context availability	0.587298507	0.344919536	wiki-sub	gausch (2015)	0.344919536	es gausch (2015) context availability	0
+166	5	es	familiarity	0.588510026	0.346344051	wiki-sub	gausch (2015)	0.346344051	es gausch (2015) familiarity	0
+226	0	es	valence	0.755437271	0.57068547	wiki	stadthagen-gonzalez (2017)	0.57068547	es stadthagen-gonzalez (2017) valence	0
+227	1	es	arousal	0.684929235	0.469128057	wiki	stadthagen-gonzalez (2017)	0.469128057	es stadthagen-gonzalez (2017) arousal	0
+228	0	es	valence	0.797876949	0.636607626	wiki	gausch (2015)	0.636607626	es gausch (2015) valence	0
+229	1	es	arousal	0.727903836	0.529843994	wiki	gausch (2015)	0.529843994	es gausch (2015) arousal	0
+230	2	es	concreteness	0.796936279	0.635107433	wiki	gausch (2015)	0.635107433	es gausch (2015) concreteness	0
+231	3	es	imageability	0.799551519	0.639282632	wiki	gausch (2015)	0.639282632	es gausch (2015) imageability	0
+232	4	es	context availability	0.550275511	0.302803138	wiki	gausch (2015)	0.302803138	es gausch (2015) context availability	0
+233	5	es	familiarity	0.558058735	0.311429552	wiki	gausch (2015)	0.311429552	es gausch (2015) familiarity	0
+33	0	fa	age of acquisition	0.754388826	0.569102501	cc	bagheri (2016)	0.569102501	fa bagheri (2016) age of acquisition	1
+34	1	fa	familiarity	0.736391609	0.542272601	cc	bagheri (2016)	0.542272601	fa bagheri (2016) familiarity	1
+35	2	fa	imageability	0.762864137	0.581961691	cc	bagheri (2016)	0.581961691	fa bagheri (2016) imageability	1
+100	0	fa	age of acquisition	0.557148625	0.31041459	sub	bagheri (2016)	0.31041459	fa bagheri (2016) age of acquisition	1
+101	1	fa	familiarity	0.455351076	0.207344603	sub	bagheri (2016)	0.207344603	fa bagheri (2016) familiarity	1
+102	2	fa	imageability	0.608846405	0.370693945	sub	bagheri (2016)	0.370693945	fa bagheri (2016) imageability	1
+167	0	fa	age of acquisition	0.702690507	0.493773948	wiki-sub	bagheri (2016)	0.493773948	fa bagheri (2016) age of acquisition	1
+168	1	fa	familiarity	0.64711702	0.418760437	wiki-sub	bagheri (2016)	0.418760437	fa bagheri (2016) familiarity	1
+169	2	fa	imageability	0.741376916	0.549639732	wiki-sub	bagheri (2016)	0.549639732	fa bagheri (2016) imageability	1
+234	0	fa	age of acquisition	0.649546666	0.421910871	wiki	bagheri (2016)	0.421910871	fa bagheri (2016) age of acquisition	1
+235	1	fa	familiarity	0.609485545	0.37147263	wiki	bagheri (2016)	0.37147263	fa bagheri (2016) familiarity	1
+236	2	fa	imageability	0.713441949	0.508999415	wiki	bagheri (2016)	0.508999415	fa bagheri (2016) imageability	1
+36	0	fi	arousal	0.780765137	0.609594199	cc	soderholm (2013)	0.609594199	fi soderholm (2013) arousal	1
+37	1	fi	valence	0.875038085	0.76569165	cc	soderholm (2013)	0.76569165	fi soderholm (2013) valence	1
+38	0	fi	familiarity	0.627460944	0.393707236	cc	eilola (2010)	0.393707236	fi eilola (2010) familiarity	1
+39	1	fi	valence	0.837548819	0.701488024	cc	eilola (2010)	0.701488024	fi eilola (2010) valence	1
+40	2	fi	emotional charge	0.855060433	0.731128345	cc	eilola (2010)	0.731128345	fi eilola (2010) emotional charge	1
+41	3	fi	offensiveness	0.859201218	0.738226733	cc	eilola (2010)	0.738226733	fi eilola (2010) offensiveness	1
+42	4	fi	concreteness	0.882093521	0.77808898	cc	eilola (2010)	0.77808898	fi eilola (2010) concreteness	1
+103	0	fi	arousal	0.748629439	0.560446037	sub	soderholm (2013)	0.560446037	fi soderholm (2013) arousal	1
+104	1	fi	valence	0.826109886	0.682457544	sub	soderholm (2013)	0.682457544	fi soderholm (2013) valence	1
+105	0	fi	familiarity	0.576532946	0.332390238	sub	eilola (2010)	0.332390238	fi eilola (2010) familiarity	1
+106	1	fi	valence	0.813885939	0.662410322	sub	eilola (2010)	0.662410322	fi eilola (2010) valence	1
+107	2	fi	emotional charge	0.811490164	0.658516287	sub	eilola (2010)	0.658516287	fi eilola (2010) emotional charge	1
+108	3	fi	offensiveness	0.888714621	0.789813677	sub	eilola (2010)	0.789813677	fi eilola (2010) offensiveness	1
+109	4	fi	concreteness	0.845173639	0.71431848	sub	eilola (2010)	0.71431848	fi eilola (2010) concreteness	1
+170	0	fi	arousal	0.767769233	0.589469596	wiki-sub	soderholm (2013)	0.589469596	fi soderholm (2013) arousal	1
+171	1	fi	valence	0.851697403	0.725388467	wiki-sub	soderholm (2013)	0.725388467	fi soderholm (2013) valence	1
+172	0	fi	familiarity	0.584872459	0.342075794	wiki-sub	eilola (2010)	0.342075794	fi eilola (2010) familiarity	1
+173	1	fi	valence	0.833193123	0.69421078	wiki-sub	eilola (2010)	0.69421078	fi eilola (2010) valence	1
+174	2	fi	emotional charge	0.83491726	0.697086832	wiki-sub	eilola (2010)	0.697086832	fi eilola (2010) emotional charge	1
+175	3	fi	offensiveness	0.892926558	0.797317838	wiki-sub	eilola (2010)	0.797317838	fi eilola (2010) offensiveness	1
+176	4	fi	concreteness	0.865075951	0.748356401	wiki-sub	eilola (2010)	0.748356401	fi eilola (2010) concreteness	1
+237	0	fi	arousal	0.730255664	0.533273335	wiki	soderholm (2013)	0.533273335	fi soderholm (2013) arousal	1
+238	1	fi	valence	0.790283829	0.62454853	wiki	soderholm (2013)	0.62454853	fi soderholm (2013) valence	1
+239	0	fi	familiarity	0.512132169	0.262279358	wiki	eilola (2010)	0.262279358	fi eilola (2010) familiarity	1
+240	1	fi	valence	0.733510289	0.538037344	wiki	eilola (2010)	0.538037344	fi eilola (2010) valence	1
+241	2	fi	emotional charge	0.806596993	0.65059871	wiki	eilola (2010)	0.65059871	fi eilola (2010) emotional charge	1
+242	3	fi	offensiveness	0.616236344	0.379747232	wiki	eilola (2010)	0.379747232	fi eilola (2010) offensiveness	1
+243	4	fi	concreteness	0.840198586	0.705933664	wiki	eilola (2010)	0.705933664	fi eilola (2010) concreteness	1
+43	0	fr	arousal	0.709234641	0.503013776	cc	monnier (2014)	0.503013776	fr monnier (2014) arousal	1
+44	1	fr	valence	0.765813335	0.586470065	cc	monnier (2014)	0.586470065	fr monnier (2014) valence	1
+45	0	fr	lexical decision rt	0.617901492	0.381802254	cc	ferrand (2010)	0.381802254	fr ferrand (2010) lexical decision rt	1
+46	0	fr	imageability	0.810978922	0.657686812	cc	desrochers (2009)	0.657686812	fr desrochers (2009) imageability	1
+110	0	fr	arousal	0.676388237	0.457501047	sub	monnier (2014)	0.457501047	fr monnier (2014) arousal	1
+111	1	fr	valence	0.724974335	0.525587786	sub	monnier (2014)	0.525587786	fr monnier (2014) valence	1
+112	0	fr	lexical decision rt	0.525885834	0.27655591	sub	ferrand (2010)	0.27655591	fr ferrand (2010) lexical decision rt	1
+113	0	fr	imageability	0.769785311	0.592569425	sub	desrochers (2009)	0.592569425	fr desrochers (2009) imageability	1
+177	0	fr	arousal	0.695997977	0.484413185	wiki-sub	monnier (2014)	0.484413185	fr monnier (2014) arousal	1
+178	1	fr	valence	0.729191466	0.531720194	wiki-sub	monnier (2014)	0.531720194	fr monnier (2014) valence	1
+179	0	fr	lexical decision rt	0.526912061	0.27763632	wiki-sub	ferrand (2010)	0.27763632	fr ferrand (2010) lexical decision rt	1
+180	0	fr	imageability	0.790859874	0.625459341	wiki-sub	desrochers (2009)	0.625459341	fr desrochers (2009) imageability	1
+244	0	fr	arousal	0.671909902	0.451462917	wiki	monnier (2014)	0.451462917	fr monnier (2014) arousal	1
+245	1	fr	valence	0.705584738	0.497849823	wiki	monnier (2014)	0.497849823	fr monnier (2014) valence	1
+246	0	fr	lexical decision rt	0.510194446	0.260298373	wiki	ferrand (2010)	0.260298373	fr ferrand (2010) lexical decision rt	1
+247	0	fr	imageability	0.749823115	0.562234703	wiki	desrochers (2009)	0.562234703	fr desrochers (2009) imageability	1
+47	0	id	valence	0.842424197	0.709678528	cc	sianipar (2016)	0.709678528	id sianipar (2016) valence	1
+48	1	id	arousal	0.657701497	0.432571259	cc	sianipar (2016)	0.432571259	id sianipar (2016) arousal	1
+49	2	id	dominance	0.648767195	0.420898873	cc	sianipar (2016)	0.420898873	id sianipar (2016) dominance	1
+50	3	id	predicability	0.448981761	0.201584622	cc	sianipar (2016)	0.201584622	id sianipar (2016) predicability	1
+51	4	id	concreteness	0.850455387	0.723274365	cc	sianipar (2016)	0.723274365	id sianipar (2016) concreteness	1
+52	5	id	frequency	0.692193985	0.479132512	cc	sianipar (2016)	0.479132512	id sianipar (2016) frequency	1
+114	0	id	valence	0.789395631	0.623145462	sub	sianipar (2016)	0.623145462	id sianipar (2016) valence	1
+115	1	id	arousal	0.582884104	0.339753878	sub	sianipar (2016)	0.339753878	id sianipar (2016) arousal	1
+116	2	id	dominance	0.597159709	0.356599718	sub	sianipar (2016)	0.356599718	id sianipar (2016) dominance	1
+117	3	id	predicability	0.31956232	0.102120076	sub	sianipar (2016)	0.102120076	id sianipar (2016) predicability	1
+118	4	id	concreteness	0.833844729	0.695297032	sub	sianipar (2016)	0.695297032	id sianipar (2016) concreteness	1
+119	5	id	frequency	0.506381553	0.256422278	sub	sianipar (2016)	0.256422278	id sianipar (2016) frequency	1
+181	0	id	valence	0.819792834	0.672060291	wiki-sub	sianipar (2016)	0.672060291	id sianipar (2016) valence	1
+182	1	id	arousal	0.613663724	0.376583166	wiki-sub	sianipar (2016)	0.376583166	id sianipar (2016) arousal	1
+183	2	id	dominance	0.595822166	0.355004054	wiki-sub	sianipar (2016)	0.355004054	id sianipar (2016) dominance	1
+184	3	id	predicability	0.361697306	0.130824941	wiki-sub	sianipar (2016)	0.130824941	id sianipar (2016) predicability	1
+185	4	id	concreteness	0.84347633	0.71145232	wiki-sub	sianipar (2016)	0.71145232	id sianipar (2016) concreteness	1
+186	5	id	frequency	0.546980318	0.299187468	wiki-sub	sianipar (2016)	0.299187468	id sianipar (2016) frequency	1
+248	0	id	valence	0.786614603	0.618762534	wiki	sianipar (2016)	0.618762534	id sianipar (2016) valence	1
+249	1	id	arousal	0.583402505	0.340358483	wiki	sianipar (2016)	0.340358483	id sianipar (2016) arousal	1
+250	2	id	dominance	0.56478245	0.318979216	wiki	sianipar (2016)	0.318979216	id sianipar (2016) dominance	1
+251	3	id	predicability	0.378305481	0.143115037	wiki	sianipar (2016)	0.143115037	id sianipar (2016) predicability	1
+252	4	id	concreteness	0.826386064	0.682913928	wiki	sianipar (2016)	0.682913928	id sianipar (2016) concreteness	1
+253	5	id	frequency	0.498223215	0.248226372	wiki	sianipar (2016)	0.248226372	id sianipar (2016) frequency	1
+53	0	ms	lexical decision rt	0.637524439	0.40643741	cc	yap (2010)	0.40643741	ms yap (2010) lexical decision rt	1
+54	1	ms	lexical decision accuracy	0.434385045	0.188690368	cc	yap (2010)	0.188690368	ms yap (2010) lexical decision accuracy	1
+120	0	ms	lexical decision rt	0.663363758	0.440051476	sub	yap (2010)	0.440051476	ms yap (2010) lexical decision rt	1
+121	1	ms	lexical decision accuracy	0.138518996	0.019187512	sub	yap (2010)	0.019187512	ms yap (2010) lexical decision accuracy	1
+187	0	ms	lexical decision rt	0.619123795	0.383314273	wiki-sub	yap (2010)	0.383314273	ms yap (2010) lexical decision rt	1
+188	1	ms	lexical decision accuracy	0.356903226	0.127379912	wiki-sub	yap (2010)	0.127379912	ms yap (2010) lexical decision accuracy	1
+254	0	ms	lexical decision rt	0.609164643	0.371081562	wiki	yap (2010)	0.371081562	ms yap (2010) lexical decision rt	1
+255	1	ms	lexical decision accuracy	0.282011632	0.07953056	wiki	yap (2010)	0.07953056	ms yap (2010) lexical decision accuracy	1
+55	0	nl	age of acquisition	0.776316927	0.602667971	cc	brysbaert (2014)	0.602667971	nl brysbaert (2014) age of acquisition	1
+56	0	nl	taboo (personal)	0.803532228	0.645664041	cc	roest (2018)	0.645664041	nl roest (2018) taboo (personal)	1
+57	1	nl	taboo (general)	0.854909223	0.730869779	cc	roest (2018)	0.730869779	nl roest (2018) taboo (general)	1
+58	2	nl	insulting	0.756618274	0.572471212	cc	roest (2018)	0.572471212	nl roest (2018) insulting	1
+59	0	nl	prevalence	0.674652232	0.455155634	cc	keuleers (2015)	0.455155634	nl keuleers (2015) prevalence	1
+122	0	nl	age of acquisition	0.696719984	0.485418736	sub	brysbaert (2014)	0.485418736	nl brysbaert (2014) age of acquisition	1
+123	0	nl	taboo (personal)	0.831390596	0.691210322	sub	roest (2018)	0.691210322	nl roest (2018) taboo (personal)	1
+124	1	nl	taboo (general)	0.855327285	0.731584765	sub	roest (2018)	0.731584765	nl roest (2018) taboo (general)	1
+125	2	nl	insulting	0.86949864	0.756027885	sub	roest (2018)	0.756027885	nl roest (2018) insulting	1
+126	0	nl	prevalence	0.552907448	0.305706647	sub	keuleers (2015)	0.305706647	nl keuleers (2015) prevalence	1
+189	0	nl	age of acquisition	0.727644767	0.529466907	wiki-sub	brysbaert (2014)	0.529466907	nl brysbaert (2014) age of acquisition	1
+190	0	nl	taboo (personal)	0.829571662	0.688189142	wiki-sub	roest (2018)	0.688189142	nl roest (2018) taboo (personal)	1
+191	1	nl	taboo (general)	0.861810914	0.742718052	wiki-sub	roest (2018)	0.742718052	nl roest (2018) taboo (general)	1
+192	2	nl	insulting	0.858958938	0.737810458	wiki-sub	roest (2018)	0.737810458	nl roest (2018) insulting	1
+193	0	nl	prevalence	0.623570422	0.388840071	wiki-sub	keuleers (2015)	0.388840071	nl keuleers (2015) prevalence	1
+256	0	nl	age of acquisition	0.692598051	0.479692061	wiki	brysbaert (2014)	0.479692061	nl brysbaert (2014) age of acquisition	1
+257	0	nl	taboo (personal)	0.744726126	0.554617003	wiki	roest (2018)	0.554617003	nl roest (2018) taboo (personal)	1
+258	1	nl	taboo (general)	0.778240773	0.605658701	wiki	roest (2018)	0.605658701	nl roest (2018) taboo (general)	1
+259	2	nl	insulting	0.666142303	0.443745568	wiki	roest (2018)	0.443745568	nl roest (2018) insulting	1
+260	0	nl	prevalence	0.579458199	0.335771804	wiki	keuleers (2015)	0.335771804	nl keuleers (2015) prevalence	1
+60	0	pl	valence	0.869052553	0.75525234	cc	imir (2014)	0.75525234	pl imir (2014) valence	1
+61	1	pl	dominance	0.745597913	0.555916247	cc	imir (2014)	0.555916247	pl imir (2014) dominance	1
+62	2	pl	arousal	0.699641169	0.489497765	cc	imir (2014)	0.489497765	pl imir (2014) arousal	1
+127	0	pl	valence	0.837946239	0.702153899	sub	imir (2014)	0.702153899	pl imir (2014) valence	1
+128	1	pl	dominance	0.728533936	0.530761696	sub	imir (2014)	0.530761696	pl imir (2014) dominance	1
+129	2	pl	arousal	0.704601422	0.496463164	sub	imir (2014)	0.496463164	pl imir (2014) arousal	1
+194	0	pl	valence	0.847439823	0.718154253	wiki-sub	imir (2014)	0.718154253	pl imir (2014) valence	1
+195	1	pl	dominance	0.721938607	0.521195352	wiki-sub	imir (2014)	0.521195352	pl imir (2014) dominance	1
+196	2	pl	arousal	0.689657043	0.475626836	wiki-sub	imir (2014)	0.475626836	pl imir (2014) arousal	1
+261	0	pl	valence	0.802315462	0.643710101	wiki	imir (2014)	0.643710101	pl imir (2014) valence	1
+262	1	pl	dominance	0.668826431	0.447328794	wiki	imir (2014)	0.447328794	pl imir (2014) dominance	1
+263	2	pl	arousal	0.6181474	0.382106208	wiki	imir (2014)	0.382106208	pl imir (2014) arousal	1
+63	0	pt	valence	0.861834729	0.742759099	cc	soares (2012)	0.742759099	pt soares (2012) valence	1
+64	1	pt	arousal	0.659729484	0.435242992	cc	soares (2012)	0.435242992	pt soares (2012) arousal	1
+65	2	pt	dominance	0.600556065	0.360667587	cc	soares (2012)	0.360667587	pt soares (2012) dominance	1
+66	0	pt	age of acquisition	0.800413176	0.640661253	cc	cameirao (2010)	0.640661253	pt cameirao (2010) age of acquisition	1
+130	0	pt	valence	0.839161807	0.704192538	sub	soares (2012)	0.704192538	pt soares (2012) valence	1
+131	1	pt	arousal	0.62606854	0.391961817	sub	soares (2012)	0.391961817	pt soares (2012) arousal	1
+132	2	pt	dominance	0.536015348	0.287312454	sub	soares (2012)	0.287312454	pt soares (2012) dominance	1
+133	0	pt	age of acquisition	0.769493401	0.592120094	sub	cameirao (2010)	0.592120094	pt cameirao (2010) age of acquisition	1
+197	0	pt	valence	0.851936292	0.725795446	wiki-sub	soares (2012)	0.725795446	pt soares (2012) valence	1
+198	1	pt	arousal	0.642280532	0.412524282	wiki-sub	soares (2012)	0.412524282	pt soares (2012) arousal	1
+199	2	pt	dominance	0.559211424	0.312717417	wiki-sub	soares (2012)	0.312717417	pt soares (2012) dominance	1
+200	0	pt	age of acquisition	0.778002188	0.605287404	wiki-sub	cameirao (2010)	0.605287404	pt cameirao (2010) age of acquisition	1
+264	0	pt	valence	0.818179434	0.669417586	wiki	soares (2012)	0.669417586	pt soares (2012) valence	1
+265	1	pt	arousal	0.587067629	0.344648401	wiki	soares (2012)	0.344648401	pt soares (2012) arousal	1
+266	2	pt	dominance	0.554852497	0.307861293	wiki	soares (2012)	0.307861293	pt soares (2012) dominance	1
+267	0	pt	age of acquisition	0.750424689	0.563137214	wiki	cameirao (2010)	0.563137214	pt cameirao (2010) age of acquisition	1

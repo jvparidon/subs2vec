@@ -1,0 +1,18 @@
+	norm	r	r-squared	source
+0	valence	0.7865906905886993	0.6187249145208069	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/en-warriner-2013
+1	arousal	0.611775221243992	0.3742689213281353	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/en-warriner-2013
+2	dominance	0.693842150368326	0.48141692962774274	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/en-warriner-2013
+0	concreteness	0.8740905361286428	0.7640342653496583	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/en-brysbaert-2014
+0	imageability	0.3806200935782495	0.1448716556355154	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/en-thibodeau-2016
+1	arousal	0.4236840395335478	0.17950816535546488	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/en-thibodeau-2016
+2	familiarity	0.2633881765417943	0.06937333154201142	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/en-thibodeau-2016
+3	use	0.44952674730038555	0.2020742965384647	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/en-thibodeau-2016
+4	aversion	0.6493483861182738	0.4216533265544069	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/en-thibodeau-2016
+5	valence	0.6485134394888301	0.42056968119763255	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/en-thibodeau-2016
+0	age of acquisition	0.7318348498358644	0.5355822474342822	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/en-kuperman-2012
+0	arousal	0.6708601244905691	0.45005330663150184	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/en-janschewitz-2008
+1	familiarity	0.6255778650604196	0.39134766525355247	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/en-janschewitz-2008
+2	tabooness	0.7449121031265353	0.554894041384398	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/en-janschewitz-2008
+3	personal use	0.6136229128543199	0.37653307917982026	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/en-janschewitz-2008
+4	offensiveness	0.7450642720762886	0.5551207695245698	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/en-janschewitz-2008
+5	valence	0.7861762985621128	0.6180731724208244	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/en-janschewitz-2008

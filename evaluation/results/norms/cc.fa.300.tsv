@@ -1,0 +1,4 @@
+	norm	r	r-squared	source
+0	age of acquisition	0.7543888259004814	0.5691025006435069	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/fa-bagheri-2016
+1	familiarity	0.7363916085886045	0.5422726011997125	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/fa-bagheri-2016
+2	imageability	0.7628641368950712	0.5819616913606618	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/fa-bagheri-2016

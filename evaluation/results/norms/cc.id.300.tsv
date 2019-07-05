@@ -1,0 +1,7 @@
+	norm	r	r-squared	source
+0	valence	0.8424241972502946	0.7096785281128032	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/id-sianipar-2016
+1	arousal	0.6577014968611823	0.4325712589734398	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/id-sianipar-2016
+2	dominance	0.6487671946938426	0.4208988729109183	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/id-sianipar-2016
+3	predicability	0.44898176093300035	0.2015846216504979	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/id-sianipar-2016
+4	concreteness	0.8504553867590471	0.7232743648674803	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/id-sianipar-2016
+5	frequency	0.6921939845951747	0.47913251230974485	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/id-sianipar-2016

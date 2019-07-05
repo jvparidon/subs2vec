@@ -1,0 +1,24 @@
+ISO language code	Language	Article	Lexical norms	Number of words	Number of raters
+de	German	Kanske (2010)	Arousal, concreteness, valence	1000	64
+de	German	Schauenburg (2015)	Arousal, authority, community, potency, valence	858	612, ~35 raters per item
+en	English	Brysbaert (2014)	Concreteness	37058	4237, ~25 raters per item
+en	English	Janschewitz (2008)	Familiarity, offensiveness, tabooness, personal use	460	78
+en	English	Keuleers (2012)	Lexical decision RT and accuracy	28515	78
+en	English	Kuperman (2012)	Age of acquisition	30121	1960, ~20 raters per item
+en	English	Thibodeau (2016)	Arousal, aversion, familiarity, imageability, use, valence	29	500, ~100 raters per item
+en	English	Warriner (2013)	Arousal, dominance, valence	13915	1827, ~20 raters per item
+es	Spanish	Guasch (2016)	Arousal, concreteness, context availability, familiarity, imageability, valence	1400	826, ~20 raters per item
+es	Spanish	Stadthagen-Gonzalez (2017)	Arousal, valence	14031	512, ~20 raters per item
+fa	Farsi	Bakhtiar (2015)	Age of acquisition, familiarity, imageability	871	40
+fi	Finnish	Eilola (2010)	Concreteness, emotional charge, familiarity, offensiveness, valence	210	304, ~150 raters per item
+fi	Finnish	Soderholm (2013)	Arousal, valence	420	996, ~250 raters per item
+fr	French	Desrochers (2009)	Imageability	3600	144, ~72 raters per item
+fr	French	Ferrand (2010)	Lexical decision RT	38840	975, ~25 raters per item
+id	Indonesian	Sianipar (2016)	Arousal, concreteness, dominance, predictability, valence	1490	1402, ~70 raters per item
+ms	Malay	Yap (2010)	Lexical decision RT and accuracy	1510	44
+nl	Dutch	Brysbaert (2014)	Age of acquisition, concreteness	25888	149, ~15 raters per item
+nl	Dutch	Keuleers (2015)	Prevalence	52847	150k, ~300 raters per item
+nl	Dutch	Roest (2018)	Arousal, insulting, taboo (general), taboo (personal), valence	672	87
+pl	Polish	Imbir (2016)	Arousal, dominance, valence	4905	400
+pt	Portuguese	Cameirão (2010)	Age of acquisition	1749	685, ~48 raters per item
+pt	Portuguese	Soares (2012)	Arousal, dominance, valence	1034	958, ~50 raters per item

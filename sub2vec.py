@@ -57,14 +57,18 @@ def build_phrases(training_data, phrase_pass):
 def fix_encoding(training_data):
     out_fname = training_data.replace('.txt', '.utf-8.txt')
     with open(training_data, 'r', encoding='utf-8', errors='ignore') as in_file, open(out_fname, 'w', encoding='utf-8') as out_file:
-        outfile.write(infile.read())
+        for line in in_file:
+            out_file.write(line)
+        #out_file.write(in_file.read())
     return out_fname
 
 
 def lowercase(training_data):
     out_fname = training_data.replace('.txt', '.lower.txt')
     with open(training_data, 'r', encoding='utf-8') as in_file, open(out_fname, 'w', encoding='utf-8') as out_file:
-        outfile.write(infile.read().lower())
+        for line in in_file:
+            out_file.write(line.lower())
+        #out_file.write(in_file.read().lower())
     return out_fname
 
 

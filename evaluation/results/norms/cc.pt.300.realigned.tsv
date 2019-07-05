@@ -1,0 +1,5 @@
+	norm	r	r-squared	source
+0	valence	0.8620752639341085	0.7431737606870629	evaluation/norms/pt-soares-2012
+1	arousal	0.6517244984355646	0.42474482186108814	evaluation/norms/pt-soares-2012
+2	dominance	0.597340637587708	0.3568158373136895	evaluation/norms/pt-soares-2012
+0	age of acquisition	0.8019323617306433	0.6430955127908873	evaluation/norms/pt-cameirao-2010

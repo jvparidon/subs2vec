@@ -5,6 +5,7 @@ import pandas as pd
 import sklearn.linear_model
 import sklearn.model_selection
 import sklearn.preprocessing
+import sklearn.utils
 import argparse
 import os
 import vecs
@@ -24,7 +25,8 @@ def evaluate_vecs(lang, vecs_fname):
         if norms_fname.startswith(lang):
             results.append(predict_norms(vectors, os.path.join(norms_path, norms_fname)))
     results_fname = os.path.split(vecs_fname)[1].replace('.vec', '.tsv')
-    pd.concat(results).to_csv(os.path.join(path, 'results', 'norms', results_fname), sep='\t')
+    if len(results) > 0:
+        pd.concat(results).to_csv(os.path.join(path, 'results', 'norms', results_fname), sep='\t')
 
 
 @log_timer
@@ -33,25 +35,29 @@ def predict_norms(vectors, norms_fname):
     norms = pd.read_csv(norms_fname, sep='\t')
     norms['word'] = norms['word'].str.lower()
     norms = norms.set_index('word')
-    df = norms.join(vectors, how='left').dropna()
+    df = norms.join(vectors, how='left')
+    logging.info(f'missing vectors for {df[0].isna().sum()} out of {df[0].size} words')
+    df = sklearn.utils.shuffle(df.dropna())  # shuffle is important for ordered datasets!
 
     scaler = sklearn.preprocessing.StandardScaler()  # standardize predictors
     model = sklearn.linear_model.Ridge()  # use ridge regression models
     X = df[vectors.columns.values]
     #X = scaler.fit_transform(df[vectors.columns.values])  # word vectors are the predictors
-    cv = sklearn.model_selection.KFold(10, shuffle=True)  # shuffle is important for ordered datasets, because even ridge regression will overfit otherwise
+    #cv = sklearn.model_selection.KFold(n_splits=50)
+    cv = sklearn.model_selection.RepeatedKFold(n_splits=5, n_repeats=10)
 
     results = []
     for col in norms.columns.values:
         # set dependent variable and calculate 10-fold mean fit/predict scores
         y = df[col]
         #y = df[col] - np.mean(df[col])
-        score = np.mean(sklearn.model_selection.cross_val_score(model, X, y, cv=cv))
+        scores = sklearn.model_selection.cross_val_score(model, X, y, cv=cv)
+        median_score = np.median(scores)
         results.append({
             'source': norms_fname.rstrip('.tsv'),
             'norm': col,
-            'r': np.sqrt(score),  # take square root of explained variance to get Pearson r
-            'r-squared': score
+            'r': np.sqrt(median_score),  # take square root of explained variance to get Pearson r
+            'r-squared': median_score
         })
 
     return pd.DataFrame(results)

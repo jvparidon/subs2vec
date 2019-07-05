@@ -1,0 +1,5 @@
+	norm	r	r-squared	source
+0	valence	0.8181794335820829	0.669417585536698	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/pt-soares-2012
+1	arousal	0.5870676286872338	0.3446484006524519	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/pt-soares-2012
+2	dominance	0.554852496798214	0.3078612932032121	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/pt-soares-2012
+0	age of acquisition	0.7504246891849642	0.5631372141383502	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/pt-cameirao-2010

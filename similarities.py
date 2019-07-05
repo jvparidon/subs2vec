@@ -15,6 +15,8 @@ logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.I
 @timer
 def compare_similarities(fname, vecs_dict, replace_missing=True):
     wordsim = pd.read_csv(fname, delimiter='\t', comment='#')
+    wordsim['word1'] = wordsim['word1'].str.lower()
+    wordsim['word2'] = wordsim['word2'].str.lower()
     sub2vec_dsm = []
     wordsim_dsm = []
     missing = 0
@@ -28,7 +30,7 @@ def compare_similarities(fname, vecs_dict, replace_missing=True):
             if replace_missing:
                 sub2vec_dsm.append(0)
                 wordsim_dsm.append(pair['similarity'])
-            
+
     return scipy.stats.spearmanr(wordsim_dsm, sub2vec_dsm)[0], len(wordsim) - missing, len(wordsim)
 
 

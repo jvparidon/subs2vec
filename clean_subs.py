@@ -26,7 +26,7 @@ def strip_lemma(tree):
         if node.tag == 's':
             stripped.append('\n')
         if node.tag == 'w':
-            stripped.append(f'{node.get("lemma")} ')
+            stripped.append(f'{node.get("lemma")}_{node.get("upos")} ')
     return u''.join(stripped)
 
 
@@ -68,7 +68,10 @@ def strip_xml(text, xmlparser, ioformat='txt'):
 def strip_archive(lang, ioformat='txt', years=(1900, 2050)):
     read_zip = zipfile.ZipFile(f'{lang}.zip', 'r')
     write_zip = zipfile.ZipFile(f'{lang}_stripped.zip', 'a')
-    dirpath = 'OpenSubtitles/raw'
+    if ioformat == 'txt':
+        dirpath = 'OpenSubtitles/raw'
+    elif ioformat in ['upos', 'lemma']:
+        dirpath = 'OpenSubtitles/parsed'
     filepaths = []
     for filepath in read_zip.namelist():
         if filepath.endswith('xml'):
@@ -78,12 +81,13 @@ def strip_archive(lang, ioformat='txt', years=(1900, 2050)):
     logging.info(f'stripping xml from {len(filepaths)} subtitles in {lang}')
     # XML parser recover option is needed to deal with malformed XML in subs
     xmlparser = etree.XMLParser(recover=True, encoding='utf-8')
-    for filepath in filepaths:
+    for filepath in sorted(filepaths):
         write_zip.writestr(filepath.replace('xml', ioformat),
                            strip_xml(read_zip.open(filepath).read(), xmlparser, ioformat))
 
 
-def strip_punctuation(txt):
+def strip_punctuation(txt, ioformat='txt'):
+    '''
     regeces = [
         (r'<.*?>', ''),  # strip other xml tags
         (r'http.*?(?:[\s\n\]]|$)', ''),  # strip links
@@ -95,10 +99,25 @@ def strip_punctuation(txt):
         (r' {2,}', ' '),  # strip excessive spaces
         (r'\s*\n\s*', '\n'),  # strip empty lines
     ]
+    '''
+    regeces = [
+        (r'<.*?>', ''),  # strip other xml tags
+        (r'http.*?(?:[\s\n\]]|$)', ''),  # strip links
+        (r'\s\(.*?\)', ''),  # remove everything in parentheses
+        (r'([^\s]{2,})[\.\!\?\:\;]+?[\s\n]|$', '\\1\n'),  # break sentences at periods
+        (r"[-–—/']", ' '),  # replace hyphens, apostrophes and slashes with spaces
+        (r'\s*\n\s*', '\n'),  # strip empty lines and lines containing whitespace
+        (r'\s{2,}', ' '),  # strip excessive spaces
+    ]
     for regec in regeces:
         pattern = re.compile(regec[0], re.IGNORECASE)
         txt = pattern.sub(regec[1], txt)
-    txt = ''.join([letter for letter in txt if (letter.isalnum() or letter.isspace() or (letter == '-'))])
+    if ioformat == 'txt':
+        txt = ''.join([letter for letter in txt if (letter.isalnum() or letter.isspace())])
+    elif ioformat in ['lemma', 'upos']:
+        txt = ''.join([letter for letter in txt if (letter.isalnum() or letter.isspace() or (letter == '_'))])
+    else:
+        txt = ''.join([letter for letter in txt if (letter.isalnum() or letter.isspace())])
     return txt
 
 
@@ -106,7 +125,10 @@ def strip_punctuation(txt):
 def join_archive(lang, ioformat='txt', years=(1900, 2050), verbose=False):
     read_zip = zipfile.ZipFile(f'{lang}_stripped.zip', 'r')
     out_fname = f'{lang}.{ioformat}'
-    dirpath = 'OpenSubtitles/raw'
+    if ioformat == 'txt':
+        dirpath = 'OpenSubtitles/raw'
+    elif ioformat in ['upos', 'lemma']:
+        dirpath = 'OpenSubtitles/parsed'
     filepaths = []
     for filepath in read_zip.namelist():
         if filepath.endswith(ioformat):
@@ -118,7 +140,7 @@ def join_archive(lang, ioformat='txt', years=(1900, 2050), verbose=False):
     i = 0
     with open(out_fname, 'w') as outfile:
         for filepath in filepaths:
-                outfile.write(strip_punctuation(read_zip.open(filepath).read().decode('utf-8')))
+                outfile.write(strip_punctuation(read_zip.open(filepath).read().decode('utf-8'), ioformat))
                 if verbose:
                     i += 1
                     print(f'\tprogress: {(float(i) / total) * 100:5.2f}%', end='\r')

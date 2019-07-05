@@ -25,11 +25,34 @@ def strip_wiki_file(fname):
 
 # TODO: figure out if 1e7 is a sensible number of lines for this (equates to approx. 500MB temp files)
 @log_timer
-def big_strip_wiki_file(fname, lines_per_chunk=1e7):
+def big_strip_wiki_file(fname, lines_per_chunk=1e6):
     logging.info(f'stripping {fname}')
     if fname.endswith('.bz2'):
         with bz2.open(fname, 'rt', encoding='utf-8') as in_file, open(fname.replace('.xml.bz2', '.txt'), 'w', encoding='utf-8') as out_file:
 
+            i = 0
+            j = 0
+            lines = []
+            text = False
+            for line in in_file:
+                if '<text' in line:
+                    lines.append(line)
+                    text = True
+                elif '</text' in line:
+                    lines.append(line)
+                    text = False
+                    if i > ((j + 1) * int(lines_per_chunk)):
+                        out_file.write(strip_wiki_xml(''.join(lines)))
+                        lines = []
+                        j += 1
+                        print(j)
+                else:
+                    if text:
+                        lines.append(line)
+                        i += 1
+            out_file.write(strip_wiki_xml(''.join(lines)))
+
+            '''
             i = 0
             j = 0
             temp_file = open(f'{fname}_temp_{j}.txt', 'w')
@@ -46,6 +69,7 @@ def big_strip_wiki_file(fname, lines_per_chunk=1e7):
             for k in range(j + 1):
                 with open(f'{fname}_temp_{k}.txt', 'r') as temp_file:
                     out_file.write(strip_wiki_xml(temp_file.read()))
+            '''
 
     if fname.endswith('.xml'):
         with open(fname, 'r', encoding='utf-8') as in_file, open(fname.replace('.xml', '.txt'), 'w', encoding='utf-8') as out_file:
@@ -73,7 +97,7 @@ def strip_curly(txt):
 
 def strip_wiki_xml(txts):
     pattern = re.compile('<text.*?>(.*?)</text>', re.DOTALL)
-    txts = pattern.findall(html.unescape(html.unescape(txts)))
+    txts = pattern.findall(html.unescape(html.unescape(txts)))  # double unescape because Wikipedia is a mess
 
     regeces = [
         (r'(?s)<ref.*?</ref>', ''),  # strip reference links
@@ -82,27 +106,37 @@ def strip_wiki_xml(txts):
         (r'(?s)<gallery.*?</gallery>', ''),  # strip galleries
         (r'(?s)<kml.*?</kml>', ''),  # strip KML tags
         (r'<.*?>', ''),  # strip other xml tags
-        (r'http.*?(?:[\s\n\]]|$)', ''),  # strip links
-        (r'(?s)\[{2}[^\]]*?:.*?\]{2}', ''),  # strip all special links (categories, files, etc.)
-        (r'\[\[.*?\|(.*?)\]\]', '\\1'),  # convert labeled links to just labels
-        (r'(?m)^[*=+\-].*?$', ''),  # strip lines that do not start with a-z or [
-        (r'([^\s]{2})[\.\?\!]+', '\\1\n'),  # line breaks at sentence ends, but not single initials
-        (r'[-–]', '-'),  # replace different types of dash with hyphen
-        (r'[—/]', ' '),  # replace ellipses and slashes with spaces
-        (r'-\s', ' '),  # strip hyphens outside of compounds
-        (r'\n-', '\n'),  # strip hyphens at sentence starts
-        (r' {2,}', ' '),  # strip excessive spaces
-        (r'\s*\n\s*', '\n'),  # strip empty lines
+        (r'http.*?(?:[\s\n\]]|$)', ''),  # strip external http(s) links
+        #(r'(?s)\[{2}[^\]]*?:.*?\]{2}', ''),  # strip all special links (categories, files, etc.)
+        (r'\[\[[^\]]*?:.*\|(.*?)\]\]', '\\1'),  # strip links to files, etc. but keep labels
+        (r'\[\[[^\]]*?:(.*?)\]\]', ''),  # strip category links
+        (r'\[\[[^\]]*?\|(.*?)\]\]', '\\1'),  # convert labeled links to just labels
+        (r'(?m)^[\s]*[!?*;:=+\-|#_].*?$', ''),  # strip lines that do not start with alphanumerics, quotes, or brackets
+        (r'(?m)^.*?\(UTC\).*?$', ''),  # strip lines containing a time stamp
+        #(r'[\[\]]', ''),  # remove brackets
+        #(r'"+', '"'),  # remove multiple double quotes
+        #(r"'+", "'"),  # remove multiple single quotes
+        (r'\s\(.*?\)', ''),  # remove everything in parentheses
+        (r'([^\s.!?:;]{2})[.!?:;]+?[\s\n]|$', '\\1\n'),  # break sentences at periods
+        (r"[-–—/']", ' '),  # replace hyphens, apostrophes and slashes with spaces
+        (r'\s*\n\s*', '\n'),  # strip empty lines and lines containing whitespace
+        (r'\s{2,}', ' '),  # strip excessive spaces
     ]
-    txts = [strip_curly(txt) if (('#redirect' not in txt.lower())
-                                 and ('<noinclude>' not in txt)
+
+    txts = [strip_curly(txt) if ((not txt.startswith('#'))
+                                 and ('<noinclude>' not in txt.lower())
                                  and ('__noindex__' not in txt.lower())
                                  ) else '' for txt in txts]
     for regec in regeces:
         pattern = re.compile(regec[0], re.IGNORECASE)
+        #print(regec[0])
         for i in range(len(txts)):
+            #print(regec[0])
+            #print(len(txts[i]))
+            #print(txts[i][:20])
+            #print(txts[i][-20:])
             txts[i] = pattern.sub(regec[1], txts[i])
-    txts = [''.join([letter for letter in txt if (letter.isalnum() or letter.isspace() or (letter == '-'))]) for txt in txts if txt != '']
+    txts = [''.join([letter for letter in txt if (letter.isalnum() or letter.isspace())]) for txt in txts if txt != '']
     return '\n'.join(txts)
 
 

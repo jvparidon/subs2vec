@@ -1,0 +1,8 @@
+# exclude article pdfs of evaluation sources
+evaluation/sources/
+
+# exclude pycache
+__pycache__/
+
+# exclude all sge scripts
+*.sge

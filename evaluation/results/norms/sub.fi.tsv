@@ -1,0 +1,8 @@
+	norm	r	r-squared	source
+0	arousal	0.7486294393346151	0.5604460374384602	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/fi-soderholm-2013
+1	valence	0.8261098863790773	0.6824575443732521	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/fi-soderholm-2013
+0	familiarity	0.5765329464169595	0.33239023830422076	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/fi-eilola-2010
+1	valence	0.8138859388856954	0.6624103215158499	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/fi-eilola-2010
+2	emotional charge	0.8114901644723843	0.6585162870354173	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/fi-eilola-2010
+3	offensiveness	0.8887146205095866	0.7898136767074986	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/fi-eilola-2010
+4	concreteness	0.8451736387584703	0.7143184796522333	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/fi-eilola-2010

@@ -1,0 +1,6 @@
+	norm	r	r-squared	source
+0	age of acquisition	0.776316926835031	0.6026679708905869	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/nl-brysbaert-2014
+0	taboo (personal)	0.803532227573745	0.6456640407496247	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/nl-roest-2018
+1	taboo (general)	0.8549092225822841	0.7308697788562453	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/nl-roest-2018
+2	insulting	0.7566182736251551	0.5724712119835101	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/nl-roest-2018
+0	prevalence	0.6746522321810977	0.45515563438693785	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/nl-keuleers-2015
