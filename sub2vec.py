@@ -7,7 +7,7 @@ import subprocess as sp
 import strip_subs
 import join_subs
 import deduplicate
-from utensilities import log_timer
+from utensils import log_timer
 import psutil
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
@@ -37,7 +37,7 @@ def train_fasttext(training_data, prefix, lang, d=300, neg=10, epoch=10, t=.0001
 
 @log_timer
 def build_phrases(training_data, phrase_pass):
-    base_fname = training_data.strip('.txt')
+    base_fname = training_data.replace('.txt', '')
     for i in range(phrase_pass):
         t = (2 ** (phrase_pass - i - 1)) * 100
         out_fname = f'{base_fname}.{i + 1}pass.d5.t{t}.txt'
@@ -103,8 +103,8 @@ def generate(lang, filename, source, prep_data, dedup_data, phrase_pass, years=(
         training_data = out_fname
 
     # lowercase
-    logging.info(f'lowercasing {training_data}')
-    training_data = lowercase(training_data)
+    #logging.info(f'lowercasing {training_data}')
+    #training_data = lowercase(training_data)
 
     # build phrases
     logging.info('building phrases for {}'.format(training_data))

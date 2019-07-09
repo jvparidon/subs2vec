@@ -7,7 +7,7 @@ import os
 import scipy.spatial.distance
 import scipy.stats
 import vecs
-from utensilities import timer
+from utensils import timer
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 

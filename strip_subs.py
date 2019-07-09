@@ -7,7 +7,7 @@ import gzip
 import numpy as np
 from lxml import etree
 from joblib import Parallel, delayed
-from utensilities import timer
+from utensils import timer
 from multiprocessing import cpu_count
 cores = int(cpu_count() / 2)
 

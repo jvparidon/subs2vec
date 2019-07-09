@@ -3,7 +3,7 @@
 import numpy as np
 import argparse
 import os
-from utensilities import timer
+from utensils import timer
 import vecs
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)

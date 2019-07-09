@@ -6,7 +6,7 @@ import unicodedata
 import string
 import sys
 import numpy as np
-from utensilities import timer
+from utensils import timer
 
 
 def strip_special(txt):

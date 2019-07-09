@@ -9,7 +9,7 @@ import sklearn.utils
 import argparse
 import os
 import vecs
-from utensilities import log_timer
+from utensils import log_timer
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 path = os.path.dirname(__file__)
@@ -17,7 +17,7 @@ path = os.path.dirname(__file__)
 
 @log_timer
 def evaluate_vecs(lang, vecs_fname):
-    norms_path = os.path.join(path, 'evaluation', 'norms')
+    norms_path = os.path.join(path, 'evaluation', 'datasets', 'norms')
     logging.info(f'evaluating lexical norm prediction with {vecs_fname}')
     vectors = vecs.Vectors(vecs_fname, normalize=True, n=1e6, d=300).as_df()
     results = []
@@ -26,14 +26,14 @@ def evaluate_vecs(lang, vecs_fname):
             results.append(predict_norms(vectors, os.path.join(norms_path, norms_fname)))
     results_fname = os.path.split(vecs_fname)[1].replace('.vec', '.tsv')
     if len(results) > 0:
-        pd.concat(results).to_csv(os.path.join(path, 'results', 'norms', results_fname), sep='\t')
+        pd.concat(results).to_csv(os.path.join(path, 'evaluation', 'results', 'norms', results_fname), sep='\t')
 
 
 @log_timer
 def predict_norms(vectors, norms_fname):
     logging.info(f'predicting norms from {norms_fname}')
     norms = pd.read_csv(norms_fname, sep='\t')
-    norms['word'] = norms['word'].str.lower()
+    #norms['word'] = norms['word'].str.lower()  # lowercase test norms if vecs are lowercased
     norms = norms.set_index('word')
     df = norms.join(vectors, how='left')
     logging.info(f'missing vectors for {df[0].isna().sum()} out of {df[0].size} words')
