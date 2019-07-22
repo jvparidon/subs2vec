@@ -1,5 +1,0 @@
-	norm	r	r-squared	source
-0	arousal	0.7092346407722905	0.5030137756713999	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/fr-monnier-2014
-1	valence	0.7658133353169153	0.5864700645492182	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/fr-monnier-2014
-0	lexical decision rt	0.6179014919242036	0.38180225372215665	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/fr-ferrand-2010
-0	imageability	0.8109789222170872	0.6576868122803885	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/fr-desrochers-2009

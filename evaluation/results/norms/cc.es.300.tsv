@@ -1,9 +1,0 @@
-	norm	r	r-squared	source
-0	valence	0.7865048316836749	0.6185898502617658	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/es-stadthagen-gonzalez-2017
-1	arousal	0.7292070260002259	0.5317428867680942	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/es-stadthagen-gonzalez-2017
-0	valence	0.8299570700787188	0.6888287381736513	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/es-gausch-2015
-1	arousal	0.7627466388096867	0.5817824350154748	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/es-gausch-2015
-2	concreteness	0.8443160810281762	0.7128696446827778	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/es-gausch-2015
-3	imageability	0.8342627251288022	0.6959942945393354	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/es-gausch-2015
-4	context availability	0.6701669928597914	0.44912379831873567	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/es-gausch-2015
-5	familiarity	0.6917595527735193	0.47853127885341945	/data/clusterfs/pol/pol-sub2vec/sub2vec/evaluation/norms/es-gausch-2015

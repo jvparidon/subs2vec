@@ -32,8 +32,7 @@ def evaluate_vecs(lang, vecs_fname):
 @log_timer
 def predict_norms(vectors, norms_fname):
     logging.info(f'predicting norms from {norms_fname}')
-    norms = pd.read_csv(norms_fname, sep='\t')
-    #norms['word'] = norms['word'].str.lower()  # lowercase test norms if vecs are lowercased
+    norms = pd.read_csv(norms_fname, sep='\t', comment='#')
     norms = norms.set_index('word')
     df = norms.join(vectors, how='left')
     logging.info(f'missing vectors for {df[0].isna().sum()} out of {df[0].size} words')
@@ -42,15 +41,12 @@ def predict_norms(vectors, norms_fname):
     scaler = sklearn.preprocessing.StandardScaler()  # standardize predictors
     model = sklearn.linear_model.Ridge()  # use ridge regression models
     X = df[vectors.columns.values]
-    #X = scaler.fit_transform(df[vectors.columns.values])  # word vectors are the predictors
-    #cv = sklearn.model_selection.KFold(n_splits=50)
     cv = sklearn.model_selection.RepeatedKFold(n_splits=5, n_repeats=10)
 
     results = []
     for col in norms.columns.values:
         # set dependent variable and calculate 10-fold mean fit/predict scores
         y = df[col]
-        #y = df[col] - np.mean(df[col])
         scores = sklearn.model_selection.cross_val_score(model, X, y, cv=cv)
         median_score = np.median(scores)
         results.append({
