@@ -4,5 +4,8 @@ evaluation/sources/
 # exclude pycache
 __pycache__/
 
+# exclude .idea
+.idea/
+
 # exclude all sge scripts
 *.sge
