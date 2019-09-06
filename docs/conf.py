@@ -14,13 +14,12 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../'))
 
-
 # -- Project information -----------------------------------------------------
 
 project = 'subs2vec'
 copyright = '2019, Jeroen van Paridon & Bill Thompson'
 author = 'Jeroen van Paridon & Bill Thompson'
-
+master_doc = 'index'
 
 # -- General configuration ---------------------------------------------------
 
