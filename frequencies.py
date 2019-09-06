@@ -44,3 +44,71 @@ if __name__ == '__main__':
 
     freq_counter, n_words, _ = count_freqs(args.filename)
     write_freqs(f'{args.filename}_freqs', freq_counter, n_words, args.min_freq)
+
+
+import pandas as pd
+import argparse
+import itertools
+import collections
+
+
+def read_txt(filename):
+    with open(filename, 'r') as txtfile:
+        txt = [tuple(line.split(' '))
+               for line in txtfile.read().lower().split('\n')[:-1]]
+        txt = set(txt)
+    return txt
+
+
+def count_unigrams(txt):
+    unigrams = itertools.chain.from_iterable(txt)
+    unigrams = collections.Counter(unigrams)
+    return unigrams
+
+
+def count_bigrams(txt):
+    bigrams = itertools.chain.from_iterable([zip(item[:-1], item[1:]) for item in txt])
+    bigrams = collections.Counter(bigrams)
+    return bigrams
+
+
+def count_trigrams(txt):
+    trigrams = itertools.chain.from_iterable([zip(item[:-2], item[1:-1], item[2:]) for item in txt])
+    trigrams = collections.Counter(trigrams)
+    return trigrams
+
+
+# for lower memory consumption, but probably slower (not 100% sure)
+def count_ngrams_by_line(filename, kind='words'):
+    unigrams = collections.Counter()
+    bigrams = collections.Counter()
+    trigrams = collections.Counter()
+    with open(filename, 'r') as txtfile:
+        for line in txtfile:
+            line = line.lower().strip('\n').split(' ')
+
+            if kind == 'words':
+                unigrams.update(line)
+                bigrams.update([' '.join(bigram) for bigram in zip(line[:-1], line[1:])])
+                trigrams.update([' '.join(trigram) for trigram in zip(line[:-2], line[1:-1], line[2:])])
+
+            elif kind == 'letters':
+                for item in line:
+                    item = list(item)
+                    unigrams.update(item)
+                    bigrams.update([''.join(bigram) for bigram in zip(item[:-1], item[1:])])
+                    trigrams.update([''.join(trigram) for trigram in zip(item[:-2], item[1:-1], item[2:])])
+
+    return unigrams, bigrams, trigrams
+
+
+if __name__ == '__main__':
+    argparser = argparse.ArgumentParser(description='Extract unigram and bigram frequencies from a text file')
+    argparser.add_argument('--filename')
+    argparser.add_argument('--kind', default='words', choices=['words', 'letters'])
+    args = argparser.parse_args()
+
+    unigrams, bigrams, trigrams = count_ngrams_by_line(args.filename, args.kind)
+    pd.DataFrame.from_dict(unigrams, orient='index', columns=['unigram_freq']).sort_values(by=['unigram_freq'], ascending=False).to_csv(f'{args.kind}_unigram_freqs.tsv', index_label='unigram', sep='\t')
+    pd.DataFrame.from_dict(bigrams, orient='index', columns=['bigram_freq']).sort_values(by=['bigram_freq'], ascending=False).to_csv(f'{args.kind}_bigram_freqs.tsv', index_label='bigram', sep='\t')
+    pd.DataFrame.from_dict(trigrams, orient='index', columns=['trigram_freq']).sort_values(by=['trigram_freq'], ascending=False).to_csv(f'{args.kind}_trigram_freqs.tsv', index_label='trigram', sep='\t')
