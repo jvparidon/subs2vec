@@ -10,8 +10,8 @@ If you use sub2vec and/or pretrained models, please cite the arXiv paper (also f
 
 ## Scripts included in this repository
 - `analogies.py`: Evaluates semantic and syntactic analogy solving on all datasets for a set of word vectors in a given language. Can be used as a command line tool.
-- `clean_subs.py`: ?
-- `clean_wiki.py`: ?
+- `clean_subs.py`: Cleans and joins a subtitle corpus so that word embeddings can be trained on it. Can be used as a command line tool.
+- `clean_wiki.py`: Cleans a Wikipedia corpus so that word embeddings can be trained on it. Can be used as a command line tool.
 - `count_words.py`: Counts words in a corpus. Can be used as a command line tool.
 - `deduplicate.py`: Removes duplicate lines from a corpus. Can be used as a command line tool.
 - `eval_lang.py`: Evaluates all metrics (analogies, similarities, and norms) for a set of word vectors in a given language. Can be used as a command line tool.
