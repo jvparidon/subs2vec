@@ -1,4 +1,4 @@
-# coding: utf-8
+"""Predict lexical norms, either to evaluate word vectors, or to get norms for unnormed words."""
 # Copyright (c) 2018 - Present Bill Thompson (biltho@mpi.nl) & Jeroen van Paridon (jerpar@mpi.nl)
 import numpy as np
 import pandas as pd
@@ -17,6 +17,12 @@ path = os.path.dirname(__file__)
 
 @log_timer
 def evaluate_vecs(lang, vecs_fname):
+    """Predict lexical norms to evaluate a set of word vectors in a given language.
+    
+    Writes results to tab-separated text file.
+    :param lang: language to evaluate word vectors in (uses two-letter ISO codes)
+    :param vecs_fname: word vectors to evaluate
+    """
     norms_path = os.path.join(path, 'evaluation', 'datasets', 'norms')
     logging.info(f'evaluating lexical norm prediction with {vecs_fname}')
     vectors = vecs.Vectors(vecs_fname, normalize=True, n=1e6, d=300).as_df()
@@ -31,6 +37,12 @@ def evaluate_vecs(lang, vecs_fname):
 
 @log_timer
 def predict_norms(vectors, norms_fname):
+    """Predict lexical norms and return score.
+
+    :param vectors: Vectors object containing word vectors
+    :param norms_fname: lexical norms dataset filename
+    :return: pandas DataFrame containing results
+    """
     logging.info(f'predicting norms from {norms_fname}')
     norms = pd.read_csv(norms_fname, sep='\t', comment='#')
     norms = norms.set_index('word')

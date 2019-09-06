@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# jvparidon@gmail.com
+"""Evaluate word vectors by solving syntactic and semantic analogies."""
 import numpy as np
 import pandas as pd
 import argparse
@@ -18,7 +17,7 @@ def solve_analogies(analogies, vectors, method='multiplicative', whole_matrix=Fa
     :param vectors: Vectors object containing word vectors
     :param method: solving method to use (options are "additive" and "multiplicative", multiplicative is the default and usually performs best)
     :param whole_matrix: boolean determining whether to use whole matrix multiplication (faster, but uses more RAM than you may have available, False is the default)
-    :returns: tuple of (fraction of analogies solved correctly, number of analogies with no missing vectors, total number of analogies)
+    :return: tuple of (fraction of analogies solved correctly, number of analogies with no missing vectors, total number of analogies)
     """
     missing = 0
     total = len(analogies)
@@ -103,6 +102,14 @@ def solve_analogies(analogies, vectors, method='multiplicative', whole_matrix=Fa
 
 @log_timer
 def evaluate_vecs(vectors, lang, method='multiplicative', whole_matrix=False):
+    """Solve all available analogies for a set of word vectors in a given language.
+
+    :param vectors: Vectors object containing word vectors
+    :param lang: language to evaluate word vectors in (uses two-letter ISO codes)
+    :param method: solving method to use (options are "additive" and "multiplicative", multiplicative is the default and usually performs best)
+    :param whole_matrix: boolean determining whether to use whole matrix multiplication (faster, but uses more RAM than you may have available, False is the default)
+    :return: list of results
+    """
     results = []
     folder = 'evaluation/datasets/analogies'
     for fname in sorted(os.listdir(folder)):

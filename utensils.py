@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # jvparidon@gmail.com
 from time import time, localtime, strftime
+import functools
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 
@@ -15,6 +16,7 @@ def timer(func):
     :param func: any function
     :return: func with timing wrapper
     """
+    @functools.wraps(func)
     def timed_func(*args, **kwargs):
         t = {}
         t['start'] = strftime('%Y/%m/%d %H:%M:%S', localtime())
@@ -36,6 +38,7 @@ def log_timer(func):
     :param func: any function
     :return: func with logging timer
     """
+    @functools.wraps(func)
     def timed_func(*args, **kwargs):
         t0 = time()
         res = func(*args, **kwargs)

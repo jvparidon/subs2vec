@@ -45,3 +45,4 @@ How to use
 
 | For more detailed training options:
 | ``python3 sub2vec.py --help``
+
