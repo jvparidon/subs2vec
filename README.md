@@ -29,7 +29,7 @@ If you use sub2vec and/or pretrained models, please cite the arXiv paper (also f
 
 ## How to use
 To evaluate word vectors on a set of language-specific benchmarks:  
-`python3 vecs.py --filename=my_spanish_vectors.vec --lang=es` (sub2vec uses the ISO 639-1 language codes)  
+`python3 vecs.py --filename=my_spanish_vectors.vec --lang=es` (sub2vec uses the two-letter ISO 639-1 language codes)  
 For more detailed evaluation options:  
 `python3 vecs.py --help`
 
