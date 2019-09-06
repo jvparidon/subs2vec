@@ -7,6 +7,7 @@ logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.I
 
 @log_timer
 def count_freqs(filename):
+    # add bigram and trigram methods
     n_words = 0
     n_lines = 0
     freq_counter = Counter()
@@ -20,17 +21,26 @@ def count_freqs(filename):
     return freq_counter, n_words, n_lines
 
 
-def write_freqs(filename, freq_counter, n_words):
+def write_freqs(filename, freq_counter, n_words, min_freq=1):
     with open(filename, 'w') as out_file:
-        out_file.write('word\tcount\tfreq\n')
+        out_file.write('item\tcount\tfrequency\n')
         for entry in freq_counter.most_common():
-            out_file.write(f'{entry[0]}\t{entry[1]}\t{entry[1] / n_words}\n')
+            if entry[1] >= min_freq:
+                out_file.write(f'{entry[0]}\t{entry[1]}\t{entry[1] / n_words}\n')
+
+
+def pull_freqs():
+    # pull unigram, bigram, or trigram freqs for a list of words
+
+
+def pull_n_freqs():
 
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='count word frequencies')
-    argparser.add_argument('--filename', help='text file to count from')
+    argparser.add_argument('--filename', help='text file to counts frequencies in')
+    argparser.add_argument('--min_freq', help='minimum frequency for an item to be included', default=1)
     args = argparser.parse_args()
 
     freq_counter, n_words, _ = count_freqs(args.filename)
-    write_freqs(f'{args.filename}_freqs', freq_counter, n_words)
+    write_freqs(f'{args.filename}_freqs', freq_counter, n_words, args.min_freq)
