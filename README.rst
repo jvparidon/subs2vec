@@ -3,7 +3,7 @@ sub2vec
 =======
 sub2vec contains a number of Python 3.7 scripts and command line tools to evaluate a set of word vectors on semantic similarity, semantic and syntactic analogy, and lexical norm prediction tasks. In addition, the `sub2vec.py` script will take an OpenSubtitles archive or Wikipedia and go through all the steps to train a fastText model and produce word vectors as used in Van Paridon & Thompson (2019).
 
-Psycholinguists may be especially interested `norms.py` script, which evaluates the lexical norm prediction performance of a set of word vectors, but can also be used to predict lexical norms for unnormed words. For a more detailed explanation see the __how to use__ section.
+Psycholinguists may be especially interested `norms.py` script, which evaluates the lexical norm prediction performance of a set of word vectors, but can also be used to predict lexical norms for unnormed words. For a more detailed explanation see the **how to use** section.
 
 The scripts in this repository require `Python 3.7 <https://www.python.org/downloads/>`_ and some additional libraries that are easily installed through pip. (If you want to use the `sub2vec.py` script to train your own word embeddings, you will also need compiled fastText and word2vec binaries.)  
 
@@ -36,10 +36,12 @@ How to use
 ==========
 | To evaluate word vectors on a set of language-specific benchmarks:
 | ``python3 vecs.py --filename=my_spanish_vectors.vec --lang=es`` (sub2vec uses the two-letter ISO 639-1 language codes)  
+
 | For more detailed evaluation options:
 | ``python3 vecs.py --help``
 
 | To train a sub2vec model:
 | ``python3 sub2vec.py --subs_dir=../OpenSubtitles2018 --lang=es``
+
 | For more detailed training options:
 | ``python3 sub2vec.py --help``
