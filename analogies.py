@@ -12,6 +12,14 @@ logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.I
 
 @log_timer
 def solve_analogies(analogies, vectors, method='multiplicative', whole_matrix=False):
+    """Solves analogies using specified methods.
+    
+    :param analogies: list of analogies
+    :param vectors: Vectors object containing word vectors
+    :param method: solving method to use (options are "additive" and "multiplicative", multiplicative is the default and usually performs best)
+    :param whole_matrix: boolean determining whether to use whole matrix multiplication (faster, but uses more RAM than you may have available, False is the default)
+    :returns: tuple of (fraction of analogies solved correctly, number of analogies with no missing vectors, total number of analogies)
+    """
     missing = 0
     total = len(analogies)
     vecs_dict = vectors.as_dict()
