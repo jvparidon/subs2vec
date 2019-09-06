@@ -16,19 +16,13 @@ If you use sub2vec and/or pretrained models, please cite the arXiv paper (also f
 - `deduplicate.py`: Removes duplicate lines from a corpus. Can be used as a command line tool.
 - `eval_lang.py`: Evaluates all metrics (analogies, similarities, and norms) for a set of word vectors in a given language. Can be used as a command line tool.
 - `frequencies.py`: Extracts word frequencies (and bigram and trigram frequencies) from a corpus. Can be used as a command line tool.
-- `join_subs.py`: Possibly a legay file? (__remove?__)
 - `norms.py`: Evaluates lexical norm prediction on all datasets for a set of word vectors in a given language. Can be used as a command line tool.
 - `plots.py`: Draws the plots included in Van Paridon & Thompson (2019).
-- `response_times.py`: Legacy file (__remove__)
 - `shuffle_text.py`: Shuffles lines in a corpus. Can be used as a command line tool.
 - `similarities.py`: Evaluates semantic similarity correlations on all datasets for a set of word vectors in a given language. Can be used as a command line tool.
-- `strip_phrases.py`: Possibly a legacy file? (__remove?__)
-- `strip_subs.py`: Possibly a legacy file? (__remove__?__)
 - `sub2vec.py`: Creates word embeddings from a subtitle or Wikipedia corpus. Can be used as a command line tool. (Requires fastText and word2phrase binaries.)
-- `subs.py`: Possibly a legacy file? (__remove?__)
 - `utensils.py`: Contains some convenience functions, used for timing and logging.
 - `vecs.py`: Contains methods for reading and writing word vectors, including reading into Python dicts, pandas DataFrames, and NumPy arrays.
-- `wikifil.pl`: Perl thing (__remove__)
 
 ## How to use
 To evaluate word vectors on a set of language-specific benchmarks:  
