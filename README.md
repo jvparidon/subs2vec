@@ -10,9 +10,9 @@ If you use sub2vec and/or pretrained models, please cite the arXiv paper (also f
 
 ## Contents of this repository
 - `evaluation/`: Contains three subdirectories related to the evaluation of word vectors.
-..- `datasets/`: Contains the evaluation datasets.
-..- `results/`: Contains evaluation results and figures as used in Van Paridon & Thompson (2019)
-..- `sources/`: Legacy? __(remove?)__
+  - `datasets/`: Contains the evaluation datasets.
+  - `results/`: Contains evaluation results and figures as used in Van Paridon & Thompson (2019)
+  - `sources/`: Legacy? __(remove?)__
 - `analogies.py`: Evaluates semantic and syntactic analogy solving on all datasets for a set of word vectors in a given language. Can be used as a command line tool.
 - `clean_subs.py`: Cleans and joins a subtitle corpus so that word embeddings can be trained on it. Can be used as a command line tool.
 - `clean_wiki.py`: Cleans a Wikipedia corpus so that word embeddings can be trained on it. Can be used as a command line tool.
