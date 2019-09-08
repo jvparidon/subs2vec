@@ -28,8 +28,12 @@ author = 'Jeroen van Paridon & Bill Thompson'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc'
+    'sphinx.ext.autodoc',
+    'sphinx.ext.viewcode'
 ]
+
+# point readthedocs to index.rst instead of contents.rst
+master_doc = 'index'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
