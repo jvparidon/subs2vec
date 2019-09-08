@@ -1,6 +1,6 @@
 import argparse
 from collections import Counter
-from utensilities import log_timer
+from utensils import log_timer
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 
@@ -31,10 +31,11 @@ def write_freqs(filename, freq_counter, n_words, min_freq=1):
 
 def pull_freqs():
     # pull unigram, bigram, or trigram freqs for a list of words
+    return None
 
 
 def pull_n_freqs():
-
+    return None
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='count word frequencies')

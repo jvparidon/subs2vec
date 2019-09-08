@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # jvparidon@gmail.com
-"""Download datasets for training sub2vec models (not Windows-compatible)."""
+"""Download datasets for training subs2vec models (not Windows-compatible)."""
 import subprocess
 import os
 import argparse
@@ -23,7 +23,7 @@ def download(lang, corpus):
 
 
 if __name__ == '__main__':
-    argparser = argparse.ArgumentParser(description='download datasets for training sub2vec models (not Windows-compatible)')
+    argparser = argparse.ArgumentParser(description='download datasets for training subs2vec models (not Windows-compatible)')
     argparser.add_argument('lang', help='anguage to download (use 2-letter ISO code)')
     argparser.add_argument('corpus', choices=['sub', 'wiki'], help='corpus to download')
     args = argparser.parse_args()
