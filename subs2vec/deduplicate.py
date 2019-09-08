@@ -5,7 +5,7 @@ import lzma
 import argparse
 import random
 import itertools
-from utensils import log_timer
+from .utensils import log_timer
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 

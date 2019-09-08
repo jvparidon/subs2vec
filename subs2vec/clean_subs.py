@@ -2,7 +2,7 @@ import os
 import zipfile
 import argparse
 import re
-from utensilities import log_timer
+from .utensils import log_timer
 from lxml import etree
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)

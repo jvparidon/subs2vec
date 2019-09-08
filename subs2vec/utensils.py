@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # jvparidon@gmail.com
-from time import time, localtime, strftime
+import time
 import functools
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
@@ -19,11 +19,11 @@ def timer(func):
     @functools.wraps(func)
     def timed_func(*args, **kwargs):
         t = {}
-        t['start'] = strftime('%Y/%m/%d %H:%M:%S', localtime())
-        t0 = time()
+        t['start'] = time.strftime('%Y/%m/%d %H:%M:%S', time.localtime())
+        t0 = time.time()
         res = func(*args, **kwargs)
-        t1 = time()
-        t['finish'] = strftime('%Y/%m/%d %H:%M:%S', localtime())
+        t1 = time.time()
+        t['finish'] = time.strftime('%Y/%m/%d %H:%M:%S', time.localtime())
         t['duration'] = t1 - t0
         return res, t
     return timed_func
@@ -40,9 +40,9 @@ def log_timer(func):
     """
     @functools.wraps(func)
     def timed_func(*args, **kwargs):
-        t0 = time()
+        t0 = time.time()
         res = func(*args, **kwargs)
-        t1 = time()
+        t1 = time.time()
         t = t1 - t0
         logging.info(f'{func} ran in {t:.3f} seconds')
         return res

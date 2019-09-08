@@ -1,6 +1,6 @@
 import argparse
 from collections import Counter
-from utensils import log_timer
+from .utensils import log_timer
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 

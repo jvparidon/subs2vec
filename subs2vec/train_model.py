@@ -4,10 +4,9 @@ import os
 import argparse
 import numpy as np
 import subprocess as sp
-import strip_subs
-import join_subs
-import deduplicate
-from utensils import log_timer
+from .clean_subs import strip_archive, join_archive
+from .deduplicate import dedup_file
+from .utensils import log_timer
 import psutil
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
@@ -80,13 +79,13 @@ def generate(lang, filename, source, prep_data, dedup_data, phrase_pass, years=(
             training_data = os.path.join(subs_dir, 'raw')
             # strip subs
             logging.info('stripping xml from subs in language {}'.format(lang))
-            results, t = strip_subs.strip_parallelized(training_data, lang, ioformat='txt')
+            results, t = strip_archive(training_data, lang, ioformat='txt')
             logging.info('stripped xml from {} files in {} seconds'.format(np.sum(results), int(t['duration'])))
             training_data = os.path.join(subs_dir, 'raw')
             # join subs
             logging.info('concatenating training data for language {}'.format(lang))
-            results, t = join_subs.join_dir(training_data, './', lang, verbose=True, ioformat='txt', subset_years=subset_years)
-            logging.info('concatenated {} files in {} seconds'.format(results, int(t['duration'])))
+            results = join_archive(training_data, './', lang, verbose=True, ioformat='txt', subset_years=subset_years)
+            logging.info('concatenated {} files'.format(results))
 
         training_data = '{}.{}-{}.txt'.format(lang, *years)
         if source in ['wiki', 'wiki-sub']:
@@ -99,7 +98,7 @@ def generate(lang, filename, source, prep_data, dedup_data, phrase_pass, years=(
     if dedup_data:
         logging.info('deduplicating {}'.format(training_data))
         out_fname = training_data.replace('.txt', '.dedup.txt')
-        n_lines, n_duplicates = deduplicate.dedup_file(training_data, out_fname)
+        n_lines, n_duplicates = dedup_file(training_data, out_fname)
         training_data = out_fname
 
     # lowercase

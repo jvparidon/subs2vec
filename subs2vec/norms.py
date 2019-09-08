@@ -8,15 +8,15 @@ import sklearn.preprocessing
 import sklearn.utils
 import argparse
 import os
-import vecs
-from utensils import log_timer
+from .vecs import Vectors
+from .utensils import log_timer
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 path = os.path.dirname(__file__)
 
 
 @log_timer
-def evaluate_vecs(lang, vecs_fname):
+def evaluate_norms(lang, vecs_fname):
     """Predict lexical norms to evaluate a set of word vectors in a given language.
     
     Writes results to tab-separated text file.
@@ -25,7 +25,7 @@ def evaluate_vecs(lang, vecs_fname):
     """
     norms_path = os.path.join(path, 'evaluation', 'datasets', 'norms')
     logging.info(f'evaluating lexical norm prediction with {vecs_fname}')
-    vectors = vecs.Vectors(vecs_fname, normalize=True, n=1e6, d=300).as_df()
+    vectors = Vectors(vecs_fname, normalize=True, n=1e6, d=300).as_df()
     results = []
     for norms_fname in os.listdir(norms_path):
         if norms_fname.startswith(lang):
@@ -83,4 +83,4 @@ if __name__ == '__main__':
     argparser.add_argument('vecs_fname')
     args = argparser.parse_args()
 
-    evaluate_vecs(args.lang, args.vecs_fname)
+    evaluate_norms(args.lang, args.vecs_fname)

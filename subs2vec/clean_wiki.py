@@ -4,7 +4,7 @@ import html
 import bz2
 import os
 import logging
-from utensilities import log_timer
+from .utensils import log_timer
 from joblib import Parallel, delayed
 from multiprocessing import cpu_count
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)

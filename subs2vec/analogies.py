@@ -3,8 +3,8 @@ import numpy as np
 import pandas as pd
 import argparse
 import os
-from utensils import log_timer
-import vecs
+from .utensils import log_timer
+from .vecs import Vectors
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 
@@ -117,6 +117,7 @@ def evaluate_vecs(vectors, lang, method='multiplicative', whole_matrix=False):
             analogies = pd.read_csv(os.path.join(folder, fname), sep='\t', comment='#')
             result = solve_analogies(analogies, vectors, method=method, whole_matrix=whole_matrix)
             result = (fname, *result)
+            # TODO: fix results printing
             vecs.print_result(result)
             results.append(result)
     return results
@@ -130,5 +131,5 @@ if __name__ == '__main__':
                            help='perform computations using whole matrices instead of column-wise (potentially results in big memory footprint)')
     args = argparser.parse_args()
 
-    vectors = vecs.Vectors(args.fname, normalize=True, n=2e5)
+    vectors = Vectors(args.fname, normalize=True, n=2e5)
     results = evaluate_vecs(vectors, lang=args.lang, whole_matrix=args.whole_matrix)

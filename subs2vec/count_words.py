@@ -3,6 +3,7 @@
 import os
 import argparse
 
+
 def count_words(filename):
     with open(filename, 'r') as infile:
         wordcount = 0
@@ -11,6 +12,7 @@ def count_words(filename):
             if line != '':
                 wordcount += len(line.split(' '))
         return wordcount
+
 
 def print_count(wordcount, filename):
     if wordcount > 10000000000:

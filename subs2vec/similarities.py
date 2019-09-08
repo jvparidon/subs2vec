@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 # jvparidon@gmail.com
 """Compute rank correlations between word vector cosine similarities and human ratings of semantic similarity."""
-import numpy as np
 import pandas as pd
 import argparse
 import os
 import scipy.spatial.distance
 import scipy.stats
-import vecs
-from utensils import log_timer
+from .vecs import Vectors
+from .utensils import log_timer
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 
@@ -42,6 +41,7 @@ def evaluate_vecs(vectors, lang):
         if fname.lower().startswith(lang):
             result = compare_similarities(os.path.join(folder, fname), vectors)
             result = (fname, *result)
+            # TODO: Fix the results printing?
             vecs.print_result(result)
             results.append(result)
     return results
@@ -53,5 +53,5 @@ if __name__ == '__main__':
     argparser.add_argument('--lang', help='language to compare simarities in (use ISO language codes)')
     args = argparser.parse_args()
 
-    vectors = vecs.Vectors(args.fname, normalize=True, n=1e6).as_dict()
+    vectors = Vectors(args.fname, normalize=True, n=1e6).as_dict()
     results = evaluate_vecs(vectors, args.lang)

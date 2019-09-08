@@ -2,10 +2,7 @@
 # jvparidon@gmail.com
 import numpy as np
 import pandas as pd
-import argparse
-import similarities
-import analogies
-from utensils import log_timer
+from .utensils import log_timer
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 

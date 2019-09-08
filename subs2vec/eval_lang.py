@@ -1,7 +1,6 @@
-import vecs
 import os
 import argparse
-import norms
+from .norms import evaluate_norms
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser()
@@ -20,8 +19,8 @@ if __name__ == '__main__':
     for filepath in filepaths:
         if os.path.exists(filepath) and (lang in langs):
             print(filepath.split('/')[-1])
-            norms.evaluate_vecs(lang, filepath)
-            #vecs_dict = vecs.load_vecs(fname=filepath, normalize=True, n=1e6)
+            evaluate_norms(lang, filepath)
+            #vecs_dict = load_vecs(fname=filepath, normalize=True, n=1e6)
             #vecs.evaluate_vecs(vecs_dict, lang=lang, no_analogies=True)
             #vecs_dict = vecs.load_vecs(fname=filepath, normalize=True, n=2e5)
             #vecs.evaluate_vecs(vecs_dict, lang=lang, no_similarities=True)
