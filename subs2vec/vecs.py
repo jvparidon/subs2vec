@@ -45,6 +45,7 @@ class Vectors:
         """Casts word vectors to pandas DataFrame.
 
         Each row contains a vector, each column corresponds with a vector dimension. Rows are indexed by word.
+
         :return: pandas DataFrame containing word vectors.
         """
         return pd.DataFrame(self.vectors).set_index(self.words)
@@ -53,6 +54,7 @@ class Vectors:
         """Casts word vectors to Python dict.
 
         The dict is indexed by word, with the items being word vectors in the form of numpy arrays.
+
         :return: Python dict containing word vectors
         """
         return {self.words[i]: self.vectors[i] for i in range(self.n)}
