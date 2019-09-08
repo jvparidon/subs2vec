@@ -5,4 +5,3 @@ subs2vec
    :maxdepth: 4
 
    subs2vec
-

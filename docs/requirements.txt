@@ -1,9 +1,0 @@
-numpy
-scipy
-pandas
-lxml
-joblib
-matplotlib
-seaborn
-scikit-learn
-psutil

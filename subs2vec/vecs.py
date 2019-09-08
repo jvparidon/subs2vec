@@ -8,6 +8,8 @@ logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.I
 
 
 class Vectors:
+    """Creates a Vectors object containing numpy arrays of words and word vectors.
+    """
     @log_timer
     def __init__(self, fname, normalize=False, n=1e6, d=300):
         self.n = int(n)
@@ -40,13 +42,28 @@ class Vectors:
                 self.vectors = self.vectors / np.linalg.norm(self.vectors, axis=1).reshape(-1, 1)
 
     def as_df(self):
+        """Casts word vectors to pandas DataFrame.
+
+        Each row contains a vector, each column corresponds with a vector dimension. Rows are indexed by word.
+        :return: pandas DataFrame containing word vectors.
+        """
         return pd.DataFrame(self.vectors).set_index(self.words)
 
     def as_dict(self):
+        """Casts word vectors to Python dict.
+
+        The dict is indexed by word, with the items being word vectors in the form of numpy arrays.
+        :return: Python dict containing word vectors
+        """
         return {self.words[i]: self.vectors[i] for i in range(self.n)}
 
 
 def write_vecs(vecs, fname):
+    """Writes word vectors to .vec file
+
+    :param vecs:
+    :param fname:
+    """
     with open(fname, 'w') as vecfile:
         for key, value in vecs.items():
             vecfile.write(f'{key} {" ".join([str(num) for num in value])}\n')

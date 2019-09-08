@@ -87,19 +87,6 @@ def strip_archive(lang, ioformat='txt', years=(1900, 2050)):
 
 
 def strip_punctuation(txt, ioformat='txt'):
-    '''
-    regeces = [
-        (r'<.*?>', ''),  # strip other xml tags
-        (r'http.*?(?:[\s\n\]]|$)', ''),  # strip links
-        (r'([^\s]{2})[\.\?\!]+', '\\1\n'),  # line breaks at sentence ends, but not single initials
-        (r'[-–]', '-'),  # replace different types of dash with hyphen
-        (r'[—/]', ' '),  # replace ellipses and slashes with spaces
-        (r'-\s', ' '),  # strip hyphens outside of compounds
-        (r'\n-', '\n'),  # strip hyphens at sentence starts
-        (r' {2,}', ' '),  # strip excessive spaces
-        (r'\s*\n\s*', '\n'),  # strip empty lines
-    ]
-    '''
     regeces = [
         (r'<.*?>', ''),  # strip other xml tags
         (r'http.*?(?:[\s\n\]]|$)', ''),  # strip links

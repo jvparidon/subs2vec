@@ -20,6 +20,7 @@ def evaluate_norms(lang, vecs_fname):
     """Predict lexical norms to evaluate a set of word vectors in a given language.
     
     Writes results to tab-separated text file.
+
     :param lang: language to evaluate word vectors in (uses two-letter ISO codes)
     :param vecs_fname: word vectors to evaluate
     """
