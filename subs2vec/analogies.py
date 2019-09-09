@@ -104,10 +104,10 @@ def solve_analogies(vectors, analogies, method='multiplicative', whole_matrix=Fa
     analogies['b2 predicted'] = vectors.words[b2_pred_idx]
     analogies['accuracy'] = analogies['b2'] == analogies['b2 predicted']
     score = analogies['accuracy'].mean()
-    corrected_score = score * ((total - missing) / total)
-    score = pd.DataFrame([score, corrected_score], columns=['score', 'corrected score'])
+    penalty = (total - missing) / total
+    corrected_score = score * penalty
+    score = pd.DataFrame({'score': [score], 'corrected score': [corrected_score]})
     return {'score': score, 'predictions': analogies}
-    # return np.mean(vectors.words[b2_pred_idx] == b2_words.squeeze()), total - missing, total
 
 
 @log_timer
@@ -121,6 +121,9 @@ def evaluate_vecs(vecs_fname, lang, method='multiplicative', whole_matrix=False)
     :return: pandas DataFrame of scores
     """
     analogies_path = os.path.join(path, 'evaluation', 'datasets', 'analogies')
+    results_path = os.path.join(path, 'evaluation', 'results', 'analogies')
+    if not os.path.exists(results_path):
+        os.mkdir(results_path)
     logging.info(f'evaluating analogy solving with {vecs_fname}')
     vectors = Vectors(vecs_fname, normalize=True, n=2e5, d=300)
     scores = []
@@ -129,11 +132,12 @@ def evaluate_vecs(vecs_fname, lang, method='multiplicative', whole_matrix=False)
             if analogies_fname.startswith(lang) and analogies_fname.endswith('.tsv'):
                 logging.info(f'solving analogies from {analogies_fname}')
                 analogies = pd.read_csv(os.path.join(analogies_path, analogies_fname), sep='\t', comment='#')
-                scores.append(solve_analogies(vectors, analogies, method=method, whole_matrix=whole_matrix)['score'])
+                score = solve_analogies(vectors, analogies, method=method, whole_matrix=whole_matrix)['score']
+                score['source'] = analogies_fname
+                scores.append(score)
     scores_fname = os.path.split(vecs_fname)[1].replace('.vec', '.tsv')
     if len(scores) > 0:
-        scores['source'] = analogies_fname
-        pd.concat(scores).to_csv(os.path.join(path, 'evaluation', 'results', 'analogies', scores_fname), sep='\t')
+        pd.concat(scores).to_csv(os.path.join(results_path, scores_fname), sep='\t')
 
 
 if __name__ == '__main__':
