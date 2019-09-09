@@ -7,12 +7,6 @@ import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 
 
-def lookup_freqs():
-    """Pull unigram, bigram, or trigram freqs for a list of words.
-    """
-    return None
-
-
 @log_timer
 def count_ngrams_by_line(filename, kind='words', min_freq=1, no_bigrams=False, no_trigrams=False):
     """Counts unigrams, bigrams, and trigrams line-by-line in a text corpus.
@@ -44,8 +38,8 @@ def count_ngrams_by_line(filename, kind='words', min_freq=1, no_bigrams=False, n
             if kind == 'words':
                 update_counters(line)
             elif kind == 'letters':
-                for item in line:
-                    update_counters(list(item))
+                for word in line:
+                    update_counters(list(word))
 
     # remove items below frequency threshold
     if min_freq > 1:

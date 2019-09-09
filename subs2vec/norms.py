@@ -19,63 +19,66 @@ path = os.path.dirname(__file__)
 def evaluate_norms(lang, vecs_fname):
     """Predict lexical norms to evaluate a set of word vectors in a given language.
     
-    Writes results to tab-separated text file.
+    Writes scores to tab-separated text file.
 
     :param lang: language to evaluate word vectors in (uses two-letter ISO codes)
     :param vecs_fname: word vectors to evaluate
     """
     norms_path = os.path.join(path, 'evaluation', 'datasets', 'norms')
     logging.info(f'evaluating lexical norm prediction with {vecs_fname}')
-    vectors = Vectors(vecs_fname, normalize=True, n=1e6, d=300).as_df()
-    results = []
+    vectors = Vectors(vecs_fname, normalize=True, n=1e6, d=300)
+    scores = []
     for norms_fname in os.listdir(norms_path):
         if norms_fname.startswith(lang):
-            results.append(predict_norms(vectors, os.path.join(norms_path, norms_fname)))
-    results_fname = os.path.split(vecs_fname)[1].replace('.vec', '.tsv')
-    if len(results) > 0:
-        pd.concat(results).to_csv(os.path.join(path, 'evaluation', 'results', 'norms', results_fname), sep='\t')
+            logging.info(f'predicting norms from {norms_fname}')
+            norms = pd.read_csv(os.path.join(norms_path, norms_fname), sep='\t', comment='#')
+            norms = norms.set_index('word')
+            scores.append(predict_norms(vectors, norms)['score'])
+    scores_fname = os.path.split(vecs_fname)[1].replace('.vec', '.tsv')
+    if len(scores) > 0:
+        scores['source'] = norms_fname
+        pd.concat(scores).to_csv(os.path.join(path, 'evaluation', 'results', 'norms', scores_fname), sep='\t')
 
 
 @log_timer
-def predict_norms(vectors, norms_fname):
+def predict_norms(vectors, norms):
     """Predict lexical norms and return score.
 
     :param vectors: Vectors object containing word vectors
-    :param norms_fname: lexical norms dataset filename
-    :return: pandas DataFrame containing results
+    :param norms: pandas DataFrame of lexical norms
+    :return: dict containing scores and predictions in separate pandas DataFrames
     """
-    logging.info(f'predicting norms from {norms_fname}')
-    norms = pd.read_csv(norms_fname, sep='\t', comment='#')
-    norms = norms.set_index('word')
-    df = norms.join(vectors, how='left')
-    logging.info(f'missing vectors for {df[0].isna().sum()} out of {df[0].size} words')
-    df = sklearn.utils.shuffle(df.dropna())  # shuffle is important for ordered datasets!
+    cols = norms.columns.values
+    df = norms.join(vectors.as_df(), how='inner')
+    logging.info(f'missing vectors for {len(norms) - len(df)} out of {len(norms)} words')
+    #df = sklearn.utils.shuffle(df.dropna())  # shuffle is important for ordered datasets!
+    df = sklearn.utils.shuffle(df)  # shuffle is important for ordered datasets!
 
-    scaler = sklearn.preprocessing.StandardScaler()  # standardize predictors
     model = sklearn.linear_model.Ridge()  # use ridge regression models
-    X = df[vectors.columns.values]
+    x = df[vectors.columns.values]
+    df = df[cols]
     cv = sklearn.model_selection.RepeatedKFold(n_splits=5, n_repeats=10)
 
-    results = []
-    for col in norms.columns.values:
+    # compute crossvalidated prediction scores
+    scores = []
+    for col in cols:
         # set dependent variable and calculate 10-fold mean fit/predict scores
         y = df[col]
-        scores = sklearn.model_selection.cross_val_score(model, X, y, cv=cv)
-        median_score = np.median(scores)
-        results.append({
-            'source': norms_fname.rstrip('.tsv'),
+        cv_scores = sklearn.model_selection.cross_val_score(model, x, y, cv=cv)
+        median_score = np.median(cv_scores)
+        scores.append({
             'norm': col,
             'r': np.sqrt(median_score),  # take square root of explained variance to get Pearson r
             'r-squared': median_score
         })
 
-    return pd.DataFrame(results)
+    # predict (extend norms)
+    for col in cols:
+        y = df[col]
+        model.fit(x, y)
+        df[f'{col} predicted'] = model.predict(x)
 
-
-@log_timer
-def extend_norms(vecs_fname, norms_fname):
-    # implement extension of lexical norms using pandas and ridge regression fit/predict
-    pass
+    return {'score': pd.DataFrame(scores), 'predictions': df}
 
 
 if __name__ == '__main__':
@@ -84,4 +87,4 @@ if __name__ == '__main__':
     argparser.add_argument('vecs_fname')
     args = argparser.parse_args()
 
-    evaluate_norms(args.lang, args.vecs_fname)
+    evaluate_norms(**vars(args))

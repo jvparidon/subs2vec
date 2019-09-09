@@ -18,7 +18,7 @@ def timer(func):
     """
     @functools.wraps(func)
     def timed_func(*args, **kwargs):
-        t = {}
+        t = dict()
         t['start'] = time.strftime('%Y/%m/%d %H:%M:%S', time.localtime())
         t0 = time.time()
         res = func(*args, **kwargs)

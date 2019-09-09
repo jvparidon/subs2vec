@@ -7,17 +7,18 @@ from .utensils import log_timer
 from .vecs import Vectors
 import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
+path = os.path.dirname(__file__)
 
 
 @log_timer
-def solve_analogies(analogies, vectors, method='multiplicative', whole_matrix=False):
+def solve_analogies(vectors, analogies, method='multiplicative', whole_matrix=False):
     """Solves analogies using specified methods.
     
-    :param analogies: list of analogies
-    :param vectors: Vectors object containing word vectors
-    :param method: solving method to use (options are "additive" and "multiplicative", multiplicative is the default and usually performs best)
-    :param whole_matrix: boolean determining whether to use whole matrix multiplication (faster, but uses more RAM than you may have available, False is the default)
-    :return: tuple of (fraction of analogies solved correctly, number of analogies with no missing vectors, total number of analogies)
+    :param analogies: pandas DataFrame of analogies, columns labeled a1, a2, b1, b2.
+    :param vectors: Vectors object containing word vectors.
+    :param method: solving method to use (options are "additive" and "multiplicative", multiplicative is the default and usually performs best).
+    :param whole_matrix: boolean determining whether to use whole matrix multiplication (faster, but uses more RAM than you may have available, False is the default).
+    :return: dict containing score and predictions in separate pandas DataFrames
     """
     missing = 0
     total = len(analogies)
@@ -97,39 +98,50 @@ def solve_analogies(analogies, vectors, method='multiplicative', whole_matrix=Fa
                 b2_pred[np.isin(vectors.words, analogies_words[i])] = -1.0
                 b2_pred_idx[i] = np.argmax(b2_pred)
 
-    return np.mean(vectors.words[b2_pred_idx] == b2_words.squeeze()), total - missing, total
+    # return pandas df with b2 and b2 predicted
+    analogies = pd.DataFrame(analogies_words, columns=['a1', 'a2', 'b1'])
+    analogies['b2'] = b2_words
+    analogies['b2 predicted'] = vectors.words[b2_pred_idx]
+    analogies['accuracy'] = analogies['b2'] == analogies['b2 predicted']
+    score = analogies['accuracy'].mean()
+    corrected_score = score * ((total - missing) / total)
+    score = pd.DataFrame([score, corrected_score], columns=['score', 'corrected score'])
+    return {'score': score, 'predictions': analogies}
+    # return np.mean(vectors.words[b2_pred_idx] == b2_words.squeeze()), total - missing, total
 
 
 @log_timer
-def evaluate_vecs(vectors, lang, method='multiplicative', whole_matrix=False):
+def evaluate_vecs(vecs_fname, lang, method='multiplicative', whole_matrix=False):
     """Solve all available analogies for a set of word vectors in a given language.
 
-    :param vectors: Vectors object containing word vectors
+    :param vecs_fname: filename of a file containing a set of word vectors
     :param lang: language to evaluate word vectors in (uses two-letter ISO codes)
     :param method: solving method to use (options are "additive" and "multiplicative", multiplicative is the default and usually performs best)
     :param whole_matrix: boolean determining whether to use whole matrix multiplication (faster, but uses more RAM than you may have available, False is the default)
-    :return: list of results
+    :return: pandas DataFrame of scores
     """
-    results = []
-    folder = 'evaluation/datasets/analogies'
-    for fname in sorted(os.listdir(folder)):
-        if fname.startswith(lang) and fname.endswith('.tsv'):
-            analogies = pd.read_csv(os.path.join(folder, fname), sep='\t', comment='#')
-            result = solve_analogies(analogies, vectors, method=method, whole_matrix=whole_matrix)
-            result = (fname, *result)
-            # TODO: fix results printing
-            vecs.print_result(result)
-            results.append(result)
-    return results
+    analogies_path = os.path.join(path, 'evaluation', 'datasets', 'analogies')
+    logging.info(f'evaluating analogy solving with {vecs_fname}')
+    vectors = Vectors(vecs_fname, normalize=True, n=2e5, d=300)
+    scores = []
+    for analogies_fname in os.listdir(analogies_path):
+        if analogies_fname.startswith(lang):
+            if analogies_fname.startswith(lang) and analogies_fname.endswith('.tsv'):
+                logging.info(f'solving analogies from {analogies_fname}')
+                analogies = pd.read_csv(os.path.join(analogies_path, analogies_fname), sep='\t', comment='#')
+                scores.append(solve_analogies(vectors, analogies, method=method, whole_matrix=whole_matrix)['score'])
+    scores_fname = os.path.split(vecs_fname)[1].replace('.vec', '.tsv')
+    if len(scores) > 0:
+        scores['source'] = analogies_fname
+        pd.concat(scores).to_csv(os.path.join(path, 'evaluation', 'results', 'analogies', scores_fname), sep='\t')
 
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='solve syntactic and semantic analogies from Mikolov et al. (2013)')
-    argparser.add_argument('--fname', help='word vectors to evaluate')
-    argparser.add_argument('--lang', help='language to solve analogies in (use ISO 639-1 codes)')
+    argparser.add_argument('lang', help='language to solve analogies in (use ISO 639-1 codes)')
+    argparser.add_argument('vecs_fname', help='word vectors to evaluate')
     argparser.add_argument('--whole_matrix', action='store_true',
                            help='perform computations using whole matrices instead of column-wise (potentially results in big memory footprint)')
     args = argparser.parse_args()
 
-    vectors = Vectors(args.fname, normalize=True, n=2e5)
-    results = evaluate_vecs(vectors, lang=args.lang, whole_matrix=args.whole_matrix)
+    evaluate_vecs(**vars(args))
