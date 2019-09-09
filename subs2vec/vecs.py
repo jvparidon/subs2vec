@@ -64,10 +64,5 @@ class Vectors:
 
         :param vecs_fname: filename to write vectors to
         """
-        # TODO: work out numpy method. Pandas is not suitable.
-        np.savetxt(vecs_fname, np.hstack([self.words, self.vectors]))
-
-        # TODO: dict method (deprecate and remove!)
-        #with open(vecs_fname, 'w') as vecfile:
-        #    for key, value in vecs.items():
-        #        vecfile.write(f'{key} {" ".join([str(num) for num in value])}\n')
+        header = f'{self.vectors.shape[0]} {self.vectors.shape[1]}'
+        np.savetxt(vecs_fname, np.hstack([self.words.reshape(-1, 1), self.vectors]), fmt='%s', header=header)
