@@ -52,7 +52,7 @@ def predict_norms(vectors, norms):
     df = norms.join(vectors.as_df(), how='inner')
     logging.info(f'missing vectors for {len(norms) - len(df)} out of {len(norms)} words')
     #df = sklearn.utils.shuffle(df.dropna())  # shuffle is important for ordered datasets!
-    df = sklearn.utils.shuffle(df)  # shuffle is important for ordered datasets!
+    df = sklearn.utils.shuffle(df)  # shuffle is important for unbiased results on ordered datasets!
 
     model = sklearn.linear_model.Ridge()  # use ridge regression models
     x = df[vectors.columns.values]
@@ -81,10 +81,34 @@ def predict_norms(vectors, norms):
     return {'score': pd.DataFrame(scores), 'predictions': df}
 
 
+def extend_norms(vecs_fname, norms_fname):
+    """Extend lexical norms to unobserved words, using word vectors.
+
+    Writes predictions to tab-separated text file.
+
+    :param vecs_fname: File containing word vectors to use for prediction.
+    :param norms_fname: File containing norms in tab-separated columns, first column should contain words,
+     first line should contain column names, unobserved cells should be left empty.
+    """
+    logging.info(f'extending lexical norms with {vecs_fname}')
+    vectors = Vectors(vecs_fname, normalize=True, n=1e6, d=300)
+    norms = pd.read_csv(norms_fname, sep='\t', comment='#')
+    norms = norms.set_index('word')
+    results = predict_norms(vectors, norms)
+    base_fname = '.'.join(norms_fname.split('.')[:-1])
+    results['scores'].to_csv(f'{base_fname}.scores.tsv', sep='\t')
+    results['predictions'].to_csv(f'{base_fname}.predictions.tsv', sep='\t')
+
+
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='perform crossvalidated penalized regression of lexical norms using word vectors as predictors')
     argparser.add_argument('lang')
     argparser.add_argument('vecs_fname')
+    argparser.add_argument('--extend', action='store_true')
+    argparser.add_argument('--norms_fname')
     args = argparser.parse_args()
 
-    evaluate_norms(**vars(args))
+    if args.extend:
+        predict_norms(args.vecs_fname, args.norms_fname)
+    else:
+        evaluate_norms(args.lang, args.vecs_fname)
