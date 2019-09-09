@@ -15,9 +15,7 @@ path = os.path.dirname(__file__)
 
 @log_timer
 def compare_similarities(vectors, similarities):
-    vecs_dict = vectors.as_df()
-    similarities['word1'] = similarities['word1'].str
-    similarities['word2'] = similarities['word2'].str
+    vecs_dict = vectors.as_dict()
     vecs_dsm = []
     similarities_dsm = []
     word1 = []
