@@ -1,5 +1,4 @@
 """Predict lexical norms, either to evaluate word vectors, or to get norms for unnormed words."""
-# Copyright (c) 2018 - Present Bill Thompson (biltho@mpi.nl) & Jeroen van Paridon (jerpar@mpi.nl)
 import numpy as np
 import pandas as pd
 import sklearn.linear_model
@@ -16,7 +15,7 @@ path = os.path.dirname(__file__)
 
 
 @log_timer
-def evaluate_norms(lang, vecs_fname):
+def evaluate_vecs(lang, vecs_fname):
     """Predict lexical norms to evaluate a set of word vectors in a given language.
     
     Writes scores to tab-separated text file.
@@ -52,9 +51,9 @@ def predict_norms(vectors, norms):
     :param norms: pandas DataFrame of lexical norms
     :return: dict containing scores and predictions in separate pandas DataFrames
     """
-    vectors = vectors.as_df()
+    vecs_df = vectors.as_df()
     cols = norms.columns.values
-    df = norms.join(vectors, how='inner')
+    df = norms.join(vecs_df, how='inner')
     # compensate for missing ys somehow
     total = len(norms)
     missing = len(norms) - len(df)
@@ -69,13 +68,13 @@ def predict_norms(vectors, norms):
     scores = []
     for col in cols:
         # set dependent variable and calculate 10-fold mean fit/predict scores
-        df_subset = df.loc[:,vectors.columns.values]  # use .loc[] so copy is created and no setting with copy warning is issued
+        df_subset = df.loc[:,vecs_df.columns.values]  # use .loc[] so copy is created and no setting with copy warning is issued
         df_subset[col] = df[col]
         df_subset = df_subset.dropna()  # drop NaNs for this specific y
-        x = df_subset[vectors.columns.values]
+        x = df_subset[vecs_df.columns.values]
         y = df_subset[col]
         cv_scores = sklearn.model_selection.cross_val_score(model, x, y, cv=cv)
-        median_score = penalty * np.median(cv_scores)
+        median_score = np.median(cv_scores) * penalty
         scores.append({
             'norm': col,
             'r': np.sqrt(median_score),  # take square root of explained variance to get Pearson r
@@ -83,14 +82,14 @@ def predict_norms(vectors, norms):
         })
 
     # predict (extend norms)
-    x_full = df[vectors.columns.values]
+    x_full = df[vecs_df.columns.values]
     predictions = df.loc[:, cols]  # use .loc[] so copy is created and no setting with copy warning is raised by pandas
     for col in cols:
         # set dependent variable and fit, but predict for whole x (so including unobserved y)
-        df_subset = df.loc[:, vectors.columns.values]  # use .loc[] so copy is created and no setting with copy warning is raised
+        df_subset = df.loc[:, vecs_df.columns.values]  # use .loc[] so copy is created and no setting with copy warning is raised
         df_subset[col] = df[col]
         df_subset = df_subset.dropna()  # drop NaNs for this specific y
-        x = df_subset[vectors.columns.values]
+        x = df_subset[vecs_df.columns.values]
         y = df_subset[col]
         model.fit(x, y)
         predictions[f'{col} predicted'] = model.predict(x_full)
@@ -128,4 +127,4 @@ if __name__ == '__main__':
     if args.extend:
         extend_norms(args.vecs_fname, args.norms_fname)
     else:
-        evaluate_norms(args.lang, args.vecs_fname)
+        evaluate_vecs(args.lang, args.vecs_fname)

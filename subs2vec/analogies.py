@@ -105,8 +105,8 @@ def solve_analogies(vectors, analogies, method='multiplicative', whole_matrix=Fa
     analogies['accuracy'] = analogies['b2'] == analogies['b2 predicted']
     score = analogies['accuracy'].mean()
     penalty = (total - missing) / total
-    corrected_score = score * penalty
-    score = pd.DataFrame({'score': [score], 'corrected score': [corrected_score]})
+    adjusted_score = score * penalty
+    score = pd.DataFrame({'score': [score], 'adjusted score': [adjusted_score]})
     return {'score': score, 'predictions': analogies}
 
 
