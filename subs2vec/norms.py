@@ -25,6 +25,9 @@ def evaluate_norms(lang, vecs_fname):
     :param vecs_fname: word vectors to evaluate
     """
     norms_path = os.path.join(path, 'evaluation', 'datasets', 'norms')
+    results_path = os.path.join(path, 'evaluation', 'results', 'norms')
+    if not os.path.exists(results_path):
+        os.mkdir(results_path)
     logging.info(f'evaluating lexical norm prediction with {vecs_fname}')
     vectors = Vectors(vecs_fname, normalize=True, n=1e6, d=300)
     scores = []
@@ -33,11 +36,12 @@ def evaluate_norms(lang, vecs_fname):
             logging.info(f'predicting norms from {norms_fname}')
             norms = pd.read_csv(os.path.join(norms_path, norms_fname), sep='\t', comment='#')
             norms = norms.set_index('word')
-            scores.append(predict_norms(vectors, norms)['score'])
+            score = predict_norms(vectors, norms)['scores']
+            score['source'] = norms_fname
+            scores.append(score)
     scores_fname = os.path.split(vecs_fname)[1].replace('.vec', '.tsv')
     if len(scores) > 0:
-        scores['source'] = norms_fname
-        pd.concat(scores).to_csv(os.path.join(path, 'evaluation', 'results', 'norms', scores_fname), sep='\t')
+        pd.concat(scores).to_csv(os.path.join(results_path, scores_fname), sep='\t')
 
 
 @log_timer
@@ -56,7 +60,7 @@ def predict_norms(vectors, norms):
     missing = len(norms) - len(df)
     penalty = (total - missing) / total
     logging.info(f'missing vectors for {missing} out of {total} words')
-    df = sklearn.utils.shuffle()  # shuffle is important for unbiased results on ordered datasets!
+    df = sklearn.utils.shuffle(df)  # shuffle is important for unbiased results on ordered datasets!
 
     model = sklearn.linear_model.Ridge()  # use ridge regression models
     cv = sklearn.model_selection.RepeatedKFold(n_splits=5, n_repeats=10)
@@ -65,9 +69,11 @@ def predict_norms(vectors, norms):
     scores = []
     for col in cols:
         # set dependent variable and calculate 10-fold mean fit/predict scores
-        df_dropna = df[vectors.columns.values + [col]].dropna()
-        x = df_dropna[vectors.columns.values]
-        y = df_dropna[col]
+        df_subset = df.loc[:,vectors.columns.values]  # use .loc[] so copy is created and no setting with copy warning is issued
+        df_subset[col] = df[col]
+        df_subset = df_subset.dropna()  # drop NaNs for this specific y
+        x = df_subset[vectors.columns.values]
+        y = df_subset[col]
         cv_scores = sklearn.model_selection.cross_val_score(model, x, y, cv=cv)
         median_score = penalty * np.median(cv_scores)
         scores.append({
@@ -78,14 +84,18 @@ def predict_norms(vectors, norms):
 
     # predict (extend norms)
     x_full = df[vectors.columns.values]
+    predictions = df.loc[:, cols]  # use .loc[] so copy is created and no setting with copy warning is raised by pandas
     for col in cols:
-        df_dropna = df[vectors.columns.values + [col]].dropna()
-        x = df_dropna[vectors.columns.values]
-        y = df_dropna[col]
+        # set dependent variable and fit, but predict for whole x (so including unobserved y)
+        df_subset = df.loc[:, vectors.columns.values]  # use .loc[] so copy is created and no setting with copy warning is raised
+        df_subset[col] = df[col]
+        df_subset = df_subset.dropna()  # drop NaNs for this specific y
+        x = df_subset[vectors.columns.values]
+        y = df_subset[col]
         model.fit(x, y)
-        df[f'{col} predicted'] = model.predict(x_full)
+        predictions[f'{col} predicted'] = model.predict(x_full)
 
-    return {'score': pd.DataFrame(scores), 'predictions': df}
+    return {'scores': pd.DataFrame(scores), 'predictions': predictions}
 
 
 def extend_norms(vecs_fname, norms_fname):
@@ -116,6 +126,6 @@ if __name__ == '__main__':
     args = argparser.parse_args()
 
     if args.extend:
-        predict_norms(args.vecs_fname, args.norms_fname)
+        extend_norms(args.vecs_fname, args.norms_fname)
     else:
         evaluate_norms(args.lang, args.vecs_fname)
