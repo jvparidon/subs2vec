@@ -48,24 +48,28 @@ def predict_norms(vectors, norms):
     :param norms: pandas DataFrame of lexical norms
     :return: dict containing scores and predictions in separate pandas DataFrames
     """
+    vectors = vectors.as_df()
     cols = norms.columns.values
-    df = norms.join(vectors.as_df(), how='inner')
-    logging.info(f'missing vectors for {len(norms) - len(df)} out of {len(norms)} words')
-    #df = sklearn.utils.shuffle(df.dropna())  # shuffle is important for ordered datasets!
-    df = sklearn.utils.shuffle(df)  # shuffle is important for unbiased results on ordered datasets!
+    df = norms.join(vectors, how='inner')
+    # compensate for missing ys somehow
+    total = len(norms)
+    missing = len(norms) - len(df)
+    penalty = (total - missing) / total
+    logging.info(f'missing vectors for {missing} out of {total} words')
+    df = sklearn.utils.shuffle()  # shuffle is important for unbiased results on ordered datasets!
 
     model = sklearn.linear_model.Ridge()  # use ridge regression models
-    x = df[vectors.columns.values]
-    df = df[cols]
     cv = sklearn.model_selection.RepeatedKFold(n_splits=5, n_repeats=10)
 
     # compute crossvalidated prediction scores
     scores = []
     for col in cols:
         # set dependent variable and calculate 10-fold mean fit/predict scores
-        y = df[col]
+        df_dropna = df[vectors.columns.values + [col]].dropna()
+        x = df_dropna[vectors.columns.values]
+        y = df_dropna[col]
         cv_scores = sklearn.model_selection.cross_val_score(model, x, y, cv=cv)
-        median_score = np.median(cv_scores)
+        median_score = penalty * np.median(cv_scores)
         scores.append({
             'norm': col,
             'r': np.sqrt(median_score),  # take square root of explained variance to get Pearson r
@@ -73,10 +77,13 @@ def predict_norms(vectors, norms):
         })
 
     # predict (extend norms)
+    x_full = df[vectors.columns.values]
     for col in cols:
-        y = df[col]
+        df_dropna = df[vectors.columns.values + [col]].dropna()
+        x = df_dropna[vectors.columns.values]
+        y = df_dropna[col]
         model.fit(x, y)
-        df[f'{col} predicted'] = model.predict(x)
+        df[f'{col} predicted'] = model.predict(x_full)
 
     return {'score': pd.DataFrame(scores), 'predictions': df}
 
