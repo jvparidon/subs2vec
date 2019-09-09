@@ -11,12 +11,12 @@ logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.I
 def count_ngrams_by_line(filename, kind='words', min_freq=1, no_bigrams=False, no_trigrams=False):
     """Counts unigrams, bigrams, and trigrams line-by-line in a text corpus.
 
-    :param filename: Text corpus to count in.
-    :param kind: Kind of items to count (options are 'words' or 'letters')
-    :param min_freq: Minimum frequency threshold for an item to be included in the output.
-    :param no_bigrams: Whether to skip counting bigrams for improved speed/memory footprint (default False).
-    :param no_trigrams: Whether to skip counting trigrams for improved speed/memory footprint (default False).
-    :return: tuple of pandas DataFrames containing frequencies for unigrams, bigrams, and trigrams, respectively.
+    :param filename: text corpus to count in
+    :param kind: kind of items to count (options are 'words' or 'letters')
+    :param min_freq: minimum frequency threshold for an item to be included in the output
+    :param no_bigrams: whether to skip counting bigrams for improved speed/memory footprint (default False)
+    :param no_trigrams: whether to skip counting trigrams for improved speed/memory footprint (default False)
+    :return: tuple of pandas DataFrames containing frequencies for unigrams, bigrams, and trigrams, respectively
     """
     # initialize Counter objects
     unigrams = collections.Counter()

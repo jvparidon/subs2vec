@@ -102,9 +102,9 @@ def extend_norms(vecs_fname, norms_fname):
 
     Writes predictions to tab-separated text file.
 
-    :param vecs_fname: File containing word vectors to use for prediction.
-    :param norms_fname: File containing norms in tab-separated columns, first column should contain words,
-     first line should contain column names, unobserved cells should be left empty.
+    :param vecs_fname: file containing word vectors to use for prediction.
+    :param norms_fname: file containing norms in tab-separated columns, first column should contain words,
+     first line should contain column names, unobserved cells should be left empty
     """
     logging.info(f'extending lexical norms with {vecs_fname}')
     vectors = Vectors(vecs_fname, normalize=True, n=1e6, d=300)

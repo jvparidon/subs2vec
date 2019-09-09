@@ -59,18 +59,15 @@ class Vectors:
         """
         return {self.words[i]: self.vectors[i] for i in range(self.n)}
 
+    def write_vecs(self, vecs_fname):
+        """Writes word vectors to .vec file
 
-def write_vecs(vecs, fname):
-    """Writes word vectors to .vec file
+        :param vecs_fname: filename to write vectors to
+        """
+        # TODO: work out numpy method. Pandas is not suitable.
+        np.savetxt(vecs_fname, np.hstack([self.words, self.vectors]))
 
-    :param vecs:
-    :param fname:
-    """
-    with open(fname, 'w') as vecfile:
-        for key, value in vecs.items():
-            vecfile.write(f'{key} {" ".join([str(num) for num in value])}\n')
-
-
-def print_result(results):
-    results = [str(result) for result in results]
-    print('\t'.join(results))
+        # TODO: dict method (deprecate and remove!)
+        #with open(vecs_fname, 'w') as vecfile:
+        #    for key, value in vecs.items():
+        #        vecfile.write(f'{key} {" ".join([str(num) for num in value])}\n')

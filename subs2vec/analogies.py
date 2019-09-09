@@ -13,11 +13,11 @@ path = os.path.dirname(__file__)
 @log_timer
 def solve_analogies(vectors, analogies, method='multiplicative', whole_matrix=False):
     """Solves analogies using specified methods.
-    
-    :param analogies: pandas DataFrame of analogies, columns labeled a1, a2, b1, b2.
-    :param vectors: Vectors object containing word vectors.
-    :param method: solving method to use (options are "additive" and "multiplicative", multiplicative is the default and usually performs best).
-    :param whole_matrix: boolean determining whether to use whole matrix multiplication (faster, but uses more RAM than you may have available, False is the default).
+
+    :param vectors: Vectors object containing word vectors
+    :param analogies: pandas DataFrame of analogies, columns labeled a1, a2, b1, b2
+    :param method: solving method to use (options are "additive" and "multiplicative", multiplicative is the default and usually performs best)
+    :param whole_matrix: boolean determining whether to use whole matrix multiplication (faster, but uses more RAM than you may have available, False is the default)
     :return: dict containing score and predictions in separate pandas DataFrames
     """
     missing = 0
@@ -118,7 +118,6 @@ def evaluate_vecs(vecs_fname, lang, method='multiplicative', whole_matrix=False)
     :param lang: language to evaluate word vectors in (uses two-letter ISO codes)
     :param method: solving method to use (options are "additive" and "multiplicative", multiplicative is the default and usually performs best)
     :param whole_matrix: boolean determining whether to use whole matrix multiplication (faster, but uses more RAM than you may have available, False is the default)
-    :return: pandas DataFrame of scores
     """
     analogies_path = os.path.join(path, 'evaluation', 'datasets', 'analogies')
     results_path = os.path.join(path, 'evaluation', 'results', 'analogies')

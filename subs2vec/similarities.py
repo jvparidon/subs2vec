@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-# jvparidon@gmail.com
 """Compute rank correlations between word vector cosine similarities and human ratings of semantic similarity."""
 import pandas as pd
 import argparse
@@ -15,6 +13,14 @@ path = os.path.dirname(__file__)
 
 @log_timer
 def compare_similarities(vectors, similarities):
+    """Correlate vector similarities to human ratings of semantic similarity.
+
+    Computes cosine similarities, and uses rank (Spearman) correlation as a measure of similarity to the specified human ratings.
+
+    :param vectors: Vectors object containing word vectors.
+    :param similarities: pandas DataFrame of analogies, columns labeled a1, a2, b1, b2.
+    :return: dict containing score and predictions in separate pandas DataFrames
+    """
     vecs_dict = vectors.as_dict()
     vecs_dsm = []
     similarities_dsm = []
@@ -42,6 +48,11 @@ def compare_similarities(vectors, similarities):
 
 @log_timer
 def evaluate_vecs(vecs_fname, lang):
+    """Compute similarities for all available ratings datasets for a set of word vectors in a given language.
+
+    :param vecs_fname: filename of a file containing a set of word vectors
+    :param lang: language to evaluate word vectors in (uses two-letter ISO codes)
+    """
     similarities_path = os.path.join(path, 'evaluation', 'datasets', 'similarities')
     results_path = os.path.join(path, 'evaluation', 'results', 'similarities')
     if not os.path.exists(results_path):
