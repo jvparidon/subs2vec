@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# jvparidon@gmail.com
+"""Provides Vectors object and methods to load, write, and interact with word vectors."""
 import numpy as np
 import pandas as pd
 from .utensils import log_timer
@@ -46,7 +45,7 @@ class Vectors:
 
         Each row contains a vector, each column corresponds with a vector dimension. Rows are indexed by word.
 
-        :return: pandas DataFrame containing word vectors.
+        :return: pandas DataFrame containing word vectors
         """
         return pd.DataFrame(self.vectors).set_index(self.words)
 
@@ -60,7 +59,7 @@ class Vectors:
         return {self.words[i]: self.vectors[i] for i in range(self.n)}
 
     def write_vecs(self, vecs_fname):
-        """Writes word vectors to .vec file
+        """Writes word vectors to .vec file.
 
         :param vecs_fname: filename to write vectors to
         """
