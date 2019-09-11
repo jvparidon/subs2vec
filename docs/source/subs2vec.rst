@@ -60,18 +60,18 @@ subs2vec.download module
    :undoc-members:
    :show-inheritance:
 
-subs2vec.lang\_evaluation module
---------------------------
-
-.. automodule:: subs2vec.lang_evaluation
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 subs2vec.frequencies module
 ---------------------------
 
 .. automodule:: subs2vec.frequencies
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+subs2vec.lang\_evaluate module
+--------------------------
+
+.. automodule:: subs2vec.lang_evaluate
    :members:
    :undoc-members:
    :show-inheritance:
