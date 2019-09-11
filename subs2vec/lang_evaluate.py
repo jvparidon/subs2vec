@@ -1,6 +1,9 @@
+"""Evaluate available vectors for a given language."""
 import os
 import argparse
 from .norms import evaluate_norms
+from .analogies import evaluate_analogies
+from .similarities import evaluate_similarities
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser()
@@ -20,7 +23,5 @@ if __name__ == '__main__':
         if os.path.exists(filepath) and (lang in langs):
             print(filepath.split('/')[-1])
             evaluate_norms(lang, filepath)
-            #vecs_dict = load_vecs(fname=filepath, normalize=True, n=1e6)
-            #vecs.evaluate_vecs(vecs_dict, lang=lang, no_analogies=True)
-            #vecs_dict = vecs.load_vecs(fname=filepath, normalize=True, n=2e5)
-            #vecs.evaluate_vecs(vecs_dict, lang=lang, no_similarities=True)
+            evaluate_similarities(lang, filepath)
+            evaluate_analogies(lang, filepath)

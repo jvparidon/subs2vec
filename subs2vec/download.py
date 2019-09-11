@@ -10,7 +10,7 @@ def download(lang, corpus):
     """Convenient method for downloading corpora.
 
     Uses the subprocess module and curl to download corpora.
-    Downloads to "corpora/". Not Windows-compatible.
+    Downloads to `corpora/`. Not Windows-compatible.
 
     :param lang: Language to download (use 2-letter ISO code)
     :param corpus: Corpus to download

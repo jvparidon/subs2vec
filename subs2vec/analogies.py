@@ -111,7 +111,7 @@ def solve_analogies(vectors, analogies, method='multiplicative', whole_matrix=Fa
 
 
 @log_timer
-def evaluate_vecs(vecs_fname, lang, method='multiplicative', whole_matrix=False):
+def evaluate_analogies(vecs_fname, lang, method='multiplicative', whole_matrix=False):
     """Solve all available analogies for a set of word vectors in a given language.
 
     :param vecs_fname: filename of a file containing a set of word vectors
@@ -147,4 +147,4 @@ if __name__ == '__main__':
                            help='perform computations using whole matrices instead of column-wise (potentially results in big memory footprint)')
     args = argparser.parse_args()
 
-    evaluate_vecs(**vars(args))
+    evaluate_analogies(**vars(args))

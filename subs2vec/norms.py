@@ -15,7 +15,7 @@ path = os.path.dirname(__file__)
 
 
 @log_timer
-def evaluate_vecs(lang, vecs_fname):
+def evaluate_norms(lang, vecs_fname):
     """Predict lexical norms to evaluate a set of word vectors in a given language.
     
     Writes scores to tab-separated text file.
@@ -127,4 +127,4 @@ if __name__ == '__main__':
     if args.extend:
         extend_norms(args.vecs_fname, args.norms_fname)
     else:
-        evaluate_vecs(args.lang, args.vecs_fname)
+        evaluate_norms(args.lang, args.vecs_fname)

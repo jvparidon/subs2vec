@@ -47,7 +47,7 @@ def compare_similarities(vectors, similarities):
 
 
 @log_timer
-def evaluate_vecs(vecs_fname, lang):
+def evaluate_similarities(vecs_fname, lang):
     """Compute similarities for all available ratings datasets for a set of word vectors in a given language.
 
     :param vecs_fname: filename of a file containing a set of word vectors
@@ -78,4 +78,4 @@ if __name__ == '__main__':
     argparser.add_argument('vecs_fname', help='word vectors to evaluate')
     args = argparser.parse_args()
 
-    results = evaluate_vecs(**vars(args))
+    results = evaluate_similarities(**vars(args))

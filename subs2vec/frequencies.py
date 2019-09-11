@@ -1,4 +1,4 @@
-"""Extract unigram, bigram, and trigram frequencies, either from a text corpus or from a pre-existing frequencies file.'"""
+"""Extract unigram, bigram, and trigram frequencies, either from a text corpus or from a pre-existing frequencies file."""
 import argparse
 import collections
 import pandas as pd
