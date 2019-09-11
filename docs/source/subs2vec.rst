@@ -1,6 +1,14 @@
 subs2vec package
 ================
 
+Module contents
+---------------
+
+.. automodule:: subs2vec
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Submodules
 ----------
 
@@ -112,15 +120,6 @@ subs2vec.vecs module
 --------------------
 
 .. automodule:: subs2vec.vecs
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: subs2vec
    :members:
    :undoc-members:
    :show-inheritance:
