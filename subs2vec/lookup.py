@@ -10,9 +10,11 @@ def lookup(big_fname, items_fname):
     """
     out_fname = f'lookup.{items_fname}'
     with open(big_fname, 'r') as big_file, open(items_fname, 'r') as items_file, open(out_fname, 'w') as out_file:
+        items = items_file.read().split('\n')
+        items = [item for item in items if item != '']
         for line in big_file:
-            for item in items_file:
-                if item.rstrip('\n') in line:
+            for item in items:
+                if item in line:
                     out_file.write(line)
 
 

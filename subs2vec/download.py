@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-# jvparidon@gmail.com
 """Download datasets for training subs2vec models (not Windows-compatible)."""
 import subprocess
 import os
@@ -24,12 +22,12 @@ def download(lang, corpus):
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='download datasets for training subs2vec models (not Windows-compatible)')
-    argparser.add_argument('lang', help='anguage to download (use 2-letter ISO code)')
+    argparser.add_argument('lang', help='language to download (use 2-letter ISO code)')
     argparser.add_argument('corpus', choices=['sub', 'wiki'], help='corpus to download')
     args = argparser.parse_args()
 
     # check if corpora dir exists, otherwise make it
-    if not os.path.isdir('corpora'):
+    if not os.path.exists('corpora'):
         os.mkdir('corpora')
 
     # change to corpora dir and download user-specified corpus
