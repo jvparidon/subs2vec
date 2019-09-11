@@ -111,7 +111,7 @@ def solve_analogies(vectors, analogies, method='multiplicative', whole_matrix=Fa
 
 
 @log_timer
-def evaluate_analogies(vecs_fname, lang, method='multiplicative', whole_matrix=False):
+def evaluate_analogies(lang, vecs_fname, method='multiplicative', whole_matrix=False):
     """Solve all available analogies for a set of word vectors in a given language.
 
     Writes scores to tab-separated text file but also returns them.

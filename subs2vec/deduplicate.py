@@ -63,13 +63,13 @@ def big_dedup_file(in_fname, out_fname, n_bins):
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='deduplicate lines in a file')
-    argparser.add_argument('filename', help='file to deduplicate')
+    argparser.add_argument('fname', help='file to deduplicate')
     argparser.add_argument('--bins', default=1, type=int,
                            help='number of temporary files to use when the input file is too big to fit in memory')
     args = argparser.parse_args()
 
-    path, filename = os.path.split(args.filename)
+    path, fname = os.path.split(args.fname)
     if args.bins == 1:
-        dedup_file(args.filename, os.path.join(path, 'dedup.' + filename))
+        dedup_file(in_fname=args.fname, out_fname=os.path.join(path, 'dedup.' + fname))
     else:
-        big_dedup_file(args.filename, os.path.join(path, 'dedup.' + filename), args.bins)
+        big_dedup_file(in_fname=args.fname, out_fname=os.path.join(path, 'dedup.' + fname), n_bins=args.bins)

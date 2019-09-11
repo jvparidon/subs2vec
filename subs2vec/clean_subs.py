@@ -162,14 +162,14 @@ def join_archive(lang, ioformat='txt', years=(1900, 2050), verbose=False):
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='clean subtitles for training distributional semantics models')
     argparser.add_argument('lang', help='language to clean')
-    argparser.add_argument('--stripxml', action='store_true', help='strip xml from subtitles archive')
+    argparser.add_argument('--strip', action='store_true', help='strip xml from subtitles archive')
     argparser.add_argument('--years', default=(1900, 2050), nargs=2, type=int, help='range of years to include')
     argparser.add_argument('--join', action='store_true', help='concatenate stripped archive')
     argparser.add_argument('--ioformat', default='txt', choices=['txt', 'lemma', 'upos', 'viz'],
                            help='input/output format')
     args = argparser.parse_args()
 
-    if args.stripxml:
-        strip_archive(args.lang, args.ioformat, args.years)
+    if args.strip:
+        strip_archive(lang=args.lang, ioformat=args.ioformat, years=args.years)
     if args.join:
-        join_archive(args.lang, args.ioformat, args.years)
+        join_archive(lang=args.lang, ioformat=args.ioformat, years=args.years)

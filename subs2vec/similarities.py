@@ -47,7 +47,7 @@ def compare_similarities(vectors, similarities):
 
 
 @log_timer
-def evaluate_similarities(vecs_fname, lang):
+def evaluate_similarities(lang, vecs_fname):
     """Compute similarities for all available ratings datasets for a set of word vectors in a given language.
 
     Writes scores to tab-separated text file but also returns them.

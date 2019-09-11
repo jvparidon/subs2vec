@@ -131,11 +131,11 @@ def _strip_wiki_xml(txts):
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='strip Wikipedia dumps of xml and other tags')
-    argparser.add_argument('filename', help='name of Wikipedia dump file')
+    argparser.add_argument('fname', help='name of Wikipedia dump file')
     argparser.add_argument('--big', action='store_true', help='use special method for files that do not fit in RAM')
     args = argparser.parse_args()
 
     if args.big:
-        big_strip_wiki_file(args.filename)
+        big_strip_wiki_file(fname=args.fname)
     else:
-        strip_wiki_file(args.filename)
+        strip_wiki_file(fname=args.fname)

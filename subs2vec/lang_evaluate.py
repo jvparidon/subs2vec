@@ -37,4 +37,4 @@ if __name__ == '__main__':
     for filepath in filepaths:
         if os.path.exists(filepath) and (lang in langs):
             print(filepath.split('/')[-1])
-            evaluate_lang(lang, filepaths)
+            evaluate_lang(lang=lang, vecs_fname=filepath)

@@ -123,11 +123,10 @@ if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='perform crossvalidated penalized regression of lexical norms using word vectors as predictors')
     argparser.add_argument('lang', help='language to predict norms for (uses two-letter ISO language codes)')
     argparser.add_argument('vecs_fname', help='vectors to evaluate (or use for lexical norm extension')
-    argparser.add_argument('--extend', action='store_true', help='extend lexical norms, instead of only predicting them')
-    argparser.add_argument('--norms', help='file containing lexical norms to extend')
+    argparser.add_argument('--extend_norms', help='file containing lexical norms to extend')
     args = argparser.parse_args()
 
-    if args.extend:
-        extend_norms(args.vecs_fname, args.norms_fname)
+    if args.extend_norms:
+        extend_norms(vecs_fname=args.vecs_fname, norms_fname=args.extend_norms)
     else:
-        print(evaluate_norms(args.lang, args.vecs_fname))
+        print(evaluate_norms(lang=args.lang, vecs_fname=args.vecs_fname))
