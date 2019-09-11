@@ -28,12 +28,33 @@ If you use subs2vec and/or pretrained models, please cite the arXiv paper (also 
 - `vecs.py`: Contains methods for reading and writing word vectors, including reading into Python dicts, pandas DataFrames, and NumPy arrays.
 
 ## How to use
-To evaluate word vectors on a set of language-specific benchmarks:  
-`python3 vecs.py --filename=my_spanish_vectors.vec --lang=es` (subs2vec uses the two-letter ISO 639-1 language codes)  
-For more detailed evaluation options:  
-`python3 vecs.py --help`
+### Evaluating word embeddings
+To evaluate word embeddings on analogies, semantic similarity, or lexical norm prediction as in Van Paridon & Thompson (2019), use:  
+`python3 -m subs2vec.analogies [fr] [french_word_vectors.vec]`  
+`python3 -m subs2vec.similarities [fr] [french_word_vectors.vec]`  
+`python3 -m subs2vec.norms [fr] [french_word_vectors.vec]`  
+subs2vec uses the two-letter ISO language codes, so French in the example is `fr`, English would be `en`, German would be `de`, etc.
 
-To train a subs2vec model:  
-`python3 subs2vec.py --subs_dir=../OpenSubtitles2018 --lang=es`  
+### Extending lexical norms
+`python3 -m subs2vec.norms [fr] [french_word_vectors.vec] --extend --norms=[french_norms_file.txt]`
+
+### Extracting word frequencies
+`python3 -m subs2vec.frequencies words`  
+When looking up frequencies for specific words, bigrams, or trigrams, you may find that you cannot open the frequencies file (it can be very large). To retrieve items of interest use:   
+`python3 -m subs2vec.lookup [frequencies_file.tsv] [list_of_items.txt]`  
+Your list of items should be a simple text file, with each item you want to look up on its own line.
+This method works for looking up word vectors in .vec files and lexical norms in .tsv files as well as for looking up frequencies.
+
+### Training models
+If you want to reproduce models as used in Van Paridon & Thompson (2019), you can use the `train_model` module.
+To train a subtitle model in for example French, use:  
+`python3 -m subs2vec.train_model [fr] subs --download --clean`  
 For more detailed training options:  
-`python3 subs2vec.py --help`
+`python3 -m subs2vec.train_model --help`
+
+## API
+For more detailed documentation of the package modules and API, see [subs2vec.readthedocs.io](https://subs2vec.readthedocs.io)
+
+## Pretrained embeddings and word/bigram/trigram frequencies
+Van Paridon & Thompson (2019) introduces pretrained embeddings and precomputed word/bigram/trigram frequencies in 50 languages.  
+The files can be downloaded from [language archive]. Word vectors trained on subtitles are available, as well as vectors trained on Wikipedia, and a combination of subtitles and Wikipedia (for best performance).

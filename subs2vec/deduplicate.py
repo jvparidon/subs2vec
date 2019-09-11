@@ -1,7 +1,5 @@
-# -*- coding: utf-8 -*-
-# jvparidon@gmail.com
+"""Remove duplicate lines from a training corpus."""
 import os
-import lzma
 import argparse
 import random
 import itertools
@@ -10,31 +8,40 @@ import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 
 
-def get_lines(fhandle):
-    lines = fhandle.read().split('\n')
-    n_lines = len(lines)
-    lines = set(lines)
-    n_duplicates = n_lines - len(lines)
-    return lines, n_lines, n_duplicates
-
-
 @log_timer
 def dedup_file(in_fname, out_fname):
+    """Removes duplicate lines from a text file.
+
+    Writes directly to text file.
+
+    :param in_fname: file to read text from
+    :param out_fname: file to write text to
+    """
     with open(in_fname, 'r') as in_file, open(out_fname, 'w') as out_file:
-        lines, n_lines, n_duplicates = get_lines(in_file)
-        lines = list(lines)
+        lines = in_file.read().split('\n')
+        n_lines = len(lines)
+        lines = list(set(lines))
+        n_duplicates = n_lines - len(lines)
         random.shuffle(lines)
         out_file.write('\n'.join(lines))
     logging.info(f'deduplicated {in_fname}, removed {n_duplicates} duplicates out of {n_lines} lines')
     return n_lines, n_duplicates
 
 
-# because of itertools.cycle() this is only pseudorandomized and pseudodeduplicated
-# (i.e.: consecutive lines input cannot end up as consecutive in the output
-# and up to n_bins duplicates of an item may remain)
-# unless your file fits into memory after deduplication (which includes randomization)
 @log_timer
 def big_dedup_file(in_fname, out_fname, n_bins):
+    """Remove duplicate lines from a text file that does not fit into RAM.
+
+    Because of itertools.cycle() this is only pseudorandomized and pseudodeduplicated (i.e.: consecutive lines of input
+    cannot end up as consecutive in the output and up to n_bins duplicates of an item may remain). If your file fits
+    into RAM afterward, you may consider running it through normal deduplication (which includes true randomization).
+    Writes directly to text file.
+
+    :param in_fname: file to read text from
+    :param out_fname: file to write text to
+    :param n_bins: number of bins to split files into (note that up to n_bins duplicates of any given line may remain
+    after applying this function.
+    """
     filehandles = []
     for i in range(n_bins):
         filehandles.append(open(f'temp{i}.txt', 'w'))
@@ -55,16 +62,6 @@ def big_dedup_file(in_fname, out_fname, n_bins):
     logging.info(f'pseudodeduplicated {in_fname}, {out_fname} is also pseudorandomized')
 
 
-def dedup_reddit(folder):
-    fnames = [os.path.join(folder, fname) for fname in sorted(list(os.listdir(folder))) if
-              fname.endswith('_stripped.txt')]
-    for fname in fnames:
-        with open(fname, 'rt') as in_file, open('{}.dedup.txt'.format(fname[:-4]), 'w') as out_file:
-            lines, n_lines, n_duplicates = get_lines(in_file)
-            out_file.write('\n'.join(lines))
-            logging.info(f'deduplicated {fname}, removed {n_duplicates} duplicates out of {n_lines} lines')
-
-
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='deduplicate lines in a file')
     argparser.add_argument('filename', help='file to deduplicate')
@@ -76,4 +73,4 @@ if __name__ == '__main__':
     if args.bins == 1:
         dedup_file(args.filename, os.path.join(path, 'dedup.' + filename))
     else:
-        big_dedup_file(args.filename, os.path.join(path, 'pseudodedup.' + filename), args.bins)
+        big_dedup_file(args.filename, os.path.join(path, 'dedup.' + filename), args.bins)

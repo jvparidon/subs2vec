@@ -9,3 +9,8 @@ __pycache__/
 
 # exclude all sge scripts
 *.sge
+
+# exclude temporary documentation files
+docs/Makefile
+docs/_build/
+docs/make.bat

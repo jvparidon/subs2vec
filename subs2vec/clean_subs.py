@@ -1,3 +1,4 @@
+"""Clean and concatenate OpenSubtitles archives into a single training corpus."""
 import os
 import zipfile
 import argparse
@@ -8,7 +9,7 @@ import logging
 logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.INFO)
 
 
-def strip_upos(tree):
+def _strip_upos(tree):
     # format [word]_[POS tag]
     stripped = []
     for node in tree.iter():
@@ -19,7 +20,7 @@ def strip_upos(tree):
     return u''.join(stripped)
 
 
-def strip_lemma(tree):
+def _strip_lemma(tree):
     # format [lemmatized word]
     stripped = []
     for node in tree.iter():
@@ -30,7 +31,7 @@ def strip_lemma(tree):
     return u''.join(stripped)
 
 
-def strip_txt(tree):
+def _strip_txt(tree):
     # format [sentence]
     for node in tree.iter():
         if node.tag == 'meta':
@@ -38,7 +39,7 @@ def strip_txt(tree):
     return etree.tostring(tree, encoding=str, method='text')
 
 
-def strip_viz(tree):
+def _strip_viz(tree):
     # format [timestamp in ms] [sentence]
     stripped = []
     for node in tree.iter():
@@ -52,20 +53,28 @@ def strip_viz(tree):
     return u'\n'.join(stripped)
 
 
-def strip_xml(text, xmlparser, ioformat='txt'):
+def _strip_xml(text, xmlparser, ioformat='txt'):
     tree = etree.fromstring(text, xmlparser)
     if ioformat == 'upos':
-        return strip_upos(tree)
+        return _strip_upos(tree)
     elif ioformat == 'lemma':
-        return strip_lemma(tree)
+        return _strip_lemma(tree)
     elif ioformat == 'txt':
-        return strip_txt(tree)
+        return _strip_txt(tree)
     elif ioformat == 'viz':
-        return strip_viz(tree)
+        return _strip_viz(tree)
 
 
 @log_timer
-def strip_archive(lang, ioformat='txt', years=(1900, 2050)):
+def strip_archive(lang, ioformat='txt', years=(1900, 2100)):
+    """Strip xml from a compressed OpenSubtitles archive.
+
+    Writes stripped output directly to a new compressed archive.
+
+    :param lang: language of the archive to strip (selects the correct archive)
+    :param ioformat: input/output format, default is txt
+    :param years: tuple of first and last year to select only subtitles from a range of years, default is 1900 to 2100
+    """
     read_zip = zipfile.ZipFile(f'{lang}.zip', 'r')
     write_zip = zipfile.ZipFile(f'{lang}_stripped.zip', 'a')
     if ioformat == 'txt':
@@ -83,10 +92,16 @@ def strip_archive(lang, ioformat='txt', years=(1900, 2050)):
     xmlparser = etree.XMLParser(recover=True, encoding='utf-8')
     for filepath in sorted(filepaths):
         write_zip.writestr(filepath.replace('xml', ioformat),
-                           strip_xml(read_zip.open(filepath).read(), xmlparser, ioformat))
+                           _strip_xml(read_zip.open(filepath).read(), xmlparser, ioformat))
 
 
-def strip_punctuation(txt, ioformat='txt'):
+def _strip_punctuation(txt, ioformat='txt'):
+    """Strip punctuation from a string of text.
+
+    :param txt: text to strip punctuation from
+    :param ioformat: input/output format, default is txt
+    :return: stripped text
+    """
     regeces = [
         (r'<.*?>', ''),  # strip other xml tags
         (r'http.*?(?:[\s\n\]]|$)', ''),  # strip links
@@ -110,6 +125,14 @@ def strip_punctuation(txt, ioformat='txt'):
 
 @log_timer
 def join_archive(lang, ioformat='txt', years=(1900, 2050), verbose=False):
+    """Concatenate a stripped OpenSubtitles archive into a single training corpus.
+
+    :param lang: language of the archive to join (selects the correct archive)
+    :param ioformat: input/output format (default is txt)
+    :param years: tuple of first and last year to select only subtitles from a range of years, default is 1900 to 2100.
+    :param verbose: boolean setting whether or not to print a progress bar to the command line, default is False
+    :return: number of files that were concatenated
+    """
     read_zip = zipfile.ZipFile(f'{lang}_stripped.zip', 'r')
     out_fname = f'{lang}.{ioformat}'
     if ioformat == 'txt':
@@ -127,7 +150,7 @@ def join_archive(lang, ioformat='txt', years=(1900, 2050), verbose=False):
     i = 0
     with open(out_fname, 'w') as outfile:
         for filepath in filepaths:
-                outfile.write(strip_punctuation(read_zip.open(filepath).read().decode('utf-8'), ioformat))
+                outfile.write(_strip_punctuation(read_zip.open(filepath).read().decode('utf-8'), ioformat))
                 if verbose:
                     i += 1
                     print(f'\tprogress: {(float(i) / total) * 100:5.2f}%', end='\r')
@@ -139,9 +162,9 @@ def join_archive(lang, ioformat='txt', years=(1900, 2050), verbose=False):
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='clean subtitles for training distributional semantics models')
     argparser.add_argument('lang', help='language to clean')
-    argparser.add_argument('--stripxml', action='store_true')
-    argparser.add_argument('--years', default=(1900, 2050), nargs=2, type=int)
-    argparser.add_argument('--join', action='store_true')
+    argparser.add_argument('--stripxml', action='store_true', help='strip xml from subtitles archive')
+    argparser.add_argument('--years', default=(1900, 2050), nargs=2, type=int, help='range of years to include')
+    argparser.add_argument('--join', action='store_true', help='concatenate stripped archive')
     argparser.add_argument('--ioformat', default='txt', choices=['txt', 'lemma', 'upos', 'viz'],
                            help='input/output format')
     args = argparser.parse_args()
