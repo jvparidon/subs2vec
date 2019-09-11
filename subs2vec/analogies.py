@@ -114,10 +114,13 @@ def solve_analogies(vectors, analogies, method='multiplicative', whole_matrix=Fa
 def evaluate_analogies(vecs_fname, lang, method='multiplicative', whole_matrix=False):
     """Solve all available analogies for a set of word vectors in a given language.
 
+    Writes scores to tab-separated text file but also returns them.
+
     :param vecs_fname: filename of a file containing a set of word vectors
     :param lang: language to evaluate word vectors in (uses two-letter ISO codes)
     :param method: solving method to use (options are `additive` and `multiplicative`, multiplicative is the default and usually performs best)
     :param whole_matrix: boolean determining whether to use whole matrix multiplication (faster, but uses more RAM than you may have available, `False` is the default)
+    :return: pandas DataFrame containing the analogies results
     """
     analogies_path = os.path.join(path, 'evaluation', 'datasets', 'analogies')
     results_path = os.path.join(path, 'evaluation', 'results', 'analogies')
@@ -136,15 +139,17 @@ def evaluate_analogies(vecs_fname, lang, method='multiplicative', whole_matrix=F
                 scores.append(score)
     scores_fname = os.path.split(vecs_fname)[1].replace('.vec', '.tsv')
     if len(scores) > 0:
-        pd.concat(scores).to_csv(os.path.join(results_path, scores_fname), sep='\t')
+        scores = pd.concat(scores)
+        scores.to_csv(os.path.join(results_path, scores_fname), sep='\t')
+        return scores
 
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='solve syntactic and semantic analogies from Mikolov et al. (2013)')
-    argparser.add_argument('lang', help='language to solve analogies in (use ISO 639-1 codes)')
+    argparser.add_argument('lang', help='language to solve analogies in (uses two-letter ISO language codes)')
     argparser.add_argument('vecs_fname', help='word vectors to evaluate')
     argparser.add_argument('--whole_matrix', action='store_true',
                            help='perform computations using whole matrices instead of column-wise (potentially results in big memory footprint)')
     args = argparser.parse_args()
 
-    evaluate_analogies(**vars(args))
+    print(evaluate_analogies(**vars(args)))

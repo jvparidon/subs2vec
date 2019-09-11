@@ -18,10 +18,11 @@ path = os.path.dirname(__file__)
 def evaluate_norms(lang, vecs_fname):
     """Predict lexical norms to evaluate a set of word vectors in a given language.
     
-    Writes scores to tab-separated text file.
+    Writes scores to tab-separated text file but also returns them.
 
     :param lang: language to evaluate word vectors in (uses two-letter ISO codes)
     :param vecs_fname: word vectors to evaluate
+    :return: pandas DataFrame containing the norms results
     """
     norms_path = os.path.join(path, 'evaluation', 'datasets', 'norms')
     results_path = os.path.join(path, 'evaluation', 'results', 'norms')
@@ -40,7 +41,9 @@ def evaluate_norms(lang, vecs_fname):
             scores.append(score)
     scores_fname = os.path.split(vecs_fname)[1].replace('.vec', '.tsv')
     if len(scores) > 0:
-        pd.concat(scores).to_csv(os.path.join(results_path, scores_fname), sep='\t')
+        scores = pd.concat(scores)
+        scores.to_csv(os.path.join(results_path, scores_fname), sep='\t')
+        return scores
 
 
 @log_timer
@@ -118,13 +121,13 @@ def extend_norms(vecs_fname, norms_fname):
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='perform crossvalidated penalized regression of lexical norms using word vectors as predictors')
-    argparser.add_argument('lang')
-    argparser.add_argument('vecs_fname')
-    argparser.add_argument('--extend', action='store_true')
-    argparser.add_argument('--norms_fname')
+    argparser.add_argument('lang', help='language to predict norms for (uses two-letter ISO language codes)')
+    argparser.add_argument('vecs_fname', help='vectors to evaluate (or use for lexical norm extension')
+    argparser.add_argument('--extend', action='store_true', help='extend lexical norms, instead of only predicting them')
+    argparser.add_argument('--norms', help='file containing lexical norms to extend')
     args = argparser.parse_args()
 
     if args.extend:
         extend_norms(args.vecs_fname, args.norms_fname)
     else:
-        evaluate_norms(args.lang, args.vecs_fname)
+        print(evaluate_norms(args.lang, args.vecs_fname))

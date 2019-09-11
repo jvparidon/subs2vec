@@ -17,6 +17,7 @@ This page serves to document the full subs2vecs module API in more detail for an
    :maxdepth: 2
    :caption: Contents:
 
+   subs2vec <subs2vec>
 
 
 Indices and tables

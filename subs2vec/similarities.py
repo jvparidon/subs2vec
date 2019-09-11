@@ -50,8 +50,11 @@ def compare_similarities(vectors, similarities):
 def evaluate_similarities(vecs_fname, lang):
     """Compute similarities for all available ratings datasets for a set of word vectors in a given language.
 
-    :param vecs_fname: filename of a file containing a set of word vectors
+    Writes scores to tab-separated text file but also returns them.
+
     :param lang: language to evaluate word vectors in (uses two-letter ISO codes)
+    :param vecs_fname: word vectors to evaluate
+    :return: pandas DataFrame containing the similarities results
     """
     similarities_path = os.path.join(path, 'evaluation', 'datasets', 'similarities')
     results_path = os.path.join(path, 'evaluation', 'results', 'similarities')
@@ -69,7 +72,9 @@ def evaluate_similarities(vecs_fname, lang):
             scores.append(score)
     scores_fname = os.path.split(vecs_fname)[1].replace('.vec', '.tsv')
     if len(scores) > 0:
-        pd.concat(scores).to_csv(os.path.join(results_path, scores_fname), sep='\t')
+        scores = pd.concat(scores)
+        scores.to_csv(os.path.join(results_path, scores_fname), sep='\t')
+        return scores
 
 
 if __name__ == '__main__':
@@ -78,4 +83,4 @@ if __name__ == '__main__':
     argparser.add_argument('vecs_fname', help='word vectors to evaluate')
     args = argparser.parse_args()
 
-    results = evaluate_similarities(**vars(args))
+    print(evaluate_similarities(**vars(args)))
