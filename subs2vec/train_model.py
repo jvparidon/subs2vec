@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
-# jvparidon@gmail.com
-import os
+"""Train a model using the default parameters from Van Paridon & Thompson (2019).
+
+Use of this module requires working binaries for fastText and word2vec on the path and plenty of RAM.
+Please note that even on a very fast desktop, training could take hours or days.
+"""
 import argparse
-import numpy as np
 import subprocess as sp
-from .clean_subs import strip_archive, join_archive
-from .deduplicate import dedup_file
 from .utensils import log_timer
 import psutil
 import logging
@@ -15,6 +14,19 @@ cpu_count = psutil.cpu_count(logical=False)  # logical=False to count only physi
 
 @log_timer
 def train_fasttext(training_data, prefix, lang, d=300, neg=10, epoch=10, t=.0001):
+    """Train a fastText model on a given training corpus.
+
+    Requires a working fastText binary on the path.
+
+    :param training_data: text file containing the training corpus
+    :param prefix: prefix to use for the model binary and vector filenames
+    :param lang: language tag to use for the model binary and vector filenames
+    :param d: number of dimensions in the vector (default is 300)
+    :param neg: number of negative samples (fastText default is 5, subs2vec default used here is 10)
+    :param epoch: number of training epochs (fastText default is 5, subs2vec default used here is 10)
+    :param t: sampling threshold (default is .0001)
+    :return: tuple of filenames for model binary and vectors
+    """
     model_name = f'{prefix}.{lang}'
     binary = ['fasttext']
     method = ['skipgram']
@@ -36,6 +48,15 @@ def train_fasttext(training_data, prefix, lang, d=300, neg=10, epoch=10, t=.0001
 
 @log_timer
 def build_phrases(training_data, phrase_pass):
+    """Use word2phrase to connect common phrases.
+
+    Uses the word2phrase tool to connect high mutual information phrases such as "New York" using underscores, so fastText will treat them as a single lexical item.
+    Requires a working word2phrase (included in word2vec) binary on the path.
+
+    :param training_data: text file containing the training corpus
+    :param phrase_pass: number of passes to do over the training file
+    :return: filename of the phrase-joined corpus
+    """
     base_fname = training_data.replace('.txt', '')
     for i in range(phrase_pass):
         t = (2 ** (phrase_pass - i - 1)) * 100
@@ -54,60 +75,47 @@ def build_phrases(training_data, phrase_pass):
 
 
 def fix_encoding(training_data):
+    """Fix utf-8 file encoding after word2phrase mangles it (happens sometimes).
+
+    :param training_data: file containing text with encoding that needs fixing
+    :return: filename of repaired text file
+    """
     out_fname = training_data.replace('.txt', '.utf-8.txt')
     with open(training_data, 'r', encoding='utf-8', errors='ignore') as in_file, open(out_fname, 'w', encoding='utf-8') as out_file:
         for line in in_file:
             out_file.write(line)
-        #out_file.write(in_file.read())
     return out_fname
 
 
 def lowercase(training_data):
+    """Cast a text file to lower case.
+
+    :param training_data: file containing text to cast to lower case
+    :return: filename of lower cased text file
+    """
     out_fname = training_data.replace('.txt', '.lower.txt')
     with open(training_data, 'r', encoding='utf-8') as in_file, open(out_fname, 'w', encoding='utf-8') as out_file:
         for line in in_file:
             out_file.write(line.lower())
-        #out_file.write(in_file.read().lower())
     return out_fname
 
 
 @log_timer
-def generate(lang, filename, source, prep_data, dedup_data, phrase_pass, years=(1900, 2050)):
-    # prep subs
-    if prep_data:
-        if source in ['subs', 'wiki-sub']:
-            training_data = os.path.join(subs_dir, 'raw')
-            # strip subs
-            logging.info('stripping xml from subs in language {}'.format(lang))
-            results, t = strip_archive(training_data, lang, ioformat='txt')
-            logging.info('stripped xml from {} files in {} seconds'.format(np.sum(results), int(t['duration'])))
-            training_data = os.path.join(subs_dir, 'raw')
-            # join subs
-            logging.info('concatenating training data for language {}'.format(lang))
-            results = join_archive(training_data, './', lang, verbose=True, ioformat='txt', subset_years=subset_years)
-            logging.info('concatenated {} files'.format(results))
+def generate(lang, prefix, training_data, lowercase=False):
+    """Generate a fastText model using default parameters from Van Paridon & Thompson (2019).
 
-        training_data = '{}.{}-{}.txt'.format(lang, *years)
-        if source in ['wiki', 'wiki-sub']:
-            # do wiki prep
-            pass
-    else:
-        training_data = filename
-
-    # deduplicate
-    if dedup_data:
-        logging.info('deduplicating {}'.format(training_data))
-        out_fname = training_data.replace('.txt', '.dedup.txt')
-        n_lines, n_duplicates = dedup_file(training_data, out_fname)
-        training_data = out_fname
-
-    # lowercase
-    #logging.info(f'lowercasing {training_data}')
-    #training_data = lowercase(training_data)
+    :param lang: language tag to use for the model binary and vector filenames
+    :param training_data: text file containing the training corpus
+    :param prefix: prefix to use for the model binary and vector filenames
+    :param lowercase: boolean setting whether to cast training corpus to lower case (default is `False`)
+    """
+    if lowercase:
+        logging.info(f'lowercasing {training_data}')
+        training_data = lowercase(training_data)
 
     # build phrases
     logging.info('building phrases for {}'.format(training_data))
-    training_data = build_phrases(training_data, phrase_pass)
+    training_data = build_phrases(training_data)
 
     # fix potential broken utf-8 encoding
     logging.info('checking (and fixing) utf-8 encoding for {}'.format(training_data))
@@ -115,7 +123,7 @@ def generate(lang, filename, source, prep_data, dedup_data, phrase_pass, years=(
 
     # train fastText model
     logging.info('training fastText model on {}'.format(training_data))
-    results = train_fasttext(training_data=training_data, lang=lang, prefix=source)
+    results = train_fasttext(training_data=training_data, lang=lang, prefix=prefix)
     model, vecs = results
     logging.info('model binary at {}'.format(model))
     logging.info('word vectors at {}'.format(vecs))
@@ -125,15 +133,10 @@ if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='generate a fastText model from OpenSubtitles and Wikipedia data')
     argparser.add_argument('lang',
                            help='source language (OpenSubtitles and Wikipedia data uses ISO 639-1 codes)')
-    argparser.add_argument('source',
+    argparser.add_argument('prefix',
                            help='source data, use one of {wiki, sub, wiki-sub} if using automatic data preparation')
-    argparser.add_argument('filename',
-                           help='filename if skipping data preparation')
-    argparser.add_argument('--prep_data', action='store_true')
-    argparser.add_argument('--dedup_data', action='store_true',
-                           help='deduplicate training data line-wise')
-    argparser.add_argument('--phrase_pass', default='5', type=int,
-                           help='number of phrase-building passes, 0 equals no phrase-building (default 5)')
+    argparser.add_argument('training_data',
+                           help='filename of text file containing the training corpus')
     args = argparser.parse_args()
 
     generate(**vars(args))
