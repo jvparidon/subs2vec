@@ -70,6 +70,14 @@ subs2vec.lang\_evaluate
    :undoc-members:
    :show-inheritance:
 
+subs2vec.lookup
+---------------
+
+.. automodule:: subs2vec.lookup
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 subs2vec.norms
 --------------
 
