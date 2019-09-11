@@ -1,6 +1,6 @@
 # subs2vec
-Van Paridon & Thompson (2019) introduces pretrained embeddings and precomputed word/bigram/trigram frequencies in 50 languages.  
-The files can be downloaded from [language archive]. Word vectors trained on subtitles are available, as well as vectors trained on Wikipedia, and a combination of subtitles and Wikipedia (for best performance).
+Van Paridon & Thompson (2019) introduces pretrained embeddings and precomputed word/bigram/trigram frequencies in 50 languages. The files can be downloaded from [language archive]. Word vectors trained on subtitles are available, as well as vectors trained on Wikipedia, and a combination of subtitles and Wikipedia (for best performance).
+
 This repository contains the subs2vec module, a number of Python 3.7 scripts and command line tools to evaluate a set of word vectors on semantic similarity, semantic and syntactic analogy, and lexical norm prediction tasks. In addition, the `subs2vec.py` script will take an OpenSubtitles archive or Wikipedia and go through all the steps to train a fastText model and produce word vectors as used in Van Paridon & Thompson (2019).  
 
 Psycholinguists may be especially interested `norms` script, which evaluates the lexical norm prediction performance of a set of word vectors, but can also be used to predict lexical norms for un-normed words. For a more detailed explanation see the __How to use -> Extending lexical norms__ section.  
@@ -17,7 +17,8 @@ To evaluate word embeddings on analogies, semantic similarity, or lexical norm p
 `python3 -m subs2vec.norms fr french_word_vectors.vec`  
 subs2vec uses the two-letter ISO language codes, so French in the example is `fr`, English would be `en`, German would be `de`, etc.
 
-All datasets used for evaluation, including the lexical norms, are stored in `subs2vec/evaluation/datasets/`. Results from Van Paridon & Thompson (2019) are in `subs2vec/evaluation/article_results/`.
+All datasets used for evaluation, including the lexical norms, are stored in `subs2vec/evaluation/datasets/`.  
+Results from Van Paridon & Thompson (2019) are in `subs2vec/evaluation/article_results/`.
 
 ### Extending lexical norms
 To extend lexical norms (either norms you have collected yourself, or norms provided in this repository) use:  
