@@ -52,10 +52,10 @@ subs2vec.download module
    :undoc-members:
    :show-inheritance:
 
-subs2vec.eval\_lang module
+subs2vec.lang\_evaluation module
 --------------------------
 
-.. automodule:: subs2vec.eval_lang
+.. automodule:: subs2vec.lang_evaluation
    :members:
    :undoc-members:
    :show-inheritance:
@@ -80,14 +80,6 @@ subs2vec.plots module
 ---------------------
 
 .. automodule:: subs2vec.plots
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-subs2vec.shuffle\_text module
------------------------------
-
-.. automodule:: subs2vec.shuffle_text
    :members:
    :undoc-members:
    :show-inheritance:

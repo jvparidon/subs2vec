@@ -32,15 +32,14 @@ def dedup_file(in_fname, out_fname):
 def big_dedup_file(in_fname, out_fname, n_bins):
     """Remove duplicate lines from a text file that does not fit into RAM.
 
-    Because of itertools.cycle() this is only pseudorandomized and pseudodeduplicated (i.e.: consecutive lines of input
-    cannot end up as consecutive in the output and up to n_bins duplicates of an item may remain). If your file fits
-    into RAM afterward, you may consider running it through normal deduplication (which includes true randomization).
+    Because of `itertools.cycle()` this is only pseudorandomized and pseudodeduplicated
+    (i.e.: consecutive lines of input cannot end up as consecutive in the output and up to n_bins duplicates of an item may remain).
+    If your file fits into RAM afterward, you may consider running it through normal deduplication (which includes true randomization).
     Writes directly to text file.
 
     :param in_fname: file to read text from
     :param out_fname: file to write text to
-    :param n_bins: number of bins to split files into (note that up to n_bins duplicates of any given line may remain
-    after applying this function.
+    :param n_bins: number of bins to split files into (note that up to n_bins duplicates of any given line may remain after applying this function.
     """
     filehandles = []
     for i in range(n_bins):

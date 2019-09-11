@@ -9,8 +9,8 @@ logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.I
 def timer(func):
     """Decorator to add timing wrapper to other functions.
 
-    Use by prepending @timer to the target function definition.
-    Logs start and finish time in y/m/d h:m:s and keeps track of duration in seconds.
+    Use by prepending `@timer` to the target function definition.
+    Logs start and finish time in `y/m/d h:m:s` and keeps track of duration in seconds.
     Wrapper returns a tuple containing the original results and a dictionary containing start, finish, and duration.
 
     :param func: any function
@@ -32,8 +32,8 @@ def timer(func):
 def log_timer(func):
     """Decorator to add logging timer to other functions.
 
-    Use by prepending @log_timer to the target function definition.
-    Logs function name and duration in seconds to level INFO.
+    Use by prepending `@log_timer` to the target function definition.
+    Logs function name and duration in seconds to level `INFO`.
 
     :param func: any function
     :return: func with logging timer
