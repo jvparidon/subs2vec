@@ -47,14 +47,14 @@ def train_fasttext(training_data, prefix, lang, d=300, neg=10, epoch=10, t=.0001
 
 
 @log_timer
-def build_phrases(training_data, phrase_pass):
+def build_phrases(training_data, phrase_pass=5):
     """Use word2phrase to connect common phrases.
 
     Uses the word2phrase tool to connect high mutual information phrases such as "New York" using underscores, so fastText will treat them as a single lexical item.
     Requires a working word2phrase (included in word2vec) binary on the path.
 
     :param training_data: text file containing the training corpus
-    :param phrase_pass: number of passes to do over the training file
+    :param phrase_pass: number of passes to do over the training file (default is 5)
     :return: filename of the phrase-joined corpus
     """
     base_fname = training_data.replace('.txt', '')
