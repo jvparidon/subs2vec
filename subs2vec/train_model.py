@@ -13,7 +13,7 @@ cpu_count = psutil.cpu_count(logical=False)  # logical=False to count only physi
 
 
 @log_timer
-def train_fasttext(training_data, prefix, lang, d=300, neg=10, epoch=10, t=.0001, cutoff=2e6, retrain=True):
+def train_fasttext(training_data, prefix, lang, d=300, neg=10, epoch=10, t=.0001, cutoff=2e6):
     """Train a fastText model on a given training corpus.
 
     Requires a working fastText binary on the path.
@@ -26,7 +26,6 @@ def train_fasttext(training_data, prefix, lang, d=300, neg=10, epoch=10, t=.0001
     :param epoch: number of training epochs (fastText default is 5, subs2vec default used here is 10)
     :param t: sampling threshold (default is .0001)
     :param cutoff: number of vectors to retain when quantizing model after training
-    :param retrain: boolean setting whether to finetune vectors after quantization
     :return: tuple of filenames for model binary and vectors
     """
     model_name = f'{prefix}.{lang}'
@@ -39,7 +38,7 @@ def train_fasttext(training_data, prefix, lang, d=300, neg=10, epoch=10, t=.0001
     t = ['-t', str(t)]
     d = ['-dim', str(d)]
     cutoff = ['-cutoff', str(int(cutoff))]
-    retrain = ['-retrain', '1'] if retrain else ['-retrain', '0']
+    retrain = ['-retrain']  # this is always set to finetune after quantization
     thread = ['-thread', str(cpu_count)]
     if logging.getLogger().isEnabledFor(logging.INFO):
         sp.run(binary + method + train + output + neg + epoch + t + d + cutoff + retrain + thread)
