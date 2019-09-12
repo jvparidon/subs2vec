@@ -1,4 +1,4 @@
-"""Remove duplicate lines from a training corpus."""
+"""Remove duplicate lines from a text file."""
 import os
 import argparse
 import random
@@ -62,7 +62,7 @@ def big_dedup_file(in_fname, out_fname, n_bins):
 
 
 if __name__ == '__main__':
-    argparser = argparse.ArgumentParser(description='deduplicate lines in a file')
+    argparser = argparse.ArgumentParser(description='remove duplicate lines from a text file')
     argparser.add_argument('fname', help='file to deduplicate')
     argparser.add_argument('--bins', default=1, type=int,
                            help='number of temporary files to use when the input file is too big to fit in memory')

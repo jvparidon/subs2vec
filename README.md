@@ -26,13 +26,20 @@ To extend lexical norms (either norms you have collected yourself, or norms prov
 The norms file should be a tab-separated text file, with the first line containing column names and the column containing the words should be called `word`. Unobserved cells should be left empty. If you are unsure how to generate this file, you can create your list in Excel and then use `Save as... tab-delimited text`.
 
 ### Extracting word frequencies
-To extract word, bigram, or trigram frequencies from a text corpus, use:  
-`python3 -m subs2vec.frequencies fr_corpus.txt`  
-In general, however, we recommend downloading the precompiled subtitle word frequencies from [language archive] and looking frequencies up in those.  
+The subtitle corpus used in Van Paridon & Thompson (2019) was also used to compile the word frequencies in SUBTLEX [ref]. That same corpus can be used to compile bigram and trigram frequencies as well.
+To extract word, bigram, or trigram frequencies from a text file yourself, `fr.txt` for instance, use:  
+`python3 -m subs2vec.frequencies fr.txt`  
+
+In general, however, we recommend downloading the precompiled frequencies files from [language archive] and looking frequencies up in those.  
 When looking up frequencies for specific words, bigrams, or trigrams, you may find that you cannot open the frequencies files (they can be very large). To retrieve items of interest use:   
 `python3 -m subs2vec.lookup frequencies_file.tsv list_of_items.txt`  
 Your list of items should be a simple text file, with each item you want to look up on its own line.
-This method works for looking up word vectors in .vec files and lexical norms in .tsv files as well as for looking up frequencies.
+This lookup scripts works for looking up frequencies, but it works for looking up word vectors in .vec files and lexical norms in .tsv files as well.
+
+### Removing duplicate lines
+subs2vec comes with a script that removes duplicate lines from text files. We used it to remove duplicate lines from training corpora, but it works for any text file.  
+To remove duplicates from `fr.txt` for example, use:  
+`python3 -m subs2vec.deduplicate fr.txt`
 
 ### Training models
 If you want to reproduce models as used in Van Paridon & Thompson (2019), you can use the `train_model` module.
@@ -40,7 +47,7 @@ For instance, the steps to create a subtitle corpus are:
 1. Download a corpus:  
 `python3 -m subs2vec.download fr subs`  
 2. Clean the corpus:  
-`python3 -m subs2vec.clean_subs fr --strip --join`  
+`python3 -m subs2vec.clean_subs fr.zip --strip --join`  
 3. Deduplicate the lines in the corpus:  
 `python3 -m subs2vec.deduplicate fr.txt`  
 4. Train a fastText model on the subtitle corpus:  
