@@ -7,5 +7,5 @@ setup(name='subs2vec',
       author_email='jvparidon@gmail.com',
       url='https://github.com/jvparidon/subs2vec/',
       packages=['subs2vec'],
-      package_data={'subs2vec': ['evaluation/*/*/*.tsv']},
+      package_data={'subs2vec': ['*/*.tsv']},
 )
