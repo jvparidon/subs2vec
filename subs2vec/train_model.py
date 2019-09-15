@@ -13,7 +13,7 @@ cpu_count = psutil.cpu_count(logical=False)  # logical=False to count only physi
 
 
 @log_timer
-def train_fasttext(training_data, prefix, lang, d=300, neg=10, epoch=10, t=.0001, cutoff=2e6):
+def train_fasttext(training_data, prefix, lang, d=300, neg=10, epoch=10, t=.0001):
     """Train a fastText model on a given training corpus.
 
     Requires a working fastText binary on the path.
@@ -25,7 +25,6 @@ def train_fasttext(training_data, prefix, lang, d=300, neg=10, epoch=10, t=.0001
     :param neg: number of negative samples (fastText default is 5, subs2vec default used here is 10)
     :param epoch: number of training epochs (fastText default is 5, subs2vec default used here is 10)
     :param t: sampling threshold (default is .0001)
-    :param cutoff: number of vectors to retain when quantizing model after training
     :return: tuple of filenames for model binary and vectors
     """
     model_name = f'{prefix}.{lang}'
@@ -37,13 +36,11 @@ def train_fasttext(training_data, prefix, lang, d=300, neg=10, epoch=10, t=.0001
     epoch = ['-epoch', str(epoch)]
     t = ['-t', str(t)]
     d = ['-dim', str(d)]
-    cutoff = ['-cutoff', str(int(cutoff))]
-    retrain = ['-retrain']  # this is always set to finetune after quantization
     thread = ['-thread', str(cpu_count)]
     if logging.getLogger().isEnabledFor(logging.INFO):
-        sp.run(binary + method + train + output + neg + epoch + t + d + cutoff + retrain + thread)
+        sp.run(binary + method + train + output + neg + epoch + t + d + thread)
     else:
-        sp.run(binary + method + train + output + neg + epoch + t + d + cutoff + retrain + thread, stdout=sp.DEVNULL)
+        sp.run(binary + method + train + output + neg + epoch + t + d + thread, stdout=sp.DEVNULL)
     model = f'{model_name}.bin'
     vecs = f'{model_name}.vec'
     return model, vecs
@@ -117,8 +114,8 @@ def generate(lang, prefix, training_data, lowercase=False):
         training_data = lowercase(training_data)
 
     # build phrases
-    logging.info('building phrases for {}'.format(training_data))
-    training_data = build_phrases(training_data)
+    #logging.info('building phrases for {}'.format(training_data))
+    #training_data = build_phrases(training_data)
 
     # fix potential broken utf-8 encoding
     logging.info('checking (and fixing) utf-8 encoding for {}'.format(training_data))
