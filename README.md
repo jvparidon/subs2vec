@@ -16,7 +16,9 @@ Normally, this only works if you are in the subs2vec directory. If you want to b
 the subs2vec package using:  
 `python3 setup.py install`  
 This will not make any major changes to your system, it just copies the subs2vec package to a place where the Python interpreter knows to 
-look for it.
+look for it.  
+Any missing dependencies can be installed using:  
+`pip3 install -r requirements.txt`
 
 ### Evaluating word embeddings
 To evaluate word embeddings on analogies, semantic similarity, or lexical norm prediction as in Van Paridon & Thompson (2019), use:  

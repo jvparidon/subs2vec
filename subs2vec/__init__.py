@@ -6,5 +6,5 @@ Provides:
   - Command line tools to conveniently do any of the above, in 50 languages.
 """
 
-__author__ = "Jeroen van Paridon & Bill Thompson"
-__version__ = "0.9.0"
+__author__ = 'Jeroen van Paridon & Bill Thompson'
+__version__ = '0.9.1'
