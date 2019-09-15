@@ -42,7 +42,7 @@ In general, however, we recommend downloading the precompiled frequencies files 
 When looking up frequencies for specific words, bigrams, or trigrams, you may find that you cannot open the frequencies files (they can be very large). To retrieve items of interest use:   
 `python3 -m subs2vec.lookup frequencies_file.tsv list_of_items.txt`  
 Your list of items should be a simple text file, with each item you want to look up on its own line.
-This lookup scripts works for looking up frequencies, but it works for looking up word vectors in .vec files and lexical norms in .tsv files as well.
+This lookup scripts works for looking up frequencies, but it finds lines in any plain text file, so it works for looking up word vectors in .vec files as well.
 
 ### Removing duplicate lines
 subs2vec comes with a script that removes duplicate lines from text files. We used it to remove duplicate lines from training corpora, but it works for any text file.  
@@ -60,6 +60,7 @@ For instance, the steps to create a subtitle corpus are:
 `python3 -m subs2vec.deduplicate fr.txt`  
 4. Train a fastText model on the subtitle corpus:  
 `python3 -m subs2vec.train_model fr subs dedup.fr.txt`  
+This last step requires the binaries for [fastText](https://github.com/facebookresearch/fastText) and [word2phrase (part of word2vec)](https://github.com/tmikolov/word2vec) to be downloaded, built, and discoverable on your system.
 
 For more detailed training options:  
 `python3 -m subs2vec.train_model --help`
