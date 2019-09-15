@@ -24,8 +24,10 @@ def evaluate_norms(lang, vecs_fname):
     :param vecs_fname: word vectors to evaluate
     :return: pandas DataFrame containing the norms results
     """
-    norms_path = os.path.join(path, 'evaluation', 'datasets', 'norms')
-    results_path = os.path.join(path, 'evaluation', 'results', 'norms')
+    norms_path = os.path.join(path, 'datasets', 'norms')
+    if not os.path.exists('results'):
+        os.mkdir('results')
+    results_path = os.path.join('results', 'norms')
     if not os.path.exists(results_path):
         os.mkdir(results_path)
     logging.info(f'evaluating lexical norm prediction with {vecs_fname}')

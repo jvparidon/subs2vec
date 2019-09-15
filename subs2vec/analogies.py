@@ -122,8 +122,10 @@ def evaluate_analogies(lang, vecs_fname, method='multiplicative', whole_matrix=F
     :param whole_matrix: boolean determining whether to use whole matrix multiplication (faster, but uses more RAM than you may have available, `False` is the default)
     :return: pandas DataFrame containing the analogies results
     """
-    analogies_path = os.path.join(path, 'evaluation', 'datasets', 'analogies')
-    results_path = os.path.join(path, 'evaluation', 'results', 'analogies')
+    analogies_path = os.path.join(path, 'datasets', 'analogies')
+    if not os.path.exists('results'):
+        os.mkdir('results')
+    results_path = os.path.join('results', 'analogies')
     if not os.path.exists(results_path):
         os.mkdir(results_path)
     logging.info(f'evaluating analogy solving with {vecs_fname}')

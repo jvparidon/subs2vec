@@ -56,8 +56,10 @@ def evaluate_similarities(lang, vecs_fname):
     :param vecs_fname: word vectors to evaluate
     :return: pandas DataFrame containing the similarities results
     """
-    similarities_path = os.path.join(path, 'evaluation', 'datasets', 'similarities')
-    results_path = os.path.join(path, 'evaluation', 'results', 'similarities')
+    similarities_path = os.path.join(path, 'datasets', 'similarities')
+    if not os.path.exists('results'):
+        os.mkdir('results')
+    results_path = os.path.join('results', 'similarities')
     if not os.path.exists(results_path):
         os.mkdir(results_path)
     logging.info(f'evaluating lexical norm prediction with {vecs_fname}')
