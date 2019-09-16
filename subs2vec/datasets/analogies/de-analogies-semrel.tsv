@@ -1,6 +1,6 @@
 # Scheible, Schulte im Walde (2014)
 a1	a2	b1	b2
-# Adjective	Antonym	(P# 30)		(T# 870)	
+# Adjective	Antonym	(P# 30)	(T# 870)
 neugotisch	altgotisch	unfruchtbar	fruchtbar
 neugotisch	altgotisch	wild	zahm
 neugotisch	altgotisch	ästhetisch	unästhetisch
@@ -871,7 +871,7 @@ undurchsichtig	durchsichtig	fix	langsam
 undurchsichtig	durchsichtig	faul	fleißig
 undurchsichtig	durchsichtig	arm	reich
 undurchsichtig	durchsichtig	unsportlich	sportlich
-# Noun	Antonym	(P# 25)		(T# 600)	
+# Noun	Antonym	(P# 25)	(T# 600)
 Breite	Länge	Gesamtbelastung	Einzelbelastung
 Breite	Länge	Fluch	Segen
 Breite	Länge	Alb	Tal
@@ -1472,7 +1472,7 @@ Bein	Arm	Verjüngung	Alterung
 Bein	Arm	Explosion	Implosion
 Bein	Arm	Arzt	Patient
 Bein	Arm	Ablehnung	Zustimmung
-# Noun	Hyponym	(P# 18)		(T# 306)	
+# Noun	Hyponym	(P# 18)	(T# 306)
 Eiweiß	Nährstoff	Entscheidungskompetenz	Kompetenz
 Eiweiß	Nährstoff	Atomwaffe	Waffe
 Eiweiß	Nährstoff	Ekel	Gefühl
@@ -1779,7 +1779,7 @@ Arzt	Beruf	Schwergewicht	Gewichtsklasse
 Arzt	Beruf	Verhandlung	Gespräch
 Arzt	Beruf	Bein	Gliedmaße
 Arzt	Beruf	Stuhl	Möbel
-# Noun	Synonym	(P# 20)		(T# 380)	
+# Noun	Synonym	(P# 20)	(T# 380)
 Lieblichkeit	Anmut	Sirene	Martinshorn
 Lieblichkeit	Anmut	Ausnahmefall	Sonderfall
 Lieblichkeit	Anmut	Zeit	Dauer
@@ -2160,7 +2160,7 @@ Pflanze	Gewächs	Temperatur	Wärme
 Pflanze	Gewächs	Zeile	Reihe
 Pflanze	Gewächs	Wache	Aufsicht
 Pflanze	Gewächs	Mittelklasse	Mittelschicht
-# Verb	Antonym	(P# 18)		(T# 306)	
+# Verb	Antonym	(P# 18)	(T# 306)
 wiederverwenden	wegwerfen	ärgern	freuen
 wiederverwenden	wegwerfen	abschalten	einschalten
 wiederverwenden	wegwerfen	aufhängen	abhängen

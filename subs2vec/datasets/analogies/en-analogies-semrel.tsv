@@ -1,6 +1,6 @@
 # Scheible, Schulte im Walde (2014)
 a1	a2	b1	b2
-# Adjective	Antonym	(P# 47)		(T# 2162)	
+# Adjective	Antonym	(P# 47)	(T# 2162)
 unsupervised	supervised	biblical	secular
 unsupervised	supervised	unconfirmed	confirmed
 unsupervised	supervised	progressive	regressive
@@ -2163,7 +2163,7 @@ immortal	mortal	associative	dissociative
 immortal	mortal	unstructured	structured
 immortal	mortal	metropolitan	rural
 immortal	mortal	weightless	heavy
-# Noun	Hyperonym	(P# 36)		(T# 1260)	
+# Noun	Hyperonym	(P# 36)	(T# 1260)
 iodine	chemical	cole	plant
 iodine	chemical	rendezvous	meeting
 iodine	chemical	saloon	bar
@@ -3424,7 +3424,7 @@ cod	fish	barley	grain
 cod	fish	emperor	ruler
 cod	fish	maze	puzzle
 cod	fish	metamorphosis	change
-# Noun	Synonym	(P# 49)		(T# 2352)	
+# Noun	Synonym	(P# 49)	(T# 2352)
 accessibility	availability	velocity	speed
 accessibility	availability	wrecker	destroyer
 accessibility	availability	arbor	tree
@@ -5777,7 +5777,7 @@ cod	fish	aircraft	plane
 cod	fish	intercourse	sex
 cod	fish	barley	grain
 cod	fish	artist	painter
-# Noun	Antonym	(P# 24)		(T# 552)	
+# Noun	Antonym	(P# 24)	(T# 552)
 distribution	collection	education	ignorance
 distribution	collection	assertion	denial
 distribution	collection	cemetery	nursery
@@ -6330,7 +6330,7 @@ planet	moon	commitment	refusal
 planet	moon	foot	hand
 planet	moon	metamorphosis	stagnation
 planet	moon	omnivore	herbivore
-# Verb	Antonym	(P# 35)		(T# 1190)	
+# Verb	Antonym	(P# 35)	(T# 1190)
 contaminate	sterilize	alert	ignore
 contaminate	sterilize	pardon	condemn
 contaminate	sterilize	spiral	straighten
