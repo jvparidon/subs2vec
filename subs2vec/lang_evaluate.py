@@ -25,14 +25,13 @@ if __name__ == '__main__':
     argparser.add_argument('lang')
     args = argparser.parse_args()
 
-    lang = args.lang
-
     # kludge to quickly evaluate all vectors/datasets for Van Paridon & Thompson (2019)
-    filepaths = [f'../pretrained/fasttext/cc.{lang}.300.vec',
-                 f'../data/wiki-sub/{lang}/wiki-sub.{lang}.vec',
-                 f'../data/OpenSubtitles/raw/{lang}/sub.{lang}.vec',
-                 f'../data/wiki/{lang}/wiki.{lang}.vec']
+    lang = args.lang
+    filepaths = [f'../../pretrained/fasttext/cc.{lang}.300.vec',
+                 f'wiki-sub.{lang}.vec',
+                 f'sub.{lang}.vec',
+                 f'wiki.{lang}.vec']
     for filepath in filepaths:
-        if os.path.exists(filepath) and (lang in langs):
+        if os.path.exists(filepath):
             print(filepath.split('/')[-1])
             evaluate_lang(lang=lang, vecs_fname=filepath)
