@@ -8,5 +8,5 @@ distutils.core.setup(
     author_email='jvparidon@gmail.com',
     url='https://github.com/jvparidon/subs2vec/',
     packages=['subs2vec'],
-    package_data={'subs2vec': ['*/*.tsv']},
+    package_data={'subs2vec': ['datasets/*/*.tsv']},
 )

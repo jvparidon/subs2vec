@@ -114,8 +114,8 @@ def generate(lang, prefix, training_data, lowercase=False):
         training_data = lowercase(training_data)
 
     # build phrases
-    #logging.info('building phrases for {}'.format(training_data))
-    #training_data = build_phrases(training_data)
+    logging.info('building phrases for {}'.format(training_data))
+    training_data = build_phrases(training_data)
 
     # fix potential broken utf-8 encoding
     logging.info('checking (and fixing) utf-8 encoding for {}'.format(training_data))

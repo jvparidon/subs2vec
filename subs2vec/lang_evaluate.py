@@ -28,8 +28,6 @@ if __name__ == '__main__':
     lang = args.lang
 
     # kludge to quickly evaluate all vectors/datasets for Van Paridon & Thompson (2019)
-    langs = os.listdir('evaluation/similarities') + os.listdir('evaluation/analogies') + os.listdir('evaluation/norms')
-    langs = set([lang[0:2] for lang in langs])
     filepaths = [f'../pretrained/fasttext/cc.{lang}.300.vec',
                  f'../data/wiki-sub/{lang}/wiki-sub.{lang}.vec',
                  f'../data/OpenSubtitles/raw/{lang}/sub.{lang}.vec',
