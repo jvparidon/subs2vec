@@ -95,6 +95,16 @@ def strip_archive(lang, ioformat='txt', years=(1900, 2100)):
                            _strip_xml(read_zip.open(filepath).read(), xmlparser, ioformat))
 
 
+regeces = [
+    (r'<.*?>', ''),  # strip other xml tags
+    (r'http.*?(?:[\s\n\]]|$)', ''),  # strip links
+    (r'\s\(.*?\)', ''),  # remove everything in parentheses
+    (r'([^\s]{2,})[\.\!\?\:\;]+?[\s\n]|$', '\\1\n'),  # break sentences at periods
+    (r"[-–—/']", ' '),  # replace hyphens, apostrophes and slashes with spaces
+    (r'\s*\n\s*', '\n'),  # strip empty lines and lines containing whitespace
+    (r'\s{2,}', ' '),  # strip excessive spaces
+]
+patterns = [(re.compile(regec[0], re.IGNORECASE), regec[1]) for regec in regeces]
 def _strip_punctuation(txt, ioformat='txt'):
     """Strip punctuation from a string of text.
 
@@ -102,18 +112,9 @@ def _strip_punctuation(txt, ioformat='txt'):
     :param ioformat: input/output format, default is txt
     :return: stripped text
     """
-    regeces = [
-        (r'<.*?>', ''),  # strip other xml tags
-        (r'http.*?(?:[\s\n\]]|$)', ''),  # strip links
-        (r'\s\(.*?\)', ''),  # remove everything in parentheses
-        (r'([^\s]{2,})[\.\!\?\:\;]+?[\s\n]|$', '\\1\n'),  # break sentences at periods
-        (r"[-–—/']", ' '),  # replace hyphens, apostrophes and slashes with spaces
-        (r'\s*\n\s*', '\n'),  # strip empty lines and lines containing whitespace
-        (r'\s{2,}', ' '),  # strip excessive spaces
-    ]
-    for regec in regeces:
-        pattern = re.compile(regec[0], re.IGNORECASE)
-        txt = pattern.sub(regec[1], txt)
+
+    for pattern in patterns:
+        txt = pattern[0].sub(pattern[1], txt)
     if ioformat == 'txt':
         txt = ''.join([letter for letter in txt if (letter.isalnum() or letter.isspace())])
     elif ioformat in ['lemma', 'upos']:
