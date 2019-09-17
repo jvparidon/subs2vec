@@ -1,6 +1,7 @@
 """Extract unigram, bigram, and trigram frequencies, either from a text corpus or from a pre-existing frequencies file."""
 import argparse
 import collections
+import os
 import pandas as pd
 from .utensils import log_timer
 import logging
@@ -8,7 +9,7 @@ logging.basicConfig(format='[{levelname}] {message}', style='{', level=logging.I
 
 
 @log_timer
-def count_ngrams_by_line(fname, kind='words', min_freq=1, no_bigrams=False, no_trigrams=False):
+def count_ngrams(fname, kind='words', min_freq=1, no_bigrams=False, no_trigrams=False):
     """Counts unigrams, bigrams, and trigrams line-by-line in a text corpus.
 
     :param fname: text corpus to count in
@@ -53,10 +54,15 @@ def count_ngrams_by_line(fname, kind='words', min_freq=1, no_bigrams=False, no_t
     bigrams = pd.DataFrame.from_dict(bigrams, orient='index', columns=['bigram_freq']).sort_values(by=['bigram_freq'], ascending=False)
     trigrams = pd.DataFrame.from_dict(trigrams, orient='index', columns=['trigram_freq']).sort_values(by=['trigram_freq'], ascending=False)
 
-    base_fname = '.'.join(fname.split('.')[:-1])
-    unigrams.to_csv(f'{base_fname}.{kind}_unigram_freqs.tsv', index_label='unigram', sep='\t')
-    bigrams.to_csv(f'{base_fname}.{kind}_bigram_freqs.tsv', index_label='bigram', sep='\t')
-    trigrams.to_csv(f'{base_fname}.{kind}_trigram_freqs.tsv', index_label='trigram', sep='\t')
+    if not os.path.exists('results'):
+        os.mkdir('results')
+    results_path = os.path.join('results', 'frequencies')
+    if not os.path.exists(results_path):
+        os.mkdir(results_path)
+    base_fname = os.path.join(results_path, '.'.join(os.path.basename(fname).split('.')[:-1]))
+    unigrams.to_csv(f'{base_fname}_{kind}_unigrams.tsv', index_label='unigram', sep='\t')
+    bigrams.to_csv(f'{base_fname}_{kind}_bigrams.tsv', index_label='bigram', sep='\t')
+    trigrams.to_csv(f'{base_fname}_{kind}_trigrams.tsv', index_label='trigram', sep='\t')
     return unigrams, bigrams, trigrams
 
 
@@ -69,4 +75,4 @@ if __name__ == '__main__':
     argparser.add_argument('--no_trigrams', help='do not count trigrams', action='store_true')
     args = argparser.parse_args()
 
-    count_ngrams_by_line(**vars(args))
+    count_ngrams(**vars(args))

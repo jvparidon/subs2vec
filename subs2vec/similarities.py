@@ -62,12 +62,12 @@ def evaluate_similarities(lang, vecs_fname):
     results_path = os.path.join('results', 'similarities')
     if not os.path.exists(results_path):
         os.mkdir(results_path)
-    logging.info(f'evaluating lexical norm prediction with {vecs_fname}')
+    logging.info(f'evaluating semantic similarities with {vecs_fname}')
     vectors = Vectors(vecs_fname, normalize=True, n=1e6, d=300)
     scores = []
     for similarities_fname in os.listdir(similarities_path):
         if similarities_fname.startswith(lang):
-            logging.info(f'predicting norms from {similarities_fname}')
+            logging.info(f'correlating similarities from {similarities_fname}')
             similarities = pd.read_csv(os.path.join(similarities_path, similarities_fname), sep='\t', comment='#')
             score = compare_similarities(vectors, similarities)['scores']
             score['source'] = similarities_fname

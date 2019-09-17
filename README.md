@@ -47,7 +47,7 @@ Your list of items should be a simple text file, with each item you want to look
 This lookup scripts works for looking up frequencies, but it finds lines in any plain text file, so it works for looking up word vectors in .vec files as well.
 
 ### Removing duplicate lines
-subs2vec comes with a script that removes duplicate lines from text files. We used it to remove duplicate lines from training corpora, but it works for any text file.  
+subs2vec comes with a module that removes duplicate lines from text files. We used it to remove duplicate lines from training corpora, but it works for any text file.  
 To remove duplicates from `fr.txt` for example, use:  
 `python3 -m subs2vec.deduplicate fr.txt`
 
@@ -57,7 +57,7 @@ For instance, the steps to create a subtitle corpus are:
 1. Download a corpus:  
 `python3 -m subs2vec.download fr subs`  
 2. Clean the corpus:  
-`python3 -m subs2vec.clean_subs fr.zip --strip --join`  
+`python3 -m subs2vec.clean_subs fr --strip --join`  
 3. Deduplicate the lines in the corpus:  
 `python3 -m subs2vec.deduplicate fr.txt`  
 4. Train a fastText model on the subtitle corpus:  
