@@ -72,7 +72,7 @@ For more detailed documentation of the package modules and API, see [subs2vec.re
 
 ## Datasets
 
-| language | ISO code | corpus | word vectors | corpus word count | ngram frequencies |
+| language | lang | corpus | vectors | corpus word count | ngram frequencies |
 |---|---|---|---|---:|---|
 | Afrikaans | af | OpenSubtitles | ../../data/OpenSubtitles/raw/af/dedup.af.txt | 323664 | |
 | | | | | | |
