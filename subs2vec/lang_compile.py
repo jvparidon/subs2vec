@@ -5,17 +5,17 @@ from .vecs import Vectors
 
 def lang_compile(lang):
     # subs
-    corpus = f'../../data/OpenSubtitles/raw/dedup.{lang}.txt'
+    corpus = f'../../data/OpenSubtitles/raw/{lang}/dedup.{lang}.txt'
     unigrams, _, _ = count_ngrams(corpus, kind='words')
-    total = unigrams['unigram_freqs'].sum()
+    total = unigrams['unigram_freq'].sum()
     print(f'{corpus}\t{total}')
     vectors = Vectors(f'subs.{lang}.vec', n=1e6)
     vectors.write_vecs(f'subs.{lang}.1e6.vec')
 
     # wiki
-    corpus = f'../../data/wiki/dedup.{lang}.txt'
+    corpus = f'../../data/wiki/{lang}/dedup.{lang}wiki-meta.txt'
     unigrams, _, _ = count_ngrams(corpus, kind='words')
-    total = unigrams['unigram_freqs'].sum()
+    total = unigrams['unigram_freq'].sum()
     print(f'{corpus}\t{total}')
     vectors = Vectors(f'wiki.{lang}.vec', n=1e6)
     vectors.write_vecs(f'wiki.{lang}.1e6.vec')

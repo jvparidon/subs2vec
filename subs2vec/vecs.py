@@ -40,6 +40,7 @@ class Vectors:
             if normalize:
                 self.vectors = self.vectors / np.linalg.norm(self.vectors, axis=1).reshape(-1, 1)
 
+    @log_timer
     def as_df(self):
         """Casts word vectors to pandas DataFrame.
 
@@ -49,6 +50,7 @@ class Vectors:
         """
         return pd.DataFrame(self.vectors).set_index(self.words)
 
+    @log_timer
     def as_dict(self):
         """Casts word vectors to Python dict.
 
@@ -58,6 +60,7 @@ class Vectors:
         """
         return {self.words[i]: self.vectors[i] for i in range(self.n)}
 
+    @log_timer
     def write_vecs(self, vecs_fname):
         """Writes word vectors to .vec file.
 
