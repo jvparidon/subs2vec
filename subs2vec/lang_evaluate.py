@@ -28,9 +28,9 @@ if __name__ == '__main__':
     # kludge to quickly evaluate all vectors/datasets for Van Paridon & Thompson (2019)
     lang = args.lang
     filepaths = [f'../../pretrained/fasttext/cc.{lang}.300.vec',
-                 f'wiki-sub.{lang}.vec',
-                 f'sub.{lang}.vec',
-                 f'wiki.{lang}.vec']
+                 f'../../for_publication/{lang}/wiki-subs.{lang}.vec',
+                 f'../../for_publication/{lang}/subs.{lang}.vec',
+                 f'../../for_publication/{lang}/wiki.{lang}.vec']
     for filepath in filepaths:
         if os.path.exists(filepath):
             print(filepath.split('/')[-1])
