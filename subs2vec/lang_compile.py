@@ -19,15 +19,15 @@ def lang_compile(lang):
     # subs
     corpus = f'../../data/OpenSubtitles/raw/{lang}/dedup.{lang}.txt'
     unigrams, _, _ = count_ngrams(corpus, kind='words')
-    total = unigrams['unigram_freqs'].sum()
-    print(f'| | {lang} | OpenSubtitles | subs.{lang}.1M.vec | {render_wordcount(total)} | |')
+    total = unigrams['unigram_freq'].sum()
+    print(f'| | {lang} | OpenSubtitles | subs.{lang}.1M.vec | {render_wordcount(total)} | dedup.{lang}.words.unigrams.tsv dedup.{lang}.words.bigrams.tsv dedup.{lang}.words.trigrams.tsv |')
     vectors = Vectors(f'subs.{lang}.vec', n=1e6)
     vectors.write_vecs(f'subs.{lang}.1e6.vec')
 
     # wiki
     corpus = f'../../data/wiki/{lang}/dedup.{lang}wiki-meta.txt'
     unigrams, _, _ = count_ngrams(corpus, kind='words')
-    total = unigrams['unigram_freqs'].sum()
+    total = unigrams['unigram_freq'].sum()
     print(f'| | | Wikipedia | wiki.{lang}.1M.vec | {render_wordcount(total)} | |')
     vectors = Vectors(f'wiki.{lang}.vec', n=1e6)
     vectors.write_vecs(f'wiki.{lang}.1e6.vec')
