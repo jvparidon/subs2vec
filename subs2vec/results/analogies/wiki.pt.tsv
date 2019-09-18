@@ -1,0 +1,3 @@
+	score	adjusted score	source
+0	0.6724850711988976	0.5070422535211268	pt-syntactic-google.tsv
+0	0.4020853698273053	0.27966005665722377	pt-semantic-google.tsv

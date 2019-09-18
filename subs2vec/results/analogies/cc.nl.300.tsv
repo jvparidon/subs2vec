@@ -1,0 +1,3 @@
+	score	adjusted score	source
+0	0.7321802935010482	0.5842743621915516	nl-syntactic-google.tsv
+0	0.7128547579298832	0.6832	nl-semantic_nocountries-google.tsv

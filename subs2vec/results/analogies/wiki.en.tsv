@@ -1,0 +1,6 @@
+	score	adjusted score	source
+0	0.054548296342607064	0.04643427354976051	en-analogies-semrel.tsv
+0	0.7757236682072488	0.7096128170894526	en-semantic-google.tsv
+0	0.004805037004307964	0.004350000000000001	en-analogies-bless.tsv
+0	0.8140226357183963	0.8039977264115195	en-syntactic-google.tsv
+0	0.7248	0.7248	en-semantic_no_countries-google.tsv
