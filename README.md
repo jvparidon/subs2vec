@@ -33,7 +33,8 @@ Results from Van Paridon & Thompson (2019) are in `subs2vec/evaluation/article_r
 ### Extending lexical norms
 To extend lexical norms (either norms you have collected yourself, or norms provided in this repository) use:  
 `python3 -m subs2vec.norms fr french_word_vectors.vec --extend_norms=french_norms_file.txt`  
-The norms file should be a tab-separated text file, with the first line containing column names and the column containing the words should be called `word`. Unobserved cells should be left empty. If you are unsure how to generate this file, you can create your list in Excel and then use `Save as... tab-delimited text`.
+The norms file should be a tab-separated text file, with the first line containing column names and the column containing the words should be called `word`. Unobserved cells should be left empty. If you are unsure how to generate this file, you can create your list in Excel and then use `Save as... tab-delimited text`.  
+For an overview of norms that come included in the repo (and their authors), see [this list](https://github.com/jvparidon/subs2vec/blob/master/subs2vec/datasets/norms_table.tsv). For the norms datasets themselves, look inside [this directory](https://github.com/jvparidon/subs2vec/tree/master/subs2vec/datasets/norms).
 
 ### Extracting word frequencies
 The subtitle corpus used in Van Paridon & Thompson (2019) was also used to compile the word frequencies in SUBTLEX [ref]. That same corpus can be used to compile bigram and trigram frequencies as well.
@@ -70,7 +71,8 @@ For more detailed training options:
 ## API
 For more detailed documentation of the package modules and API, see [subs2vec.readthedocs.io](https://subs2vec.readthedocs.io)
 
-## Datasets
+## Downloading datasets
+This table contains links to the top 1 million word vectors in each language, as well as the word, bigram, and trigram frequencies in the subtitles corpus.
 
 | language | lang | corpus | vectors | corpus word count | ngram frequencies |
 |---|---|---|---|---:|---|
