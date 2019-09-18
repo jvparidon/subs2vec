@@ -41,7 +41,7 @@ def compare_similarities(vectors, similarities):
     penalty = (total - missing) / total
     score = scipy.stats.spearmanr(similarities_dsm, vecs_dsm)[0]
     adjusted_score = scipy.stats.spearmanr(similarities_dsm, vecs_dsm)[0] * penalty
-    score = pd.DataFrame({'score': [score], 'adjusted score': [adjusted_score]})
+    score = pd.DataFrame({'rank r': [score], 'adjusted rank r': [adjusted_score]})
     predictions = pd.DataFrame({'word1': word1, 'word2': word2, 'similarity': similarities_dsm, 'predicted similarity': vecs_dsm})
     return {'scores': score, 'predictions': predictions}
 

@@ -73,16 +73,18 @@ def predict_norms(vectors, norms):
     scores = []
     for col in cols:
         # set dependent variable and calculate 10-fold mean fit/predict scores
-        df_subset = df.loc[:,vecs_df.columns.values]  # use .loc[] so copy is created and no setting with copy warning is issued
+        df_subset = df.loc[:, vecs_df.columns.values]  # use .loc[] so copy is created and no setting with copy warning is issued
         df_subset[col] = df[col]
         df_subset = df_subset.dropna()  # drop NaNs for this specific y
         x = df_subset[vecs_df.columns.values]
         y = df_subset[col]
         cv_scores = sklearn.model_selection.cross_val_score(model, x, y, cv=cv)
-        median_score = np.median(cv_scores) * penalty
+        median_score = np.median(cv_scores)
+        penalized_score = median_score * penalty
         scores.append({
             'norm': col,
-            'r': np.sqrt(median_score),  # take square root of explained variance to get Pearson r
+            'adjusted r': np.sqrt(penalized_score),  # take square root of explained variance to get Pearson r
+            'adjusted r-squared': penalized_score,
             'r-squared': median_score
         })
 
