@@ -17,7 +17,7 @@ def render_wordcount(wordcount):
 
 def lang_compile(lang):
     # subs
-    corpus = f'../../data/OpenSubtitles/raw/dedup.{lang}.txt'
+    corpus = f'../../data/OpenSubtitles/raw/{lang}/dedup.{lang}.txt'
     unigrams, _, _ = count_ngrams(corpus, kind='words')
     total = unigrams['unigram_freqs'].sum()
     print(f'| | {lang} | OpenSubtitles | subs.{lang}.1M.vec | {render_wordcount(total)} | |')
@@ -25,7 +25,7 @@ def lang_compile(lang):
     vectors.write_vecs(f'subs.{lang}.1e6.vec')
 
     # wiki
-    corpus = f'../../data/wiki/dedup.{lang}.txt'
+    corpus = f'../../data/wiki/{lang}/dedup.{lang}wiki-meta.txt'
     unigrams, _, _ = count_ngrams(corpus, kind='words')
     total = unigrams['unigram_freqs'].sum()
     print(f'| | | Wikipedia | wiki.{lang}.1M.vec | {render_wordcount(total)} | |')

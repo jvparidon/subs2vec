@@ -54,12 +54,7 @@ def count_ngrams(fname, kind='words', min_freq=1, no_bigrams=False, no_trigrams=
     bigrams = pd.DataFrame.from_dict(bigrams, orient='index', columns=['bigram_freq']).sort_values(by=['bigram_freq'], ascending=False)
     trigrams = pd.DataFrame.from_dict(trigrams, orient='index', columns=['trigram_freq']).sort_values(by=['trigram_freq'], ascending=False)
 
-    if not os.path.exists('results'):
-        os.mkdir('results')
-    results_path = os.path.join('results', 'frequencies')
-    if not os.path.exists(results_path):
-        os.mkdir(results_path)
-    base_fname = os.path.join(results_path, '.'.join(os.path.basename(fname).split('.')[:-1]))
+    base_fname = '.'.join(os.path.basename(fname).split('.')[:-1])
     unigrams.to_csv(f'{base_fname}_{kind}_unigrams.tsv', index_label='unigram', sep='\t')
     bigrams.to_csv(f'{base_fname}_{kind}_bigrams.tsv', index_label='bigram', sep='\t')
     trigrams.to_csv(f'{base_fname}_{kind}_trigrams.tsv', index_label='trigram', sep='\t')
