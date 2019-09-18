@@ -74,231 +74,174 @@ For more detailed documentation of the package modules and API, see [subs2vec.re
 
 | language | lang | corpus | vectors | corpus word count | ngram frequencies |
 |---|---|---|---|---:|---|
-| Afrikaans | af | OpenSubtitles | ../../data/OpenSubtitles/raw/af/dedup.af.txt | 323664 | |
-| | | | | | |
-| | | | | | |
-| | | Wikipedia | ../../data/wiki/af/dedup.afwiki-meta.txt | 17089024
-| Arabic | ar | OpenSubtitles | ../../data/OpenSubtitles/raw/ar/dedup.ar.txt | 188360588 | |
-| | | | | | |
-| | | | | | |
-| | | Wikipedia | ../../data/wiki/ar/dedup.arwiki-meta.txt | 119823113
-| Bulgarian | bg | OpenSubtitles | ../../data/OpenSubtitles/raw/bg/dedup.bg.txt | 246937673
-| | | | | | 
-| | | | | | 
-| | | Wikipedia | ../../data/wiki/bg/dedup.bgwiki-meta.txt | 53474662
-| Bengali | bn | OpenSubtitles | ../../data/OpenSubtitles/raw/bn/dedup.bn.txt | 2227540
-| | | | | | 
-| | | | | | 
-| | | Wikipedia | ../../data/wiki/bn/dedup.bnwiki-meta.txt | 18575527
-| Breton | br | OpenSubtitles | ../../data/OpenSubtitles/raw/br/dedup.br.txt | 110928
-| | | | | | 
-| | | | | | 
-| | | Wikipedia | ../../data/wiki/br/dedup.brwiki-meta.txt | 7644078
-| Bosnian | bs | OpenSubtitles | ../../data/OpenSubtitles/raw/bs/dedup.bs.txt | 91932338
-| | | | | | 
-| | | | | | 
-| | | Wikipedia | ../../data/wiki/bs/dedup.bswiki-meta.txt | 13140964
-| Catalan | ca | OpenSubtitles | ../../data/OpenSubtitles/raw/ca/dedup.ca.txt | 3098951
-| | | | | | 
-| | | | | | 
-| | | Wikipedia | ../../data/wiki/ca/dedup.cawiki-meta.txt | 175562502
-| Czech | cs | OpenSubtitles | ../../data/OpenSubtitles/raw/cs/dedup.cs.txt | 249041681
-| | | | | | 
-| | | | | | 
-| | | Wikipedia | ../../data/wiki/cs/dedup.cswiki-meta.txt | 100293683
-| Danish | da | OpenSubtitles | ../../data/OpenSubtitles/raw/da/dedup.da.txt | 87088175
-| | | | | | 
-| | | | | | 
-| Danish | da | Wikipedia | ../../data/wiki/da/dedup.dawiki-meta.txt | 56246020
-| German | de | OpenSubtitles | ../../data/OpenSubtitles/raw/de/dedup.de.txt | 139494247
-| | | | | | 
-| | | | | | 
-| German | de | Wikipedia | ../../data/wiki/de/dedup.dewiki-meta.txt | 976143003
-| Greek | el | OpenSubtitles | ../../data/OpenSubtitles/raw/el/dedup.el.txt | 271063438
-| | | | | | 
-| | | | | | 
-| Greek | el | Wikipedia | ../../data/wiki/el/dedup.elwiki-meta.txt | 58228906
-| English | en | OpenSubtitles | ../../data/OpenSubtitles/raw/en/dedup.en.txt | 750595864
-| | | | | | 
-| | | | | | 
-| English | en | Wikipedia | ../../data/wiki/en/dedup.enwiki-meta.txt | 2477794991
-| Esperanto | eo | OpenSubtitles | ../../data/OpenSubtitles/raw/eo/dedup.eo.txt | 381667
-| | | | | | 
-| | | | | | 
-| Esperanto | eo | Wikipedia | ../../data/wiki/eo/dedup.eowiki-meta.txt | 37640320
-| Spanish | es | OpenSubtitles | ../../data/OpenSubtitles/raw/es/dedup.es.txt | 514363934
-| | | | | | 
-| | | | | | 
-| Spanish | es | Wikipedia | ../../data/wiki/es/dedup.eswiki-meta.txt | 585587692
-| Estonian | et | OpenSubtitles | ../../data/OpenSubtitles/raw/et/dedup.et.txt | 60427435
-| | | | | | 
-| | | | | | 
-| Estonian | et | Wikipedia | ../../data/wiki/et/dedup.etwiki-meta.txt | 29174555
-| Basque | eu | OpenSubtitles | ../../data/OpenSubtitles/raw/eu/dedup.eu.txt | 3400495
-| | | | | | 
-| | | | | | 
-| Basque | eu | Wikipedia | ../../data/wiki/eu/dedup.euwiki-meta.txt | 20139779
-| Farsi | fa | OpenSubtitles | ../../data/OpenSubtitles/raw/fa/dedup.fa.txt | 45332894
-| | | | | | 
-| | | | | | 
-| Farsi | fa | Wikipedia | ../../data/wiki/fa/dedup.fawiki-meta.txt | 86730262
-| Finnish | fi | OpenSubtitles | ../../data/OpenSubtitles/raw/fi/dedup.fi.txt | 116907162
-| | | | | | 
-| | | | | | 
-| Finnish | fi | Wikipedia | ../../data/wiki/fi/dedup.fiwiki-meta.txt | 73628518
-| French | fr | OpenSubtitles | ../../data/OpenSubtitles/raw/fr/dedup.fr.txt | 335525382
-| | | | | | 
-| | | | | | 
-| French | fr | Wikipedia | ../../data/wiki/fr/dedup.frwiki-meta.txt | 724280677
-| Galician | gl | OpenSubtitles | ../../data/OpenSubtitles/raw/gl/dedup.gl.txt | 1666743
-| | | | | | 
-| | | | | | 
-| Galician | gl | Wikipedia | ../../data/wiki/gl/dedup.glwiki-meta.txt | 40154890
-| Hebrew | he | OpenSubtitles | ../../data/OpenSubtitles/raw/he/dedup.he.txt | 169640986
-| | | | | | 
-| | | | | | 
-| Hebrew | he | Wikipedia | ../../data/wiki/he/dedup.hewiki-meta.txt | 132900287
-| Hindi | hi | OpenSubtitles | ../../data/OpenSubtitles/raw/hi/dedup.hi.txt | 659798
-| | | | | | 
-| | | | | | 
-| Hindi | hi | Wikipedia | ../../data/wiki/hi/dedup.hiwiki-meta.txt | 31099477
-| Croatian | hr | OpenSubtitles | ../../data/OpenSubtitles/raw/hr/dedup.hr.txt | 241661205
-| | | | | | 
-| | | | | | 
-| Croatian | hr | Wikipedia | ../../data/wiki/hr/dedup.hrwiki-meta.txt | 42982505
-| Hungarian | hu | OpenSubtitles | ../../data/OpenSubtitles/raw/hu/dedup.hu.txt | 227698561
-| | | | | | 
-| | | | | | 
-| Hungarian | hu | Wikipedia | ../../data/wiki/hu/dedup.huwiki-meta.txt | 120830242
-| Armenian | hy | OpenSubtitles | ../../data/OpenSubtitles/raw/hy/dedup.hy.txt | 23730
-| | | | | | 
-| | | | | | 
-| Armenian | hy | Wikipedia | ../../data/wiki/hy/dedup.hywiki-meta.txt | 38490279
-| Indonesian | id | OpenSubtitles | ../../data/OpenSubtitles/raw/id/dedup.id.txt | 65035949
-| | | | | | 
-| | | | | | 
-| Indonesian | id | Wikipedia | ../../data/wiki/id/dedup.idwiki-meta.txt | 69226947
-| Icelandic | is | OpenSubtitles | ../../data/OpenSubtitles/raw/is/dedup.is.txt | 7474111
-| | | | | | 
-| | | | | | 
-| Icelandic| is | Wikipedia | ../../data/wiki/is/dedup.iswiki-meta.txt | 7196891
-| Italian | it | OpenSubtitles | ../../data/OpenSubtitles/raw/it/dedup.it.txt | 277692790
-| | | | | | 
-| | | | | | 
-| Italian | it | Wikipedia | ../../data/wiki/it/dedup.itwiki-meta.txt | 476457198
-| Japanese | ja | OpenSubtitles | ../../data/OpenSubtitles/raw/ja/dedup.ja.txt | 3027883
-| | | | | | 
-| | | | | | 
-| Japanese | ja | Wikipedia | ../../data/wiki/ja/dedup.jawiki-meta.txt | 23524347
-| Georgian | ka | OpenSubtitles | ../../data/OpenSubtitles/raw/ka/dedup.ka.txt | 1108570
-| | | | | | 
-| | | | | | 
-| Georgian | ka | Wikipedia | ../../data/wiki/ka/dedup.kawiki-meta.txt | 15259793
-| Kazakh | kk | OpenSubtitles | ../../data/OpenSubtitles/raw/kk/dedup.kk.txt | 13480
-| | | | | | 
-| | | | | | 
-| Kazakh | kk | Wikipedia | ../../data/wiki/kk/dedup.kkwiki-meta.txt | 18298523
-| Korean | ko | OpenSubtitles | ../../data/OpenSubtitles/raw/ko/dedup.ko.txt | 6834406
-| | | | | | 
-| | | | | | 
-| Korean | ko | Wikipedia | ../../data/wiki/ko/dedup.kowiki-meta.txt | 62946030
-| Lithuanian | lt | OpenSubtitles | ../../data/OpenSubtitles/raw/lt/dedup.lt.txt | 6252008
-| | | | | | 
-| | | | | | 
-| Lithuanian | lt | Wikipedia | ../../data/wiki/lt/dedup.ltwiki-meta.txt | 23201287
-| Latvian | lv | OpenSubtitles | ../../data/OpenSubtitles/raw/lv/dedup.lv.txt | 2167620
-| | | | | | 
-| | | | | | 
-| Latvian | lv | Wikipedia | ../../data/wiki/lv/dedup.lvwiki-meta.txt | 13939982
-| Macedonian | mk | OpenSubtitles | ../../data/OpenSubtitles/raw/mk/dedup.mk.txt | 20095253
-| | | | | | 
-| | | | | | 
-| Macedonian | mk | Wikipedia | ../../data/wiki/mk/dedup.mkwiki-meta.txt | 26681024
-| Malayalam | ml | OpenSubtitles | ../../data/OpenSubtitles/raw/ml/dedup.ml.txt | 1520820
-| | | | | | 
-| | | | | | 
-| Malayalam | ml | Wikipedia | ../../data/wiki/ml/dedup.mlwiki-meta.txt | 10454147
-| Malay | ms | OpenSubtitles | ../../data/OpenSubtitles/raw/ms/dedup.ms.txt | 12184059
-| | | | | | 
-| | | | | | 
-| Malay | ms | Wikipedia | ../../data/wiki/ms/dedup.mswiki-meta.txt | 28946522
-| Dutch | nl | OpenSubtitles | ../../data/OpenSubtitles/raw/nl/dedup.nl.txt | 264868501
-| | | | | | 
-| | | | | | 
-| Dutch | nl | Wikipedia | ../../data/wiki/nl/dedup.nlwiki-meta.txt | 248764425
-| Norwegian | no | OpenSubtitles | ../../data/OpenSubtitles/raw/no/dedup.no.txt | 45553185
-| | | | | | 
-| | | | | | 
-| Norwegian | no | Wikipedia | ../../data/wiki/no/dedup.nowiki-meta.txt | 90882902
-| Polish | pl | OpenSubtitles | ../../data/OpenSubtitles/raw/pl/dedup.pl.txt | 250390754
-| | | | | | 
-| | | | | | 
-| Polish | pl | Wikipedia | ../../data/wiki/pl/dedup.plwiki-meta.txt | 232421847
-| Portuguese | pt | OpenSubtitles | ../../data/OpenSubtitles/raw/pt/dedup.pt.txt | 257597148
-| | | | | | 
-| | | | | | 
-| Portuguese | pt | Wikipedia | ../../data/wiki/pt/dedup.ptwiki-meta.txt | 238221600
-| Romanian | ro | OpenSubtitles | ../../data/OpenSubtitles/raw/ro/dedup.ro.txt | 434898200
-| | | | | | 
-| | | | | | 
-| Romanian | ro | Wikipedia | ../../data/wiki/ro/dedup.rowiki-meta.txt | 65168414
-| Russian | ru | OpenSubtitles | ../../data/OpenSubtitles/raw/ru/dedup.ru.txt | 152197702
-| | | | | | 
-| | | | | | 
-| Russian | ru | Wikipedia | ../../data/wiki/ru/dedup.ruwiki-meta.txt | 390749248
-| Sinhalese | si | OpenSubtitles | ../../data/OpenSubtitles/raw/si/dedup.si.txt | 3493085
-| | | | | | 
-| | | | | | 
-| Sinhalese | si | Wikipedia | ../../data/wiki/si/dedup.siwiki-meta.txt | 5980385
-| Slovak | sk | OpenSubtitles | ../../data/OpenSubtitles/raw/sk/dedup.sk.txt | 47349588
-| | | | | | 
-| | | | | | 
-| Slovak | sk | Wikipedia | ../../data/wiki/sk/dedup.skwiki-meta.txt | 28569119
-| Slovene | sl | OpenSubtitles | ../../data/OpenSubtitles/raw/sl/dedup.sl.txt | 106593590
-| | | | | | 
-| | | | | | 
-| Slovene | sl | Wikipedia | ../../data/wiki/sl/dedup.slwiki-meta.txt | 31642018
-| Albanian | sq | OpenSubtitles | ../../data/OpenSubtitles/raw/sq/dedup.sq.txt | 11767480
-| | | | | | 
-| | | | | | 
-| Albanian | sq | Wikipedia | ../../data/wiki/sq/dedup.sqwiki-meta.txt | 17768079
-| Serbian | sr | OpenSubtitles | ../../data/OpenSubtitles/raw/sr/dedup.sr.txt | 343517730
-| | | | | | 
-| | | | | | 
-| Serbian | sr | Wikipedia | ../../data/wiki/sr/dedup.srwiki-meta.txt | 69719972
-| Swedish | sv | OpenSubtitles | ../../data/OpenSubtitles/raw/sv/dedup.sv.txt | 101270590
-| | | | | | 
-| | | | | | 
-| Swedish | sv | Wikipedia | ../../data/wiki/sv/dedup.svwiki-meta.txt | 143268105
-| Tamil | ta | OpenSubtitles | ../../data/OpenSubtitles/raw/ta/dedup.ta.txt | 123487
-| | | | | | 
-| | | | | | 
-| Tamil | ta | Wikipedia | ../../data/wiki/ta/dedup.tawiki-meta.txt | 17143983
-| Telugu | te | OpenSubtitles | ../../data/OpenSubtitles/raw/te/dedup.te.txt | 103117
-| | | | | | 
-| | | | | | 
-| Telugu | te | Wikipedia | ../../data/wiki/te/dedup.tewiki-meta.txt | 15246610
-| Thai | th | OpenSubtitles | ../../data/OpenSubtitles/raw/th/dedup.th.txt | 10557949
-| | | | | | 
-| | | | | | 
-| Thai | th | Wikipedia | ../../data/wiki/th/dedup.thwiki-meta.txt | 12440033
-| Tagalog | tl | OpenSubtitles | ../../data/OpenSubtitles/raw/tl/dedup.tl.txt | 87946
-| | | | | | 
-| | | | | | 
-| Tagalog | tl | Wikipedia | ../../data/wiki/tl/dedup.tlwiki-meta.txt | 6515000
-| Turkish | tr | OpenSubtitles | ../../data/OpenSubtitles/raw/tr/dedup.tr.txt | 239771328
-| | | | | | 
-| | | | | | 
-| Turkish | tr | Wikipedia | ../../data/wiki/tr/dedup.trwiki-meta.txt | 54731119
-| Ukrainian | uk | OpenSubtitles | ../../data/OpenSubtitles/raw/uk/dedup.uk.txt | 4945827
-| | | | | | 
-| | | | | | 
-| Ukrainian | uk | Wikipedia | ../../data/wiki/uk/dedup.ukwiki-meta.txt | 162630341
-| Urdu | ur | OpenSubtitles | ../../data/OpenSubtitles/raw/ur/dedup.ur.txt | 195581
-| | | | | | 
-| | | | | | 
-| Urdu | ur | Wikipedia | ../../data/wiki/ur/dedup.urwiki-meta.txt | 15878600
-| Vietnamese | vi | OpenSubtitles | ../../data/OpenSubtitles/raw/vi/dedup.vi.txt | 27372811
-| | | | | | 
-| | | | | | 
-| Vietnamese | vi | Wikipedia | ../../data/wiki/vi/dedup.viwiki-meta.txt | 115161096
+| Afrikaans | af | OpenSubtitles | subs.af.1M.vec |    323K | dedup.af.words.unigrams.tsv dedup.af.words.bigrams.tsv dedup.af.words.trigrams.tsv |
+| | | Wikipedia | wiki.af.1M.vec |     17M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.af.1M.vec | | |
+| Arabic | ar | OpenSubtitles | subs.ar.1M.vec |    188M | dedup.ar.words.unigrams.tsv dedup.ar.words.bigrams.tsv dedup.ar.words.trigrams.tsv |
+| | | Wikipedia | wiki.ar.1M.vec |    119M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.ar.1M.vec | | |
+| Bulgarian | bg | OpenSubtitles | subs.bg.1M.vec |    246M | dedup.bg.words.unigrams.tsv dedup.bg.words.bigrams.tsv dedup.bg.words.trigrams.tsv |
+| | | Wikipedia | wiki.bg.1M.vec |     53M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.bg.1M.vec | | |
+| Bengali | bn | OpenSubtitles | subs.bn.1M.vec |   2227K | dedup.bn.words.unigrams.tsv dedup.bn.words.bigrams.tsv dedup.bn.words.trigrams.tsv |
+| | | Wikipedia | wiki.bn.1M.vec |     18M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.bn.1M.vec | | |
+| Breton | br | OpenSubtitles | subs.br.1M.vec |    110K | dedup.br.words.unigrams.tsv dedup.br.words.bigrams.tsv dedup.br.words.trigrams.tsv |
+| | | Wikipedia | wiki.br.1M.vec |   7644K | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.br.1M.vec | | |
+| Bosnian | bs | OpenSubtitles | subs.bs.1M.vec |     91M | dedup.bs.words.unigrams.tsv dedup.bs.words.bigrams.tsv dedup.bs.words.trigrams.tsv |
+| | | Wikipedia | wiki.bs.1M.vec |     13M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.bs.1M.vec | | |
+| Catalan | ca | OpenSubtitles | subs.ca.1M.vec |   3098K | dedup.ca.words.unigrams.tsv dedup.ca.words.bigrams.tsv dedup.ca.words.trigrams.tsv |
+| | | Wikipedia | wiki.ca.1M.vec |    175M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.ca.1M.vec | | |
+| Czech | cs | OpenSubtitles | subs.cs.1M.vec |    249M | dedup.cs.words.unigrams.tsv dedup.cs.words.bigrams.tsv dedup.cs.words.trigrams.tsv |
+| | | Wikipedia | wiki.cs.1M.vec |    100M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.cs.1M.vec | | |
+| Danish | da | OpenSubtitles | subs.da.1M.vec |     87M | dedup.da.words.unigrams.tsv dedup.da.words.bigrams.tsv dedup.da.words.trigrams.tsv |
+| | | Wikipedia | wiki.da.1M.vec |     56M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.da.1M.vec | | |
+| German | de | OpenSubtitles | subs.de.1M.vec |    139M | dedup.de.words.unigrams.tsv dedup.de.words.bigrams.tsv dedup.de.words.trigrams.tsv |
+| | | Wikipedia | wiki.de.1M.vec |    976M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.de.1M.vec | | |
+| Greek | el | OpenSubtitles | subs.el.1M.vec |    271M | dedup.el.words.unigrams.tsv dedup.el.words.bigrams.tsv dedup.el.words.trigrams.tsv |
+| | | Wikipedia | wiki.el.1M.vec |     58M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.el.1M.vec | | |
+| English | en | OpenSubtitles | subs.en.1M.vec |    750M | dedup.en.words.unigrams.tsv dedup.en.words.bigrams.tsv dedup.en.words.trigrams.tsv |
+| | | Wikipedia | wiki.en.1M.vec |   2477M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.en.1M.vec | | |
+| Esperanto | eo | OpenSubtitles | subs.eo.1M.vec |    381K | dedup.eo.words.unigrams.tsv dedup.eo.words.bigrams.tsv dedup.eo.words.trigrams.tsv |
+| | | Wikipedia | wiki.eo.1M.vec |     37M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.eo.1M.vec | | |
+| Spanish | es | OpenSubtitles | subs.es.1M.vec |    514M | dedup.es.words.unigrams.tsv dedup.es.words.bigrams.tsv dedup.es.words.trigrams.tsv |
+| | | Wikipedia | wiki.es.1M.vec |    585M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.es.1M.vec | | |
+| Estonian | et | OpenSubtitles | subs.et.1M.vec |     60M | dedup.et.words.unigrams.tsv dedup.et.words.bigrams.tsv dedup.et.words.trigrams.tsv |
+| | | Wikipedia | wiki.et.1M.vec |     29M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.et.1M.vec | | |
+| Basque | eu | OpenSubtitles | subs.eu.1M.vec |   3400K | dedup.eu.words.unigrams.tsv dedup.eu.words.bigrams.tsv dedup.eu.words.trigrams.tsv |
+| | | Wikipedia | wiki.eu.1M.vec |     20M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.eu.1M.vec | | |
+| Farsi | fa | OpenSubtitles | subs.fa.1M.vec |     45M | dedup.fa.words.unigrams.tsv dedup.fa.words.bigrams.tsv dedup.fa.words.trigrams.tsv |
+| | | Wikipedia | wiki.fa.1M.vec |     86M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.fa.1M.vec | | |
+| Finnish | fi | OpenSubtitles | subs.fi.1M.vec |    116M | dedup.fi.words.unigrams.tsv dedup.fi.words.bigrams.tsv dedup.fi.words.trigrams.tsv |
+| | | Wikipedia | wiki.fi.1M.vec |     73M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.fi.1M.vec | | |
+| French | fr | OpenSubtitles | subs.fr.1M.vec |    335M | dedup.fr.words.unigrams.tsv dedup.fr.words.bigrams.tsv dedup.fr.words.trigrams.tsv |
+| | | Wikipedia | wiki.fr.1M.vec |    724M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.fr.1M.vec | | |
+| Galician | gl | OpenSubtitles | subs.gl.1M.vec |   1666K | dedup.gl.words.unigrams.tsv dedup.gl.words.bigrams.tsv dedup.gl.words.trigrams.tsv |
+| | | Wikipedia | wiki.gl.1M.vec |     40M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.gl.1M.vec | | |
+| Hebrew | he | OpenSubtitles | subs.he.1M.vec |    169M | dedup.he.words.unigrams.tsv dedup.he.words.bigrams.tsv dedup.he.words.trigrams.tsv |
+| | | Wikipedia | wiki.he.1M.vec |    132M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.he.1M.vec | | |
+| Hindi | hi | OpenSubtitles | subs.hi.1M.vec |    659K | dedup.hi.words.unigrams.tsv dedup.hi.words.bigrams.tsv dedup.hi.words.trigrams.tsv |
+| | | Wikipedia | wiki.hi.1M.vec |     31M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.hi.1M.vec | | |
+| Croatian | hr | OpenSubtitles | subs.hr.1M.vec |    241M | dedup.hr.words.unigrams.tsv dedup.hr.words.bigrams.tsv dedup.hr.words.trigrams.tsv |
+| | | Wikipedia | wiki.hr.1M.vec |     42M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.hr.1M.vec | | |
+| Hungarian | hu | OpenSubtitles | subs.hu.1M.vec |    227M | dedup.hu.words.unigrams.tsv dedup.hu.words.bigrams.tsv dedup.hu.words.trigrams.tsv |
+| | | Wikipedia | wiki.hu.1M.vec |    120M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.hu.1M.vec | | |
+| Armenian | hy | OpenSubtitles | subs.hy.1M.vec |     23K | dedup.hy.words.unigrams.tsv dedup.hy.words.bigrams.tsv dedup.hy.words.trigrams.tsv |
+| | | Wikipedia | wiki.hy.1M.vec |     38M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.hy.1M.vec | | |
+| Indonesian | id | OpenSubtitles | subs.id.1M.vec |     65M | dedup.id.words.unigrams.tsv dedup.id.words.bigrams.tsv dedup.id.words.trigrams.tsv |
+| | | Wikipedia | wiki.id.1M.vec |     69M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.id.1M.vec | | |
+| Icelandic | is | OpenSubtitles | subs.is.1M.vec |   7474K | dedup.is.words.unigrams.tsv dedup.is.words.bigrams.tsv dedup.is.words.trigrams.tsv |
+| | | Wikipedia | wiki.is.1M.vec |   7196K | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.is.1M.vec | | |
+| Italian | it | OpenSubtitles | subs.it.1M.vec |    277M | dedup.it.words.unigrams.tsv dedup.it.words.bigrams.tsv dedup.it.words.trigrams.tsv |
+| | | Wikipedia | wiki.it.1M.vec |    476M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.it.1M.vec | | |
+| Japanese | ja | OpenSubtitles | subs.ja.1M.vec |   3027K | dedup.ja.words.unigrams.tsv dedup.ja.words.bigrams.tsv dedup.ja.words.trigrams.tsv |
+| | | Wikipedia | wiki.ja.1M.vec |     23M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.ja.1M.vec | | |
+| Georgian | ka | OpenSubtitles | subs.ka.1M.vec |   1108K | dedup.ka.words.unigrams.tsv dedup.ka.words.bigrams.tsv dedup.ka.words.trigrams.tsv |
+| | | Wikipedia | wiki.ka.1M.vec |     15M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.ka.1M.vec | | |
+| Kazakh | kk | OpenSubtitles | subs.kk.1M.vec |     13K | dedup.kk.words.unigrams.tsv dedup.kk.words.bigrams.tsv dedup.kk.words.trigrams.tsv |
+| | | Wikipedia | wiki.kk.1M.vec |     18M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.kk.1M.vec | | |
+| Korean | ko | OpenSubtitles | subs.ko.1M.vec |   6834K | dedup.ko.words.unigrams.tsv dedup.ko.words.bigrams.tsv dedup.ko.words.trigrams.tsv |
+| | | Wikipedia | wiki.ko.1M.vec |     62M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.ko.1M.vec | | |
+| Lithuanian | lt | OpenSubtitles | subs.lt.1M.vec |   6252K | dedup.lt.words.unigrams.tsv dedup.lt.words.bigrams.tsv dedup.lt.words.trigrams.tsv |
+| | | Wikipedia | wiki.lt.1M.vec |     23M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.lt.1M.vec | | |
+| Latvian | lv | OpenSubtitles | subs.lv.1M.vec |   2167K | dedup.lv.words.unigrams.tsv dedup.lv.words.bigrams.tsv dedup.lv.words.trigrams.tsv |
+| | | Wikipedia | wiki.lv.1M.vec |     13M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.lv.1M.vec | | |
+| Macedonian | mk | OpenSubtitles | subs.mk.1M.vec |     20M | dedup.mk.words.unigrams.tsv dedup.mk.words.bigrams.tsv dedup.mk.words.trigrams.tsv |
+| | | Wikipedia | wiki.mk.1M.vec |     26M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.mk.1M.vec | | |
+| Malayalam | ml | OpenSubtitles | subs.ml.1M.vec |   1520K | dedup.ml.words.unigrams.tsv dedup.ml.words.bigrams.tsv dedup.ml.words.trigrams.tsv |
+| | | Wikipedia | wiki.ml.1M.vec |     10M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.ml.1M.vec | | |
+| Malay | ms | OpenSubtitles | subs.ms.1M.vec |     12M | dedup.ms.words.unigrams.tsv dedup.ms.words.bigrams.tsv dedup.ms.words.trigrams.tsv |
+| | | Wikipedia | wiki.ms.1M.vec |     28M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.ms.1M.vec | | |
+| Dutch | nl | OpenSubtitles | subs.nl.1M.vec |    264M | dedup.nl.words.unigrams.tsv dedup.nl.words.bigrams.tsv dedup.nl.words.trigrams.tsv |
+| | | Wikipedia | wiki.nl.1M.vec |    248M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.nl.1M.vec | | |
+| Norwegian | no | OpenSubtitles | subs.no.1M.vec |     45M | dedup.no.words.unigrams.tsv dedup.no.words.bigrams.tsv dedup.no.words.trigrams.tsv |
+| | | Wikipedia | wiki.no.1M.vec |     90M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.no.1M.vec | | |
+| Poland | pl | OpenSubtitles | subs.pl.1M.vec |    250M | dedup.pl.words.unigrams.tsv dedup.pl.words.bigrams.tsv dedup.pl.words.trigrams.tsv |
+| | | Wikipedia | wiki.pl.1M.vec |    232M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.pl.1M.vec | | |
+| Portuguese | pt | OpenSubtitles | subs.pt.1M.vec |    257M | dedup.pt.words.unigrams.tsv dedup.pt.words.bigrams.tsv dedup.pt.words.trigrams.tsv |
+| | | Wikipedia | wiki.pt.1M.vec |    238M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.pt.1M.vec | | |
+| Romanian | ro | OpenSubtitles | subs.ro.1M.vec |    434M | dedup.ro.words.unigrams.tsv dedup.ro.words.bigrams.tsv dedup.ro.words.trigrams.tsv |
+| | | Wikipedia | wiki.ro.1M.vec |     65M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.ro.1M.vec | | |
+| Russian | ru | OpenSubtitles | subs.ru.1M.vec |    152M | dedup.ru.words.unigrams.tsv dedup.ru.words.bigrams.tsv dedup.ru.words.trigrams.tsv |
+| | | Wikipedia | wiki.ru.1M.vec |    390M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.ru.1M.vec | | |
+| Sinhalese | si | OpenSubtitles | subs.si.1M.vec |   3493K | dedup.si.words.unigrams.tsv dedup.si.words.bigrams.tsv dedup.si.words.trigrams.tsv |
+| | | Wikipedia | wiki.si.1M.vec |   5980K | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.si.1M.vec | | |
+| Slovak | sk | OpenSubtitles | subs.sk.1M.vec |     47M | dedup.sk.words.unigrams.tsv dedup.sk.words.bigrams.tsv dedup.sk.words.trigrams.tsv |
+| | | Wikipedia | wiki.sk.1M.vec |     28M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.sk.1M.vec | | |
+| Slovene | sl | OpenSubtitles | subs.sl.1M.vec |    106M | dedup.sl.words.unigrams.tsv dedup.sl.words.bigrams.tsv dedup.sl.words.trigrams.tsv |
+| | | Wikipedia | wiki.sl.1M.vec |     31M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.sl.1M.vec | | |
+| Albanian | sq | OpenSubtitles | subs.sq.1M.vec |     11M | dedup.sq.words.unigrams.tsv dedup.sq.words.bigrams.tsv dedup.sq.words.trigrams.tsv |
+| | | Wikipedia | wiki.sq.1M.vec |     17M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.sq.1M.vec | | |
+| Serbian | sr | OpenSubtitles | subs.sr.1M.vec |    343M | dedup.sr.words.unigrams.tsv dedup.sr.words.bigrams.tsv dedup.sr.words.trigrams.tsv |
+| | | Wikipedia | wiki.sr.1M.vec |     69M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.sr.1M.vec | | |
+| Swedish | sv | OpenSubtitles | subs.sv.1M.vec |    101M | dedup.sv.words.unigrams.tsv dedup.sv.words.bigrams.tsv dedup.sv.words.trigrams.tsv |
+| | | Wikipedia | wiki.sv.1M.vec |    143M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.sv.1M.vec | | |
+| Tamil | ta | OpenSubtitles | subs.ta.1M.vec |    123K | dedup.ta.words.unigrams.tsv dedup.ta.words.bigrams.tsv dedup.ta.words.trigrams.tsv |
+| | | Wikipedia | wiki.ta.1M.vec |     17M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.ta.1M.vec | | |
+| Telugu | te | OpenSubtitles | subs.te.1M.vec |    103K | dedup.te.words.unigrams.tsv dedup.te.words.bigrams.tsv dedup.te.words.trigrams.tsv |
+| | | Wikipedia | wiki.te.1M.vec |     15M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.te.1M.vec | | |
+| Thai | th | OpenSubtitles | subs.th.1M.vec |     10M | dedup.th.words.unigrams.tsv dedup.th.words.bigrams.tsv dedup.th.words.trigrams.tsv |
+| | | Wikipedia | wiki.th.1M.vec |     12M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.th.1M.vec | | |
+| Tagalog | tl | OpenSubtitles | subs.tl.1M.vec |     87K | dedup.tl.words.unigrams.tsv dedup.tl.words.bigrams.tsv dedup.tl.words.trigrams.tsv |
+| | | Wikipedia | wiki.tl.1M.vec |   6515K | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.tl.1M.vec | | |
+| Turkish | tr | OpenSubtitles | subs.tr.1M.vec |    239M | dedup.tr.words.unigrams.tsv dedup.tr.words.bigrams.tsv dedup.tr.words.trigrams.tsv |
+| | | Wikipedia | wiki.tr.1M.vec |     54M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.tr.1M.vec | | |
+| Ukrainian | uk | OpenSubtitles | subs.uk.1M.vec |   4945K | dedup.uk.words.unigrams.tsv dedup.uk.words.bigrams.tsv dedup.uk.words.trigrams.tsv |
+| | | Wikipedia | wiki.uk.1M.vec |    162M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.uk.1M.vec | | |
+| Urdu | ur | OpenSubtitles | subs.ur.1M.vec |    195K | dedup.ur.words.unigrams.tsv dedup.ur.words.bigrams.tsv dedup.ur.words.trigrams.tsv |
+| | | Wikipedia | wiki.ur.1M.vec |     15M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.ur.1M.vec | | |
+| Vietnamese | vi | OpenSubtitles | subs.vi.1M.vec |     27M | dedup.vi.words.unigrams.tsv dedup.vi.words.bigrams.tsv dedup.vi.words.trigrams.tsv |
+| | | Wikipedia | wiki.vi.1M.vec |    115M | |
+| | | Wikipedia + OpenSubtitles | wiki-subs.vi.1M.vec | | |
