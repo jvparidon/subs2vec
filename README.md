@@ -166,84 +166,84 @@ This table contains links to the top 1 million word vectors in each language, as
 | Georgian | ka | OpenSubtitles | subs.ka.1M.vec |   1108K | dedup.ka.words.unigrams.tsv dedup.ka.words.bigrams.tsv dedup.ka.words.trigrams.tsv |
 | | | Wikipedia | wiki.ka.1M.vec |     15M | |
 | | | Wikipedia + OpenSubtitles | wiki-subs.ka.1M.vec | | |
-| Kazakh | kk | OpenSubtitles | subs.kk.1M.vec |     13K | dedup.kk.words.unigrams.tsv dedup.kk.words.bigrams.tsv dedup.kk.words.trigrams.tsv |
-| | | Wikipedia | wiki.kk.1M.vec |     18M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.kk.1M.vec | | |
-| Korean | ko | OpenSubtitles | subs.ko.1M.vec |   6834K | dedup.ko.words.unigrams.tsv dedup.ko.words.bigrams.tsv dedup.ko.words.trigrams.tsv |
-| | | Wikipedia | wiki.ko.1M.vec |     62M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.ko.1M.vec | | |
-| Lithuanian | lt | OpenSubtitles | subs.lt.1M.vec |   6252K | dedup.lt.words.unigrams.tsv dedup.lt.words.bigrams.tsv dedup.lt.words.trigrams.tsv |
-| | | Wikipedia | wiki.lt.1M.vec |     23M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.lt.1M.vec | | |
-| Latvian | lv | OpenSubtitles | subs.lv.1M.vec |   2167K | dedup.lv.words.unigrams.tsv dedup.lv.words.bigrams.tsv dedup.lv.words.trigrams.tsv |
-| | | Wikipedia | wiki.lv.1M.vec |     13M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.lv.1M.vec | | |
-| Macedonian | mk | OpenSubtitles | subs.mk.1M.vec |     20M | dedup.mk.words.unigrams.tsv dedup.mk.words.bigrams.tsv dedup.mk.words.trigrams.tsv |
-| | | Wikipedia | wiki.mk.1M.vec |     26M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.mk.1M.vec | | |
-| Malayalam | ml | OpenSubtitles | subs.ml.1M.vec |   1520K | dedup.ml.words.unigrams.tsv dedup.ml.words.bigrams.tsv dedup.ml.words.trigrams.tsv |
-| | | Wikipedia | wiki.ml.1M.vec |     10M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.ml.1M.vec | | |
-| Malay | ms | OpenSubtitles | subs.ms.1M.vec |     12M | dedup.ms.words.unigrams.tsv dedup.ms.words.bigrams.tsv dedup.ms.words.trigrams.tsv |
-| | | Wikipedia | wiki.ms.1M.vec |     28M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.ms.1M.vec | | |
-| Dutch | nl | OpenSubtitles | subs.nl.1M.vec |    264M | dedup.nl.words.unigrams.tsv dedup.nl.words.bigrams.tsv dedup.nl.words.trigrams.tsv |
-| | | Wikipedia | wiki.nl.1M.vec |    248M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.nl.1M.vec | | |
-| Norwegian | no | OpenSubtitles | subs.no.1M.vec |     45M | dedup.no.words.unigrams.tsv dedup.no.words.bigrams.tsv dedup.no.words.trigrams.tsv |
-| | | Wikipedia | wiki.no.1M.vec |     90M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.no.1M.vec | | |
-| Poland | pl | OpenSubtitles | subs.pl.1M.vec |    250M | dedup.pl.words.unigrams.tsv dedup.pl.words.bigrams.tsv dedup.pl.words.trigrams.tsv |
-| | | Wikipedia | wiki.pl.1M.vec |    232M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.pl.1M.vec | | |
-| Portuguese | pt | OpenSubtitles | subs.pt.1M.vec |    257M | dedup.pt.words.unigrams.tsv dedup.pt.words.bigrams.tsv dedup.pt.words.trigrams.tsv |
-| | | Wikipedia | wiki.pt.1M.vec |    238M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.pt.1M.vec | | |
-| Romanian | ro | OpenSubtitles | subs.ro.1M.vec |    434M | dedup.ro.words.unigrams.tsv dedup.ro.words.bigrams.tsv dedup.ro.words.trigrams.tsv |
-| | | Wikipedia | wiki.ro.1M.vec |     65M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.ro.1M.vec | | |
-| Russian | ru | OpenSubtitles | subs.ru.1M.vec |    152M | dedup.ru.words.unigrams.tsv dedup.ru.words.bigrams.tsv dedup.ru.words.trigrams.tsv |
-| | | Wikipedia | wiki.ru.1M.vec |    390M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.ru.1M.vec | | |
-| Sinhalese | si | OpenSubtitles | subs.si.1M.vec |   3493K | dedup.si.words.unigrams.tsv dedup.si.words.bigrams.tsv dedup.si.words.trigrams.tsv |
-| | | Wikipedia | wiki.si.1M.vec |   5980K | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.si.1M.vec | | |
-| Slovak | sk | OpenSubtitles | subs.sk.1M.vec |     47M | dedup.sk.words.unigrams.tsv dedup.sk.words.bigrams.tsv dedup.sk.words.trigrams.tsv |
-| | | Wikipedia | wiki.sk.1M.vec |     28M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.sk.1M.vec | | |
-| Slovene | sl | OpenSubtitles | subs.sl.1M.vec |    106M | dedup.sl.words.unigrams.tsv dedup.sl.words.bigrams.tsv dedup.sl.words.trigrams.tsv |
-| | | Wikipedia | wiki.sl.1M.vec |     31M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.sl.1M.vec | | |
-| Albanian | sq | OpenSubtitles | subs.sq.1M.vec |     11M | dedup.sq.words.unigrams.tsv dedup.sq.words.bigrams.tsv dedup.sq.words.trigrams.tsv |
-| | | Wikipedia | wiki.sq.1M.vec |     17M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.sq.1M.vec | | |
-| Serbian | sr | OpenSubtitles | subs.sr.1M.vec |    343M | dedup.sr.words.unigrams.tsv dedup.sr.words.bigrams.tsv dedup.sr.words.trigrams.tsv |
-| | | Wikipedia | wiki.sr.1M.vec |     69M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.sr.1M.vec | | |
-| Swedish | sv | OpenSubtitles | subs.sv.1M.vec |    101M | dedup.sv.words.unigrams.tsv dedup.sv.words.bigrams.tsv dedup.sv.words.trigrams.tsv |
-| | | Wikipedia | wiki.sv.1M.vec |    143M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.sv.1M.vec | | |
-| Tamil | ta | OpenSubtitles | subs.ta.1M.vec |    123K | dedup.ta.words.unigrams.tsv dedup.ta.words.bigrams.tsv dedup.ta.words.trigrams.tsv |
-| | | Wikipedia | wiki.ta.1M.vec |     17M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.ta.1M.vec | | |
-| Telugu | te | OpenSubtitles | subs.te.1M.vec |    103K | dedup.te.words.unigrams.tsv dedup.te.words.bigrams.tsv dedup.te.words.trigrams.tsv |
-| | | Wikipedia | wiki.te.1M.vec |     15M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.te.1M.vec | | |
-| Thai | th | OpenSubtitles | subs.th.1M.vec |     10M | dedup.th.words.unigrams.tsv dedup.th.words.bigrams.tsv dedup.th.words.trigrams.tsv |
-| | | Wikipedia | wiki.th.1M.vec |     12M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.th.1M.vec | | |
-| Tagalog | tl | OpenSubtitles | subs.tl.1M.vec |     87K | dedup.tl.words.unigrams.tsv dedup.tl.words.bigrams.tsv dedup.tl.words.trigrams.tsv |
-| | | Wikipedia | wiki.tl.1M.vec |   6515K | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.tl.1M.vec | | |
-| Turkish | tr | OpenSubtitles | subs.tr.1M.vec |    239M | dedup.tr.words.unigrams.tsv dedup.tr.words.bigrams.tsv dedup.tr.words.trigrams.tsv |
-| | | Wikipedia | wiki.tr.1M.vec |     54M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.tr.1M.vec | | |
-| Ukrainian | uk | OpenSubtitles | subs.uk.1M.vec |   4945K | dedup.uk.words.unigrams.tsv dedup.uk.words.bigrams.tsv dedup.uk.words.trigrams.tsv |
-| | | Wikipedia | wiki.uk.1M.vec |    162M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.uk.1M.vec | | |
-| Urdu | ur | OpenSubtitles | subs.ur.1M.vec |    195K | dedup.ur.words.unigrams.tsv dedup.ur.words.bigrams.tsv dedup.ur.words.trigrams.tsv |
-| | | Wikipedia | wiki.ur.1M.vec |     15M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.ur.1M.vec | | |
-| Vietnamese | vi | OpenSubtitles | subs.vi.1M.vec |     27M | dedup.vi.words.unigrams.tsv dedup.vi.words.bigrams.tsv dedup.vi.words.trigrams.tsv |
-| | | Wikipedia | wiki.vi.1M.vec |    115M | |
-| | | Wikipedia + OpenSubtitles | wiki-subs.vi.1M.vec | | |
+| Kazakh | kk | OpenSubtitles | [top 1M]() / [all]() / [binary]() |     13K | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     18M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Korean | ko | OpenSubtitles | [top 1M]() / [all]() / [binary]() |   6834K | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     62M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Lithuanian | lt | OpenSubtitles | [top 1M]() / [all]() / [binary]() |   6252K | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     23M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Latvian | lv | OpenSubtitles | [top 1M]() / [all]() / [binary]() |   2167K | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     13M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Macedonian | mk | OpenSubtitles | [top 1M]() / [all]() / [binary]() |     20M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     26M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Malayalam | ml | OpenSubtitles | [top 1M]() / [all]() / [binary]() |   1520K | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     10M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Malay | ms | OpenSubtitles | [top 1M]() / [all]() / [binary]() |     12M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     28M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Dutch | nl | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    264M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |    248M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Norwegian | no | OpenSubtitles | [top 1M]() / [all]() / [binary]() |     45M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     90M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Poland | pl | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    250M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |    232M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Portuguese | pt | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    257M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |    238M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Romanian | ro | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    434M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     65M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Russian | ru | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    152M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |    390M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Sinhalese | si | OpenSubtitles | [top 1M]() / [all]() / [binary]() |   3493K | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |   5980K | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Slovak | sk | OpenSubtitles | [top 1M]() / [all]() / [binary]() |     47M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     28M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Slovene | sl | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    106M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     31M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Albanian | sq | OpenSubtitles | [top 1M]() / [all]() / [binary]() |     11M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     17M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Serbian | sr | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    343M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     69M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Swedish | sv | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    101M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |    143M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Tamil | ta | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    123K | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     17M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Telugu | te | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    103K | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     15M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Thai | th | OpenSubtitles | [top 1M]() / [all]() / [binary]() |     10M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     12M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Tagalog | tl | OpenSubtitles | [top 1M]() / [all]() / [binary]() |     87K | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |   6515K | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Turkish | tr | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    239M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     54M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Ukrainian | uk | OpenSubtitles | [top 1M]() / [all]() / [binary]() |   4945K | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |    162M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Urdu | ur | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    195K | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     15M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Vietnamese | vi | OpenSubtitles | [top 1M]() / [all]() / [binary]() |     27M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia | [top 1M]() / [all]() / [binary]() |    115M | [unigrams]() / [bigrams]() / [trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
