@@ -76,10 +76,10 @@ This table contains links to the top 1 million word vectors in each language, as
 
 | language | lang | corpus | vectors | corpus word count | ngram frequencies |
 |---|---|---|---|---:|---|
-| Afrikaans | af | OpenSubtitles | [top 1M](https://archive.mpi.nl/islandora/object/lat%3A1839_59a61205_dfc3_4eec_9fd9_311b3f65c9a5/datastream/OBJ/download)<br>[all](https://archive.mpi.nl/islandora/object/lat%3A1839_486caf84_5d28_439c_a09f_6b90b7fe79dd/datastream/OBJ/download) / [binary](https://archive.mpi.nl/islandora/object/lat%3A1839_8d87878f_ce0b_4221_81b3_5fff04eec335/datastream/OBJ/download) |    323K | [unigrams](https://archive.mpi.nl/islandora/object/lat%3A1839_a1a82d13_be9d_4024_bbfe_90de100fcd3c/datastream/OBJ/download) / [bigrams](https://archive.mpi.nl/islandora/object/lat%3A1839_1f671cfa_131d_4fa8_bfe2_021a59952256/datastream/OBJ/download) / [trigrams](https://archive.mpi.nl/islandora/object/lat%3A1839_e4a8e2f0_2cfa_4d5a_8d22_864ef02d7f26/datastream/OBJ/download) |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     17M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Arabic | ar | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    188M | [unigrams]() / [bigrams]() / [trigrams]() |
+| Afrikaans | af | OpenSubtitles | [top 1M](https://archive.mpi.nl/islandora/object/lat%3A1839_59a61205_dfc3_4eec_9fd9_311b3f65c9a5/datastream/OBJ/download)<br>[all](https://archive.mpi.nl/islandora/object/lat%3A1839_486caf84_5d28_439c_a09f_6b90b7fe79dd/datastream/OBJ/download)<br>[binary](https://archive.mpi.nl/islandora/object/lat%3A1839_8d87878f_ce0b_4221_81b3_5fff04eec335/datastream/OBJ/download) |    323K | [unigrams](https://archive.mpi.nl/islandora/object/lat%3A1839_a1a82d13_be9d_4024_bbfe_90de100fcd3c/datastream/OBJ/download)<br>[bigrams](https://archive.mpi.nl/islandora/object/lat%3A1839_1f671cfa_131d_4fa8_bfe2_021a59952256/datastream/OBJ/download)<br>[trigrams](https://archive.mpi.nl/islandora/object/lat%3A1839_e4a8e2f0_2cfa_4d5a_8d22_864ef02d7f26/datastream/OBJ/download) |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |     17M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Arabic | ar | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |    188M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
 | | | Wikipedia | wiki.ar.1M.vec |    119M | |
 | | | Wikipedia + OpenSubtitles | wiki-subs.ar.1M.vec | | |
 | Bulgarian | bg | OpenSubtitles | subs.bg.1M.vec |    246M | dedup.bg.words.unigrams.tsv dedup.bg.words.bigrams.tsv dedup.bg.words.trigrams.tsv |
@@ -166,84 +166,84 @@ This table contains links to the top 1 million word vectors in each language, as
 | Georgian | ka | OpenSubtitles | subs.ka.1M.vec |   1108K | dedup.ka.words.unigrams.tsv dedup.ka.words.bigrams.tsv dedup.ka.words.trigrams.tsv |
 | | | Wikipedia | wiki.ka.1M.vec |     15M | |
 | | | Wikipedia + OpenSubtitles | wiki-subs.ka.1M.vec | | |
-| Kazakh | kk | OpenSubtitles | [top 1M](https://archive.mpi.nl/islandora/object/lat%3A1839_44ffc57f_2907_4a6d_ad8d_5cd2dbea548a/datastream/OBJ/download) / [all](https://archive.mpi.nl/islandora/object/lat%3A1839_eb1c5733_9db5_4704_ab4c_5902f70fccb4/datastream/OBJ/download) / [binary](https://archive.mpi.nl/islandora/object/lat%3A1839_d98342a1_0d67_4f94_9b33_c7e475ccdb38/datastream/OBJ/download) |     13K | [unigrams](https://archive.mpi.nl/islandora/object/lat%3A1839_73557531_5ebe_4fd5_aaf7_96a328f3288c/datastream/OBJ/download) / [bigrams](https://archive.mpi.nl/islandora/object/lat%3A1839_b6bb4967_e417_400a_9abb_5dc3e8dcae38/datastream/OBJ/download) / [trigrams](https://archive.mpi.nl/islandora/object/lat%3A1839_ba79d053_a8ee_46d3_9e7f_27eaebab9cb5/datastream/OBJ/download) |
-| | | Wikipedia | [top 1M](https://archive.mpi.nl/islandora/object/lat%3A1839_850e9909_d908_43ba_bdbc_762cfbd86cf2/datastream/OBJ/download) / [all](https://archive.mpi.nl/islandora/object/lat%3A1839_8c3b1f6c_576c_4075_88ab_25cc4070f2be/datastream/OBJ/download) / [binary](https://archive.mpi.nl/islandora/object/lat%3A1839_1d277b69_8535_4eb7_a4e6_9c30b418a537/datastream/OBJ/download) |     18M | [unigrams](https://archive.mpi.nl/islandora/object/lat%3A1839_40bacff9_818d_49ad_95bc_a550fc3247d4/datastream/OBJ/download) / [bigrams](https://archive.mpi.nl/islandora/object/lat%3A1839_7ec6488c_21ba_4109_af84_4c437bf22200/datastream/OBJ/download) / [trigrams](https://archive.mpi.nl/islandora/object/lat%3A1839_5d0dd48b_6b03_4ae1_9136_526485003675/datastream/OBJ/download) |
-| | | Wikipedia + OpenSubtitles | [top 1M](https://archive.mpi.nl/islandora/object/lat%3A1839_56778c23_b5c5_4386_83cb_29d04ad014ea/datastream/OBJ/download) / [all](https://archive.mpi.nl/islandora/object/lat%3A1839_b7a5b672_edc3_4254_8759_98eb6404f8a3/datastream/OBJ/download) / [binary](https://archive.mpi.nl/islandora/object/lat%3A1839_b1350e33_4e2f_4288_98be_5fdacef9b00a/datastream/OBJ/download) | | |
-| Korean | ko | OpenSubtitles | [top 1M]() / [all]() / [binary]() |   6834K | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     62M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Lithuanian | lt | OpenSubtitles | [top 1M]() / [all]() / [binary]() |   6252K | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     23M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Latvian | lv | OpenSubtitles | [top 1M]() / [all]() / [binary]() |   2167K | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     13M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Macedonian | mk | OpenSubtitles | [top 1M]() / [all]() / [binary]() |     20M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     26M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Malayalam | ml | OpenSubtitles | [top 1M]() / [all]() / [binary]() |   1520K | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     10M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Malay | ms | OpenSubtitles | [top 1M]() / [all]() / [binary]() |     12M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     28M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Dutch | nl | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    264M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |    248M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Norwegian | no | OpenSubtitles | [top 1M]() / [all]() / [binary]() |     45M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     90M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Poland | pl | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    250M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |    232M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Portuguese | pt | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    257M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |    238M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Romanian | ro | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    434M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     65M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Russian | ru | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    152M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |    390M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Sinhalese | si | OpenSubtitles | [top 1M]() / [all]() / [binary]() |   3493K | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |   5980K | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Slovak | sk | OpenSubtitles | [top 1M]() / [all]() / [binary]() |     47M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     28M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Slovene | sl | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    106M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     31M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Albanian | sq | OpenSubtitles | [top 1M]() / [all]() / [binary]() |     11M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     17M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Serbian | sr | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    343M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     69M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Swedish | sv | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    101M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |    143M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Tamil | ta | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    123K | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     17M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Telugu | te | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    103K | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     15M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Thai | th | OpenSubtitles | [top 1M]() / [all]() / [binary]() |     10M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     12M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Tagalog | tl | OpenSubtitles | [top 1M]() / [all]() / [binary]() |     87K | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |   6515K | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Turkish | tr | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    239M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     54M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Ukrainian | uk | OpenSubtitles | [top 1M]() / [all]() / [binary]() |   4945K | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |    162M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Urdu | ur | OpenSubtitles | [top 1M]() / [all]() / [binary]() |    195K | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |     15M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
-| Vietnamese | vi | OpenSubtitles | [top 1M]() / [all]() / [binary]() |     27M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia | [top 1M]() / [all]() / [binary]() |    115M | [unigrams]() / [bigrams]() / [trigrams]() |
-| | | Wikipedia + OpenSubtitles | [top 1M]() / [all]() / [binary]() | | |
+| Kazakh | kk | OpenSubtitles | [top 1M](https://archive.mpi.nl/islandora/object/lat%3A1839_44ffc57f_2907_4a6d_ad8d_5cd2dbea548a/datastream/OBJ/download)<br>[all](https://archive.mpi.nl/islandora/object/lat%3A1839_eb1c5733_9db5_4704_ab4c_5902f70fccb4/datastream/OBJ/download)<br>[binary](https://archive.mpi.nl/islandora/object/lat%3A1839_d98342a1_0d67_4f94_9b33_c7e475ccdb38/datastream/OBJ/download) |     13K | [unigrams](https://archive.mpi.nl/islandora/object/lat%3A1839_73557531_5ebe_4fd5_aaf7_96a328f3288c/datastream/OBJ/download)<br>[bigrams](https://archive.mpi.nl/islandora/object/lat%3A1839_b6bb4967_e417_400a_9abb_5dc3e8dcae38/datastream/OBJ/download)<br>[trigrams](https://archive.mpi.nl/islandora/object/lat%3A1839_ba79d053_a8ee_46d3_9e7f_27eaebab9cb5/datastream/OBJ/download) |
+| | | Wikipedia | [top 1M](https://archive.mpi.nl/islandora/object/lat%3A1839_850e9909_d908_43ba_bdbc_762cfbd86cf2/datastream/OBJ/download)<br>[all](https://archive.mpi.nl/islandora/object/lat%3A1839_8c3b1f6c_576c_4075_88ab_25cc4070f2be/datastream/OBJ/download)<br>[binary](https://archive.mpi.nl/islandora/object/lat%3A1839_1d277b69_8535_4eb7_a4e6_9c30b418a537/datastream/OBJ/download) |     18M | [unigrams](https://archive.mpi.nl/islandora/object/lat%3A1839_40bacff9_818d_49ad_95bc_a550fc3247d4/datastream/OBJ/download)<br>[bigrams](https://archive.mpi.nl/islandora/object/lat%3A1839_7ec6488c_21ba_4109_af84_4c437bf22200/datastream/OBJ/download)<br>[trigrams](https://archive.mpi.nl/islandora/object/lat%3A1839_5d0dd48b_6b03_4ae1_9136_526485003675/datastream/OBJ/download) |
+| | | Wikipedia + OpenSubtitles | [top 1M](https://archive.mpi.nl/islandora/object/lat%3A1839_56778c23_b5c5_4386_83cb_29d04ad014ea/datastream/OBJ/download)<br>[all](https://archive.mpi.nl/islandora/object/lat%3A1839_b7a5b672_edc3_4254_8759_98eb6404f8a3/datastream/OBJ/download)<br>[binary](https://archive.mpi.nl/islandora/object/lat%3A1839_b1350e33_4e2f_4288_98be_5fdacef9b00a/datastream/OBJ/download) | | |
+| Korean | ko | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |   6834K | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |     62M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Lithuanian | lt | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |   6252K | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |     23M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Latvian | lv | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |   2167K | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |     13M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Macedonian | mk | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |     20M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |     26M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Malayalam | ml | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |   1520K | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |     10M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Malay | ms | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |     12M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |     28M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Dutch | nl | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |    264M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |    248M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Norwegian | no | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |     45M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |     90M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Poland | pl | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |    250M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |    232M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Portuguese | pt | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |    257M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |    238M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Romanian | ro | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |    434M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |     65M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Russian | ru | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |    152M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |    390M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Sinhalese | si | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |   3493K | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |   5980K | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Slovak | sk | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |     47M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |     28M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Slovene | sl | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |    106M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |     31M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Albanian | sq | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |     11M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |     17M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Serbian | sr | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |    343M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |     69M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Swedish | sv | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |    101M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |    143M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Tamil | ta | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |    123K | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |     17M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Telugu | te | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |    103K | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |     15M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Thai | th | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |     10M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |     12M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Tagalog | tl | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |     87K | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |   6515K | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Turkish | tr | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |    239M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |     54M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Ukrainian | uk | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |   4945K | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |    162M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Urdu | ur | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |    195K | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |     15M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
+| Vietnamese | vi | OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() |     27M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia | [top 1M]()<br>[all]()<br>[binary]() |    115M | [unigrams]()<br>[bigrams]()<br>[trigrams]() |
+| | | Wikipedia + OpenSubtitles | [top 1M]()<br>[all]()<br>[binary]() | | |
