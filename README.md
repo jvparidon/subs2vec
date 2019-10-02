@@ -12,8 +12,10 @@ If you use any of the subs2vec code and/or pretrained models, please cite the ar
 ## How to use
 In general, the submodules of subs2vec can be run as Python modules using the -m flag:  
 `python3 -m subs2vec.submodule_name`  
+
 Normally, this only works if you are in the subs2vec directory. If you want to be able to use the subs2vec commands anywhere, consider installing the subs2vec package using:  
 `python3 setup.py install`  
+
 This will not make any major changes to your system, it just copies the subs2vec package to a place where the Python interpreter knows to look for it.  
 Any missing dependencies can be installed using:  
 `pip3 install -r requirements.txt`
@@ -62,7 +64,7 @@ For instance, the steps to create a subtitle corpus are:
 `python3 -m subs2vec.deduplicate fr.txt`  
 4. Train a fastText model on the subtitle corpus:  
 `python3 -m subs2vec.train_model fr subs dedup.fr.txt`  
-This last step requires the binaries for [fastText](https://github.com/facebookresearch/fastText) and [word2phrase (part of word2vec)](https://github.com/tmikolov/word2vec) to be downloaded, built, and discoverable on your system.
+This last step requires the binaries for [fastText](https://github.com/facebookresearch/fastText) and [word2phrase (part of word2vec)](https://github.com/tmikolov/word2vec) to be downloaded, built, and discoverable on your system (i.e., on your PATH).
 
 For more detailed training options:  
 `python3 -m subs2vec.train_model --help`
