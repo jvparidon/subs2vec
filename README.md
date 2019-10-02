@@ -31,6 +31,7 @@ Results from Van Paridon & Thompson (2019) are in `subs2vec/evaluation/article_r
 ### Extending lexical norms
 To extend lexical norms (either norms you have collected yourself, or norms provided in this repository) use:  
 `python3 -m subs2vec.norms fr french_word_vectors.vec --extend_norms=french_norms_file.txt`  
+
 The norms file should be a tab-separated text file, with the first line containing column names and the column containing the words should be called `word`. Unobserved cells should be left empty. If you are unsure how to generate this file, you can create your list in Excel and then use `Save as... tab-delimited text`.  
 For an overview of norms that come included in the repo (and their authors), see [this list](https://github.com/jvparidon/subs2vec/blob/master/subs2vec/datasets/norms_table.tsv). For the norms datasets themselves, look inside [this directory](https://github.com/jvparidon/subs2vec/tree/master/subs2vec/datasets/norms).
 
