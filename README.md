@@ -12,11 +12,9 @@ If you use any of the subs2vec code and/or pretrained models, please cite the ar
 ## How to use
 In general, the submodules of subs2vec can be run as Python modules using the -m flag:  
 `python3 -m subs2vec.submodule_name`  
-Normally, this only works if you are in the subs2vec directory. If you want to be able to use the subs2vec commands anywhere, consider installing 
-the subs2vec package using:  
+Normally, this only works if you are in the subs2vec directory. If you want to be able to use the subs2vec commands anywhere, consider installing the subs2vec package using:  
 `python3 setup.py install`  
-This will not make any major changes to your system, it just copies the subs2vec package to a place where the Python interpreter knows to 
-look for it.  
+This will not make any major changes to your system, it just copies the subs2vec package to a place where the Python interpreter knows to look for it.  
 Any missing dependencies can be installed using:  
 `pip3 install -r requirements.txt`
 
@@ -37,14 +35,14 @@ The norms file should be a tab-separated text file, with the first line containi
 For an overview of norms that come included in the repo (and their authors), see [this list](https://github.com/jvparidon/subs2vec/blob/master/subs2vec/datasets/norms_table.tsv). For the norms datasets themselves, look inside [this directory](https://github.com/jvparidon/subs2vec/tree/master/subs2vec/datasets/norms).
 
 ### Extracting word frequencies
-The subtitle corpus used in Van Paridon & Thompson (2019) was also used to compile the word frequencies in [SUBTLEX](https://www.frontiersin.org/articles/10.3389/fpsyg.2011.00027/full). That same corpus can of course be used to compile bigram and trigram frequencies as well.
+The subtitle corpus used in Van Paridon & Thompson (2019) was also used to compile the word frequencies in [SUBTLEX](https://www.frontiersin.org/articles/10.3389/fpsyg.2011.00027/full). That same corpus can of course be used to compile bigram and trigram frequencies as well.  
 To extract word, bigram, or trigram frequencies from a text file yourself, `fr.txt` for instance, use:  
 `python3 -m subs2vec.frequencies fr.txt`  
 
 In general, however, we recommend downloading the precompiled frequencies files from [language archive] and looking frequencies up in those.  
 When looking up frequencies for specific words, bigrams, or trigrams, you may find that you cannot open the frequencies files (they can be very large). To retrieve items of interest use:   
 `python3 -m subs2vec.lookup frequencies_file.tsv list_of_items.txt`  
-Your list of items should be a simple text file, with each item you want to look up on its own line.
+Your list of items should be a simple text file, with each item you want to look up on its own line.  
 This lookup scripts works for looking up frequencies, but it finds lines in any plain text file, so it works for looking up word vectors in .vec files as well.
 
 ### Removing duplicate lines
@@ -53,7 +51,7 @@ To remove duplicates from `fr.txt` for example, use:
 `python3 -m subs2vec.deduplicate fr.txt`
 
 ### Training models
-If you want to reproduce models as used in Van Paridon & Thompson (2019), you can use the `train_model` module.
+If you want to reproduce models as used in Van Paridon & Thompson (2019), you can use the `train_model` module.  
 For instance, the steps to create a subtitle corpus are:
 1. Download a corpus:  
 `python3 -m subs2vec.download fr subs`  
