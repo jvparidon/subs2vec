@@ -1,85 +1,64 @@
 	Unnamed: 0	adjusted score	lang	score	source	vecs	label
-0	0.0	0.5629139072847682	cs	0.6988798856053384	analogies svoboda	fasttext	cs analogies svoboda
-26	0.0	0.5028793550244746	cs	0.6383406432748538	analogies svoboda	subs	cs analogies svoboda
-74	0.0	0.4551780401190134	cs	0.5877067971993308	analogies svoboda	wiki	cs analogies svoboda
-50	0.0	0.5309050772626932	cs	0.6392950014446692	analogies svoboda	wiki+subs	cs analogies svoboda
-1	0.0	0.6797835156161912	de	0.7815659839253306	semantic	fasttext	de semantic
-27	0.0	0.050513022888713496	de	0.0851063829787234	semantic	subs	de semantic
-75	0.0	0.53455857481114	de	0.610560206052801	semantic	wiki	de semantic
-51	0.0	0.540083436689593	de	0.6401175998930911	semantic	wiki+subs	de semantic
-3	0.0	0.5413611484044202	de	0.7368569018836097	syntactic	fasttext	de syntactic
-29	0.0	0.4442837963441082	de	0.637616718541574	syntactic	subs	de syntactic
-77	0.0	0.4848703914076216	de	0.6960711638250556	syntactic	wiki	de syntactic
-53	0.0	0.5385727563771558	de	0.7346105085223271	syntactic	wiki+subs	de syntactic
-4	0.0	0.3392000000000001	el	0.45010615711252655	semantic (no geo)	fasttext	el semantic (no geo)
-30	0.0	0.35200000000000004	el	0.38461538461538464	semantic (no geo)	subs	el semantic (no geo)
-78	0.0	0.2208	el	0.24775583482944344	semantic (no geo)	wiki	el semantic (no geo)
-54	0.0	0.3968	el	0.4366197183098591	semantic (no geo)	wiki+subs	el semantic (no geo)
-5	0.0	0.22143311426754286	el	0.6042811686433324	syntactic	fasttext	el syntactic
-31	0.0	0.2724189103243587	el	0.530882049163396	syntactic	subs	el syntactic
-79	0.0	0.13143947424210306	el	0.4099173553719008	syntactic	wiki	el syntactic
-55	0.0	0.28301886792452835	el	0.556018325697626	syntactic	wiki+subs	el syntactic
-7	0.0	0.8485758789497108	en	0.9015366430260048	semantic	fasttext	en semantic
-33	0.0	0.1985981308411215	en	0.2945544554455445	semantic	subs	en semantic
-81	0.0	0.7096128170894526	en	0.7757236682072488	semantic	wiki	en semantic
-57	0.0	0.7044948820649756	en	0.7748409202153695	semantic	wiki+subs	en semantic
-10	0.0	0.8832	en	0.8832	semantic (no geo)	fasttext	en semantic (no geo)
-36	0.0	0.7856	en	0.7957860615883307	semantic (no geo)	subs	en semantic (no geo)
-84	0.0	0.7248	en	0.7248	semantic (no geo)	wiki	en semantic (no geo)
-60	0.0	0.8384	en	0.8384	semantic (no geo)	wiki+subs	en semantic (no geo)
-9	0.0	0.8459643804471391	en	0.8522618820385569	syntactic	fasttext	en syntactic
-35	0.0	0.7846722243273968	en	0.8032389449185415	syntactic	subs	en syntactic
-83	0.0	0.8039977264115195	en	0.8140226357183963	syntactic	wiki	en syntactic
-59	0.0	0.8228495642288746	en	0.8280266920877025	syntactic	wiki+subs	en syntactic
-11	0.0	0.24397299903567984	fi	0.5371549893842887	analogies venekoski	fasttext	fi analogies venekoski
-37	0.0	0.10028929604628736	fi	0.2458628841607565	analogies venekoski	subs	fi analogies venekoski
-85	0.0	0.08871745419479267	fi	0.20043572984749453	analogies venekoski	wiki	fi analogies venekoski
-61	0.0	0.16779170684667308	fi	0.3790849673202614	analogies venekoski	wiki+subs	fi analogies venekoski
-13	0.0	0.7519348452123831	fr	0.7884034723532742	semantic	fasttext	fr semantic
-39	0.0	0.05075593952483801	fr	0.17696893630373392	semantic	subs	fr semantic
-87	0.0	0.4967152627789778	fr	0.7777229815414964	semantic	wiki	fr semantic
-63	0.0	0.4964902807775378	fr	0.7758402475038673	semantic	wiki+subs	fr semantic
-12	0.0	0.5631868131868132	fr	0.6824583866837388	syntactic	fasttext	fr syntactic
-38	0.0	0.492497886728656	fr	0.5556747734859323	syntactic	subs	fr syntactic
-86	0.0	0.4509721048182586	fr	0.6387309188865609	syntactic	wiki	fr syntactic
-62	0.0	0.5751267962806424	fr	0.6756454816285998	syntactic	wiki+subs	fr syntactic
-14	0.0	0.2352	he	0.3868421052631579	semantic (no geo)	fasttext	he semantic (no geo)
-40	0.0	0.4448	he	0.5965665236051502	semantic (no geo)	subs	he semantic (no geo)
-88	0.0	0.16640000000000002	he	0.2736842105263158	semantic (no geo)	wiki	he semantic (no geo)
-64	0.0	0.3776	he	0.5592417061611374	semantic (no geo)	wiki+subs	he semantic (no geo)
-15	0.0	0.2887457370215991	he	0.4980392156862745	syntactic	fasttext	he syntactic
-41	0.0	0.2258431223948465	he	0.3682990885215511	syntactic	subs	he syntactic
-89	0.0	0.22432739674118984	he	0.3762313314267556	syntactic	wiki	he syntactic
-65	0.0	0.2863774156877605	he	0.4554082554986442	syntactic	wiki+subs	he syntactic
-18	0.0	0.6226584408300617	it	0.7440021444846535	semantic	fasttext	it semantic
-42	0.0	0.09814918676388112	it	0.1686909581646424	semantic	subs	it semantic
-90	0.0	0.418956814357824	it	0.5304644226672348	semantic	wiki	it semantic
-66	0.0	0.4351093662366797	it	0.5541428571428572	semantic	wiki+subs	it semantic
-19	0.0	0.5526848105921295	it	0.7128795066413662	syntactic	fasttext	it syntactic
-43	0.0	0.48556454578889297	it	0.6578226208271052	syntactic	subs	it syntactic
-91	0.0	0.4530158146377344	it	0.6870729326453772	syntactic	wiki	it syntactic
-67	0.0	0.5219749908054431	it	0.7101576182136602	syntactic	wiki+subs	it syntactic
-21	0.0	0.6832	nl	0.7128547579298832	semantic (no geo)	fasttext	nl semantic (no geo)
-45	0.0	0.5840000000000001	nl	0.5993431855500821	semantic (no geo)	subs	nl semantic (no geo)
-93	0.0	0.5488000000000001	nl	0.5726210350584308	semantic (no geo)	wiki	nl semantic (no geo)
-69	0.0	0.5983999999999999	nl	0.6243739565943238	semantic (no geo)	wiki+subs	nl semantic (no geo)
-20	0.0	0.5842743621915516	nl	0.7321802935010482	syntactic	fasttext	nl syntactic
-44	0.0	0.5367001254705145	nl	0.6729155742003147	syntactic	subs	nl syntactic
-92	0.0	0.4644500209117524	nl	0.6437681159420289	syntactic	wiki	nl syntactic
-68	0.0	0.5850062735257214	nl	0.7288952579468473	syntactic	wiki+subs	nl syntactic
-23	0.0	0.4211520917502933	pl	0.6793146941349589	semantic	fasttext	pl semantic
-47	0.0	0.02697771406229637	pl	0.1975190839694657	semantic	subs	pl semantic
-95	0.0	0.2874364655284765	pl	0.4678616885871871	semantic	wiki	pl semantic
-71	0.0	0.2500325817802685	pl	0.538148667601683	semantic	wiki+subs	pl semantic
-22	0.0	0.4927363399826539	pl	0.7841614906832298	syntactic	fasttext	pl syntactic
-46	0.0	0.4120771899392888	pl	0.6108968177434908	syntactic	subs	pl syntactic
-94	0.0	0.3699045967042498	pl	0.7049586776859504	syntactic	wiki	pl syntactic
-70	0.0	0.5277536860364267	pl	0.7533271432992882	syntactic	wiki+subs	pl syntactic
-25	0.0	0.4473654390934844	pt	0.6630836412495801	semantic	fasttext	pt semantic
-49	0.0	0.07467422096317279	pt	0.13905887317999574	semantic	subs	pt semantic
-97	0.0	0.27966005665722377	pt	0.4020853698273053	semantic	wiki	pt semantic
-73	0.0	0.301756373937677	pt	0.4417717319177173	semantic	wiki+subs	pt semantic
-24	0.0	0.5775802355114292	pt	0.7208933717579251	syntactic	fasttext	pt syntactic
-48	0.0	0.4614407758023552	pt	0.5845276396607195	syntactic	subs	pt syntactic
-96	0.0	0.5070422535211268	pt	0.6724850711988976	syntactic	wiki	pt syntactic
-72	0.0	0.5335950126991458	pt	0.6762253108997806	syntactic	wiki+subs	pt syntactic
+0	0.0	0.5028793550244746	czech	0.6383406432748538	analogies svoboda	subs	czech: analogies svoboda
+48	0.0	0.4551780401190134	czech	0.5877067971993308	analogies svoboda	wiki	czech: analogies svoboda
+24	0.0	0.5309050772626932	czech	0.6392950014446692	analogies svoboda	wiki+subs	czech: analogies svoboda
+19	0.0	0.5840000000000001	dutch	0.5993431855500821	semantic (no geo)	subs	dutch: semantic (no geo)
+67	0.0	0.5488000000000001	dutch	0.5726210350584308	semantic (no geo)	wiki	dutch: semantic (no geo)
+43	0.0	0.5983999999999999	dutch	0.6243739565943238	semantic (no geo)	wiki+subs	dutch: semantic (no geo)
+18	0.0	0.5367001254705145	dutch	0.6729155742003147	syntactic	subs	dutch: syntactic
+66	0.0	0.4644500209117524	dutch	0.6437681159420289	syntactic	wiki	dutch: syntactic
+42	0.0	0.5850062735257214	dutch	0.7288952579468473	syntactic	wiki+subs	dutch: syntactic
+7	0.0	0.1985981308411215	english	0.2945544554455445	semantic	subs	english: semantic
+55	0.0	0.7096128170894526	english	0.7757236682072488	semantic	wiki	english: semantic
+31	0.0	0.7044948820649756	english	0.7748409202153695	semantic	wiki+subs	english: semantic
+10	0.0	0.7856	english	0.7957860615883307	semantic (no geo)	subs	english: semantic (no geo)
+58	0.0	0.7248	english	0.7248	semantic (no geo)	wiki	english: semantic (no geo)
+34	0.0	0.8384	english	0.8384	semantic (no geo)	wiki+subs	english: semantic (no geo)
+9	0.0	0.7846722243273968	english	0.8032389449185415	syntactic	subs	english: syntactic
+57	0.0	0.8039977264115195	english	0.8140226357183963	syntactic	wiki	english: syntactic
+33	0.0	0.8228495642288746	english	0.8280266920877025	syntactic	wiki+subs	english: syntactic
+11	0.0	0.10028929604628736	finnish	0.2458628841607565	analogies venekoski	subs	finnish: analogies venekoski
+59	0.0	0.08871745419479267	finnish	0.20043572984749453	analogies venekoski	wiki	finnish: analogies venekoski
+35	0.0	0.16779170684667308	finnish	0.3790849673202614	analogies venekoski	wiki+subs	finnish: analogies venekoski
+13	0.0	0.05075593952483801	french	0.17696893630373392	semantic	subs	french: semantic
+61	0.0	0.4967152627789778	french	0.7777229815414964	semantic	wiki	french: semantic
+37	0.0	0.4964902807775378	french	0.7758402475038673	semantic	wiki+subs	french: semantic
+12	0.0	0.492497886728656	french	0.5556747734859323	syntactic	subs	french: syntactic
+60	0.0	0.4509721048182586	french	0.6387309188865609	syntactic	wiki	french: syntactic
+36	0.0	0.5751267962806424	french	0.6756454816285998	syntactic	wiki+subs	french: syntactic
+1	0.0	0.050513022888713496	german	0.0851063829787234	semantic	subs	german: semantic
+49	0.0	0.53455857481114	german	0.610560206052801	semantic	wiki	german: semantic
+25	0.0	0.540083436689593	german	0.6401175998930911	semantic	wiki+subs	german: semantic
+3	0.0	0.4442837963441082	german	0.637616718541574	syntactic	subs	german: syntactic
+51	0.0	0.4848703914076216	german	0.6960711638250556	syntactic	wiki	german: syntactic
+27	0.0	0.5385727563771558	german	0.7346105085223271	syntactic	wiki+subs	german: syntactic
+4	0.0	0.35200000000000004	greek	0.38461538461538464	semantic (no geo)	subs	greek: semantic (no geo)
+52	0.0	0.2208	greek	0.24775583482944344	semantic (no geo)	wiki	greek: semantic (no geo)
+28	0.0	0.3968	greek	0.4366197183098591	semantic (no geo)	wiki+subs	greek: semantic (no geo)
+5	0.0	0.2724189103243587	greek	0.530882049163396	syntactic	subs	greek: syntactic
+53	0.0	0.13143947424210306	greek	0.4099173553719008	syntactic	wiki	greek: syntactic
+29	0.0	0.28301886792452835	greek	0.556018325697626	syntactic	wiki+subs	greek: syntactic
+14	0.0	0.4448	hebrew	0.5965665236051502	semantic (no geo)	subs	hebrew: semantic (no geo)
+62	0.0	0.16640000000000002	hebrew	0.2736842105263158	semantic (no geo)	wiki	hebrew: semantic (no geo)
+38	0.0	0.3776	hebrew	0.5592417061611374	semantic (no geo)	wiki+subs	hebrew: semantic (no geo)
+15	0.0	0.2258431223948465	hebrew	0.3682990885215511	syntactic	subs	hebrew: syntactic
+63	0.0	0.22432739674118984	hebrew	0.3762313314267556	syntactic	wiki	hebrew: syntactic
+39	0.0	0.2863774156877605	hebrew	0.4554082554986442	syntactic	wiki+subs	hebrew: syntactic
+16	0.0	0.09814918676388112	italian	0.1686909581646424	semantic	subs	italian: semantic
+64	0.0	0.418956814357824	italian	0.5304644226672348	semantic	wiki	italian: semantic
+40	0.0	0.4351093662366797	italian	0.5541428571428572	semantic	wiki+subs	italian: semantic
+17	0.0	0.48556454578889297	italian	0.6578226208271052	syntactic	subs	italian: syntactic
+65	0.0	0.4530158146377344	italian	0.6870729326453772	syntactic	wiki	italian: syntactic
+41	0.0	0.5219749908054431	italian	0.7101576182136602	syntactic	wiki+subs	italian: syntactic
+21	0.0	0.02697771406229637	polish	0.1975190839694657	semantic	subs	polish: semantic
+69	0.0	0.2874364655284765	polish	0.4678616885871871	semantic	wiki	polish: semantic
+45	0.0	0.2500325817802685	polish	0.538148667601683	semantic	wiki+subs	polish: semantic
+20	0.0	0.4120771899392888	polish	0.6108968177434908	syntactic	subs	polish: syntactic
+68	0.0	0.3699045967042498	polish	0.7049586776859504	syntactic	wiki	polish: syntactic
+44	0.0	0.5277536860364267	polish	0.7533271432992882	syntactic	wiki+subs	polish: syntactic
+23	0.0	0.07467422096317279	portuguese	0.13905887317999574	semantic	subs	portuguese: semantic
+71	0.0	0.27966005665722377	portuguese	0.4020853698273053	semantic	wiki	portuguese: semantic
+47	0.0	0.301756373937677	portuguese	0.4417717319177173	semantic	wiki+subs	portuguese: semantic
+22	0.0	0.4614407758023552	portuguese	0.5845276396607195	syntactic	subs	portuguese: syntactic
+70	0.0	0.5070422535211268	portuguese	0.6724850711988976	syntactic	wiki	portuguese: syntactic
+46	0.0	0.5335950126991458	portuguese	0.6762253108997806	syntactic	wiki+subs	portuguese: syntactic

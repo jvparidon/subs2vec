@@ -9,7 +9,34 @@ mpl.use('agg')
 path = os.path.dirname(__file__)
 
 sns.set(context='paper', style='whitegrid', font_scale=1.0, rc={'grid.color': '.9', 'grid.linewidth': '.5'})
-# sns.set_palette('Set2')  # use MPI for Psycholinguistics type color palette
+sns.set_palette('Set2')  # use MPI for Psycholinguistics type color palette
+
+
+def replace_iso(series):
+    labels = {
+        'ar': 'arabic',
+        'cs': 'czech',
+        'de': 'german',
+        'el': 'greek',
+        'en': 'english',
+        'es': 'spanish',
+        'fa': 'farsi',
+        'fi': 'finnish',
+        'fr': 'french',
+        'he': 'hebrew',
+        'hi': 'hindi',
+        'id': 'indonesian',
+        'it': 'italian',
+        'ms': 'malay',
+        'nl': 'dutch',
+        'pl': 'polish',
+        'pt': 'portuguese',
+        'ro': 'romanian',
+        'ru': 'russian',
+    }
+    for lang, language in labels.items():
+        series = series.str.replace(lang, language)
+    return series
 
 
 def gather_similarities(folder):
@@ -20,23 +47,26 @@ def gather_similarities(folder):
     """
     df = pd.DataFrame(columns=['rank r', 'adjusted rank r', 'vecs', 'source', 'lang'])
     for fname in sorted(os.listdir(folder)):
-        df_temp = pd.read_csv(os.path.join(folder, fname), sep='\t')
+        if not fname.startswith('cc'):
+            df_temp = pd.read_csv(os.path.join(folder, fname), sep='\t')
 
-        df_temp['source'] = df_temp['source'].apply(lambda x: ' '.join(x.split("-")[1:]))
-        df_temp['source'] = df_temp['source'].str.replace('.tsv', '')
+            df_temp['source'] = df_temp['source'].apply(lambda x: ' '.join(x.split("-")[1:]))
+            df_temp['source'] = df_temp['source'].str.replace('.tsv', '')
 
-        df_temp['vecs'] = fname.split('.')[0]
-        df_temp['vecs'] = df_temp['vecs'].str.replace('cc', 'fasttext').replace('wiki-subs', 'wiki+subs')
+            df_temp['vecs'] = fname.split('.')[0]
+            df_temp['vecs'] = df_temp['vecs'].str.replace('cc', 'fasttext').replace('wiki-subs', 'wiki+subs')
 
-        df_temp['lang'] = fname.split('.')[1]
-        df = df.append(df_temp, ignore_index=True)
+            df_temp['lang'] = fname.split('.')[1]
+            df = df.append(df_temp, ignore_index=True)
 
-    df['label'] = df.apply(lambda x: f'{x["lang"]} {x["source"]}', axis=1)
     df = df.loc[df['source'].apply(lambda x: False if x.endswith('rel') else True)]
     df = df.loc[df['source'].apply(lambda x: False if x.endswith('no') else True)]
-    df = df.loc[df['label'].apply(lambda x: x != 'en wordsim353 all')]
-    df['label'] = df['label'].str.replace(' sim', ' all')
-    df['label'] = df['label'].str.replace(' all', '')
+    df = df.loc[(df['lang'] != 'en') | (df['source'] != 'wordsim353 all')]
+    df['source'] = df['source'].str.replace(' sim', '')
+    df['source'] = df['source'].str.replace(' all', '')
+
+    df['lang'] = replace_iso(df['lang'])
+    df['label'] = df.apply(lambda x: f'{x["lang"]}: {x["source"]}', axis=1)
     df = df.sort_values(['label', 'vecs'])
     return df
 
@@ -49,22 +79,24 @@ def gather_analogies(folder):
     """
     df = pd.DataFrame(columns=['score', 'adjusted score', 'vecs', 'source', 'lang'])
     for fname in sorted(os.listdir(folder)):
-        df_temp = pd.read_csv(os.path.join(folder, fname), sep='\t')
+        if not fname.startswith('cc'):
+            df_temp = pd.read_csv(os.path.join(folder, fname), sep='\t')
 
-        df_temp['source'] = df_temp['source'].apply(lambda x: ' '.join(x.split("-")[1:]))
-        df_temp['source'] = df_temp['source'].str.replace('.tsv', '')
-        df_temp['source'] = df_temp['source'].str.replace('_nocountries', ' (no geo)')
-        df_temp['source'] = df_temp['source'].str.replace('_no_countries', ' (no geo)')
-        df_temp['source'] = df_temp['source'].str.replace(' google', '')
+            df_temp['source'] = df_temp['source'].apply(lambda x: ' '.join(x.split("-")[1:]))
+            df_temp['source'] = df_temp['source'].str.replace('.tsv', '')
+            df_temp['source'] = df_temp['source'].str.replace('_nocountries', ' (no geo)')
+            df_temp['source'] = df_temp['source'].str.replace('_no_countries', ' (no geo)')
+            df_temp['source'] = df_temp['source'].str.replace(' google', '')
 
-        df_temp['vecs'] = fname.split('.')[0]
-        df_temp['vecs'] = df_temp['vecs'].str.replace('cc', 'fasttext').replace('wiki-subs', 'wiki+subs')
+            df_temp['vecs'] = fname.split('.')[0]
+            df_temp['vecs'] = df_temp['vecs'].str.replace('cc', 'fasttext').replace('wiki-subs', 'wiki+subs')
 
-        df_temp['lang'] = fname.split('.')[1]
-        df = df.append(df_temp, ignore_index=True)
+            df_temp['lang'] = fname.split('.')[1]
+            df = df.append(df_temp, ignore_index=True)
 
-    df['label'] = df.apply(lambda x: f'{x["lang"]} {x["source"]}', axis=1)
-    df = df.loc[df['lang'] != 'hi']
+    df['lang'] = replace_iso(df['lang'])
+    df['label'] = df.apply(lambda x: f'{x["lang"]}: {x["source"]}', axis=1)
+    #df = df.loc[df['lang'] != 'hi']
     df = df.loc[df['source'].apply(lambda x: False if x.endswith('semrel') else True)]
     df = df.loc[df['source'].apply(lambda x: False if x.endswith('bless') else True)]
     df = df.sort_values(['label', 'vecs'])
@@ -79,27 +111,39 @@ def gather_norms(folder):
     """
     df = pd.DataFrame(columns=['norm', 'adjusted r', 'adjusted r-squared', 'r-squared', 'vecs', 'source', 'lang'])
     for fname in sorted(os.listdir(folder)):
-        df_temp = pd.read_csv(os.path.join(folder, fname), sep='\t')
+        if not fname.startswith('cc'):
+            df_temp = pd.read_csv(os.path.join(folder, fname), sep='\t')
 
-        df_temp['source'] = df_temp['source'].str.replace('.tsv', '')
-        df_temp['source'] = df_temp['source'].apply(lambda x: f'{"-".join(x.split("-")[1:-1])} ({x.split("-")[-1]})')
+            df_temp['source'] = df_temp['source'].str.replace('.tsv', '')
+            df_temp['source'] = df_temp['source'].apply(lambda x: f'{"-".join(x.split("-")[1:-1])} ({x.split("-")[-1]})')
 
-        df_temp['vecs'] = fname.split('.')[0]
-        df_temp['vecs'] = df_temp['vecs'].str.replace('cc', 'fasttext').replace('wiki-subs', 'wiki+subs')
+            df_temp['vecs'] = fname.split('.')[0]
+            df_temp['vecs'] = df_temp['vecs'].str.replace('cc', 'fasttext').replace('wiki-subs', 'wiki+subs')
 
-        df_temp['lang'] = fname.split('.')[1]
+            df_temp['lang'] = fname.split('.')[1]
 
-        df = df.append(df_temp, ignore_index=True)
-    df['label'] = df.apply(lambda x: f'{x["lang"]} {x["source"]} {x["norm"]}', axis=1)
-    df = df.sort_values(['label', 'vecs'])
-    return df
+            df = df.append(df_temp, ignore_index=True)
+
+    df_norms = df.loc[df['source'] != 'binder (2016)']
+    df_norms['lang'] = replace_iso(df_norms['lang'])
+    df_norms['label'] = df_norms.apply(lambda x: f'{x["lang"]}: {x["source"]} {x["norm"]}', axis=1)
+    df_norms = df_norms.sort_values(['label', 'vecs'])
+
+    df_binder = df.loc[df['source'] == 'binder (2016)']
+    df_binder = df_binder.loc[(df_binder['norm'] != 'mean r') & (df_binder['norm'] != 'word length')]
+    df_binder['label'] = df_binder['norm']
+    df_binder = df_binder.sort_values(['label', 'vecs'])
+
+    return df_norms, df_binder
 
 
-def plot_scores(df, xlabel, legend_y=1.0):
+def plot_scores(df, xlabel, aspect=.5, legend_y=1.0):
     g = sns.catplot(x=xlabel, y='label', kind='bar', data=df, legend=False,
-                    hue='vecs', hue_order=['fasttext', 'wiki+subs', 'subs', 'wiki'],
+                    hue='vecs', hue_order=['wiki+subs', 'subs', 'wiki'],
                     height=len(df) / 12,
-                    aspect=1 / np.log10(len(df)))
+                    # aspect=1 / np.log10(len(df))
+                    aspect=aspect,
+                    )
 
     '''
     # draw vlines
@@ -119,12 +163,12 @@ def plot_scores(df, xlabel, legend_y=1.0):
     g.set(xticks=(0, .2, .4, .6, .8, 1))
     g.ax.yaxis.tick_right()
     # g.ax.axvline(1.0, color='lightgray')
-    #g.ax.yaxis.set_tick_params(which='major', reset=False, size=0)
+    # g.ax.yaxis.set_tick_params(which='major', reset=False, size=0)
 
     g.despine(left=True, right=False)
     g.set(xlim=(1.1, 0), ylabel=None)  # , xlabel=xlabel)
-    #g.ax.legend(loc='upper left', bbox_to_anchor=(-0.05, legend_y), frameon=False)
-    g.ax.legend(loc='upper left', bbox_to_anchor=(0, legend_y), frameon=False)
+    g.ax.legend(loc='upper left', bbox_to_anchor=(-0.05, legend_y), frameon=False)
+    # g.ax.legend(loc='upper left', bbox_to_anchor=(0, legend_y), frameon=False)
     return g
 
 
@@ -138,21 +182,22 @@ if __name__ == '__main__':
     #print(df_similarities.head())
     df_similarities.to_csv('similarities.tsv', sep='\t')
 
-    df_norms = gather_norms(os.path.join(path, 'paper_results', 'norms'))
+    df_norms, df_binder = gather_norms(os.path.join(path, 'paper_results', 'norms'))
     #print(df_norms.head())
     df_norms.to_csv('norms.tsv', sep='\t')
+    df_binder.to_csv('binder.tsv', sep='\t')
 
     # df_analogies = pd.read_csv('analogies.tsv', sep='\t').sort_values('label')
     # df_similarities = pd.read_csv('similarities.tsv', sep='\t').sort_values('label')
     # df_norms = pd.read_csv('norms.tsv', sep='\t').sort_values('label')
 
     # plots
-    g_analogies = plot_scores(df_analogies, 'adjusted score', .48)
+    g_analogies = plot_scores(df_analogies, 'adjusted score', .7, .45)
     plt.tight_layout()
     plt.savefig('analogies.png', dpi=600)
     plt.clf()
 
-    g_similarities = plot_scores(df_similarities, 'adjusted rank r', .48)
+    g_similarities = plot_scores(df_similarities, 'adjusted rank r', .5, .30)
     plt.tight_layout()
     plt.savefig('similarities.png', dpi=600)
     plt.clf()
@@ -162,15 +207,28 @@ if __name__ == '__main__':
     #plt.savefig('norms.png', dpi=600)
     #plt.clf()
 
-    df_norms1 = df_norms.iloc[range(int(int(len(df_norms) / 4) / 2) * 4)]
-    df_norms2 = df_norms.iloc[range(int(int(len(df_norms) / 4) / 2) * 4, len(df_norms))]
+    df_norms1 = df_norms.iloc[range(int(int(len(df_norms) / 3) / 2) * 3)]
+    df_norms2 = df_norms.iloc[range(int(int(len(df_norms) / 3) / 2) * 3, len(df_norms))]
 
-    g_norms1 = plot_scores(df_norms1, 'adjusted r', .495)
+    df_binder1 = df_binder.iloc[range(int(int(len(df_binder) / 3) / 2) * 3)]
+    df_binder2 = df_binder.iloc[range(int(int(len(df_binder) / 3) / 2) * 3, len(df_binder))]
+
+    g_norms1 = plot_scores(df_norms1, 'adjusted r', .7, .125)
     plt.tight_layout()
     plt.savefig('norms1.png', dpi=600)
     plt.clf()
 
-    g_norms2 = plot_scores(df_norms2, 'adjusted r', .55)
+    g_norms2 = plot_scores(df_norms2, 'adjusted r', .7, .625)
     plt.tight_layout()
     plt.savefig('norms2.png', dpi=600)
+    plt.clf()
+
+    g_binder1 = plot_scores(df_binder1, 'adjusted r', .5, .55)
+    plt.tight_layout()
+    plt.savefig('binder1.png', dpi=600)
+    plt.clf()
+
+    g_binder2 = plot_scores(df_binder2, 'adjusted r', .5, .9)
+    plt.tight_layout()
+    plt.savefig('binder2.png', dpi=600)
     plt.clf()
