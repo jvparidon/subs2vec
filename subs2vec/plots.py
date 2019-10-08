@@ -351,12 +351,12 @@ def gather_norms(folder):
 
             df = df.append(df_temp, ignore_index=True)
 
-    df_norms = df.loc[df['source'] != 'binder (2016)']
+    df_norms = df.loc[df['source'] != 'binder (2016)'].copy()
     df_norms['language'] = replace_iso(df_norms['lang'])
     df_norms['label'] = df_norms.apply(lambda x: f'{x["language"]}: {x["source"]} {x["norm"]}', axis=1)
     df_norms = df_norms.sort_values(['label', 'vecs'])
 
-    df_binder = df.loc[df['source'] == 'binder (2016)']
+    df_binder = df.loc[df['source'] == 'binder (2016)'].copy()
     df_binder = df_binder.loc[(df_binder['norm'] != 'mean r') & (df_binder['norm'] != 'word length')]
     df_binder['label'] = df_binder['norm']
     df_binder = df_binder.sort_values(['label', 'vecs'])
@@ -385,30 +385,51 @@ def plot_scores(df, xlabel, aspect=.5, legend_y=1.0):
 def plot_wordcounts(df):
     df_means = df.groupby(['lang', 'vecs', 'kind'], as_index=False).mean()
     df_means['log10 wordcount'] = np.log10(df_means['wordcount'])
-    g = sns.lmplot(y='score', x='log10 wordcount', hue='vecs',
+    df_means['wordcount-adjusted score'] = df_means['score'] / df_means['log10 wordcount']
+    '''
+    g = sns.lmplot(y='wordcount-adjusted score', x='log10 wordcount', hue='vecs',
                    row='kind', sharex=True, legend=False,
                    data=df_means, aspect=2, height=3,
                    )
     ylabels = ['mean analogies score per language', 'mean similarities score per language', 'mean norms score per language']
     for i in range(len(ylabels)):
         g.axes[i][0].set(ylabel=ylabels[i])
-    g.set(ylim=(-0.1, 1.1), xlim=(7, 9.5), title='')
+    #g.set(ylim=(-0.1, 1.1), xlim=(7, 9.5), title='')
     g.axes[2][0].legend(loc='lower right', frameon=False)
+    '''
+    '''
+    g = sns.catplot(y='wordcount-adjusted score', hue='vecs', hue_order=['subs', 'wiki'], x='kind',
+                    kind='violin', data=df_means, legend=False, inner='quartile', cut=0, split=True, aspect=.7)
+    g.ax.legend(loc='lower right', frameon=False)
+    g.set(ylim=(0, None), xlabel='')
+    '''
+    df_subs = df_means.loc[df_means['vecs'] == 'subs'].rename(columns={'wordcount-adjusted score': 'wordcount-adjusted score for subtitle vectors'}).reset_index()
+    df_wiki = df_means.loc[df_means['vecs'] == 'wiki'].rename(columns={'wordcount-adjusted score': 'wordcount-adjusted score for wikipedia vectors'}).reset_index()
+    df_means = df_subs
+    df_means['wordcount-adjusted score for wikipedia vectors'] = df_wiki['wordcount-adjusted score for wikipedia vectors']
+    g = sns.relplot(kind='scatter', data=df_means, hue='kind',
+                    x='wordcount-adjusted score for wikipedia vectors', y='wordcount-adjusted score for subtitle vectors',
+                    height=4, aspect=.8,
+                    )
+
+    g._legend.remove()
+    g.ax.legend(loc='lower right', frameon=False)
+    g.ax.legend_.texts[0].set_text('')
+
+    g.ax.plot([0, .11], [0, .11], linestyle='--', color='lightgray')
+    g.set(xlim=(0, .11), ylim=(0, .11))
     return g
 
 
 if __name__ == '__main__':
     # dataframes
     df_analogies = gather_analogies(os.path.join(path, 'paper_results', 'analogies'))
-    print(df_analogies.head())
     df_analogies.to_csv('analogies.tsv', sep='\t')
 
     df_similarities = gather_similarities(os.path.join(path, 'paper_results', 'similarities'))
-    print(df_similarities.head())
     df_similarities.to_csv('similarities.tsv', sep='\t')
 
     df_norms, df_binder = gather_norms(os.path.join(path, 'paper_results', 'norms'))
-    print(df_norms.head())
     df_norms.to_csv('norms.tsv', sep='\t')
     df_binder.to_csv('binder.tsv', sep='\t')
 
@@ -416,15 +437,16 @@ if __name__ == '__main__':
     # df_similarities = pd.read_csv('similarities.tsv', sep='\t').sort_values('label')
     # df_norms = pd.read_csv('norms.tsv', sep='\t').sort_values('label')
 
-    """
     # plots
     g_analogies = plot_scores(df_analogies, 'adjusted score', .7, .45)
     plt.tight_layout()
+    plt.savefig('analogies.pdf')
     plt.savefig('analogies.png', dpi=600)
     plt.clf()
 
     g_similarities = plot_scores(df_similarities, 'adjusted rank r', .5, .30)
     plt.tight_layout()
+    plt.savefig('similarities.pdf')
     plt.savefig('similarities.png', dpi=600)
     plt.clf()
 
@@ -436,25 +458,29 @@ if __name__ == '__main__':
 
     g_norms1 = plot_scores(df_norms1, 'adjusted r', .7, .125)
     plt.tight_layout()
+    plt.savefig('norms1.pdf')
     plt.savefig('norms1.png', dpi=600)
     plt.clf()
 
     g_norms2 = plot_scores(df_norms2, 'adjusted r', .7, .625)
     plt.tight_layout()
+    plt.savefig('norms2.pdf')
     plt.savefig('norms2.png', dpi=600)
     plt.clf()
 
     g_binder1 = plot_scores(df_binder1, 'adjusted r', .5, .55)
     plt.tight_layout()
+    plt.savefig('binder1.pdf')
     plt.savefig('binder1.png', dpi=600)
     plt.clf()
 
     g_binder2 = plot_scores(df_binder2, 'adjusted r', .5, .9)
     plt.tight_layout()
+    plt.savefig('binder2.pdf')
     plt.savefig('binder2.png', dpi=600)
     plt.clf()
-    """
 
+    # scatter
     df_a = df_analogies[['lang', 'source', 'vecs', 'adjusted score']].rename(columns={'adjusted score': 'score'})
     df_s = df_similarities[['lang', 'source', 'vecs', 'adjusted rank r']].rename(columns={'adjusted rank r': 'score'})
     df_n = df_norms[['lang', 'source', 'vecs', 'adjusted r']].rename(columns={'adjusted r': 'score'})
@@ -464,8 +490,8 @@ if __name__ == '__main__':
 
     df_wordcounts = pd.concat([df_a, df_s, df_n])
     df_wordcounts = add_wordcounts(df_wordcounts).dropna()
-    print(df_wordcounts.head())
     g_wordcounts = plot_wordcounts(df_wordcounts)
     plt.tight_layout()
+    plt.savefig('wordcounts.pdf')
     plt.savefig('wordcounts.png', dpi=600)
     plt.clf()
