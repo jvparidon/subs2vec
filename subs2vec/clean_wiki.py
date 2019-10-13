@@ -28,7 +28,6 @@ def strip_wiki_file(fname):
     logging.info(f'completed stripping {fname}')
 
 
-# TODO: figure out if 1e7 is a sensible number of lines for this (equates to approx. 500MB temp files)
 @log_timer
 def big_strip_wiki_file(fname, lines_per_chunk=1e6):
     """Strip xml and other tags from a Wikipedia dump that doesn't fit into RAM.
@@ -88,6 +87,26 @@ def _strip_curly(txt):
     return ''.join(txt)
 
 
+regeces = [
+    (r'(?s)<ref.*?</ref>', ''),  # strip reference links
+    (r'(?s)<references.*?</references>', ''),  # strip references
+    (r'(?s)<table.*?</table>', ''),  # strip tables
+    (r'(?s)<gallery.*?</gallery>', ''),  # strip galleries
+    (r'(?s)<kml.*?</kml>', ''),  # strip KML tags
+    (r'<.*?>', ''),  # strip other xml tags
+    (r'http.*?(?:[\s\n\]]|$)', ''),  # strip external http(s) links
+    (r'\[\[[^\]]*?:.*\|(.*?)\]\]', '\\1'),  # strip links to files, etc. but keep labels
+    (r'\[\[[^\]]*?:(.*?)\]\]', ''),  # strip category links
+    (r'\[\[[^\]]*?\|(.*?)\]\]', '\\1'),  # convert labeled links to just labels
+    (r'(?m)^[\s]*[!?*;:=+\-|#_].*?$', ''),  # strip lines that do not start with alphanumerics, quotes, or brackets
+    (r'(?m)^.*?\(UTC\).*?$', ''),  # strip lines containing a time stamp
+    (r'\s\(.*?\)', ''),  # remove everything in parentheses
+    (r'([^\s.!?:;]{2})[.!?:;]+?[\s\n]|$', '\\1\n'),  # break sentences at periods
+    (r"[-–—/']", ' '),  # replace hyphens, apostrophes and slashes with spaces
+    (r'\s*\n\s*', '\n'),  # strip empty lines and lines containing whitespace
+    (r'\s{2,}', ' '),  # strip excessive spaces
+]
+patterns = [(re.compile(regec[0], re.IGNORECASE), regec[1]) for regec in regeces]
 def _strip_wiki_xml(txts):
     """Strip xml and other tags from Wikipedia text.
 
@@ -95,36 +114,17 @@ def _strip_wiki_xml(txts):
     :return: stripped Wikipedia text
     """
     pattern = re.compile('<text.*?>(.*?)</text>', re.DOTALL)
-    txts = pattern.findall(html.unescape(html.unescape(txts)))  # double unescape because Wikipedia is a mess
-
-    regeces = [
-        (r'(?s)<ref.*?</ref>', ''),  # strip reference links
-        (r'(?s)<references.*?</references>', ''),  # strip references
-        (r'(?s)<table.*?</table>', ''),  # strip tables
-        (r'(?s)<gallery.*?</gallery>', ''),  # strip galleries
-        (r'(?s)<kml.*?</kml>', ''),  # strip KML tags
-        (r'<.*?>', ''),  # strip other xml tags
-        (r'http.*?(?:[\s\n\]]|$)', ''),  # strip external http(s) links
-        (r'\[\[[^\]]*?:.*\|(.*?)\]\]', '\\1'),  # strip links to files, etc. but keep labels
-        (r'\[\[[^\]]*?:(.*?)\]\]', ''),  # strip category links
-        (r'\[\[[^\]]*?\|(.*?)\]\]', '\\1'),  # convert labeled links to just labels
-        (r'(?m)^[\s]*[!?*;:=+\-|#_].*?$', ''),  # strip lines that do not start with alphanumerics, quotes, or brackets
-        (r'(?m)^.*?\(UTC\).*?$', ''),  # strip lines containing a time stamp
-        (r'\s\(.*?\)', ''),  # remove everything in parentheses
-        (r'([^\s.!?:;]{2})[.!?:;]+?[\s\n]|$', '\\1\n'),  # break sentences at periods
-        (r"[-–—/']", ' '),  # replace hyphens, apostrophes and slashes with spaces
-        (r'\s*\n\s*', '\n'),  # strip empty lines and lines containing whitespace
-        (r'\s{2,}', ' '),  # strip excessive spaces
-    ]
+    txts = pattern.findall(html.unescape(html.unescape(txts)))  # double unescape because Wikipedia dumps are a mess
 
     txts = [_strip_curly(txt) if ((not txt.startswith('#'))
                                  and ('<noinclude>' not in txt.lower())
                                  and ('__noindex__' not in txt.lower())
                                  ) else '' for txt in txts]
-    for regec in regeces:
-        pattern = re.compile(regec[0], re.IGNORECASE)
-        for i in range(len(txts)):
-            txts[i] = pattern.sub(regec[1], txts[i])
+
+    for i in range(len(txts)):
+        for pattern in patterns:
+            txts[i] = pattern[0].sub(pattern[1], txts[i])
+
     txts = [''.join([letter for letter in txt if (letter.isalnum() or letter.isspace())]) for txt in txts if txt != '']
     return '\n'.join(txts)
 
