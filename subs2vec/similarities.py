@@ -93,7 +93,8 @@ def novel_similarities(vecs_fname, similarities_fname):
     vecs_dict = vectors.as_dict()
     similarities = pd.read_csv(similarities_fname, sep='\t', comment='#')
     similarities['similarity'] = similarities.apply(lambda x: 1.0 - scipy.spatial.distance.cosine(vecs_dict.get(x['word1'], np.nan),
-                                                                                                  vecs_dict.get(x['word2'], np.nan)))
+                                                                                                  vecs_dict.get(x['word2'], np.nan)),
+                                                                                                  axis=1)
     base_fname = '.'.join(similarities_fname.split('.')[:-1])
     similarities.to_csv(f'{base_fname}.predictions.tsv', sep='\t')
 

@@ -45,7 +45,8 @@ def solve_analogies(vectors, analogies, novel=False, method='multiplicative', wh
     a1 = np.vstack(a1)
     a2 = np.vstack(a2)
     b1 = np.vstack(b1)
-    b2_words = np.vstack(b2_words)
+    if not novel:
+        b2_words = np.vstack(b2_words)
     analogies_words = np.vstack(analogies_words)
     l = len(analogies_words)
 
@@ -108,9 +109,9 @@ def solve_analogies(vectors, analogies, novel=False, method='multiplicative', wh
         penalty = (total - missing) / total
         adjusted_score = score * penalty
         score = pd.DataFrame({'score': [score], 'adjusted score': [adjusted_score]})
-        return {'score': score, 'predictions': analogies}
     else:
-        return analogies
+        score = np.nan
+    return {'score': score, 'predictions': analogies}
 
 
 @log_timer
