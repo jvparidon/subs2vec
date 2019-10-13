@@ -1,4 +1,5 @@
 """Compute rank correlations between word vector cosine similarities and human ratings of semantic similarity."""
+import numpy as np
 import pandas as pd
 import argparse
 import os
@@ -18,7 +19,7 @@ def compare_similarities(vectors, similarities):
     Computes cosine similarities, and uses rank (Spearman) correlation as a measure of similarity to the specified human ratings.
 
     :param vectors: Vectors object containing word vectors.
-    :param similarities: pandas DataFrame of analogies, columns labeled a1, a2, b1, b2.
+    :param similarities: pandas DataFrame of similarities, labeled word1, word2, and similarity
     :return: dict containing score and predictions in separate pandas DataFrames
     """
     vecs_dict = vectors.as_dict()
@@ -79,10 +80,32 @@ def evaluate_similarities(lang, vecs_fname):
         return scores
 
 
+def novel_similarities(vecs_fname, similarities_fname):
+    """Predict semantic similarities for novel word pairs, using word vectors.
+
+    Writes predictions to tab-separated text file.
+
+    :param vecs_fname: file containing word vectors to use for prediction.
+    :param similarities_fname: file containing word pairs in tab-separated columns named 'word1' and 'word2'
+    """
+    logging.info(f'predicting novel semantic similarities with {vecs_fname}')
+    vectors = Vectors(vecs_fname, normalize=True, n=1e6, d=300)
+    vecs_dict = vectors.as_dict()
+    similarities = pd.read_csv(similarities_fname, sep='\t', comment='#')
+    similarities['similarity'] = similarities.apply(lambda x: 1.0 - scipy.spatial.distance.cosine(vecs_dict.get(x['word1'], np.nan),
+                                                                                                  vecs_dict.get(x['word2'], np.nan)))
+    base_fname = '.'.join(similarities_fname.split('.')[:-1])
+    similarities.to_csv(f'{base_fname}.predictions.tsv', sep='\t')
+
+
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='compute rank correlations between word vector cosine similarities and human semantic similarity ratings')
     argparser.add_argument('lang', help='language to compare simarities in (uses two-letter ISO language codes)')
     argparser.add_argument('vecs_fname', help='word vectors to evaluate')
+    argparser.add_argument('--novel_similarities', help='file containing tab-separated word pairs')
     args = argparser.parse_args()
 
-    print(evaluate_similarities(**vars(args)))
+    if args.novel_similarities:
+        novel_similarities(vecs_fname=args.vecs_fname, similarities_fname=args.novel_similarities)
+    else:
+        print(evaluate_similarities(lang=args.lang, vecs_fname=args.vecs_fname))

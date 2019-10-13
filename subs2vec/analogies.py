@@ -11,11 +11,12 @@ path = os.path.dirname(__file__)
 
 
 @log_timer
-def solve_analogies(vectors, analogies, method='multiplicative', whole_matrix=False):
+def solve_analogies(vectors, analogies, novel=False, method='multiplicative', whole_matrix=False):
     """Solves analogies using specified methods.
 
     :param vectors: Vectors object containing word vectors
-    :param analogies: pandas DataFrame of analogies, columns labeled a1, a2, b1, b2
+    :param analogies: pandas DataFrame of analogies, columns labeled a1, a2, b1(, b2)
+    :param novel: whether the task is to solve novel analogies (or alternatively, score the predictions relative to existing analogies)
     :param method: solving method to use (options are `additive` and `multiplicative`, multiplicative is the default and usually performs best)
     :param whole_matrix: boolean determining whether to use whole matrix multiplication (faster, but uses more RAM than you may have available, `False` is the default)
     :return: dict containing score and predictions in separate pandas DataFrames
@@ -36,7 +37,8 @@ def solve_analogies(vectors, analogies, method='multiplicative', whole_matrix=Fa
             a1.append(vecs_dict[analogy['a1']])
             a2.append(vecs_dict[analogy['a2']])
             b1.append(vecs_dict[analogy['b1']])
-            b2_words.append(analogy['b2'])
+            if not novel:
+                b2_words.append(analogy['b2'])
             analogies_words.append([analogy['a1'], analogy['a2'], analogy['b1']])
         else:
             missing += 1
@@ -63,7 +65,6 @@ def solve_analogies(vectors, analogies, method='multiplicative', whole_matrix=Fa
         if whole_matrix:
             logging.info('computing analogies using whole matrix multiplicative method')
             b2_pred = ((cos_pos(vectors.vectors, b1) * cos_pos(vectors.vectors, a2)) / (cos_pos(vectors.vectors, a1) + eps))
-            test1 = b2_pred
             # zero out other words in analogy (yes, this feels like cheating)
             for i in range(l):
                 b2_pred[np.isin(vectors.words, analogies_words[i]), i] = -1.0
@@ -75,7 +76,6 @@ def solve_analogies(vectors, analogies, method='multiplicative', whole_matrix=Fa
                 b2_pred = ((cos_pos(vectors.vectors, b1[i].reshape(1, -1)) * cos_pos(vectors.vectors, a2[i].reshape(1, -1)))
                            / (cos_pos(vectors.vectors, a1[i].reshape(1, -1)) + eps)).squeeze()
                 # zero out other words in analogy (yes, this feels like cheating)
-                test2 = b2_pred
                 b2_pred[np.isin(vectors.words, analogies_words[i])] = -1.0
                 b2_pred_idx[i] = np.argmax(b2_pred)
 
@@ -100,14 +100,17 @@ def solve_analogies(vectors, analogies, method='multiplicative', whole_matrix=Fa
 
     # return pandas df with b2 and b2 predicted
     analogies = pd.DataFrame(analogies_words, columns=['a1', 'a2', 'b1'])
-    analogies['b2'] = b2_words
     analogies['b2 predicted'] = vectors.words[b2_pred_idx]
-    analogies['accuracy'] = analogies['b2'] == analogies['b2 predicted']
-    score = analogies['accuracy'].mean()
-    penalty = (total - missing) / total
-    adjusted_score = score * penalty
-    score = pd.DataFrame({'score': [score], 'adjusted score': [adjusted_score]})
-    return {'score': score, 'predictions': analogies}
+    if not novel:
+        analogies['b2'] = b2_words
+        analogies['accuracy'] = (analogies['b2'] == analogies['b2 predicted'])
+        score = analogies['accuracy'].mean()
+        penalty = (total - missing) / total
+        adjusted_score = score * penalty
+        score = pd.DataFrame({'score': [score], 'adjusted score': [adjusted_score]})
+        return {'score': score, 'predictions': analogies}
+    else:
+        return analogies
 
 
 @log_timer
@@ -146,12 +149,34 @@ def evaluate_analogies(lang, vecs_fname, method='multiplicative', whole_matrix=F
         return scores
 
 
+def novel_analogies(vecs_fname, analogies_fname, method='multiplicative', whole_matrix=False):
+    """Solve novel analogies, using word vectors.
+
+    Writes predictions to tab-separated text file.
+
+    :param vecs_fname: file containing word vectors to use for prediction.
+    :param analogies_fname: file containing analogies in tab-separated columns named 'a1', 'a2', and 'b1'
+    :param method: solving method to use (options are `additive` and `multiplicative`, multiplicative is the default and usually performs best)
+    :param whole_matrix: boolean determining whether to use whole matrix multiplication (faster, but uses more RAM than you may have available, `False` is the default)
+    """
+    logging.info(f'solving novel analogies with {vecs_fname}')
+    vectors = Vectors(vecs_fname, normalize=True, n=1e6, d=300)
+    analogies = pd.read_csv(analogies_fname, sep='\t', comment='#')
+    results = solve_analogies(vectors, analogies, novel=True, method=method, whole_matrix=whole_matrix)
+    base_fname = '.'.join(analogies_fname.split('.')[:-1])
+    results['predictions'].to_csv(f'{base_fname}.predictions.tsv', sep='\t')
+
+
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='solve syntactic and semantic analogies from Mikolov et al. (2013)')
     argparser.add_argument('lang', help='language to solve analogies in (uses two-letter ISO language codes)')
     argparser.add_argument('vecs_fname', help='word vectors to evaluate')
     argparser.add_argument('--whole_matrix', action='store_true',
                            help='perform computations using whole matrices instead of column-wise (potentially results in big memory footprint)')
+    argparser.add_argument('--novel_analogies', help='file containing novel analogies to solve, in tab-separated columns named a1, a2, and b1')
     args = argparser.parse_args()
 
-    print(evaluate_analogies(**vars(args)))
+    if args.novel_analogies:
+        novel_analogies(vecs_fname=args.vecs_fname, analogies_fname=args.novel_analogies, whole_matrix=args.whole_matrix)
+    else:
+        print(evaluate_analogies(lang=args.lang, vecs_fname=args.vecs_fname, whole_matrix=args.whole_matrix))
