@@ -1,13 +1,13 @@
 # subs2vec
-Van Paridon & Thompson (2019) introduces pretrained embeddings and precomputed word/bigram/trigram frequencies in 55 languages. The files can be downloaded from the links in __[this table](#downloading-datasets)__. Word vectors trained on subtitles are available, as well as vectors trained on Wikipedia, and a combination of subtitles and Wikipedia (for best performance).
+[Van Paridon & Thompson (2019)](https://doi.org/10.31234/osf.io/fcrmy) introduces pretrained embeddings and precomputed word/bigram/trigram frequencies in 55 languages. The files can be downloaded from the links in __[this table](#downloading-datasets)__. Word vectors trained on subtitles are available, as well as vectors trained on Wikipedia, and a combination of subtitles and Wikipedia (for best performance).
 
-This repository contains the subs2vec module, a number of Python 3.7 scripts and command line tools to evaluate a set of word vectors on semantic similarity, semantic and syntactic analogy, and lexical norm prediction tasks. In addition, the `subs2vec.py` script will take an OpenSubtitles archive or Wikipedia and go through all the steps to train a fastText model and produce word vectors as used in Van Paridon & Thompson (2019).  
+This repository contains the subs2vec module, a number of Python 3.7 scripts and command line tools to evaluate a set of word vectors on semantic similarity, semantic and syntactic analogy, and lexical norm prediction tasks. In addition, the `subs2vec.py` script will take an OpenSubtitles archive or Wikipedia and go through all the steps to train a fastText model and produce word vectors as used in the paper associated with this repository.  
 
 Psycholinguists may be especially interested `norms` script, which evaluates the lexical norm prediction performance of a set of word vectors, but can also be used to predict lexical norms for un-normed words. For a more detailed explanation see the __[how to use -> extending lexical norms](#extending-lexical-norms)__ section.  
 
 The scripts in this repository require [Python 3.7](https://www.python.org/downloads/) and some additional libraries that are easily installed through pip. (If you want to use the `subs2vec.py` script to train your own word embeddings, you will also need compiled fastText and word2vec binaries.)  
 
-If you use any of the subs2vec code and/or pretrained models, please cite the arXiv paper (Van Paridon & Thompson, 2019, forthcoming).  
+If you use any of the subs2vec code and/or pretrained models, please cite the preprint ([Van Paridon & Thompson, 2019](https://doi.org/10.31234/osf.io/fcrmy)).  
 
 ## How to use
 In general, the submodules of subs2vec can be run as Python modules using the -m flag:  
@@ -28,7 +28,7 @@ To evaluate word embeddings on analogies, semantic similarity, or lexical norm p
 subs2vec uses the two-letter ISO language codes, so French in the example is `fr`, English would be `en`, German would be `de`, etc.
 
 All datasets used for evaluation, including the lexical norms, are stored in `subs2vec/evaluation/datasets/`.  
-Results from Van Paridon & Thompson (2019) are in `subs2vec/evaluation/article_results/`.
+Results from [Van Paridon & Thompson (2019)](https://doi.org/10.31234/osf.io/fcrmy) are in `subs2vec/evaluation/article_results/`.
 
 ### Extending lexical norms
 To extend lexical norms (either norms you have collected yourself, or norms provided in this repository) use:  
@@ -38,7 +38,7 @@ The norms file should be a tab-separated text file, with the first line containi
 For an overview of norms that come included in the repo (and their authors), see [this list](https://github.com/jvparidon/subs2vec/blob/master/subs2vec/datasets/norms_table.tsv). For the norms datasets themselves, look inside [this directory](https://github.com/jvparidon/subs2vec/tree/master/subs2vec/datasets/norms).
 
 ### Extracting word frequencies
-The subtitle corpus used in Van Paridon & Thompson (2019) was also used to compile the word frequencies in [SUBTLEX](https://www.frontiersin.org/articles/10.3389/fpsyg.2011.00027/full). That same corpus can of course be used to compile bigram and trigram frequencies as well.  
+The subtitle corpus used to train subs2vec was also used to compile the word frequencies in [SUBTLEX](https://www.frontiersin.org/articles/10.3389/fpsyg.2011.00027/full). That same corpus can of course be used to compile bigram and trigram frequencies as well.  
 To extract word, bigram, or trigram frequencies from a text file yourself, `fr.txt` for instance, use:  
 `python3 -m subs2vec.frequencies fr.txt`  
 
@@ -54,7 +54,7 @@ To remove duplicates from `fr.txt` for example, use:
 `python3 -m subs2vec.deduplicate fr.txt`
 
 ### Training models
-If you want to reproduce models as used in Van Paridon & Thompson (2019), you can use the `train_model` module.  
+If you want to reproduce models as used in [Van Paridon & Thompson (2019)](https://doi.org/10.31234/osf.io/fcrmy), you can use the `train_model` module.  
 For instance, the steps to create a subtitle corpus are:
 1. Download a corpus:  
 `python3 -m subs2vec.download fr subs`  
@@ -73,7 +73,7 @@ For more detailed training options:
 For more detailed documentation of the package modules and API, see [subs2vec.readthedocs.io](https://subs2vec.readthedocs.io)
 
 ## Downloading datasets
-This table contains links to the top 1 million word vectors in each language, as well all vectors, model binaries, and the word, bigram, and trigram frequencies in the subtitle and Wikipedia corpora.
+This table contains links to the top 1 million word vectors in each language, as well all vectors, model binaries, and the word, bigram, and trigram frequencies in the subtitle and Wikipedia corpora. If you use these pretrained vectors/models, please cite the preprint ([Van Paridon & Thompson, 2019](https://doi.org/10.31234/osf.io/fcrmy)).  
 
 | language | lang | corpus | vectors | corpus word count | ngram frequencies |
 |---|---|---|---|---:|---|
