@@ -15,13 +15,14 @@ path = os.path.dirname(__file__)
 
 
 @log_timer
-def evaluate_norms(lang, vecs_fname):
+def evaluate_norms(lang, vecs_fname, alpha=1.0):
     """Predict lexical norms to evaluate a set of word vectors in a given language.
     
     Writes scores to tab-separated text file but also returns them.
 
     :param lang: language to evaluate word vectors in (uses two-letter ISO codes)
     :param vecs_fname: word vectors to evaluate
+    :param alpha: regularization strength, default 1.0, set higher for small datasets
     :return: pandas DataFrame containing the norms results
     """
     norms_path = os.path.join(path, 'datasets', 'norms')
@@ -38,7 +39,7 @@ def evaluate_norms(lang, vecs_fname):
             logging.info(f'predicting norms from {norms_fname}')
             norms = pd.read_csv(os.path.join(norms_path, norms_fname), sep='\t', comment='#')
             norms = norms.set_index('word')
-            score = predict_norms(vectors, norms)['scores']
+            score = predict_norms(vectors, norms, alpha)['scores']
             score['source'] = norms_fname
             scores.append(score)
     scores_fname = os.path.split(vecs_fname)[1].replace('.vec', '.tsv')
@@ -49,11 +50,12 @@ def evaluate_norms(lang, vecs_fname):
 
 
 @log_timer
-def predict_norms(vectors, norms):
+def predict_norms(vectors, norms, alpha=1.0):
     """Predict lexical norms and return score.
 
     :param vectors: Vectors object containing word vectors
     :param norms: pandas DataFrame of lexical norms
+    :param alpha: regularization strength, default 1.0, set higher for small datasets
     :return: dict containing scores and predictions in separate pandas DataFrames
     """
     vecs_df = vectors.as_df()
@@ -66,7 +68,7 @@ def predict_norms(vectors, norms):
     logging.info(f'missing vectors for {missing} out of {total} words')
     df = sklearn.utils.shuffle(df)  # shuffle is important for unbiased results on ordered datasets!
 
-    model = sklearn.linear_model.Ridge()  # use ridge regression models
+    model = sklearn.linear_model.Ridge(alpha=alpha)  # use ridge regression models
     cv = sklearn.model_selection.RepeatedKFold(n_splits=5, n_repeats=10)
 
     # compute crossvalidated prediction scores
@@ -104,20 +106,21 @@ def predict_norms(vectors, norms):
     return {'scores': pd.DataFrame(scores), 'predictions': predictions}
 
 
-def extend_norms(vecs_fname, norms_fname):
+def extend_norms(vecs_fname, norms_fname, alpha=1.0):
     """Extend lexical norms to unobserved words, using word vectors.
 
     Writes predictions to tab-separated text file.
 
     :param vecs_fname: file containing word vectors to use for prediction.
     :param norms_fname: file containing norms in tab-separated columns, first column should contain words,
-     first line should contain column names, unobserved cells should be left empty
+    first line should contain column names, unobserved cells should be left empty
+    :param alpha: regularization strength, default 1.0, set higher for small datasets
     """
     logging.info(f'extending lexical norms with {vecs_fname}')
     vectors = Vectors(vecs_fname, normalize=True, n=1e6, d=300)
     norms = pd.read_csv(norms_fname, sep='\t', comment='#')
     norms = norms.set_index('word')
-    results = predict_norms(vectors, norms)
+    results = predict_norms(vectors, norms, alpha)
     base_fname = '.'.join(norms_fname.split('.')[:-1])
     results['scores'].to_csv(f'{base_fname}.scores.tsv', sep='\t')
     results['predictions'].to_csv(f'{base_fname}.predictions.tsv', sep='\t')
@@ -128,9 +131,10 @@ if __name__ == '__main__':
     argparser.add_argument('lang', help='language to predict norms for (uses two-letter ISO language codes)')
     argparser.add_argument('vecs_fname', help='vectors to evaluate (or use for lexical norm extension')
     argparser.add_argument('--extend_norms', help='file containing lexical norms to extend')
+    argparser.add_argument('--alpha', type=float, default=1.0, help='regularization strength, default 1.0, set higher for small datasets')
     args = argparser.parse_args()
 
     if args.extend_norms:
-        extend_norms(vecs_fname=args.vecs_fname, norms_fname=args.extend_norms)
+        extend_norms(vecs_fname=args.vecs_fname, norms_fname=args.extend_norms, alpha=args.alpha)
     else:
-        print(evaluate_norms(lang=args.lang, vecs_fname=args.vecs_fname))
+        print(evaluate_norms(lang=args.lang, vecs_fname=args.vecs_fname, alpha=args.alpha))
