@@ -10,15 +10,12 @@ The scripts in this repository require [Python 3.7](https://www.python.org/downl
 If you use any of the subs2vec code and/or pretrained models, please cite the preprint ([Van Paridon & Thompson, 2019](https://doi.org/10.31234/osf.io/fcrmy)).  
 
 ## How to use
-In general, the submodules of subs2vec can be run as Python modules using the -m flag:  
+subs2vec is available through pip, installing is as easy as running:  
+`python3 -m pip install subs2vec`  
+Any missing dependencies should be installed automatically.  
+
+Each submodules of subs2vec can then be run as a command line tool using the -m flag:  
 `python3 -m subs2vec.submodule_name`  
-
-Normally, this only works if you are in the subs2vec directory. If you want to be able to use the subs2vec commands anywhere, consider installing the subs2vec package using:  
-`python3 setup.py install`  
-
-This will not make any major changes to your system, it just copies the subs2vec package to a place where the Python interpreter knows to look for it.  
-Any missing dependencies can be installed using:  
-`pip3 install -r requirements.txt`
 
 ### Evaluating word embeddings
 To evaluate word embeddings on analogies, semantic similarity, or lexical norm prediction as in Van Paridon & Thompson (2019), use:  
