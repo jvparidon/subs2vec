@@ -15,7 +15,7 @@ def download(lang, corpus):
     """
     urls = {
         'subs': f'http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/raw/{lang}.zip',
-        'wiki': f'https://ftp.acc.umu.se/mirror/wikimedia.org/dumps/{lang}wiki/20190401/{lang}wiki-20190401-pages-meta-current.xml.bz2'
+        'wiki': f'http://dumps.wikimedia.your.org/{lang}wiki/latest/{lang}wiki-latest-pages-meta-current.xml.bz2'
     }
     subprocess.run(['curl', '-OLk', urls[corpus]])
 

@@ -1,5 +1,5 @@
 # subs2vec
-[Van Paridon & Thompson (2019)](https://doi.org/10.31234/osf.io/fcrmy) introduces pretrained embeddings and precomputed word/bigram/trigram frequencies in 55 languages. The files can be downloaded from the links in __[this table](#downloading-datasets)__. Word vectors trained on subtitles are available, as well as vectors trained on Wikipedia, and a combination of subtitles and Wikipedia (for best performance).
+[Van Paridon & Thompson (2019)](https://doi.org/10.31234/osf.io/fcrmy) introduces pretrained embeddings and precomputed word/bigram/trigram frequencies in 55 languages. The files can be downloaded from the links in __[this table](#downloading-datasets)__. Word vectors trained on subtitles are available, as well as vectors trained on Wikipedia, and a combination of subtitles and Wikipedia (for best predictive performance).
 
 This repository contains the subs2vec module, a number of Python 3.7 scripts and command line tools to evaluate a set of word vectors on semantic similarity, semantic and syntactic analogy, and lexical norm prediction tasks. In addition, the `subs2vec.py` script will take an OpenSubtitles archive or Wikipedia and go through all the steps to train a fastText model and produce word vectors as used in the paper associated with this repository.  
 
