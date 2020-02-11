@@ -45,7 +45,7 @@ def evaluate_norms(lang, vecs_fname, alpha=1.0):
     scores_fname = os.path.split(vecs_fname)[1].replace('.vec', '.tsv')
     if len(scores) > 0:
         scores = pd.concat(scores)
-        scores.to_csv(os.path.join(results_path, scores_fname), sep='\t')
+        scores.to_csv(os.path.join(results_path, scores_fname), sep='\t', index=False)
         return scores
 
 
@@ -87,7 +87,8 @@ def predict_norms(vectors, norms, alpha=1.0):
             'norm': col,
             'adjusted r': np.sqrt(penalized_score),  # take square root of explained variance to get Pearson r
             'adjusted r-squared': penalized_score,
-            'r-squared': median_score
+            'r-squared': median_score,
+            'r': np.sqrt(median_score),
         })
 
     # predict (extend norms)
@@ -122,8 +123,8 @@ def extend_norms(vecs_fname, norms_fname, alpha=1.0):
     norms = norms.set_index('word')
     results = predict_norms(vectors, norms, alpha)
     base_fname = '.'.join(norms_fname.split('.')[:-1])
-    results['scores'].to_csv(f'{base_fname}.scores.tsv', sep='\t')
-    results['predictions'].to_csv(f'{base_fname}.predictions.tsv', sep='\t')
+    results['scores'].to_csv(f'{base_fname}.scores.tsv', sep='\t', index=False)
+    results['predictions'].to_csv(f'{base_fname}.predictions.tsv', sep='\t', index=False)
 
 
 if __name__ == '__main__':

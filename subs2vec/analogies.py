@@ -146,7 +146,7 @@ def evaluate_analogies(lang, vecs_fname, method='multiplicative', whole_matrix=F
     scores_fname = os.path.split(vecs_fname)[1].replace('.vec', '.tsv')
     if len(scores) > 0:
         scores = pd.concat(scores)
-        scores.to_csv(os.path.join(results_path, scores_fname), sep='\t')
+        scores.to_csv(os.path.join(results_path, scores_fname), sep='\t', index=False)
         return scores
 
 
@@ -165,7 +165,7 @@ def novel_analogies(vecs_fname, analogies_fname, method='multiplicative', whole_
     analogies = pd.read_csv(analogies_fname, sep='\t', comment='#')
     results = solve_analogies(vectors, analogies, novel=True, method=method, whole_matrix=whole_matrix)
     base_fname = '.'.join(analogies_fname.split('.')[:-1])
-    results['predictions'].to_csv(f'{base_fname}.predictions.tsv', sep='\t')
+    results['predictions'].to_csv(f'{base_fname}.predictions.tsv', sep='\t', index=False)
 
 
 if __name__ == '__main__':

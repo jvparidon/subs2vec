@@ -76,7 +76,7 @@ def evaluate_similarities(lang, vecs_fname):
     scores_fname = os.path.split(vecs_fname)[1].replace('.vec', '.tsv')
     if len(scores) > 0:
         scores = pd.concat(scores)
-        scores.to_csv(os.path.join(results_path, scores_fname), sep='\t')
+        scores.to_csv(os.path.join(results_path, scores_fname), sep='\t', index=False)
         return scores
 
 
@@ -96,7 +96,7 @@ def novel_similarities(vecs_fname, similarities_fname):
                                                                                                   vecs_dict.get(x['word2'], np.nan)),
                                                                                                   axis=1)
     base_fname = '.'.join(similarities_fname.split('.')[:-1])
-    similarities.to_csv(f'{base_fname}.predictions.tsv', sep='\t')
+    similarities.to_csv(f'{base_fname}.predictions.tsv', sep='\t', index=False)
 
 
 if __name__ == '__main__':
