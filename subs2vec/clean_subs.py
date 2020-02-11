@@ -77,7 +77,7 @@ def strip_archive(lang, ioformat='txt', years=(1900, 2100)):
     """
     read_zip = zipfile.ZipFile(f'{lang}.zip', 'r')
     write_zip = zipfile.ZipFile(f'{lang}_stripped.zip', 'a')
-    if ioformat == 'txt':
+    if ioformat in ['txt', 'viz']:
         dirpath = 'OpenSubtitles/raw'
     elif ioformat in ['upos', 'lemma']:
         dirpath = 'OpenSubtitles/parsed'
@@ -112,15 +112,15 @@ def _strip_punctuation(txt, ioformat='txt'):
     :param ioformat: input/output format, default is txt
     :return: stripped text
     """
-
-    for pattern in patterns:
-        txt = pattern[0].sub(pattern[1], txt)
-    if ioformat == 'txt':
-        txt = ''.join([letter for letter in txt if (letter.isalnum() or letter.isspace())])
-    elif ioformat in ['lemma', 'upos']:
-        txt = ''.join([letter for letter in txt if (letter.isalnum() or letter.isspace() or (letter == '_'))])
-    else:
-        txt = ''.join([letter for letter in txt if (letter.isalnum() or letter.isspace())])
+    if ioformat != 'viz':
+        for pattern in patterns:
+            txt = pattern[0].sub(pattern[1], txt)
+        if ioformat == 'txt':
+            txt = ''.join([letter for letter in txt if (letter.isalnum() or letter.isspace())])
+        elif ioformat in ['lemma', 'upos']:
+            txt = ''.join([letter for letter in txt if (letter.isalnum() or letter.isspace() or (letter == '_'))])
+        else:
+            txt = ''.join([letter for letter in txt if (letter.isalnum() or letter.isspace())])
     return txt
 
 
@@ -136,7 +136,7 @@ def join_archive(lang, ioformat='txt', years=(1900, 2050), verbose=False):
     """
     read_zip = zipfile.ZipFile(f'{lang}_stripped.zip', 'r')
     out_fname = f'{lang}.{ioformat}'
-    if ioformat == 'txt':
+    if ioformat in ['txt', 'viz']:
         dirpath = 'OpenSubtitles/raw'
     elif ioformat in ['upos', 'lemma']:
         dirpath = 'OpenSubtitles/parsed'
