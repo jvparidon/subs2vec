@@ -11,7 +11,7 @@ setuptools.setup(
     version='0.9.3',
     packages=['subs2vec'],
     package_data={
-        'subs2vec': ['datasets/*/*.tsv', 'paper_results/*/*.tsv'],
+        'subs2vec': ['datasets/*/*.tsv', 'paper_results/*.tsv', 'paper_results/*/*.tsv'],
     },
     author='Jeroen van Paridon & Bill Thompson',
     author_email='j.v.paridon@gmail.com',
