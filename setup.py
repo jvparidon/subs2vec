@@ -8,7 +8,7 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md'), encoding='utf-8'
 
 setuptools.setup(
     name='subs2vec',
-    version='0.9.3',
+    version='0.9.4',
     packages=['subs2vec'],
     package_data={
         'subs2vec': ['datasets/*/*.tsv', 'paper_results/*.tsv', 'paper_results/*/*.tsv'],
