@@ -11,7 +11,7 @@ path = os.path.dirname(__file__)
 df_corpus = pd.read_csv(os.path.join(path, 'paper_results', 'corpus_data.tsv'), sep='\t')
 
 sns.set(context='paper', style='whitegrid', font_scale=1.0, rc={'grid.color': '.9', 'grid.linewidth': '.5'})
-sns.set_palette('Set2')  # use MPI for Psycholinguistics type color palette
+sns.set_palette('Set2')  # use MPI for Psycholinguistics style color palette
 
 
 def gather_similarities(folder):
@@ -223,6 +223,7 @@ if __name__ == '__main__':
 
         df_wordcounts = pd.concat([df_a, df_s, df_n])
         df_wordcounts = df_wordcounts.merge(df_corpus[['lang', 'vecs', 'wordcount']], how='inner', on=['lang', 'vecs'])
+        df_wordcounts.to_csv('glmm_data.tsv', sep='\t', index=False)
         g_wordcounts = plot_wordcounts(df_wordcounts.dropna())
         plt.tight_layout()
         plt.savefig('wordcounts.pdf')
