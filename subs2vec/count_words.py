@@ -11,42 +11,35 @@ def count_words(fname):
     """
     with open(fname, 'r') as infile:
         wordcount = 0
+        linecount = 0
         for line in infile:
             line = line.strip('\n')
             if line != '':
+                linecount += 1
                 wordcount += len(line.split(' '))
-        return wordcount
+        return wordcount, linecount
 
 
-def print_count(wordcount, fname):
-    """Print the number of words in a file to the command line.
+def count_words_in_path(path):
+    """Count words in text files on a given path.
 
-    Formats numbers for legibility, prints directly to command line.
-
-    :param wordcount: number of words to format
-    :param fname: filename to display
+    :param path: either filename or directory name to count words in
     """
-    if wordcount > 10000000000:
-        print('{: >6}B words in file {}'.format(int(wordcount / 1000000000), fname))
-    elif wordcount > 10000000:
-        print('{: >6}M words in file {}'.format(int(wordcount / 1000000), fname))
-    elif wordcount > 10000:
-        print('{: >6}K words in file {}'.format(int(wordcount / 1000), fname))
+    print('file\twords\tlines\tmean_line_length')
+    if os.path.isdir(path):
+        for fname in sorted(os.listdir(path)):
+            if fname.endswith('.txt'):
+                filepath = os.path.join(path, fname)
+                wordcount, linecount = count_words(filepath)
+                print(f'{fname}\t{wordcount}\t{linecount}\t{wordcount / linecount}')
     else:
-        print('{: >6}  words in file {}'.format(wordcount, fname))
+        wordcount, linecount = count_words(path)
+        print(f'{path}\t{wordcount}\t{linecount}\t{wordcount / linecount:.2f}')
 
 
 if __name__ == '__main__':
-    argparser = argparse.ArgumentParser(description='count words in files in a given directory')
-    argparser.add_argument('fname', help='file or directory that files are located in')
+    argparser = argparse.ArgumentParser(description='count words in text files')
+    argparser.add_argument('path', help='file or directory that files are located in')
     args = argparser.parse_args()
 
-    if os.path.isdir(args.fname):
-        for fname in sorted(os.listdir(args.fname)):
-            if fname.endswith('.txt'):
-                filepath = os.path.join(args.fname, fname)
-                wordcount = count_words(fname=filepath)
-                print_count(wordcount=wordcount, fname=filepath)
-    else:
-        wordcount = count_words(fname=args.fname)
-        print_count(wordcount=wordcount, fname=args.fname)
+    count_words_in_path(args.path)
