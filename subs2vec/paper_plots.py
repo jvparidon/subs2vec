@@ -1,12 +1,10 @@
-"""Generate plots presented in Van Paridon & Thompson (2019)."""
+"""Compile embedding evaluation stats and generate plots as presented in Van Paridon & Thompson (2020)."""
 import numpy as np
 import pandas as pd
 import os
 import seaborn as sns
 import matplotlib.pyplot as plt
-import matplotlib as mpl
 import argparse
-mpl.use('agg')
 path = os.path.dirname(__file__)
 df_corpus = pd.read_csv(os.path.join(path, 'paper_results', 'corpus_data.tsv'), sep='\t')
 
@@ -111,7 +109,7 @@ def gather_norms(folder):
     return df_norms, df_binder
 
 
-def plot_scores(df, xlabel, aspect=.5, legend_y=1.0):
+def _plot_scores(df, xlabel, aspect=.5, legend_y=1.0):
     g = sns.catplot(x=xlabel, y='label', kind='bar', data=df, legend=False,
                     hue='vecs', hue_order=['wiki+subs', 'subs', 'wiki'],
                     height=len(df) / 12, aspect=aspect
@@ -126,7 +124,7 @@ def plot_scores(df, xlabel, aspect=.5, legend_y=1.0):
     return g
 
 
-def plot_wordcounts(df):
+def _plot_wordcounts(df):
     df_means = df.groupby(['lang', 'vecs', 'kind'], as_index=False).mean()
     df_means['log10 wordcount'] = np.log10(df_means['wordcount'])
     df_means['wordcount-adjusted score'] = df_means['score'] / df_means['log10 wordcount']
@@ -176,37 +174,37 @@ if __name__ == '__main__':
     df_binder2 = df_binder.iloc[range(int(int(len(df_binder) / 3) / 2) * 3, len(df_binder))]
 
     # draw barplots
-    g_analogies = plot_scores(df_analogies, f'{prefix}score', .7, .485)
+    g_analogies = _plot_scores(df_analogies, f'{prefix}score', .7, .485)
     plt.tight_layout()
     plt.savefig('analogies.pdf')
     plt.savefig('analogies.png', dpi=600)
     plt.clf()
 
-    g_similarities = plot_scores(df_similarities, f'{prefix}rank r', .5, .30)
+    g_similarities = _plot_scores(df_similarities, f'{prefix}rank r', .5, .30)
     plt.tight_layout()
     plt.savefig('similarities.pdf')
     plt.savefig('similarities.png', dpi=600)
     plt.clf()
 
-    g_norms1 = plot_scores(df_norms1, f'{prefix}r', .7, .095)
+    g_norms1 = _plot_scores(df_norms1, f'{prefix}r', .7, .095)
     plt.tight_layout()
     plt.savefig('norms1.pdf')
     plt.savefig('norms1.png', dpi=600)
     plt.clf()
 
-    g_norms2 = plot_scores(df_norms2, f'{prefix}r', .7, .605)
+    g_norms2 = _plot_scores(df_norms2, f'{prefix}r', .7, .605)
     plt.tight_layout()
     plt.savefig('norms2.pdf')
     plt.savefig('norms2.png', dpi=600)
     plt.clf()
 
-    g_binder1 = plot_scores(df_binder1, f'{prefix}r', .5, .55)
+    g_binder1 = _plot_scores(df_binder1, f'{prefix}r', .5, .55)
     plt.tight_layout()
     plt.savefig('binder1.pdf')
     plt.savefig('binder1.png', dpi=600)
     plt.clf()
 
-    g_binder2 = plot_scores(df_binder2, f'{prefix}r', .5, .9)
+    g_binder2 = _plot_scores(df_binder2, f'{prefix}r', .5, .9)
     plt.tight_layout()
     plt.savefig('binder2.pdf')
     plt.savefig('binder2.png', dpi=600)
@@ -224,7 +222,7 @@ if __name__ == '__main__':
         df_wordcounts = pd.concat([df_a, df_s, df_n])
         df_wordcounts = df_wordcounts.merge(df_corpus[['lang', 'vecs', 'wordcount']], how='inner', on=['lang', 'vecs'])
         df_wordcounts.to_csv('glmm_data.tsv', sep='\t', index=False)
-        g_wordcounts = plot_wordcounts(df_wordcounts.dropna())
+        g_wordcounts = _plot_wordcounts(df_wordcounts.dropna())
         plt.tight_layout()
         plt.savefig('wordcounts.pdf')
         plt.savefig('wordcounts.png', dpi=600)
