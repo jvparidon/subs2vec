@@ -112,7 +112,7 @@ def _fit_model():
 
         # sample with 3 chains, 2000 warmup + 4000 posterior samples per chain
         # target_accept was tuned to .95 to prevent occasional divergences
-        trace = pm.sample(2000, tune=2000, chains=3, target_accept=.95)
+        trace = pm.sample(2500, tune=2500, chains=4, target_accept=.95)
 
     # store trace summary as tsv and LaTeX table
     df_summary = pm.summary(trace, credible_interval=.9)
@@ -146,16 +146,15 @@ def _fit_model():
         'β wiki+subs vs. mean:norms vs. mean',
         'β wiki+subs vs. mean:similarities vs. mean',
     ]
-    axes = pm.forestplot(trace, var_names=varnames, credible_interval=.9, combined=True, figsize=(4.5, 6))
-    axes[0].set(xlabel='Coefficient (in log-odds)')
+    axes = pm.forestplot(trace, var_names=varnames, credible_interval=.9, combined=True, figsize=(4, 6))
+    axes[0].set(title='90% credible intervals', xlabel='coefficient (in log-odds)')
     plt.savefig('forestplot.pdf')
     plt.savefig('forestplot.png', dpi=600)
     plt.clf()
 
     # draw and store trace plot
     pm.traceplot(trace)
-    plt.savefig('traceplot.pdf')
-    plt.savefig('traceplot.png', dpi=600)
+    plt.savefig('traceplot.png', dpi=300)  # the traceplot is huge, so we lower the resolution and don't store it as pdf
     plt.clf()
 
     return df_summary
