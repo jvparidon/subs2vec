@@ -109,7 +109,7 @@ def gather_norms(folder):
     return df_norms, df_binder
 
 
-def _plot_scores(df, xlabel, aspect=.5, legend_y=1.0):
+def _plot_scores(df, xlabel, aspect=.5):
     g = sns.catplot(x=xlabel, y='label', kind='bar', data=df, legend=False,
                     hue='vecs', hue_order=['wiki+subs', 'subs', 'wiki'],
                     height=len(df) / 12, aspect=aspect
@@ -120,7 +120,6 @@ def _plot_scores(df, xlabel, aspect=.5, legend_y=1.0):
 
     g.despine(left=True, right=False)
     g.set(xlim=(1.1, 0), ylabel=None)
-    #g.ax.legend(loc='upper left', bbox_to_anchor=(-0.05, legend_y), frameon=False)
     g.ax.legend(loc='upper left', bbox_to_anchor=(1.1, 0), frameon=False)
     return g
 
@@ -153,7 +152,6 @@ if __name__ == '__main__':
     args = argparser.parse_args()
     if args.unadjusted:
         prefix = ''
-        legend_y_unadjusted = -.05
     else:
         prefix = 'adjusted '
 
@@ -179,57 +177,49 @@ if __name__ == '__main__':
     df_binder2 = df_binder.iloc[range(int(int(len(df_binder) / 3) / 2) * 3, len(df_binder))]
 
     # draw barplots
-    legend_y = legend_y_unadjusted if args.unadjusted else .485
-    g_analogies = _plot_scores(df_analogies, f'{prefix}score', .7, legend_y)
+    g_analogies = _plot_scores(df_analogies, f'{prefix}score', .7)
     plt.tight_layout()
     plt.savefig('analogies.pdf')
     plt.savefig('analogies.png', dpi=600)
     plt.clf()
 
-    legend_y = legend_y_unadjusted if args.unadjusted else .30
-    g_similarities = _plot_scores(df_similarities, f'{prefix}rank r', .5, legend_y)
+    g_similarities = _plot_scores(df_similarities, f'{prefix}rank r', .5)
     plt.tight_layout()
     plt.savefig('similarities.pdf')
     plt.savefig('similarities.png', dpi=600)
     plt.clf()
 
-    legend_y = legend_y_unadjusted if args.unadjusted else .1
-    g_norms1 = _plot_scores(df_norms1, f'{prefix}r', .5, legend_y)
+    g_norms1 = _plot_scores(df_norms1, f'{prefix}r', .5)
     plt.tight_layout()
     plt.savefig('norms1.pdf')
     plt.savefig('norms1.png', dpi=600)
     plt.clf()
 
-    legend_y = legend_y_unadjusted if args.unadjusted else .75
-    g_norms2 = _plot_scores(df_norms2, f'{prefix}r', .5, legend_y)
+    g_norms2 = _plot_scores(df_norms2, f'{prefix}r', .5)
     plt.tight_layout()
     plt.savefig('norms2.pdf')
     plt.savefig('norms2.png', dpi=600)
     plt.clf()
 
-    legend_y = legend_y_unadjusted if args.unadjusted else .605
-    g_norms3 = _plot_scores(df_norms3, f'{prefix}r', .5, legend_y)
+    g_norms3 = _plot_scores(df_norms3, f'{prefix}r', .5)
     plt.tight_layout()
     plt.savefig('norms3.pdf')
     plt.savefig('norms3.png', dpi=600)
     plt.clf()
 
-    legend_y = legend_y_unadjusted if args.unadjusted else .605
-    g_norms4 = _plot_scores(df_norms4, f'{prefix}r', .5, legend_y)
+    g_norms4 = _plot_scores(df_norms4, f'{prefix}r', .5)
     plt.tight_layout()
     plt.savefig('norms4.pdf')
     plt.savefig('norms4.png', dpi=600)
     plt.clf()
 
-    legend_y = legend_y_unadjusted if args.unadjusted else .55
-    g_binder1 = _plot_scores(df_binder1, f'{prefix}r', .5, legend_y)
+    g_binder1 = _plot_scores(df_binder1, f'{prefix}r', .5)
     plt.tight_layout()
     plt.savefig('binder1.pdf')
     plt.savefig('binder1.png', dpi=600)
     plt.clf()
 
-    legend_y = legend_y_unadjusted if args.unadjusted else .9
-    g_binder2 = _plot_scores(df_binder2, f'{prefix}r', .5, legend_y)
+    g_binder2 = _plot_scores(df_binder2, f'{prefix}r', .5)
     plt.tight_layout()
     plt.savefig('binder2.pdf')
     plt.savefig('binder2.png', dpi=600)
