@@ -8,7 +8,7 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md'), encoding='utf-8'
 
 setuptools.setup(
     name='subs2vec',
-    version='0.9.5',
+    version='0.9.6',
     packages=['subs2vec'],
     package_data={
         'subs2vec': ['datasets/*/*.tsv', 'paper_results/*.tsv', 'paper_results/*/*.tsv'],
@@ -23,13 +23,14 @@ setuptools.setup(
     install_requires=[
         'numpy',
         'scipy',
-        'pandas>=0.25',
+        'pandas>=1.0',
         'lxml',
         'joblib',
         'matplotlib',
-        'seaborn>=0.9',
+        'seaborn>=0.10',
         'scikit-learn',
         'psutil',
+        'pymc3>=3.8',
     ],
     python_requires='>=3.6',
     classifiers=[

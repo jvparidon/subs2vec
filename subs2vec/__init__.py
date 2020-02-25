@@ -7,4 +7,4 @@ Provides:
 """
 
 __author__ = 'Jeroen van Paridon & Bill Thompson'
-__version__ = '0.9.3'
+__version__ = '0.9.6'

@@ -1,9 +1,10 @@
 numpy
 scipy
-pandas
+pandas>=1.0
 lxml
 joblib
 matplotlib
-seaborn
+seaborn>=0.10
 scikit-learn
 psutil
+pymc3>=3.8
