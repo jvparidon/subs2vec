@@ -40,9 +40,34 @@ def sum_contrast(value, target, reference):
 
 
 def _fit_model():
-    # data preparation
-    df = pd.read_csv(os.path.join(path, 'paper_results', 'model_data.tsv'), sep='\t')  # load data
-    df['log10_wordcount'] = np.log10(df['wordcount'])  # log-transform word counts
+    # load data
+    df_a = pd.read_csv(os.path.join(path, 'paper_results', 'analogies.tsv'), sep='\t')[['lang', 'vecs', 'source', 'adjusted score']]
+    df_s = pd.read_csv(os.path.join(path, 'paper_results', 'similarities.tsv'), sep='\t')[['lang', 'vecs', 'source', 'adjusted rank r']]
+    df_n = pd.read_csv(os.path.join(path, 'paper_results', 'norms.tsv'), sep='\t')[['lang', 'vecs', 'norm', 'adjusted r']]
+    df_b = pd.read_csv(os.path.join(path, 'paper_results', 'binder.tsv'), sep='\t')[['lang', 'vecs', 'norm', 'adjusted r']]
+
+    # keep track of different evaluation tasks
+    df_a['kind'] = 'analogies'
+    df_s['kind'] = 'similarities'
+    df_n['kind'] = 'norms'
+    df_b['kind'] = 'norms'
+
+    # rename different metrics to score, and various dataset origins to task
+    df_a = df_a.rename(columns={'source': 'task', 'adjusted score': 'score'})
+    df_s = df_s.rename(columns={'source': 'task', 'adjusted rank r': 'score'})
+    df_n = df_n.rename(columns={'norm': 'task', 'adjusted r': 'score'})
+    df_b = df_b.rename(columns={'norm': 'task', 'adjusted r': 'score'})
+
+    # stack datasets
+    df = pd.concat([df_a, df_s, df_n, df_b])
+
+    # merge in corpus word counts
+    df_corpus = pd.read_csv(os.path.join(path, 'paper_results', 'table_data.tsv'), sep='\t')
+    df = df.merge(df_corpus[['lang', 'vecs', 'words']], how='inner', on=['lang', 'vecs'])
+
+    df.to_csv('model_data.tsv', sep='\t', index=False)  # store merged data for record keeping
+
+    df['log10_wordcount'] = np.log10(df['words'])  # log-transform word counts
     df['log10_wordcount_z'] = standardize(df['log10_wordcount'])  # standardize word counts
 
     # create sum-coded contrasts
@@ -54,8 +79,8 @@ def _fit_model():
     # define PyMC3 model for statistical inference
     with pm.Model() as beta_model:
         # define centered Normal priors for all the betas, sd = 1 (mild shrinkage prior)
-        b_intercept = pm.Normal('β intercept', mu=0, sd=1)
-        b_wordcount = pm.Normal('β corpus word count', mu=0, sd=1)
+        intercept = pm.Normal('μ', mu=0, sd=1)
+        b_wordcount = pm.Normal('β log corpus word count', mu=0, sd=1)
         b_wiki = pm.Normal('β wiki vs. mean', mu=0, sd=1)
         b_subs = pm.Normal('β subs vs. mean', mu=0, sd=1)
         b_norms = pm.Normal('β norms vs. mean', mu=0, sd=1)
@@ -79,7 +104,7 @@ def _fit_model():
         # b_wikisubs_similarities2 = pm.Deterministic('β wiki+subs vs. mean:similarities vs. mean (2)', -1 * (b_wikisubs_analogies + b_wikisubs_norms))
 
         # non-centered parametrization for task-level random intercepts
-        task_codes, task_uniques = df['source'].factorize()  # get number of unique groups and code them
+        task_codes, task_uniques = df['task'].factorize()  # get number of unique groups and code them
         mu_tilde_task = pm.Normal('μ\u0303 task', mu=0, sd=1, shape=len(task_uniques))  # prior for task group offsets
         sigma_task = pm.HalfNormal('σ task', sd=1)  # prior for task group sigma
         mu_task = pm.Deterministic('μ task', sigma_task * mu_tilde_task)  # task group means (random intercepts)
@@ -92,7 +117,7 @@ def _fit_model():
 
         # compute predictions for y, using logit link function
         y_hat = pm.Deterministic('ŷ', pm.math.invlogit(
-            b_intercept
+            intercept
             + b_wordcount * df['log10_wordcount_z']
             + b_wiki * df['wiki']
             + b_subs * df['subs']
@@ -107,12 +132,12 @@ def _fit_model():
         ))
 
         # define likelihood
-        phi = pm.HalfNormal('φ', sd=1)  # prior for phi, for Beta(mu, phi) parametrization of the likelihood distribution
+        invphi = pm.HalfNormal('1 / φ', sd=1)  # prior for phi, for Beta(mu, phi) parametrization of the likelihood distribution
+        phi = pm.Deterministic('φ', 1 / invphi)
         y = pm.Beta('y', alpha=y_hat * phi, beta=(1 - y_hat) * phi, observed=df['score'])
 
         # sample with 3 chains, 2000 warmup + 4000 posterior samples per chain
-        # target_accept was tuned to .95 to prevent occasional divergences
-        trace = pm.sample(2500, tune=2500, chains=4, target_accept=.95)
+        trace = pm.sample(2500, tune=2500, chains=4, target_accept=.9)
 
     # store trace summary as tsv and LaTeX table
     df_summary = pm.summary(trace, credible_interval=.9)
@@ -126,10 +151,9 @@ def _fit_model():
     graph.render(filename='model', format='pdf', cleanup=True)
 
     # draw and store forest plot
-    varnames = sorted([varname for varname in trace.varnames if ('β' in varname)])
     varnames = [
-        'β intercept',
-        'β corpus word count',
+        'μ',
+        'β log corpus word count',
         'β subs vs. mean',
         'β wiki vs. mean',
         'β wiki+subs vs. mean',

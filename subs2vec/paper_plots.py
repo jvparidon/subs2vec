@@ -6,7 +6,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import argparse
 path = os.path.dirname(__file__)
-df_corpus = pd.read_csv(os.path.join(path, 'paper_results', 'corpus_data.tsv'), sep='\t')
+df_corpus = pd.read_csv(os.path.join(path, 'paper_results', 'table_data.tsv'), sep='\t')
 
 sns.set(context='paper', style='whitegrid', font_scale=1.0, rc={'grid.color': '.9', 'grid.linewidth': '.5'})
 sns.set_palette('Set2')  # use MPI for Psycholinguistics style color palette
@@ -120,13 +120,14 @@ def _plot_scores(df, xlabel, aspect=.5, legend_y=1.0):
 
     g.despine(left=True, right=False)
     g.set(xlim=(1.1, 0), ylabel=None)
-    g.ax.legend(loc='upper left', bbox_to_anchor=(-0.05, legend_y), frameon=False)
+    #g.ax.legend(loc='upper left', bbox_to_anchor=(-0.05, legend_y), frameon=False)
+    g.ax.legend(loc='upper left', bbox_to_anchor=(1.1, 0), frameon=False)
     return g
 
 
 def _plot_wordcounts(df):
     df_means = df.groupby(['lang', 'vecs', 'kind'], as_index=False).mean()
-    df_means['log10 wordcount'] = np.log10(df_means['wordcount'])
+    df_means['log10 wordcount'] = np.log10(df_means['words'])
     df_means['wordcount-adjusted score'] = df_means['score'] / df_means['log10 wordcount']
     df_subs = df_means.loc[df_means['vecs'] == 'subs'].rename(columns={'wordcount-adjusted score': 'wordcount-adjusted score for subtitle vectors'}).reset_index()
     df_wiki = df_means.loc[df_means['vecs'] == 'wiki'].rename(columns={'wordcount-adjusted score': 'wordcount-adjusted score for wikipedia vectors'}).reset_index()
@@ -152,6 +153,7 @@ if __name__ == '__main__':
     args = argparser.parse_args()
     if args.unadjusted:
         prefix = ''
+        legend_y_unadjusted = -.05
     else:
         prefix = 'adjusted '
 
@@ -166,45 +168,68 @@ if __name__ == '__main__':
     df_norms.to_csv('norms.tsv', sep='\t', index=False)
     df_binder.to_csv('binder.tsv', sep='\t', index=False)
 
-    # cut norms and binder dataframes in half so the plots will fit on a page
-    df_norms1 = df_norms.iloc[range(int(int(len(df_norms) / 3) / 2) * 3)]
-    df_norms2 = df_norms.iloc[range(int(int(len(df_norms) / 3) / 2) * 3, len(df_norms))]
+    # cut norms and binder dataframes up so the plots will fit on a page
+    chunk = int(len(df_norms) / 12)
+    df_norms1 = df_norms.iloc[range(chunk * 3)]
+    df_norms2 = df_norms.iloc[range(chunk * 3, chunk * 6)]
+    df_norms3 = df_norms.iloc[range(chunk * 6, chunk * 9)]
+    df_norms4 = df_norms.iloc[range(chunk * 9, len(df_norms))]
 
     df_binder1 = df_binder.iloc[range(int(int(len(df_binder) / 3) / 2) * 3)]
     df_binder2 = df_binder.iloc[range(int(int(len(df_binder) / 3) / 2) * 3, len(df_binder))]
 
     # draw barplots
-    g_analogies = _plot_scores(df_analogies, f'{prefix}score', .7, .485)
+    legend_y = legend_y_unadjusted if args.unadjusted else .485
+    g_analogies = _plot_scores(df_analogies, f'{prefix}score', .7, legend_y)
     plt.tight_layout()
     plt.savefig('analogies.pdf')
     plt.savefig('analogies.png', dpi=600)
     plt.clf()
 
-    g_similarities = _plot_scores(df_similarities, f'{prefix}rank r', .5, .30)
+    legend_y = legend_y_unadjusted if args.unadjusted else .30
+    g_similarities = _plot_scores(df_similarities, f'{prefix}rank r', .5, legend_y)
     plt.tight_layout()
     plt.savefig('similarities.pdf')
     plt.savefig('similarities.png', dpi=600)
     plt.clf()
 
-    g_norms1 = _plot_scores(df_norms1, f'{prefix}r', .7, .095)
+    legend_y = legend_y_unadjusted if args.unadjusted else .1
+    g_norms1 = _plot_scores(df_norms1, f'{prefix}r', .5, legend_y)
     plt.tight_layout()
     plt.savefig('norms1.pdf')
     plt.savefig('norms1.png', dpi=600)
     plt.clf()
 
-    g_norms2 = _plot_scores(df_norms2, f'{prefix}r', .7, .605)
+    legend_y = legend_y_unadjusted if args.unadjusted else .75
+    g_norms2 = _plot_scores(df_norms2, f'{prefix}r', .5, legend_y)
     plt.tight_layout()
     plt.savefig('norms2.pdf')
     plt.savefig('norms2.png', dpi=600)
     plt.clf()
 
-    g_binder1 = _plot_scores(df_binder1, f'{prefix}r', .5, .55)
+    legend_y = legend_y_unadjusted if args.unadjusted else .605
+    g_norms3 = _plot_scores(df_norms3, f'{prefix}r', .5, legend_y)
+    plt.tight_layout()
+    plt.savefig('norms3.pdf')
+    plt.savefig('norms3.png', dpi=600)
+    plt.clf()
+
+    legend_y = legend_y_unadjusted if args.unadjusted else .605
+    g_norms4 = _plot_scores(df_norms4, f'{prefix}r', .5, legend_y)
+    plt.tight_layout()
+    plt.savefig('norms4.pdf')
+    plt.savefig('norms4.png', dpi=600)
+    plt.clf()
+
+    legend_y = legend_y_unadjusted if args.unadjusted else .55
+    g_binder1 = _plot_scores(df_binder1, f'{prefix}r', .5, legend_y)
     plt.tight_layout()
     plt.savefig('binder1.pdf')
     plt.savefig('binder1.png', dpi=600)
     plt.clf()
 
-    g_binder2 = _plot_scores(df_binder2, f'{prefix}r', .5, .9)
+    legend_y = legend_y_unadjusted if args.unadjusted else .9
+    g_binder2 = _plot_scores(df_binder2, f'{prefix}r', .5, legend_y)
     plt.tight_layout()
     plt.savefig('binder2.pdf')
     plt.savefig('binder2.png', dpi=600)
@@ -220,8 +245,10 @@ if __name__ == '__main__':
         df_n['kind'] = 'norms'
 
         df_wordcounts = pd.concat([df_a, df_s, df_n])
-        df_wordcounts = df_wordcounts.merge(df_corpus[['lang', 'vecs', 'wordcount']], how='inner', on=['lang', 'vecs'])
-        df_wordcounts.to_csv('glmm_data.tsv', sep='\t', index=False)
+        df_wordcounts = df_wordcounts.merge(df_corpus[['lang', 'vecs', 'words']], how='inner', on=['lang', 'vecs'])
+        df_wordcounts.to_csv('model_data.tsv', sep='\t', index=False)
+
+        sns.set_palette(sns.color_palette('Set2')[3:])  # skip the first three colors, because we use those to label training corpus
         g_wordcounts = _plot_wordcounts(df_wordcounts.dropna())
         plt.tight_layout()
         plt.savefig('wordcounts.pdf')

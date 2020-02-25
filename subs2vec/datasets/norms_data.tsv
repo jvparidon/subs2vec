@@ -1,0 +1,41 @@
+lang	Language	Article	Lexical norms	Number of words	Number of raters
+nl	Dutch	Brysbaert (2014)	Age of acquisition, concreteness	25888	15 per item
+nl	Dutch	Keuleers (2015)	Prevalence	52847	300 per item
+nl	Dutch	Roest (2018)	Arousal, insulting, taboo (general), taboo (personal), valence	672	87 per item
+nl	Dutch	Speed (2017)	Arousal, auditory, dominance, gustatory, modality exclusivity, olfactory, tactile, valence, visual	485	15 per item
+nl	Dutch	Verheyen (2019)	Age of acquisition, arousal, concreteness, dominance, familiarity, imageability, valence	1000	20 per item
+en	English	Brysbaert (2014)	Concreteness	37058	25 per item
+en	English	Janschewitz (2008)	Familiarity, offensiveness, tabooness, personal use	460	78 per item
+en	English	Keuleers (2012)	Lexical decision time	28515	39 per item
+en	English	Kuperman (2012)	Age of acquisition	30121	20 per item
+en	English	Warriner (2013)	Arousal, dominance, valence	13915	20 per item
+en	English	Brysbaert (2019)	Prevalence	61855	388 per item
+en	English	Engelthaler (2018)	Humorousness	4997	35 per item
+en	English	Lynott (2019)	Lancaster sensorimotor norms	39707	25 per item
+en	English	Pexman (2019)	Body-object interaction	9349	26 per item
+en	English	Scott (2019)	Age of acquisition, arousal, concreteness, dominance, familiarity, gender association, imageability, semantic size, valence	5553	20 per item
+fa	Farsi	Bakhtiar (2015)	Age of acquisition, familiarity, imageability	871	40 per item
+fi	Finnish	Eilola (2010)	Concreteness, emotional charge, familiarity, offensiveness, valence	210	150 per item
+fi	Finnish	Soderholm (2013)	Arousal, valence	420	250 per item
+fr	French	Desrochers (2009)	Imageability	3600	72 per item
+fr	French	Ferrand (2010)	Lexical decision time	38840	25 per item
+fr	French	Monnier (2014)	Arousal, valence	1031	37 per item
+fr	French	Bonin (2018)	Arousal, concreteness, context availability, valence	1659	30 per item
+fr	French	Chedid (2019a)	Familiarity	3596	20 per item
+fr	French	Chedid (2019b)	Auditory perceptual strength, visual perceptual strength	3596	25 per item
+de	German	Kanske (2010)	Arousal, concreteness, valence	1000	64 per item
+de	German	Schauenburg (2015)	Arousal, authority, community, potency, valence	858	35 per item
+de	German	Grandy (2020)	Imageability, emotionality (in two age groups)	2592	20 per item
+id	Indonesian	Sianipar (2016)	Arousal, concreteness, dominance, predictability, valence	1490	70 per item
+it	Italian	Vergallito (2020)	Auditory, gustatory, haptic, lexical decision time, modality exclusivity, naming time, olfactory, visual	1121	57 per item
+ms	Malay	Yap (2010)	Lexical decision time	1510	44 per item
+pl	Polish	Imbir (2016)	Arousal, concreteness, dominance, imageability valence	4905	50 per item
+pt	Portuguese	Cameirao (2010)	Age of acquisition	1749	48 per item
+pt	Portuguese	Soares (2012)	Arousal, dominance, valence	1034	50 per item
+es	Spanish	Guasch (2016)	Arousal, concreteness, context availability, familiarity, imageability, valence	1400	20 per item
+es	Spanish	Stadthagen-Gonzalez (2017)	Arousal, valence	14031	20 per item
+es	Spanish	Diez-Alamo (2018)	Color vividness, graspability, pleasant taste, risk of pain, smell intensity, sound intensity, visual motion	750	26 per item
+es	Spanish	Diez-Alamo (2019)	Sensory experience	5500	35 per item
+es	Spanish	San Miguel Abella (2019)	Age of acquisition, motor content	4565	25 per item
+es	Spanish	Stadthagen-Gonzalez (2018)	Anger, arousal, disgust, fear, happiness, sadness, valence	10491	20 per item
+tr	Turkish	Goz (2017)	Age of acquisition, imagery, concreteness	600	457 per item
