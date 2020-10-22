@@ -124,7 +124,7 @@ def extend_norms(vecs_fname, norms_fname, alpha=1.0):
     results = predict_norms(vectors, norms, alpha)
     base_fname = '.'.join(norms_fname.split('.')[:-1])
     results['scores'].to_csv(f'{base_fname}.scores.tsv', sep='\t', index=False)
-    results['predictions'].to_csv(f'{base_fname}.predictions.tsv', sep='\t', index=False)
+    results['predictions'].to_csv(f'{base_fname}.predictions.tsv', sep='\t', index=True)
 
 
 if __name__ == '__main__':

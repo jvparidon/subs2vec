@@ -30,7 +30,7 @@ setuptools.setup(
         'seaborn>=0.10',
         'scikit-learn',
         'psutil',
-        'pymc3>=3.8',
+        'pymc3==3.6',
     ],
     python_requires='>=3.6',
     classifiers=[

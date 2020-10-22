@@ -80,7 +80,7 @@ def evaluate_similarities(lang, vecs_fname):
         return scores
 
 
-def novel_similarities(vecs_fname, similarities_fname):
+def novel_similarities(vecs_fname, words_fname):
     """Predict semantic similarities for novel word pairs, using word vectors.
 
     Writes predictions to tab-separated text file.
@@ -90,13 +90,24 @@ def novel_similarities(vecs_fname, similarities_fname):
     """
     logging.info(f'predicting novel semantic similarities with {vecs_fname}')
     vectors = Vectors(vecs_fname, normalize=True, n=1e6, d=300)
+    df_words = pd.read_csv(words_fname, sep='\t', comment='#')
+    df_words = compute_similarities(vectors, df_words)
+    base_fname = '.'.join(words_fname.split('.')[:-1])
+    df_words.to_csv(f'{base_fname}.predictions.tsv', sep='\t', index=False)
+
+
+def compute_similarities(vectors, df_words):
+    """Compute semantic similarities for novel word pairs.
+
+    :param vectors: Vectors object containing word vectors
+    :param df_words: pandas DataFrame containing word pairs in columns labeled 'word1' and 'word2'
+    :return: pandas DataFrame containing word pairs and cosine similarities in a column labeled 'similarity'
+    """
     vecs_dict = vectors.as_dict()
-    similarities = pd.read_csv(similarities_fname, sep='\t', comment='#')
-    similarities['similarity'] = similarities.apply(lambda x: 1.0 - scipy.spatial.distance.cosine(vecs_dict.get(x['word1'], np.nan),
+    df_words['similarity'] = df_words.apply(lambda x: 1.0 - scipy.spatial.distance.cosine(vecs_dict.get(x['word1'], np.nan),
                                                                                                   vecs_dict.get(x['word2'], np.nan)),
                                                                                                   axis=1)
-    base_fname = '.'.join(similarities_fname.split('.')[:-1])
-    similarities.to_csv(f'{base_fname}.predictions.tsv', sep='\t', index=False)
+    return df_words
 
 
 if __name__ == '__main__':

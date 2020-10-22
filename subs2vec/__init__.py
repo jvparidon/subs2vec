@@ -1,6 +1,6 @@
 """
 Provides:
-  - Routines for interacting with, evaluating, and training word embeddings as used in Van Paridon & Thompson (2019).
+  - Routines for interacting with, evaluating, and training word embeddings as used in Van Paridon & Thompson (2020).
   - Routines for extending lexical norms to unnormed words.
   - Routines for retrieving word, bigram, and trigram frequencies.
   - Command line tools to conveniently do any of the above, in 55 languages.

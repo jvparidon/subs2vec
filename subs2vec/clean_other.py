@@ -11,7 +11,7 @@ cores = int(cpu_count() / 2)
 
 
 @log_timer
-def strip_wiki_file(fname):
+def strip_file(fname):
     """Strip xml and other tags from Wikipedia dump.
 
     Writes stripped Wikipedia text directly to text file.
@@ -20,16 +20,19 @@ def strip_wiki_file(fname):
     """
     logging.info(f'stripping {fname}')
     if fname.endswith('.bz2'):
-        with bz2.open(fname, 'rt', encoding='utf-8') as in_file, open(fname.replace('.xml.bz2', '.txt'), 'w', encoding='utf-8') as out_file:
-            out_file.write(_strip_wiki_xml(in_file.read()))
+        with bz2.open(fname, 'rt', encoding='utf-8') as in_file, open(fname.replace('.xml.bz2', '.clean.txt'), 'w', encoding='utf-8') as out_file:
+            out_file.write(_strip_xml(in_file.read()))
     if fname.endswith('.xml'):
-        with open(fname, 'r', encoding='utf-8') as in_file, open(fname.replace('.xml', '.txt'), 'w', encoding='utf-8') as out_file:
-            out_file.write(_strip_wiki_xml(in_file.read()))
+        with open(fname, 'r', encoding='utf-8') as in_file, open(fname.replace('.xml', '.clean.txt'), 'w', encoding='utf-8') as out_file:
+            out_file.write(_strip_xml(in_file.read()))
+    if fname.endswith('.txt'):
+        with open(fname, 'r', encoding='utf-8') as in_file, open(fname.replace('.txt', '.clean.txt'), 'w', encoding='utf-8') as out_file:
+            out_file.write(_strip_xml(in_file.read()))
     logging.info(f'completed stripping {fname}')
 
 
 @log_timer
-def big_strip_wiki_file(fname, lines_per_chunk=1e6):
+def big_strip_file(fname, lines_per_chunk=1e6):
     """Strip xml and other tags from a Wikipedia dump that doesn't fit into RAM.
 
     Processes Wikipedia dump in chunks and then concatenates the junks into a single text file.
@@ -39,51 +42,26 @@ def big_strip_wiki_file(fname, lines_per_chunk=1e6):
     """
     logging.info(f'stripping {fname}')
     if fname.endswith('.bz2'):
-        with bz2.open(fname, 'rt', encoding='utf-8') as in_file, open(fname.replace('.xml.bz2', '.txt'), 'w', encoding='utf-8') as out_file:
+        with bz2.open(fname, 'rt', encoding='utf-8') as in_file, open(fname.replace('.xml.bz2', '.clean.txt'), 'w', encoding='utf-8') as out_file:
 
             i = 0
             j = 0
             lines = []
-            text = False
             for line in in_file:
-                if '<text' in line:
-                    lines.append(line)
-                    text = True
-                elif '</text' in line:
-                    lines.append(line)
-                    text = False
-                    if i > ((j + 1) * int(lines_per_chunk)):
-                        out_file.write(_strip_wiki_xml(''.join(lines)))
-                        lines = []
-                        j += 1
-                else:
-                    if text:
-                        lines.append(line)
-                        i += 1
-            out_file.write(_strip_wiki_xml(''.join(lines)))
+                lines.append(line)
+                if i > ((j + 1) * int(lines_per_chunk)):
+                    out_file.write(_strip_xml(''.join(lines)))
+                    lines = []
+                    j += 1
+            out_file.write(_strip_xml(''.join(lines)))
 
     if fname.endswith('.xml'):
-        with open(fname, 'r', encoding='utf-8') as in_file, open(fname.replace('.xml', '.txt'), 'w', encoding='utf-8') as out_file:
-            out_file.write(_strip_wiki_xml(in_file.read()))
+        with open(fname, 'r', encoding='utf-8') as in_file, open(fname.replace('.xml', '.clean.txt'), 'w', encoding='utf-8') as out_file:
+            out_file.write(_strip_xml(in_file.read()))
+    if fname.endswith('.txt'):
+        with open(fname, 'r', encoding='utf-8') as in_file, open(fname.replace('.txt', '.clean.txt'), 'w', encoding='utf-8') as out_file:
+            out_file.write(_strip_xml(in_file.read()))
     logging.info(f'completed stripping {fname}')
-
-
-def _strip_curly(txt):
-    curly = 0
-    txt = list(txt)
-    for i in range(len(txt)):
-        if txt[i] == '{':
-            curly += 1
-        elif txt[i] == '}':
-            curly -= 1
-            txt[i] = ''
-        if curly > 0:
-            txt[i] = ''
-        elif curly < 0:
-            # there appear to be more closing than opening brackets in this lemma, we should just discard it
-            txt = []
-            break
-    return ''.join(txt)
 
 
 regeces = [
@@ -106,19 +84,14 @@ regeces = [
     (r'\s{2,}', ' '),  # strip excessive spaces
 ]
 patterns = [(re.compile(regec[0], re.IGNORECASE), regec[1]) for regec in regeces]
-def _strip_wiki_xml(txts):
+def _strip_xml(txts):
     """Strip xml and other tags from Wikipedia text.
 
     :param txts: Wikipedia dump text containing multiple articles
     :return: stripped Wikipedia text
     """
-    pattern = re.compile('<text.*?>(.*?)</text>', re.DOTALL)
-    txts = pattern.findall(html.unescape(html.unescape(txts)))  # double unescape because Wikipedia dumps are a mess
-
-    txts = [_strip_curly(txt) if ((not txt.startswith('#'))
-                                 and ('<noinclude>' not in txt.lower())
-                                 and ('__noindex__' not in txt.lower())
-                                 ) else '' for txt in txts]
+    txts = html.unescape(html.unescape(txts))  # double unescape because Wikipedia dumps are a mess
+    txts = txts.split('\n')
 
     for i in range(len(txts)):
         for pattern in patterns:
@@ -129,12 +102,12 @@ def _strip_wiki_xml(txts):
 
 
 if __name__ == '__main__':
-    argparser = argparse.ArgumentParser(description='strip Wikipedia dumps of xml and other tags')
-    argparser.add_argument('fname', help='name of Wikipedia dump file')
+    argparser = argparse.ArgumentParser(description='strip text files of xml and other tags')
+    argparser.add_argument('fname', help='name of file')
     argparser.add_argument('--big', action='store_true', help='use special method for files that do not fit in RAM')
     args = argparser.parse_args()
 
     if args.big:
-        big_strip_wiki_file(fname=args.fname)
+        big_strip_file(fname=args.fname)
     else:
-        strip_wiki_file(fname=args.fname)
+        strip_file(fname=args.fname)
